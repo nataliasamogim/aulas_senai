@@ -1,5 +1,19 @@
 *{
     font-family: 'arial';
     font-size: 16px;
-    color: rgb(204, 108, 255);
+    color: aliceblue;
+}
+
+.menu{
+    background-color: blueviolet;
+    display: flex;
+    justify-content: space-around;
+}
+
+body{
+    background-color:  color: rgb(204, 108, 255);
+}
+
+li{
+    list-style-type: none;
 }
