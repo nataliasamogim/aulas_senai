@@ -1,0 +1,87 @@
+*{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/*Início Menu*/
+
+header{
+    display: flex;
+}
+
+.logo{
+    width: 180px;
+    height: 180px;
+}
+
+.menu{
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    margin: 50px 0px 0px 700px;
+}
+
+.title{
+    padding: 12px;
+    color: #fff;
+}
+
+a{
+    text-decoration: none;
+}
+
+li:hover{
+    color: rgb(132, 14, 201);
+}
+
+/*Fim Menu*/
+
+/*Início Body*/
+
+body{
+    background-color: black;
+}
+
+.roxo{
+    color: rgb(132, 14, 201);
+    font-size: 38px;
+}
+
+.texto1{
+    padding-top: 0px;
+    color: #fff;
+    font-size: 36px;
+}
+
+p{
+    color: #fff;
+}
+
+.container_form{
+     display: flex;
+}
+
+.hambúrguer{
+    height: 600px ;
+    width: 1000px;
+}
+
+input{
+    width: 400px;
+    height: 50px;
+    border-radius: 4px;
+    margin: 14px 0 2px 0;
+}
+
+button{
+    width: 100px;
+    height: 36px;
+    background-color: rgb(132, 14, 201);
+    color: #fff;
+    border-radius: 6px;
+    margin-top: 10px;
+}
+
+button:hover{
+    background-color: black;
+    transition: 0.3s;
+}
