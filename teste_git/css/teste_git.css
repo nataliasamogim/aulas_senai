@@ -10,6 +10,7 @@
     justify-content: space-around;
     flex-direction: row;
     border-radius: 8px;
+    padding: 20px;
 }
 
 body{
