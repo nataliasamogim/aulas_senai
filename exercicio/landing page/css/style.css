@@ -185,7 +185,7 @@ address{
 /*Serviços*/
 
 .serviços_item{
-    background-color: #c1c1c1;
+    background-color: rgb(132, 14, 201);
     padding: 25px;
     height: 100px;
     text-align: center;
@@ -213,5 +213,11 @@ address{
     gap: 10px;
     margin-top: 20px;
     padding: 20px;
+}
+
+.serviços_item img:hover{
+    max-width: 70px;
+    transition: 400ms linear;
+    cursor: pointer;
 }
 
