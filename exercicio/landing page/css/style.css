@@ -15,16 +15,51 @@ header{
 
 .menu{
     display: flex;
-    flex-direction: row;
-    list-style-type: none;
-    margin: 50px 0px 0px 700px;
+    margin: 50px 0px 0px 600px;
+}
+
+.menu li ul{
+    position: absolute;
+    top: 90px;
+    left: 1050px;
+    color: #fff;
+    display: none;
+}
+
+.menu li:hover ul{
+    display: block;
+}
+
+.menu ul li{
+    display: block;
+    width: 100px;
+}
+
+.menu a{
+    text-decoration: none;
+}
+
+.opções{
+    padding: 20px;
 }
 
 .title{
-    padding: 12px;
+    padding: 16px;
     color: #fff;
+    list-style-type: none;
 }
 
+.pedido{
+    border: 2px solid;
+    border-radius: 10px;
+    border-color: rgb(132, 14, 201);
+}
+
+#pedido:hover{
+    background-color: rgb(132, 14, 201);
+    color: #fff;
+    border-radius: 10px;
+}
 a{
     text-decoration: none;
 }
@@ -39,17 +74,20 @@ li:hover{
 
 body{
     background-color: black;
+    padding-left: 80px;
+    padding-right: 80px;
 }
 
 .roxo{
     color: rgb(132, 14, 201);
     font-size: 38px;
+    margin-bottom: 0;
 }
 
 .texto1{
-    padding-top: 0px;
     color: #fff;
     font-size: 36px;
+    margin-top: 0;
 }
 
 p{
@@ -62,7 +100,7 @@ p{
 
 .hambúrguer{
     height: 600px ;
-    width: 1000px;
+    width: 800px;
 }
 
 input{
@@ -73,8 +111,8 @@ input{
 }
 
 button{
-    width: 100px;
-    height: 36px;
+    width: 120px;
+    height: 40px;
     background-color: rgb(132, 14, 201);
     color: #fff;
     border-radius: 6px;
@@ -82,6 +120,71 @@ button{
 }
 
 button:hover{
-    background-color: black;
+    background-color: gray;
     transition: 0.3s;
+}
+
+/*Fim Body*/
+
+.whatsapp {
+    position: fixed;
+    max-width: 75px;
+    right: 12px;
+    bottom: 12px;
+}
+
+hr{
+    color: #fff;
+    background-color: #fff;
+    border: none;
+    height: 1px;
+    margin-top: 10px;
+}
+
+/*Início Sobre Nós*/
+
+.banner2{
+    padding-top: 18px;
+    width: 600px;
+    height: 800px;
+}
+
+h1{
+    color: #fff;
+    align-items: center;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.sobre{
+    color: #fff;
+    text-align: center;
+    font-size: 40px;
+}
+
+.pagina{
+    margin-left: 30px;
+}
+
+/*Fim Sobre Nós*/
+
+/*Início Footer*/
+
+
+.rede{
+    max-width: 40px;
+    padding: 20px;
+}
+
+.sociais{
+    display: flex;
+    justify-content: center;
+}
+
+address{
+    color: #fff;
+    text-align: center;
 }
