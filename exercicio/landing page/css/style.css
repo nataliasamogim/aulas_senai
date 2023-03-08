@@ -185,10 +185,15 @@ address{
 /*Serviços*/
 
 .serviços_item{
-    display: grid;
     background-color: #c1c1c1;
-    width: 420px;
-    height: 80px;
+    padding: 25px;
+    height: 100px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.serviços_item img{
+    max-width: 60px;
 }
 
 #item_1{grid-area: card1;}
@@ -205,7 +210,8 @@ address{
     "card4 card5 card6";
     border-top: 1px solid #c1c1c1;
     border-bottom: 1px solid #c1c1c1;
-    gap: 20px;
+    gap: 10px;
     margin-top: 20px;
     padding: 20px;
 }
+
