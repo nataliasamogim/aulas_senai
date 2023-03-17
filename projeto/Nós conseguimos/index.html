@@ -5,131 +5,120 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="imagem/logosemfundo.png" type="image/x-icon">
     <title>Tointo</title>
 </head>
 
 <!--Início Menu-->
-<header>
-    <div>
-        <img src="imagem/logosemfundo.png" alt="">
+
+<header class="container">
+    <div class="img_logo">
+        <img class="logo" src="imagem/logosemfundo.png" alt="">
     </div>
-    <nav>
-        <ul>
-            <a href=""><li>Home</li></a>
-            <a href=""><li>Recursos</li></a>
-            <a href=""><li>Planos</li></a>
+    <nav class="menu">
+        <ul class="menu_1">
+            <li class="topico">Home</li>
+            <li class="topico">Recursos</li>
+            <li class="topico">Planos</li>
         </ul>
-        <ul>
-            <input type="button" value="Entrar">
-            <input type="button" value="Cadastrar-se grátis ">
+
+        <ul class="menu_2">
+            <input class="entrar" type="button" value="Entrar">
+            <input class="cadastrar" type="button" value="Cadastrar-se grátis ">
         </ul>
     </nav>
 </header>
 
 <body>
 
-    <main>
-        <div>
-            <h1>Bem-vindos ao Tointo</h1>
-            <p>Com nossa lista de tarefas você poderá se organizar de uma maneira mais fácil e funcional. Ela te
+    <main class="principal">
+        <div class="texto">
+            <h1 class="frase">Bem-vindos ao Tointo</h1>
+            <p class="descricao">Com nossa lista de tarefas você poderá se organizar de uma maneira mais fácil e funcional. Ela te
                 auxiliará diariamente em sua rotina, com lembretes e calendário. Conosco não irá se esquecer de seus
                 compromissos e perder seus horários.
             </p>
         </div>
-        <div>
-            <img src="imagem/lista.png" alt="">
+
+        <div class="img_lista">
+            <img class="lista" src="imagem/lista.png" alt="">
         </div>
     </main>
-    <div>
-        <img src="imagem/whatsapp.png" alt="whatsapp">
+
+    <div class="fixed">
+        <img class="whatsapp_fixed" src="imagem/whatsapp.png" alt="whatsapp">
+
     </div>
 
     <!--Fim Menu-->
 
     <!--Inicio da descrição de cada recurso-->
 
-    <section>
+    <section class="recursos">
+        <h1 class="title">Recursos</h1>
 
-        <h1>Recursos</h1>
-
-        <div class="descricao">
-
-            <article>
-
-                <img src="imagem/Relógio.png" alt="">
-
-                <p>Utilize a ferramenta relógio para estar sempre por dentro dos seus horários e nunca perder a hora.
-                </p>
-
+        <div class="relogio">
+            <article class="content_1">
+                <img class="imagem_1" src="imagem/Relógio.png" alt="Relógio">
+                <p class="text_1">Utilize a ferramenta relógio para estar sempre por dentro dos seus horários e nunca perder a hora.</p>
             </article>
-
         </div>
 
-        <div class="descricao_1">
 
-            <article>
-
-                <p>Utilize a ferramenta calendário para manter a organização dos seus compromissos e prazos.</p>
-
-                <img src="imagem/Calendário.png" alt="">
+        <div class="calendario">
+            <article class="content_2">
+                <p class="text_2">Utilize a ferramenta calendário para manter a organização dos seus compromissos e prazos.</p>
+                <img class="imagem_2" src="imagem/Calendário.png" alt="Calendário">
 
             </article>
-
         </div>
 
-        <div class="descricao_3">
 
-            <article>
-
-                <p>Utilize a ferramenta checklist para manter a organização dos seus projetos passados e futuros.</p>
-
-                <img src="imagem/Checklist (1).png" alt="">
+        <div class="checklist">
+            <article class="content_3">
+                <p class="text_3">Utilize a ferramenta checklist para manter a organização dos seus projetos passados e futuros.</p>
+                <img class="imagem_3" src="imagem/Checklist-Icon.png" alt="Checklist-Icon">
 
             </article>
-
         </div>
 
-        <div class="descricao_4">
 
-            <article>
-
-                <p>Utilize a ferramenta lembrete para que possamos te lembrar de seus compromissos e evitar a procrastinação. </p>
-
-                <img src="imagem/Sino.png" alt="">
+        <div class="sino">
+            <article class="content_4">
+                <p class="text_4">Utilize a ferramenta lembrete para que possamos te lembrar de seus compromissos e evitar a procrastinação. </p>
+                <img class="imagem_4" src="imagem/Sino.png" alt="Sino">
 
             </article>
-
         </div>
-
     </section>
 
     <!--Fim Recursos-->
 
     <!--Início Planos-->
 
-    <section>
-        <div class="Free">
-            <img src="imagem/free.png" alt="" height="75" width="75">
-            <h1>Free</h1>
-            <p>Use o Fointo de <br> forma gratuita com <br>funcionalidades básicas</p>
-            <h1>R$00,00</h1>
-            <button type="submit">Assine Agora</button>
+    <section class="planos">
+        <div class="plano_free">
+            <img class="free" src="imagem/free.png" alt="" height="75" width="75">
+            <h1 class="h1_1">Free</h1>
+            <p class="p1">Use o Tointo de forma gratuita <br> com funcionalidades básicas</p>
+            <h1 class="preco_1">R$00,00</h1>
+            <button class="btn_1" type="submit">Assine Agora</button>
         </div>
 
-        <div class="Plano Mensal">
-            <img src="imagem/oi.png" alt="" height="75" width="75">
-            <h1>Plano Mensal</h1>
-            <p>Tenha a maioria das <br> funcionalidades pagando <br> um pequeno valor mensal</p>
-            <h1>R$--,--/mês</h1>
-            <button type="submit">Assine Agora</button>
+        <div class="plano_mensal">
+            <img class="oi" src="imagem/oi.png" alt="" height="75" width="75">
+            <h1 class="h1_2">Plano Mensal</h1>
+            <p class="p2">Tenha a maioria das funcionalidades <br> pagando um pequeno valor mensal</p>
+            <h1 class="preco_2">R$9,90/mês</h1>
+            <button class="btn_2" type="submit">Assine Agora</button>
         </div>
 
-        <div class="Plano Anual">
-            <img src="imagem/anual.png" alt="" height="75" width="75">
-            <h1>Plano Anual</h1>
-            <p>Use todas as funcionalidades <br> pagando um plano anual</p>
-            <h1>R$--,--/ano</h1>
-            <button type="submit">Assine Agora</button>
+        <div class="plano_anual">
+            <img class="anual" src="imagem/anual.png" alt="" height="75" width="75">
+            <h1 class="h1_3">Plano Anual</h1>
+            <p class="p3">Use todas as funcionalidades <br> pagando um plano anual</p>
+            <h1 class="preco_3">R$89,90/ano</h1>
+            <button class="btn_3" type="submit">Assine Agora</button>
         </div>
     </section>
 
@@ -138,51 +127,51 @@
     <!--Início Cadastro-->
 
     <form class="cadastro">
-        <h1>Cadastro</h1>
+        <h1 class="h1_cadastro">Cadastro</h1>
 
         <div class="form_grupo">
-            <label for="">Nome</label>
-            <input type="text" name="nome" id="nome">
+            <label class="nome" for="">Nome</label>
+            <input class="input_1" type="text" name="nome" id="nome">
         </div>
 
         <div class="form_grupo">
-            <label for="">Email</label>
-            <input type="email" name="email" id="email">
+            <label class="email" for="">Email</label>
+            <input class="input_2" type="email" name="email" id="email">
         </div>
 
         <div class="form_grupo">
-            <label for="">Senha</label>
-            <input type="password" name="senha" id="senha">
+            <label class="senha" for="">Senha</label>
+            <input class="input_3" type="password" name="senha" id="senha">
         </div>
 
         <div class="form_grupo">
-            <label for="">Confirmar Senha </label>
-            <input type="password" name="" id="">
+            <label class="confirmar" for="">Confirmar senha </label>
+            <input class="input_4" type="password" name="" id="">
         </div>
 
         <button class="submit_btn" type="submit">Cadastrar</button>
     </form>
 </body>
 
-<footer>
+<footer class="foot">
 
-    <div>
-        <textarea placeholder="O que você achou?" name="opinião" id="opinião" cols="50" rows="1"></textarea>
-        <button type="submit">Enviar</button>
+    <div class="opinião">
+        <textarea class="textarea" placeholder="O que você achou?" name="opinião" id="opinião" cols="50" rows="1"></textarea>
+        <button class="enviar_btn" type="submit">Enviar</button>
     </div>
 
-    <aside>
-        <h2>Sobre Nós</h2>
-        <p>Nós do ProDS, somos uma equipe que pensamos e desenvolvemos softwares para ajudar no seu cotidiano, de uma
-            forma fácil e rápida. <br> Sempre pensando no próximo! </p>
+    <aside class="sobre">
+        <h2 class="descrição">Sobre Nós</h2>
+        <p class="nós">Nós do ProDS, somos uma equipe que pensamos e desenvolvemos softwares <br> para ajudar no seu cotidiano, de uma
+            forma fácil e rápida. Sempre pensando no próximo! </p>
     </aside>
 
-    <nav>
-        <h2>Redes Sociais</h2>
+    <nav class="redes">
+        <h2 class="titulo">Redes Sociais</h2>
         <ul class="sociais">
-            <li><a href=""><img src="imagem/instagram.png" alt="instagram"></a></li>
-            <li><a href=""><img src="imagem/facebook.png" alt="facebook"></a></li>
-            <li><a href=""><img src="imagem/whatsapp.png" alt="whatsapp"></a></li>
+            <li><a href=""><img class="instagram" src="imagem/instagram.png" alt="instagram"></a></li>
+            <li><a href=""><img class="facebook" src="imagem/facebook.png" alt="facebook"></a></li>
+            <li><a href=""><img class="whatsapp" src="imagem/whatsapp.png" alt="whatsapp"></a></li>
         </ul>
     </nav>
 </footer>
