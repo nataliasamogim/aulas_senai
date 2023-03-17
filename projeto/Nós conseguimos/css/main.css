@@ -1,0 +1,53 @@
+/*Começo do main*/
+.principal{
+    display: flex;
+    background-color: rgb(133, 158, 189);
+    border-radius: 20px;
+    border: 5px solid rgb(114, 122, 133);
+}
+.frase{
+    font-family: 'arial';
+    color: #fff;
+    text-align: center;
+    margin-bottom: 0;
+}
+.lista{
+    width: 800px;
+    height: 450px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    
+}
+.img_lista {
+    padding-right: 50px;
+    padding-left: 50px;
+}
+.texto{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 25px;
+    margin-left: 25px;
+
+}
+.descricao{
+    padding-left: 30px;
+    padding-right: 30px;
+    max-width: 600px;
+    text-align: center;
+    margin-top: 0;
+    color: #fff;
+    
+}
+
+/*Fim do main*/
+
+/*Começo WhatsApp*/
+.whatsapp_fixed{
+    position: fixed;
+    height: 90px;
+    width: 90px;
+    bottom: 20px;
+    left: 1400px;
+}
+/*fim whatsApp*/
