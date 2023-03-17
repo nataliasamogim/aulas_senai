@@ -1,0 +1,71 @@
+/*Início Footer*/
+
+.foot{
+    background-color: rgb(33, 48, 71);
+    margin-top: 30px;
+}
+
+/*Textarea*/
+.opinião{
+    display: flex;
+    justify-content: center;
+}
+
+.textarea{
+    border-radius: 08px;
+    height: 30px;
+    margin: 10px 0 10px 0;
+    width: 50%;
+}
+
+.enviar_btn{
+    width: 80px;
+    height: 36px;
+    margin: 10px 0 6px 6px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.enviar_btn:hover{
+    background-color: rgb(133, 158, 189);
+    color: #fff;
+}
+
+/*Textarea*/
+
+/*Sobre e redes sociais*/
+
+.footer_element{
+    display: flex;
+    border-top: 1px solid #fff;
+    justify-content: space-between;
+}
+
+.sobre{
+    padding-left: 80px;
+    color: #fff;
+}
+
+.titulo{
+    color: #fff;
+    display: flex;
+    padding-left: 40px;
+}
+
+.redes{
+    align-items: center;
+    margin-right: 20px;
+    width: 300px;
+}
+
+.sociais {
+    list-style-type: none;
+    display: flex;
+}
+
+.sociais li img{
+    max-width: 38px;
+    padding-right: 16px;
+}
+
+/*Fim Footer*/
