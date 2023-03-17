@@ -1,0 +1,76 @@
+/*inicio do planos*/
+
+.planos{
+display: flex;
+justify-content: center;
+border-top: 1px solid;
+margin-top: 10px;
+padding-top: 50px;
+}
+
+.plano_free, .plano_mensal, .plano_anual{
+    padding: 5%;
+    color: white;
+}
+
+.planos img{
+    max-width: 90px;
+    margin-top: 30px;
+}
+.free:hover {
+    transition: 400ms linear;
+}
+
+.plano_free{
+    background-color:#a1c1e8;
+    align-content: center;
+    text-align: center;
+    height: 500px;
+    
+}
+
+.plano_mensal{
+    background-color: hsl(220, 64%, 73%);
+    align-content: center;
+    text-align: center;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.plano_anual{
+    background-color: rgb(133, 158, 189);
+    align-content: center;
+    text-align: center;
+}
+
+.btn_1, .btn_2, .btn_3{
+    margin-top: 10px;
+    padding: 20px 40px 20px 40px;
+    border-radius: 57px;
+    font-size: 1em;
+    border: none;
+    background-color: hwb(209 36% 9%);
+    color: white;
+}
+
+.btn_1:hover, .btn_2:hover, .btn_3:hover{
+    background-color: #1979d3;
+}
+
+
+.preco_1, .preco_2, .preco_3{
+    padding: 20px;
+    font-size: 1.9em;
+}
+
+.h1_1, .h1_2, .h1_3{
+    font-size: 40px;
+}
+
+.p1, .p2, .p3{
+    font-size: 1.3em;
+}
+
+/*fim dos planos*/
+
+
