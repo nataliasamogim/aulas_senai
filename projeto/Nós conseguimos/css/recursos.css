@@ -1,0 +1,118 @@
+.recursos {
+    background-color: rgb(189, 174, 174);
+}
+
+.recursos img {
+    width: 150px;
+    height: 150px;
+}
+
+.imagem_1 {
+    margin: 0px 0px 0px 80px;
+}
+
+.imagem_2 {
+    margin: 0px 80px 0px 0px;
+}
+
+.imagem_3 {
+    margin: 0px 0px 0px 80px;
+}
+
+.imagem_4 {
+    margin: 0px 80px 0px 0px;
+}
+
+.title {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 45px;
+    font-size: 30px;
+    color: rgb(0, 0, 0);
+}
+
+.relogio {
+    margin: 20px 60px;
+    background-color: rgb(133, 158, 189);
+    padding: 30px 50px 30px 30px;
+    border-radius: 50px;
+    border: 5px solid rgb(32, 103, 103);
+}
+
+.content_1  , .content_2, .content_3, .content_4{
+    display: flex;
+    align-items: center;
+}
+
+.text_1 {
+    color: white;
+    margin: 0 auto;
+    width: 1000px;
+    height: 150px;
+    font-size: 21px;
+    font-family: Arial, Helvetica, sans-serif;
+    position: relative;
+    top: 63px;
+    margin: 0px 0px 0px 110px;
+ }
+
+ .calendario {
+    margin: 20px 60px;
+    background-color: rgb(133, 158, 189);
+    padding: 30px 50px 30px 30px;
+    border-radius: 50px;
+    border: 5px solid rgb(32, 103, 103);
+}
+
+.text_2 {
+    color: rgb(255, 255, 255);
+    margin: 0 auto;
+    width: 1000px;
+    height: 150px;
+    font-size: 21px;
+    font-family: Arial, Helvetica, sans-serif;
+    position: relative;
+    top: 63px;
+    margin: 0px 0px 0px 90px;
+ }
+
+ .checklist {
+    margin: 20px 60px;
+    background-color: rgb(133, 158, 189);
+    padding: 30px 50px 30px 30px;
+    border-radius: 50px;
+    border: 5px solid rgb(32, 103, 103);
+}
+
+.text_3 {
+    color: white;
+    margin: 0 auto;
+    width: 1000px;
+    height: 150px;
+    font-size: 21px;
+    font-family: Arial, Helvetica, sans-serif;
+    position: relative;
+    top: 63px;
+    margin: 0px 60px;
+ }
+
+ .sino {
+    margin: 20px 60px;
+    background-color: rgb(133, 158, 189);
+    padding: 30px 50px 30px 30px;
+    border-radius: 50px;
+    border: 5px solid rgb(32, 103, 103);
+}
+
+
+.text_4 {
+    color: white;
+    margin: 0 auto;
+    width: 1000px;
+    height: 150px;
+    font-size: 21px;
+    font-family: Arial, Helvetica, sans-serif;
+    position: relative;
+    top: 63px;
+    margin: 0px 0px 0px 90px;
+ }
