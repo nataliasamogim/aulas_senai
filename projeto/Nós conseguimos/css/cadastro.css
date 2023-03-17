@@ -1,0 +1,90 @@
+/*--Início Formulário--*/
+.cadastro {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid;
+    background-color: rgb(33, 48, 71);
+    margin-left: 30%;
+    margin-right: 30%;
+    border-radius: 8px;
+    height: 460px;
+    margin-top: 40px;
+}
+
+.h1_cadastro {
+    border-bottom: 1px solid;
+    text-align: center;
+    color: white;
+}
+
+.form_grupo {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    padding: 3px 10px 10px 10px;
+}
+
+.input_1 {
+    border-radius: 8px;
+    padding: 6px;
+    margin-bottom: 15px;
+}
+
+.input_2 {
+    border-radius: 8px;
+    padding: 6px;
+    margin-bottom: 15px;
+}
+
+.input_3 {
+    border-radius: 8px;
+    padding: 6px;
+    margin-bottom: 15px;
+}
+
+.input_4 {
+    border-radius: 8px;
+    padding: 6px;
+    margin-bottom: 15px;
+}
+
+.submit_btn {
+    padding: 6px;
+    font-size: 1.2em;
+    margin-left: 20%;
+    margin-right: 20%;
+    border-radius: 15px;
+    margin-bottom: 25px;
+}
+
+.submit_btn:hover {
+    background-color: rgb(133, 158, 189);
+}
+
+.nome {
+    margin-top: 5px;
+    font-size: 1.2em;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.email {
+    font-size: 1.2em;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.senha {
+    font-size: 1.2em;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.confirmar {
+    font-size: 1.2em;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+/*--Fim Formulário--*/
