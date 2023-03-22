@@ -1,0 +1,78 @@
+
+*{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #8B638B;
+}
+.form_pagamento {
+    text-align: center;
+    background-color: rgb(64, 29, 97);
+    height: 540px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 540px;
+    color: white;
+    box-shadow: 20px 20px 50px rgb(58, 17, 58);
+}
+
+.h1_mensal {
+    font-size: 2.5em;
+    border-bottom: 1px solid white;
+    margin-bottom: 60px;
+}
+
+.escolha {
+    font-size: 1.5em;
+}
+
+.content {
+    margin-bottom: 100px;
+}
+
+.cartão {
+    padding-bottom: 10px;
+}
+
+.boleto {
+    margin-bottom: 60px;
+}
+
+.span_frase {
+    font-size: 1.2em;
+}
+
+.input_pagamento {
+    height: 17px;
+    width: 17px
+}
+
+.button_btn {
+    padding: 7px 17px 7px 17px;
+    font-size: 1.1em;
+    border-radius: 5px;
+    border: none;
+}
+
+.button_btn:hover {
+    background-color: #823b9c;
+    font-size: 1.2em;
+    cursor: pointer;
+    color: white;
+}
+
+.btn {
+    display: flex;
+    justify-content: space-around;
+    width: 350px;
+    padding-left: 25px;
+}
+
+
+
