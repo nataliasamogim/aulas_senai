@@ -2,16 +2,20 @@
 /*------------------------------------------------------------HEADER-----------------------------------------------------------------------*/
 header.container {
     display: flex;
-    border-radius: 10px;
+    border-radius: 10px 10px 0 0;
+    border-bottom: 4px solid rgb(124, 101, 147);
 }
 .container {
-    background:  rgb(40, 46, 80);
+    background: #61457C;
     padding: 20px 0;
 }
+
+
 .img_logo {
     width: 200px;
     padding: 0 0 0 35px;
 }
+
 .logo {
     height: 150px;
     width: 150px;
@@ -44,7 +48,8 @@ nav.menu {
     border-radius: 15px;
     padding: 10px;
     border: 1px solid #000000;
-    background-color: rgb(213, 219, 231);
+    color: #fff;
+    background-color: rgb(124, 101, 147);
     cursor: pointer;
 }
 .cadastrar {
@@ -52,22 +57,23 @@ nav.menu {
     font-weight: bold;
     border-radius: 15px;
     border: 1px solid #000000;
+    color: #fff;
     padding: 10px;
     margin-right: 20px;
     margin-left: 20px;
-    background-color: rgb(213, 219, 231);
+    background-color: rgb(124, 101, 147);
     cursor: pointer;
 }
 .cadastrar:hover {
-    background-color: blueviolet;
+    background-color: #751A74;
     color: #fff;
 }
 .entrar:hover {
-    background-color: blueviolet;
+    background-color: #751A74;
     color: #fff;
 }
 .topico:hover {
-   color: blueviolet;
+   color: #A978A5;
 }
 
 
