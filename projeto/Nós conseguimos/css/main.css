@@ -1,9 +1,8 @@
 /*Começo do main*/
 .principal{
     display: flex;
-    background-color: rgb(133, 158, 189);
-    border-radius: 20px;
-    border: 5px solid rgb(114, 122, 133);
+    background-color: #51326F;
+    border-bottom: 4px solid rgb(124, 101, 147);
 }
 .frase{
     font-family: 'arial';
@@ -11,6 +10,7 @@
     text-align: center;
     margin-bottom: 0;
 }
+
 .lista{
     width: 800px;
     height: 450px;

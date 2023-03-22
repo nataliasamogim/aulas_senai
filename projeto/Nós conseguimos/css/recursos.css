@@ -1,5 +1,6 @@
 .recursos {
-    background-color: rgb(189, 174, 174);
+    background-color: rgb(64, 29, 97);
+    padding-bottom: 30px;
 }
 
 .recursos img {
@@ -28,15 +29,18 @@
     font-family: Arial, Helvetica, sans-serif;
     padding: 45px;
     font-size: 30px;
-    color: rgb(0, 0, 0);
+    color: #fff;
+    background-color: rgb(64, 29, 97);
+    display: block;
+    font-weight: bold;
 }
 
 .relogio {
     margin: 20px 60px;
-    background-color: rgb(133, 158, 189);
+    background-color: #6F5688;
     padding: 30px 50px 30px 30px;
     border-radius: 50px;
-    border: 5px solid rgb(32, 103, 103);
+    border: 5px solid #2D0651;
 }
 
 .content_1  , .content_2, .content_3, .content_4{
@@ -58,10 +62,10 @@
 
  .calendario {
     margin: 20px 60px;
-    background-color: rgb(133, 158, 189);
+    background-color: #6F5688;
     padding: 30px 50px 30px 30px;
     border-radius: 50px;
-    border: 5px solid rgb(32, 103, 103);
+    border: 5px solid #2D0651;
 }
 
 .text_2 {
@@ -78,10 +82,10 @@
 
  .checklist {
     margin: 20px 60px;
-    background-color: rgb(133, 158, 189);
+    background-color: #6F5688;
     padding: 30px 50px 30px 30px;
     border-radius: 50px;
-    border: 5px solid rgb(32, 103, 103);
+    border: 5px solid #2D0651;
 }
 
 .text_3 {
@@ -98,10 +102,10 @@
 
  .sino {
     margin: 20px 60px;
-    background-color: rgb(133, 158, 189);
+    background-color: #6F5688;
     padding: 30px 50px 30px 30px;
     border-radius: 50px;
-    border: 5px solid rgb(32, 103, 103);
+    border: 5px solid #2D0651;
 }
 
 
