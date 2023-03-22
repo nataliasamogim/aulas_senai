@@ -13,6 +13,7 @@ body{
     border-radius: 8px;
     height: 460px;
     margin-top: 40px;
+    box-shadow: 20px 20px 50px #2D0651;
 }
 
 .h1_cadastro {

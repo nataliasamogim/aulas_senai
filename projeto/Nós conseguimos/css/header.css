@@ -38,6 +38,7 @@ nav.menu { /*tamanho da nav (home, recurso e plano) e sua posição*/
 .topico { /*li do home, recurso e plano*/
     list-style-type: none;
     color: white;
+    cursor: pointer;
 }
 
 .menu .topico{ /*Deixar os tópicos em linha*/
