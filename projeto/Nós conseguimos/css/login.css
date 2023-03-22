@@ -1,0 +1,77 @@
+body {
+    background-image: linear-gradient(to right,#AC72BF ,#6B29A4 ,#570D70);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+}
+#login {
+    background-color: #BC93CB;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 30%;
+    margin-right: 30%;
+    border-radius: 5px;
+    height: 600px;
+    margin-top: 40px;
+    text-align: left;
+    align-items: center;
+    box-shadow: 20px 20px 50px rgb(90, 56, 90);
+}
+.h1_login {
+    text-align: center;
+    color: #fff;
+}
+
+.email_login {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 10px 10px 10px;
+    width: 400px;
+}
+.senha_login {
+    display: flex;
+    flex-direction: column;
+    padding: 3px 10px 10px 10px;
+    width: 400px;
+}
+.input_email {
+    height: 30px;
+    max-width: 400px;
+}
+.input_senha {
+    height: 30px;
+    max-width: 400px;
+}
+.label_email{
+    color: #fff;
+}
+.label_senha{
+    color: #fff;
+}
+/*botão entrar*/
+.entrar_login {
+    height: 40px;
+    width: 150px;
+    background-color: #a56aba;
+    color: #fff;
+    font-size: 20px;
+    border:none ;
+    border-radius: 5px;
+    
+}
+.entrar_login:hover{
+    background-color: #570D70;
+
+}
+/*fim botão entrar*/
+
+/*parágrafo*/
+.paragrafo{
+    color: #fff;
+}
+.paragrafo:hover {
+    color: #570D70;
+}
+/*fim parágrafo
+
+
