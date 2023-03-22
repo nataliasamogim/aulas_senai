@@ -2,8 +2,8 @@
 body{
     background-color: #8B638D;
 }
-.cadastro {
-    display: flex;
+.cadastro { /*class do form*/
+    display: flex; /*deixei o formulário no centro da página */
     flex-direction: column;
     justify-content: center;
     border: 1px solid;
@@ -16,44 +16,44 @@ body{
     box-shadow: 20px 20px 50px #2D0651;
 }
 
-.h1_cadastro {
+.h1_cadastro { /*Título "Cadastro" do formulário*/
     border-bottom: 1px solid;
     text-align: center;
     color: white;
 }
 
-.form_grupo {
+.form_grupo { /*class das Divs que contém os labels e os inputs*/
     display: flex;
     flex-direction: column;
     color: white;
     padding: 3px 10px 10px 10px;
 }
 
-.input_1 {
+.input_1 { /*class do input nome*/
     border-radius: 8px;
     padding: 6px;
     margin-bottom: 15px;
 }
 
-.input_2 {
+.input_2 { /*class do input email*/
     border-radius: 8px;
     padding: 6px;
     margin-bottom: 15px;
 }
 
-.input_3 {
+.input_3 { /*class do input senha*/
     border-radius: 8px;
     padding: 6px;
     margin-bottom: 15px;
 }
 
-.input_4 {
+.input_4 { /*class do input confirmar senha*/
     border-radius: 8px;
     padding: 6px;
     margin-bottom: 15px;
 }
 
-.submit_btn {
+.submit_btn { /*class do botão cadastrar*/
     padding: 6px;
     font-size: 1.2em;
     margin-left: 20%;
@@ -63,30 +63,30 @@ body{
     cursor: pointer;
 }
 
-.submit_btn:hover {
+.submit_btn:hover { 
     background-color: #AFA4CF;
 }
 
-.nome {
+.nome { /*class da label Nome*/
     margin-top: 5px;
     font-size: 1.2em;
     padding-left: 5px;
     padding-right: 5px;
 }
 
-.email {
+.email { /*class da label Email*/
     font-size: 1.2em;
     padding-left: 5px;
     padding-right: 5px;
 }
 
-.senha {
+.senha { /*class da label Senha*/
     font-size: 1.2em;
     padding-left: 5px;
     padding-right: 5px;
 }
 
-.confirmar {
+.confirmar { /*class da label Confirmar Senha*/
     font-size: 1.2em;
     padding-left: 5px;
     padding-right: 5px;
