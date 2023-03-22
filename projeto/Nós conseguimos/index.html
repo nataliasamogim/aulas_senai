@@ -17,27 +17,31 @@
 
 <!--Início Menu-->
 
-<header class="container">
-    <div class="img_logo">
-        <img class="logo" src="imagem/logosemfundo.png" alt="">
+<header class="container"> <!--Header com nome container que contém o logo e o menu-->
+    <div class="img_logo"> <!--div da logo-->
+        <img class="logo" src="imagem/logosemfundo.png" alt=""> <!--logo Tointo-->
     </div>
-    <nav class="menu">
+    <nav class="menu"> <!--nav com a class menu que contém o home, recursos e planos que o site possui, ele está no header-->
         <ul class="menu_1">
-            <a href="#home"><li class="topico">Home</li></a>
-            <a href="#utilizacao"><li class="topico">Recursos</li></a>
-            <a href="#plano"><li class="topico">Planos</li></a>
+            <a href="#home"><li class="topico">Home</li></a> <!-- li home com o link da parte da descrição do site (Bem vindo ao Tointo)-->
+            <a href="#utilizacao"><li class="topico">Recursos</li></a> <!--li recursos com o link da parte com os recurso do site (id utilização)-->
+            <a href="#plano"><li class="topico">Planos</li></a> <!--li plano com o link da parte de plano do site, que mostrarar os planos que possui-->
         </ul>
 
-        <ul class="menu_2">
-            <a href="file:///C:/Users/Aluno/Documents/GitHub/aulas_senai/projeto/N%C3%B3s%20conseguimos/login.html"><input class="entrar" type="button" value="Entrar"></a> 
-            <a href="#cadastrar"><input class="cadastrar" type="button" value="Cadastrar-se Grátis"></a>
+        <ul class="menu_2"> <!--segunda ul do header, ela contém o input entrar e cadastrar free-->
+            <a href="file:///C:/Users/Aluno/Documents/GitHub/aulas_senai/projeto/N%C3%B3s%20conseguimos/login.html"><input class="entrar" type="button" value="Entrar"></a> <!--entrar-->
+            <a href="#cadastrar"><input class="cadastrar" type="button" value="Cadastrar-se Grátis"></a> <!--cadastrar com o plano free-->
         </ul>
     </nav>
 </header>
 
-<body>
+<!--Fim Menu-->
 
-    <main class="principal" id="home">
+<!--Início Body-->
+
+<body> 
+
+    <main class="principal" id="home"> <!--main que contém a descrição e boas vindas-->
         <div class="texto">
             <h1 class="frase">Bem-vindos ao Tointo</h1>
             <p class="descricao">Com nossa lista de tarefas você poderá se organizar de uma maneira mais fácil e funcional. Ela te
@@ -46,45 +50,45 @@
             </p>
         </div>
 
-        <div class="img_lista">
+        <div class="img_lista"> <!-- div da imagem da página do site como exemplo-->
             <img class="lista" src="imagem/lista.png" alt="">
         </div>
     </main>
 
-    <div class="fixed">
+    <div class="fixed"> <!--div da imagem do whatsapp que fica fixed na tela-->
         <a href="https://www.whatsapp.com/?lang=pt_br"><img class="whatsapp_fixed" src="imagem/whatsapp.png" alt="whatsapp"></a>
 
     </div>
 
-    <!--Fim Menu-->
-
     <!--Inicio da descrição de cada recurso-->
 
-    <section class="recursos" id="utilizacao">
+    <!--É importante destacar que em algumas divs o img vem antes do p por causa que no site eles estão intercalados, imagem e descrição/descrição e imagem-->
+
+    <section class="recursos" id="utilizacao"> <!--section para os recursos-->
         <span class="title">Recursos</span>
 
-        <div class="relogio">
+        <div class="relogio"> <!--div para o recurso relógio, que contém a imagem e a descrição dele-->
             <article class="content_1">
                 <img class="imagem_1" src="imagem/relogio.png" alt="">
                 <p class="text_1">Utilize a ferramenta relógio para estar sempre por dentro dos seus horários e nunca perder a hora.</p>
             </article>
         </div>
 
-        <div class="calendario">
+        <div class="calendario"> <!--div para o recurso calendário, que contém a descrição e a imagem dele-->
             <article class="content_2">
                 <p class="text_2">Utilize a ferramenta calendário para manter a organização dos seus compromissos e prazos.</p>
                 <img class="imagem_2" src="imagem/calendario.png" alt="">
             </article>
         </div>
 
-        <div class="checklist">
+        <div class="checklist"> <!--div para o recurso checklist, que contém a imagem e a descrição dele-->
             <article class="content_3">
                 <img class="imagem_3" src="imagem/check.png" alt="">
                 <p class="text_3">Utilize a ferramenta checklist para manter a organização dos seus projetos passados e futuros.</p>
             </article>
         </div>
 
-        <div class="sino">
+        <div class="sino"> <!--div para o recurso sino, que contém a descrição e a imagem dele-->
             <article class="content_4">
                 <p class="text_4">Utilize a ferramenta lembrete para que possamos te lembrar de seus compromissos e evitar a procrastinação. </p>
                 <img class="imagem_4" src="imagem/sinonovo.png" alt="">
@@ -96,29 +100,29 @@
 
     <!--Início Planos-->
 
-    <section class="planos" id="plano">
-        <div class="plano_free">
-            <img class="free" src="imagem/free.png" alt="">
+    <section class="planos" id="plano"> 
+        <div class="plano_free"> <!--div para o plano free-->
+            <img class="free" src="imagem/free.png" alt=""> 
             <h1 class="h1_1">Free</h1>
             <p class="p1">Use o Tointo de forma gratuita <br> com funcionalidades básicas</p>
             <h1 class="preco_1">R$00,00</h1>
-            <a href="#cadastrar"><button class="btn_1" type="submit">Assine Agora</button></a>
+            <a href="#cadastrar"><button class="btn_1" type="submit">Assine Agora</button></a> <!--link do input cadastrar, que está no header,para poder acessar no header do site-->
         </div>
 
-        <div class="plano_mensal">
+        <div class="plano_mensal"> <!--div plano mensal-->
             <img class="oi" src="imagem/oi.png" alt="">
             <h1 class="h1_2">Plano Mensal</h1>
             <p class="p2">Tenha a maioria das funcionalidades <br> pagando um pequeno valor mensal</p>
             <h1 class="preco_2">R$9,90/mês</h1>
-            <a href="file:///C:/Users/Aluno/Documents/GitHub/aulas_senai/projeto/N%C3%B3s%20conseguimos/plano%20mensal.html"><button class="btn_2" type="submit">Assine Agora</button></a>
+            <a href="file:///C:/Users/Aluno/Documents/GitHub/aulas_senai/projeto/N%C3%B3s%20conseguimos/plano%20mensal.html"><button class="btn_2" type="submit">Assine Agora</button></a> <!--link do site da parte de pagamento mensal-->
         </div>
 
-        <div class="plano_anual">
+        <div class="plano_anual"> <!--div para o plano anual-->
             <img class="anual" src="imagem/anual.png" alt="">
             <h1 class="h1_3">Plano Anual</h1>
             <p class="p3">Use todas as funcionalidades <br> pagando um plano anual</p>
             <h1 class="preco_3">R$89,90/ano</h1>
-            <a href="file:///C:/Users/Aluno/Documents/GitHub/aulas_senai/projeto/N%C3%B3s%20conseguimos/plano%20anual.html"><button class="btn_3" type="submit">Assine Agora</button></a>
+            <a href="file:///C:/Users/Aluno/Documents/GitHub/aulas_senai/projeto/N%C3%B3s%20conseguimos/plano%20anual.html"><button class="btn_3" type="submit">Assine Agora</button></a> <!--link do site da parte de pagamento anual-->
         </div>
     </section>
 
@@ -126,48 +130,52 @@
 
     <!--Início Cadastro-->
 
-    <form class="cadastro" id="cadastrar">
+    <form class="cadastro" id="cadastrar"> <!--form do cadastro-->
         <h1 class="h1_cadastro">Cadastro</h1>
 
-        <div class="form_grupo">
+        <div class="form_grupo"> <!--div para a parte do nome-->
             <label class="nome" for="">Nome</label>
             <input class="input_1" type="text" name="Nome" id="nome" required>
         </div>
 
-        <div class="form_grupo">
+        <div class="form_grupo"> <!--div para a parte do email-->
             <label class="email" for="">Email</label>
             <input class="input_2" type="email" name="Email" id="email" required>
         </div>
 
-        <div class="form_grupo">
+        <div class="form_grupo"> <!--div para a parte da senha-->
             <label class="senha" for="">Senha</label>
             <input class="input_3" type="password" name="Senha" id="senha" required>
         </div>
 
         <div class="form_grupo">
-            <label class="confirmar" for="">Confirmar senha </label>
+            <label class="confirmar" for="">Confirmar senha </label> <!--div para a parte de confirmar senha-->
             <input class="input_4" type="password" name="Password" id="password" required>
         </div>
 
-        <button class="submit_btn" type="submit">Cadastrar</button>
+        <button class="submit_btn" type="submit">Cadastrar</button> <!--botão de cadastrar-->
     </form>
 </body>
 
+<!--Fim Cadastro-->
+
+<!--Início Footer-->
+
 <footer class="foot">
 
-    <div class="opinião">
+    <div class="opinião"> <!--div que contem o textarea para a pessoa escrever o que achou do site e o botão deenviar a resposta-->
         <textarea class="textarea" placeholder="O que você achou?" name="opinião" id="opinião" cols="50" rows="1"></textarea>
         <button class="enviar_btn" type="submit">Enviar</button>
     </div>
 
-    <div class="footer_element">
+    <div class="footer_element"> <!--div dentro do footer, para colocar a descrição SOBRE NÓs-->
     <aside class="sobre">
         <h2 class="descrição">Sobre Nós</h2>
         <p class="nós">Nós do ProDS, somos uma equipe que pensamos e desenvolvemos softwares <br> para ajudar no seu cotidiano, de uma
             forma fácil e rápida, sempre prezando pelo melhor de nossos usuários. <br> Somos uma startup jovem, mas com muita experiência e vanguarda. <br> Tentamos facilitar ao máximo o manuseamento do site e estamos sempre dispostos a melhora-lo, priorizando as suas críticas! </p>
     </aside>
 
-    <nav class="redes">
+    <nav class="redes"> <!--nav que contem as redes sociais do Instagram, Facebook e Whatsapp da empresa-->
         <h2 class="titulo">Redes Sociais</h2>
         <ul class="sociais">
             <li><a href="https://www.instagram.com/"><img class="instagram" src="imagem/instagram.png" alt="instagram"></a></li>
