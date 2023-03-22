@@ -1,17 +1,17 @@
 /*Início Footer*/
 
-.foot{
+.foot{ /*class foot*/
     background-color: rgb(33, 48, 71);
     margin-top: 30px;
 }
 
 /*Textarea*/
-.opinião{
+.opinião{ /*Div class opinião, que contém o textararea e o botão de enviar*/
     display: flex;
     justify-content: center;
 }
 
-.textarea{
+.textarea{ /*Text area para colocar o que achou do site*/
     border-radius: 08px;
     height: 30px;
     margin: 10px 0 10px 0;
@@ -35,35 +35,35 @@
 
 /*Sobre e redes sociais*/
 
-.footer_element{
+.footer_element{ /*div footer element, que contém as redes sociais e sobre nós*/
     display: flex;
     border-top: 1px solid #fff;
     justify-content: space-between;
 }
 
-.sobre{
+.sobre{ /*aside sobre, para dar cor ao titulo e a descrição do sobre nós*/
     padding-left: 80px;
     color: #fff;
 }
 
-.titulo{
+.titulo{ /*O nome é "Sobre Nós"*/
     color: #fff;
     display: flex;
     padding-left: 40px;
 }
 
-.redes{
+.redes{ /*Nav das redes sociais*/
     align-items: center;
     margin-right: 20px;
     width: 300px;
 }
 
-.sociais {
+.sociais { /*Ul que contem o li dos icones das redes sociais*/
     list-style-type: none;
     display: flex;
 }
 
-.sociais li img{
+.sociais li img{ /*Aqui está modificando o img (icones das redes sociais) da li da ul sociais*/
     max-width: 38px;
     padding-right: 16px;
 }
