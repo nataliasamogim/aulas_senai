@@ -1,5 +1,7 @@
-*{font-family: Arial, Helvetica, sans-serif;}
-/*------------------------------------------------------------HEADER-----------------------------------------------------------------------*/
+*{font-family: Arial, Helvetica, sans-serif;} /*Fonte arial para o site inteiro*/
+
+/*-----Inicio Header-----*/
+
 header.container {
     display: flex;
     border-radius: 10px 10px 0 0;
@@ -10,39 +12,47 @@ header.container {
     padding: 20px 0;
 }
 
+/*Logo Tointo*/
 
-.img_logo {
+.img_logo { /*tamanho da div da logo*/
     width: 200px;
     padding: 0 0 0 35px;
 }
 
-.logo {
+.logo { /*tamanho da logo*/
     height: 150px;
     width: 150px;
     border: none;
 }
-nav.menu {
+
+/*Fim logo Tointo*/
+
+nav.menu { /*tamanho da nav (home, recurso e plano) e sua posição*/
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: 10px;
 }
-.topico {
+
+.topico { /*li do home, recurso e plano*/
     list-style-type: none;
     color: white;
 }
-.menu .topico{
+
+.menu .topico{ /*Deixar os tópicos em linha*/
     display: inline;
     margin: 0 0 0 30px;
-}
-.menu a{
+} 
+
+.menu a{ /*Estilizando o "a" do menu*/
     color: #000000;
     font-weight: bold;
     font-size: 22px;
     text-decoration: none;
 }
-.entrar {
+
+.entrar { /*Input do entrar*/
     font-size: 100%;
     font-weight: bold;
     border-radius: 15px;
@@ -52,7 +62,10 @@ nav.menu {
     background-color: rgb(124, 101, 147);
     cursor: pointer;
 }
-.cadastrar {
+
+/*Input cadastrar*/
+
+.cadastrar { /*Estilização do input cadastrar*/
     font-size: 100%;
     font-weight: bold;
     border-radius: 15px;
@@ -64,10 +77,13 @@ nav.menu {
     background-color: rgb(124, 101, 147);
     cursor: pointer;
 }
+
+/*Hover do cadastrar, entrar e tópico(o tópico é os li home, recursos e planos)*/
 .cadastrar:hover {
     background-color: #751A74;
     color: #fff;
 }
+
 .entrar:hover {
     background-color: #751A74;
     color: #fff;
