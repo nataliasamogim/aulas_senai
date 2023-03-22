@@ -1,9 +1,9 @@
-body {
+body { /*Foi feito o degradê do fundo e ajustes da letra*/
     background-image: linear-gradient(to right,#AC72BF ,#6B29A4 ,#570D70);
     font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;
 }
-#login {
+#login { /*Foi feito o login e posicionado no meio*/
     background-color: #BC93CB;
     display: flex;
     flex-direction: column;
@@ -17,39 +17,39 @@ body {
     align-items: center;
     box-shadow: 20px 20px 50px rgb(90, 56, 90);
 }
-.h1_login {
+.h1_login { /*Foi feito os ajustes do textos como cor e posição do login*/
     text-align: center;
     color: #fff;
 }
 
-.email_login {
+.email_login { /*Foi feito o ajuste do tamanho e posição do texto da primeira caixa*/
     display: flex;
     flex-direction: column;
     padding: 10px 10px 10px 10px;
     width: 400px;
 }
-.senha_login {
+.senha_login { /*Foi feito o ajuste do tamanho e posição da segunda caixa*/
     display: flex;
     flex-direction: column;
     padding: 3px 10px 10px 10px;
     width: 400px;
 }
-.input_email {
+.input_email { /*Foi dado o tamanho para o primeiro imput*/
     height: 30px;
     max-width: 400px;
 }
-.input_senha {
+.input_senha { /*Foi dado o tamanho para o segundo input*/
     height: 30px;
     max-width: 400px;
 }
-.label_email{
+.label_email{ /*Foi dado a cor para a font do email*/
     color: #fff;
 }
-.label_senha{
+.label_senha{ /*Foi dado a cor para a font da senha*/
     color: #fff;
 }
 /*botão entrar*/
-.entrar_login {
+.entrar_login { /*Foi dado um tamanho e formato para o botão*/
     height: 40px;
     width: 150px;
     background-color: #a56aba;
@@ -59,17 +59,17 @@ body {
     border-radius: 5px;
     
 }
-.entrar_login:hover{
+.entrar_login:hover{ /*Foi feito para que mudasse a cor após o clique*/
     background-color: #570D70;
 
 }
 /*fim botão entrar*/
 
 /*parágrafo*/
-.paragrafo{
+.paragrafo{ /*Foi dado cor para a letra*/
     color: #fff;
 }
-.paragrafo:hover {
+.paragrafo:hover { /*Foi feito para mudar a cor após o clique*/
     color: #570D70;
 }
 /*fim parágrafo
