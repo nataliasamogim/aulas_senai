@@ -72,5 +72,13 @@ body { /*Body para colocar o formulário no centro da página */
     padding-left: 25px;
 }
 
+.btn .button_btn a {
+    text-decoration: none;
+    color: black;
+}
+
+.button_btn a:hover {
+    color: white;
+}
 
 
