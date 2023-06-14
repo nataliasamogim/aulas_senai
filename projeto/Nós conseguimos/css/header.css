@@ -1,4 +1,8 @@
-*{font-family: Arial, Helvetica, sans-serif;} /*Fonte arial para o site inteiro*/
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/*Fonte arial para o site inteiro*/
 
 /*-----Inicio Header-----*/
 
@@ -6,20 +10,25 @@ header.container {
     display: flex;
     border-radius: 10px 10px 0 0;
     border-bottom: 4px solid rgb(124, 101, 147);
+    top: 0;
 }
+
 .container {
     background: #61457C;
-    padding: 20px 0;
+    position: fixed;
+    width: 99%;
 }
 
 /*Logo Tointo*/
 
-.img_logo { /*tamanho da div da logo*/
+.img_logo {
+    /*tamanho da div da logo*/
     width: 200px;
     padding: 0 0 0 35px;
 }
 
-.logo { /*tamanho da logo*/
+.logo {
+    /*tamanho da logo*/
     height: 150px;
     width: 150px;
     border: none;
@@ -27,7 +36,8 @@ header.container {
 
 /*Fim logo Tointo*/
 
-nav.menu { /*tamanho da nav (home, recurso e plano) e sua posição*/
+nav.menu {
+    /*tamanho da nav (home, recurso e plano) e sua posição*/
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -35,25 +45,29 @@ nav.menu { /*tamanho da nav (home, recurso e plano) e sua posição*/
     margin: 10px;
 }
 
-.topico { /*li do home, recurso e plano*/
+.topico {
+    /*li do home, recurso e plano*/
     list-style-type: none;
     color: white;
     cursor: pointer;
 }
 
-.menu .topico{ /*Deixar os tópicos em linha*/
+.menu .topico {
+    /*Deixar os tópicos em linha*/
     display: inline;
     margin: 0 0 0 30px;
-} 
+}
 
-.menu a{ /*Estilizando o "a" do menu*/
+.menu a {
+    /*Estilizando o "a" do menu*/
     color: #000000;
     font-weight: bold;
     font-size: 22px;
     text-decoration: none;
 }
 
-.entrar { /*Input do entrar*/
+.entrar {
+    /*Input do entrar*/
     font-size: 100%;
     font-weight: bold;
     border-radius: 15px;
@@ -66,7 +80,8 @@ nav.menu { /*tamanho da nav (home, recurso e plano) e sua posição*/
 
 /*Input cadastrar*/
 
-.cadastrar { /*Estilização do input cadastrar*/
+.cadastrar {
+    /*Estilização do input cadastrar*/
     font-size: 100%;
     font-weight: bold;
     border-radius: 15px;
@@ -89,8 +104,7 @@ nav.menu { /*tamanho da nav (home, recurso e plano) e sua posição*/
     background-color: #751A74;
     color: #fff;
 }
+
 .topico:hover {
-   color: #A978A5;
+    color: #A978A5;
 }
-
-
