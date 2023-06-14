@@ -1,26 +1,32 @@
 /*Começo do main*/
 
-.principal{ /*Ajuste dos itens do main, como cor, borda e posição*/
+.principal {
+    /*Ajuste dos itens do main, como cor, borda e posição*/
     display: flex;
     background-color: #51326F;
     border-bottom: 4px solid rgb(124, 101, 147);
+    padding-top: 150px;
+    
 }
 
-.frase{ /*Estilização da frase "Bem Vindo ao Tointo"*/
+.frase {
+    /*Estilização da frase "Bem Vindo ao Tointo"*/
     font-family: 'arial';
     color: #fff;
     text-align: center;
     margin-bottom: 0;
 }
 
-.significado{ /*Estilizção da frase com o significado do tointo*/
+.significado {
+    /*Estilizção da frase com o significado do tointo*/
     font-family: 'comic Sans MS';
     color: #fff;
     text-align: center;
 
 }
 
-.texto{ /*Alinhamento da div descrição*/
+.texto {
+    /*Alinhamento da div descrição*/
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -28,24 +34,29 @@
     margin-left: 25px;
 
 }
-.descricao{ /*Estilização da descrição de boas vindas*/
+
+.descricao {
+    /*Estilização da descrição de boas vindas*/
     padding-left: 30px;
     padding-right: 30px;
     max-width: 600px;
     text-align: center;
     margin-top: 0;
     color: #fff;
-    
+
 }
 
-.lista{ /*Imagem da demonstração do site*/
+.lista {
+    /*Imagem da demonstração do site*/
     width: 800px;
     height: 450px;
     padding-top: 20px;
     padding-bottom: 20px;
-    
+
 }
-.img_lista { /*Div da demonstração da imagem do site*/
+
+.img_lista {
+    /*Div da demonstração da imagem do site*/
     padding-right: 50px;
     padding-left: 50px;
 }
@@ -54,11 +65,12 @@
 /*Fim do main*/
 
 /*Começo WhatsApp fixed*/
-.whatsapp_fixed{
+.whatsapp_fixed {
     position: fixed;
     height: 90px;
     width: 90px;
     bottom: 20px;
     left: 1400px;
 }
+
 /*fim whatsApp*/
