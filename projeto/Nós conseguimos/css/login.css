@@ -49,7 +49,7 @@ body { /*Foi feito o degradê do fundo e ajustes da letra*/
     color: #fff;
 }
 /*botão entrar*/
-.entrar_login { /*Foi dado um tamanho e formato para o botão*/
+.submit_btn{ /*Foi dado um tamanho e formato para o botão*/
     height: 40px;
     width: 150px;
     background-color: #a56aba;
@@ -57,12 +57,18 @@ body { /*Foi feito o degradê do fundo e ajustes da letra*/
     font-size: 20px;
     border:none ;
     border-radius: 5px;
-    
+    margin-left: 40px;
 }
-.entrar_login:hover{ /*Foi feito para que mudasse a cor após o clique*/
+.submit_btn:hover{ /*Foi feito para que mudasse a cor após o clique*/
     background-color: #570D70;
 
 }
+.button_log{
+    display: flex;
+    justify-content: space-around;
+    margin-right: 40px;
+}
+
 /*fim botão entrar*/
 
 /*parágrafo*/

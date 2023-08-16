@@ -12,6 +12,7 @@ padding-bottom: 50px;
 .plano_free, .plano_mensal, .plano_anual{ /*cor das letras das tres divs*/
     padding: 5%;
     color: white;
+
 }
 
 .planos img{ /*tamanho das imagens e sua margem*/
