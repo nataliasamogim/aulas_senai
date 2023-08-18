@@ -6,7 +6,7 @@ body {
 .cadastro {
     /*class do form*/
     /*deixei o formulário no centro da página */
-
+    font-family: Arial, Helvetica, sans-serif;
     border: 1px solid;
     background-color: #2D0651;
     border-radius: 8px;
@@ -111,4 +111,23 @@ body {
     max-width: 100%;
 }
 
+.error-validation {
+    color: rgb(107, 236, 221);
+    font-size: 15px;
+    margin: 0;
+    
+  }
+  
+.template {
+    display: none;
+}
+
+.conta_log {
+    color: white;
+    text-align: center;
+    margin-top: 0;
+    font-size: 18px;
+    text-decoration: none;
+}
 /*--Fim Formulário--*/
+

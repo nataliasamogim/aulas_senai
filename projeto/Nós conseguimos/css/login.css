@@ -3,7 +3,7 @@ body { /*Foi feito o degradê do fundo e ajustes da letra*/
     font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;
 }
-#login { /*Foi feito o login e posicionado no meio*/
+#cadastrar { /*Foi feito o login e posicionado no meio*/
     background-color: #BC93CB;
     display: flex;
     flex-direction: column;
@@ -78,6 +78,19 @@ body { /*Foi feito o degradê do fundo e ajustes da letra*/
 .paragrafo:hover { /*Foi feito para mudar a cor após o clique*/
     color: #570D70;
 }
-/*fim parágrafo
+/*Fim parágrafo
+
+/*recados de error*/
+.error-validation {
+    color: #fff;
+    font-size: 15px;
+    position: relative;
+    margin: 0;
+    
+}
+  
+.template {
+    display: none;
+}
 
 

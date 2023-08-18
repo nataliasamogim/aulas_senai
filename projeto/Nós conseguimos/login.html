@@ -9,32 +9,35 @@
     <title>Tointo</title>
 </head>
 <body>
-    <form id="login"> <!--Form que contém o h1 e as divs-->
+    <form id="cadastrar"> <!--Form que contém o h1 e as divs-->
         <h1 class="h1_login">Login</h1>
 
         <div class="email_login"> <!--Div que contém a label e o input do email-->
             <label class="label_email" for="">Email</label>
-            <input class="input_email" type="email" name="email" id="email" required>
+            <input class="input_email" type="email" name="email" id="email" data-email-validate data-required>
         </div>
 
         <div class="senha_login"> <!--Div que contém a label e o input da senha-->
             <label class="label_senha" for="">Senha</label>
-            <input class="input_senha" type="password" name="senha" id="senha" required>
+            <input class="input_senha" type="password" name="senha" id="senha"  data-password-validate data-required>
         </div>
         <p class="paragrafo">Esqueceu a senha?</p> 
 
         <div class="button_log">
             <div class="log_entrar">
-                <button class="submit_btn" type="submit">Entrar</button>
+                <input class="submit_btn" id="btn_cadastrar" type="submit" value="Entrar">
                 
             </div>
             <div class="log_cancel">
-                <button class="submit_btn" type="submit">Cancelar</button>
+                <input class="submit_btn" id="btn_cancelar" type="button" value="Cancelar" onclick="limpaForm()";>
 
             </div>
 
 
         </div>
     </form>
+    <p class="error-validation template"></p>
+    <script src="js/validar.js"></script>
+    
 </body>
 </html>
