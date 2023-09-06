@@ -71,7 +71,7 @@ class Validator {
     // Validar se tem apenas letras
 
     onlyletters(input) {
-        let re = /^[A-Za-z]+$/;;
+        let re = /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/;;
         let inputValue = input.value;
         let errorMessage = `Este campo aceita somente letras`;
 
