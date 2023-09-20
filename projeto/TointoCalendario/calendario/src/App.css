@@ -1,0 +1,143 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  color: white;
+}
+
+body{
+  background-image: linear-gradient(#AC72BF, #6B29A4, #570D70);
+}
+
+#root {
+  max-width: 100%;
+  margin-bottom: auto;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+/*Inicio CALENDARIO*/
+.cabecalho_menu{
+  display: flex;
+}
+
+.usuario{
+  margin-left: auto;
+  align-items: center;
+}
+
+.calendarioimg img {
+  display: flex;
+  justify-content: center;
+  width: 90%;
+  margin-left: 5%;
+  margin-top: 20px;
+
+}
+
+.cabecalho_mes{
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0px 10px 0px;
+
+}
+
+.botao{
+  background-color:rgb(213, 186, 231) ;
+}
+/*Fim calendario*/
+
+/*Início ToDolist*/
+.modal-header, .modal-body, .modal-footer{
+  background-color: #915d9b;
+}
+
+.Modal.Title.data {
+  display: none;
+}
+
+.Modal-Header{
+  display:flex;
+}
+
+.descr{
+  padding-bottom: 20px;
+}
+
+.tarefa{
+  display:flex;
+}
+
+.edit_excluir{
+  margin-left: auto;
+}
+
+label.lembrete.form-label {
+  padding-right: 10px;
+}
+
+.tarefa input, .hora{
+  margin-right: 10px;
+}
+/*Fim ToDolist*/
+
+/*Início do componente Calendario*/
+.seta-mes {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.mes-ano {
+  align-items: center;
+  text-align: center;
+}
+
+.barra-data {
+  display: flex;
+  align-items: center;
+}
+
+.btn-seta1 {
+  background-color: rgb(72, 4, 120);
+  margin-left: 15px;
+}
+
+.btn-seta2 {
+  background-color: rgb(72, 4, 120);
+  margin-right: 15px;
+}
+
+.seta-perfil{
+  margin-right: 10px;
+}
+
+.add{
+  font-size: 25px;
+}
+/*Fim do componente Calendario*/
+
+/*Início menu lateral*/
+.hoje, .semana, .importante{
+  background-color: rgb(64, 29, 97);
+  color: white;
+}
+.hoje:hover, .semana:hover, .importante:hover{
+  background-color: rgb(150, 119, 181);
+}
+
+.menu{
+  background-color:rgb(213, 186, 231) ;
+}
+
+.offcanvas-body, .offcanvas-header{
+  background-color: #7c638d;
+}
+/*Fim menu lateral*/
+
+/*Botão importante do componente compromisso*/
+.mb-3, input{
+  margin-right: 10px;
+}
+
