@@ -1,0 +1,274 @@
+#root {
+  max-width: 100%;
+  margin-bottom: auto;
+}
+/*App calen*/
+.menu-cal-per {
+  display: flex;
+  justify-content: space-between;
+  background-image: linear-gradient(to left, #AC72BF, #6B29A4, #570D70);
+}
+/*Fim app calen*/
+
+/*Inicio CALENDARIO*/
+.cabecalho_menu {
+  margin-left: 15px;
+  margin-top: 20px;
+}
+
+.usuario {
+  margin-left: auto;
+  align-items: center;
+}
+
+.cabecalho_mes {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0px 10px 0px;
+
+}
+
+.botao {
+  background-color: rgb(213, 186, 231);
+}
+/*Fim calendario*/
+
+/*Início ToDolist*/
+.todolist{
+  margin-top: 140px;
+  width: 530px;
+  height: 60.3%;
+}
+
+.menu-todo-per {
+  display: flex;
+  justify-content: space-between;
+  background-image: linear-gradient(to left, #AC72BF, #6B29A4, #570D70);
+  width: 1534px;
+  height: 747px;
+}
+
+.inicio,
+.corpo,
+.todo_footer {
+  background-color: #915d9b;
+  color: white;
+  padding: 10px;
+}
+
+.form-todo{
+  padding: 5px;
+}
+
+.corpo{
+  height: 240px;
+}
+
+.inicio.data {
+  display: none;
+}
+
+.data{
+  padding: 5px;
+}
+
+.inicio {
+  display: flex;
+  height: 90px;
+  border-radius: 15px 15px 0 0;
+}
+
+.todo_footer{
+  border-radius: 0px 0px 15px 15px;
+}
+
+.dia-mes{
+  margin-bottom: 6px;
+}
+
+.dia-semana{
+  text-align: center;
+
+}
+
+.descr {
+  padding-bottom: 40px;
+}
+
+.plus {
+  background-color: #915d9b;
+  border: none;
+  margin-left: 92%;
+}
+
+button.btn.btn-outline {
+  color: white;
+}
+
+.plus:hover {
+  background-color: #c07acc;
+}
+
+.tarefa {
+  display: flex;
+}
+
+.edit_excluir {
+  margin-left: auto;
+}
+
+label.lembrete.form-label {
+  padding-right: 10px;
+}
+
+.tarefa input,
+.hora {
+  margin-right: 10px;
+}
+/*Fim ToDolist*/
+
+/*Início do componente Calendario*/
+.mes-ano {
+  margin-top: 15px;
+  text-align: center;
+  color: white;
+}
+
+.add {
+  font-size: 25px;
+}
+/*Fim do componente Calendario*/
+
+/*Início menu lateral*/
+.hoje,
+.semana,
+.importante {
+  background-color: rgb(64, 29, 97);
+  color: white;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-size: 20px;
+  text-align: center;
+
+}
+
+.perfil {
+  margin-top: 12px;
+  margin-right: 15px;
+  border: none;
+}
+
+.hoje:hover,
+.semana:hover,
+.importante:hover {
+  background-color: rgb(150, 119, 181);
+}
+
+.lateral_menu {
+  border: none;
+}
+
+svg.bi.bi-justify {
+  color: white;
+}
+
+svg.bi.bi-justify:hover {
+  color: #915d9b;
+}
+
+
+.offcanvas-body,
+.offcanvas-header {
+  background-color: #7c638d;
+}
+
+.home_calen{
+  color: #570D70;
+}
+/*Fim menu lateral*/
+
+/*Início dos Compromissos*/
+.mb-3,
+.import {
+  margin-right: 10px;
+}
+
+.modal-header, .modal-body, .modal-footer{
+  background-color: #915d9b;
+  color: white;
+}
+
+.form-control:focus,
+button.btn-close:focus {
+  border-color: #cccccc;
+  outline: 0;
+  box-shadow: none;
+}
+
+.dropdown-menu {
+  --bs-dropdown-link-active-bg: #b25dcf;
+}
+
+.dropdown-item {
+  width: 150px;
+  color: #570D70;
+}
+
+.dropdown-item:hover {
+  color: #570D70;
+}
+
+.btn.show {
+  color: #570D70;
+}
+
+.btn-outline-light:hover {
+  color: #570D70;
+}
+/*Fim dos compromissos*/
+
+/*Início do Perfil*/
+#dropdown-basic::after {
+  content: none;
+}
+
+.form-control {
+  width: 440px;
+}
+
+.nome-perfil,
+.email-perfil {
+  text-align: center;
+  color: white;
+}
+
+.email-perfil,
+input {
+  border-bottom: 1px solid lightgrey;
+}
+
+.page-perfil {
+  background-color: rgb(72, 4, 120);
+  width: 370%;
+}
+
+.page-perfil input {
+  color: white;
+  background-color: rgb(72, 4, 120);
+  display: flex;
+  flex-direction: column;
+  width: 91.8%;
+  border: none;
+  text-align: start;
+  padding: 8px 15px 8px 15px;
+}
+
+.page-perfil input:hover {
+  background-color: rgb(150, 119, 181);
+}
+
+.save:hover {
+  color: #915d9b;
+}
+/*Fim do Perfil*/

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="imagem/logosemfundo.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/login.css">
+    <title>Tointo</title>
+</head>
+<body>
+    <form id="cadastrar"> <!--Form que contém o h1 e as divs-->
+        <h1 class="h1_login">Login</h1>
+
+        <div class="email_login"> <!--Div que contém a label e o input do email-->
+            <label class="label_email" for="">Email</label>
+            <input class="input_email" type="email" name="email" id="email" data-email-validate data-required>
+        </div>
+
+        <div class="senha_login"> <!--Div que contém a label e o input da senha-->
+            <label class="label_senha" for="">Senha</label>
+            <input class="input_senha" type="password" name="senha" id="senha"  data-password-validate data-required>
+        </div>
+        <p class="paragrafo">Esqueceu a senha?</p> 
+
+        <div class="button_log">
+            <div class="log_entrar">
+                <input class="submit_btn" id="btn_cadastrar" type="submit" value="Entrar">
+                
+            </div>
+            <div class="log_cancel">
+                <input class="submit_btn" id="btn_cancelar" type="button" value="Cancelar" onclick="limpaForm()";>
+
+            </div>
+
+
+        </div>
+    </form>
+    <p class="error-validation template"></p>
+    <script src="js/validar.js"></script>
+    
+</body>
+</html>

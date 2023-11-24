@@ -1,0 +1,87 @@
+/*inicio do planos*/
+
+.planos{ /*div com todos os planos incluídos, e suas configurações totais*/
+display: flex;
+justify-content: center;
+border-top: 4px solid rgb(124, 101, 147);
+padding-top: 50px;
+background-color: #401D61;
+padding-bottom: 50px;
+}
+
+.plano_free, .plano_mensal, .plano_anual{ /*cor das letras das tres divs*/
+    padding: 5%;
+    color: white;
+
+}
+
+.planos img{ /*tamanho das imagens e sua margem*/
+    max-width: 90px;
+    margin-top: 30px;
+}
+
+.plano_free{ /*div do plano free, seu alinhamento, e cor*/
+    background-color:#61457C;
+    align-content: center;
+    text-align: center;
+    
+}
+
+.plano_mensal{ /*div do plano mensal, cor, alinhamento e margens*/
+    background-color: #61457C;
+    align-content: center;
+    text-align: center;
+    /*margens colocadas para separar uma div da outra*/
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.plano_anual{ /*div plano anual, cor e alinhamento*/
+    background-color: #61457C;
+    align-content: center;
+    text-align: center;
+}
+
+.btn_1, .btn_2, .btn_3{ /*configuração dos botoes, padronizando o tamanho e bordas, cores e sua margem*/
+    margin-top: 10px;
+    padding: 20px 40px 20px 40px;
+    border-radius: 57px; /*arredondando bordas*/
+    font-size: 1em;
+    border: none;
+    background-color: #7C6593;
+    color: white;
+}
+
+.btn_1:hover, .btn_2:hover, .btn_3:hover{ /*cor dos botões após mouse*/
+    background-color:#B662B5;
+}
+
+
+.preco_1, .preco_2, .preco_3{ /*div dos preços, tamanhos fonte*/
+    padding: 20px;
+    font-size: 1.9em;
+}
+
+.h1_1, .h1_2, .h1_3{ /*tamanho do h1 das três divs*/
+    font-size: 40px;
+}
+
+.p1, .p2, .p3{ /*tamanho do p das três divs*/
+    font-size: 1.3em;
+}
+
+.plano_free img:hover{ /*imagem da div free e seu movimento (transição) e tamanho*/
+    max-width: 140px;
+    transition: 300ms linear;
+}
+.plano_mensal img:hover{ /*imagem da div mensal e seu movimento (transição) e tamanho*/
+    max-width: 140px;
+    transition: 300ms linear;
+}
+.plano_anual img:hover{ /*imagem da div anual e seu movimento (transição) e tamanho*/
+    max-width: 140px;
+    transition: 300ms linear;
+}
+/*fim dos planos*/
+
+

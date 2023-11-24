@@ -1,0 +1,122 @@
+/*--Início Cadastro--*/
+*, ::after, ::before{
+    box-sizing: content-box;
+}
+
+.cadastro { /*class do form*/
+    font-family: Arial, Helvetica, sans-serif;
+    border: 1px solid;
+    background-color: #2D0651;
+    border-radius: 8px;
+    margin-top: 110px;
+    box-shadow: 20px 20px 50px #2D0651;
+    width: 530px;
+    height: 500px;
+    margin-left: auto;
+    margin-right: auto;
+   
+}
+
+.h1_cadastro {
+    /*Título "Cadastro" do formulário*/
+    border-bottom: 1px solid;
+    text-align: center;
+    color: white;
+    font-size: 1.7rem;
+    line-height: unset;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.form_grupo {
+    /*class das Divs que contém os labels e os inputs*/
+    display: flex;
+    flex-direction: column;
+    color: white;
+    padding: 3px 10px 10px 10px;
+}
+
+.form_grupo input{
+    border: none;
+}
+
+.input_1, .input_2, .input_3, .input_4 {
+    /*class do input nome, email, senha e confirmar senha*/
+    border-radius: 8px;
+    padding: 6px;
+    margin-bottom: 15px;
+    border: none;
+    font-size: 13px;
+}
+
+.submit_btn {
+    /*class do botão cadastrar*/
+    padding: 10px;
+    font-size: 1.2em;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 20px;
+    text-decoration: none;
+    color: black;
+    background-color: white;
+}
+.submit_btn:hover {
+    /*muda cor do botão*/
+    background-color: #AFA4CF;
+}
+
+.nome {
+    /*class da label Nome*/
+    margin-top: 5px;
+    font-size: 1.1em;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.email {
+    /*class da label Email*/
+    font-size: 1.1em;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.senha {
+    /*class da label Senha*/
+    font-size: 1.1em;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.confirmar {
+    /*class da label Confirmar Senha*/
+    font-size: 1.1em;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.buttons { /*botão de cadastrar e cancelar*/
+    display: flex;
+    justify-content: space-around;
+    margin-top: 15px;
+}
+
+.buttons div { /*Tamanho para a div que tem os botões cadastrar e cancelar*/
+    max-width: 100%;
+}
+
+.buttons div input{ /*input do botão*/
+    border: none;
+}
+
+.error-validation { /*java script*/
+    color: rgb(107, 236, 221);
+    font-size: 15px;
+    margin: 0;
+}
+  
+.template { 
+    display: none;
+}
+
+/*--Fim Formulário--*/
+

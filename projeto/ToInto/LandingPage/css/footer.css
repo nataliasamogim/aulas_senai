@@ -1,0 +1,71 @@
+/*Início Footer*/
+
+.foot{ /*class foot*/
+    background-color: rgb(33, 48, 71);
+    margin-top: 30px;
+}
+
+/*Textarea*/
+.opinião{ /*Div class opinião, que contém o textararea e o botão de enviar*/
+    display: flex;
+    justify-content: center;
+}
+
+.textarea{ /*Text area para colocar o que achou do site*/
+    border-radius: 08px;
+    height: 30px;
+    margin: 10px 0 10px 0;
+    width: 50%;
+}
+
+.enviar_btn{
+    width: 80px;
+    height: 36px;
+    margin: 10px 0 6px 6px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.enviar_btn:hover{
+    background-color: #B68EC5;
+    color: #fff;
+}
+
+/*Textarea*/
+
+/*Sobre e redes sociais*/
+
+.footer_element{ /*div footer element, que contém as redes sociais e sobre nós*/
+    display: flex;
+    border-top: 1px solid #fff;
+    justify-content: space-between;
+}
+
+.sobre{ /*aside sobre, para dar cor ao titulo e a descrição do sobre nós*/
+    padding-left: 80px;
+    color: #fff;
+}
+
+.titulo{ /*O nome é "Sobre Nós"*/
+    color: #fff;
+    display: flex;
+    padding-left: 40px;
+}
+
+.redes{ /*Nav das redes sociais*/
+    align-items: center;
+    margin-right: 20px;
+    width: 300px;
+}
+
+.sociais { /*Ul que contem o li dos icones das redes sociais*/
+    list-style-type: none;
+    display: flex;
+}
+
+.sociais li img{ /*Aqui está modificando o img (icones das redes sociais) da li da ul sociais*/
+    max-width: 38px;
+    padding-right: 16px;
+}
+
+/*Fim Footer*/

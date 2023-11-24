@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="imagem/logosemfundo.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/pagamento.css">
+    <title>Tointo</title>
+</head>
+<body>
+
+    <section class="form_pagamento"> <!--Section que contém o formulário-->
+        <form class="pagamento"> <!--Contém o h1 e as divs-->
+            <h1 class="h1_mensal">Plano Mensal</h1>
+          
+            <div class="content">
+                <h3 class="escolha">Escolha sua forma de pagamento</h3>
+
+                <div class="cartão"> <!--Div do input do cartão de crédito-->
+                    <input class="pagamento" type="radio" name="pagamento" id="pagamento">
+                    <span class="span_frase">Pix</span>
+                </div>
+
+                <div class="boleto"> <!--Div do input do boleto bancário-->
+                    <input class="pagamento" type="radio" name="pagamento" id="pagamento">
+                    <span class="span_frase">Cartão de crédito</span>
+                </div>
+
+                <div class="btn"> <!--Botão de voltar e continuar-->
+                    <button class="button_btn" type="submit"><a href="index.html">Voltar</a></button>
+                    <a href=""><button class="button_btn" type="submit">Continuar</button></a>
+                </div>
+            </div>
+        </form>
+
+    </section>
+</body>
+</html>

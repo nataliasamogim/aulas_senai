@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/cadastro.css">
+    <title>TOINTO</title>
+</head>
+<body>
+    
+<section class="form_cadastro">
+    <form class="cadastro" id="cadastrar" action="" > <!--form do cadastro-->
+        <h1 class="h1_cadastro">Cadastro</h1>
+
+        <div class="form_grupo"> <!--div para a parte do nome-->
+            <label class="nome" for="">Nome</label>
+            <input class="input_1" type="text" name="nome" id="nome" placeholder="Digite seu nome" data-min-length="3" data-max-length="100" data-only-letters>
+        </div>
+
+        <div class="form_grupo"> <!--div para a parte do email-->
+            <label class="email" for="">Email</label>
+            <input class="input_2" type="email" name="email" id="email" placeholder="Digite seu E-mail" data-email-validate data-min-length="10" data-max-length="40">
+        </div>
+
+        <div class="form_grupo"> <!--div para a parte da senha-->
+            <label class="senha" for="">Senha</label>
+            <input class="input_3" type="password" name="senha" id="senha" placeholder="Digite sua senha"  data-min-length="8" data-max-length="15" data-password-validate>
+        </div>
+
+        <div class="form_grupo">
+            <label class="confirmar" for="">Confirmar senha </label> <!--div para a parte de confirmar senha-->
+            <input class="input_4" type="password" name="password" id="password" placeholder="Digite novamente sua senha" data-equal="senha">
+        </div>
+
+        <div class="buttons">
+            <div class="cad">
+               <a href="plano mensal.html"><input class="submit_btn" id="btn_cadastrar" type="submit" value="Cadastrar" ></a>  <!--botão de cadastrar-->
+
+            </div>
+            <div class="can">
+                <input class="submit_btn" id="btn_cancelar" type="button" value="Cancelar" onclick="limpaForm()";>
+
+            </div>
+
+
+        </div>
+
+
+    </form>
+    <p class="error-validation template"></p>
+    <script src="js/validar.js"></script>
+    
+</section>
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+/*Começo do main*/
+
+.principal {
+    /*Ajuste dos itens do main, como cor, borda e posição*/
+    display: flex;
+    background-color: #51326F;
+    border-bottom: 4px solid rgb(124, 101, 147);
+    padding-top: 150px; 
+    margin-left: 7px;
+    margin-right: 7px;
+}
+
+.frase {
+    /*Estilização da frase "Bem Vindo ao Tointo"*/
+    font-family: 'arial';
+    font-size: 47px;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.significado {
+    /*Estilizção da frase com o significado do tointo*/
+    font-family: 'comic Sans MS';
+    font-size: 30px;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.texto {
+    /*Alinhamento da div descrição*/
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 25px;
+    margin-left: 25px;
+}
+
+.descricao {
+    /*Estilização da descrição de boas vindas*/
+    padding-left: 30px;
+    padding-right: 30px;
+    max-width: 600px;
+    text-align: center;
+    margin-top: 0;
+    color: #fff;
+}
+
+.lista {
+    /*Imagem da demonstração do site*/
+    width: 800px;
+    height: 450px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+}
+
+.img_lista {
+    /*Div da demonstração da imagem do site*/
+    padding-right: 50px;
+    padding-left: 50px;
+}
+
+
+/*Fim do main*/

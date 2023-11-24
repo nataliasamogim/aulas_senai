@@ -1,0 +1,10 @@
+/*Começo WhatsApp fixed*/
+.whatsapp_fixed {
+    position: fixed;
+    height: 90px;
+    width: 90px;
+    bottom: 20px;
+    left: 1400px;
+}
+
+/*fim whatsApp*/

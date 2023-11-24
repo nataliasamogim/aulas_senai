@@ -1,0 +1,132 @@
+/*Início Recursos*/
+
+.recursos {
+    /*Estilização da section recursos*/
+    background-color: rgb(64, 29, 97);
+    padding-bottom: 30px;
+    margin-left: 7px;
+    margin-right: 7px;
+}
+
+.recursos img {
+    /*Tamanho para todas as img da section recurso*/
+    width: 150px;
+    height: 150px;
+}
+
+/*Margin para as imagens, para que algumas fiquem no lado esquerdo e outras na direita*/
+.imagem_1 {
+    margin: 0px 0px 0px 80px;
+}
+
+.imagem_2 {
+    margin: 0px 80px 0px 0px;
+}
+
+.imagem_3 {
+    margin: 0px 0px 0px 80px;
+}
+
+.imagem_4 {
+    margin: 0px 80px 0px 0px;
+}
+
+/*Fim para as imagens, para que algumas fiquem no lado esquerdo e outras na direita*/
+
+.title {
+    /*Span com o titulo Recurso*/
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 45px;
+    font-size: 30px;
+    color: #fff;
+    background-color: rgb(64, 29, 97);
+    display: block;
+    font-weight: bold;
+}
+
+.content_1,
+.content_2,
+.content_3,
+.content_4 {
+    /*Article de todas as div da section recurso*/
+    display: flex;
+    align-items: center;
+}
+
+.relogio {
+    /*Div do recurso relógio*/
+    margin: 20px 60px;
+    background-color: #6F5688;
+    padding: 30px 50px 30px 30px;
+    border-radius: 50px;
+    border: 5px solid #2D0651;
+    align-items: center;
+}
+
+.text_1 {
+    /* "p" do recurso relógio*/
+    color: white;
+    margin: 0 auto;
+    width: 1000px;
+    font-size: 21px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0px 0px 0px 100px;
+}
+
+.calendario {
+    /*Div do recurso calendário*/
+    margin: 20px 60px;
+    background-color: #6F5688;
+    padding: 30px 50px 30px 30px;
+    border-radius: 50px;
+    border: 5px solid #2D0651;
+}
+
+.text_2 {
+    /* "P" do recurso calendário*/
+    color: rgb(255, 255, 255);
+    margin: 0 auto;
+    width: 1000px;
+    font-size: 21px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0px 0px 0px 90px;
+}
+
+.checklist {
+    /*Div do recurso checklist*/
+    margin: 20px 60px;
+    background-color: #6F5688;
+    padding: 30px 50px 30px 30px;
+    border-radius: 50px;
+    border: 5px solid #2D0651;
+}
+
+.text_3 {
+    /*"P" do recurso checklist*/
+    color: white;
+    margin: 0 auto;
+    width: 1000px;
+    font-size: 21px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0px 60px;
+}
+
+.sino {
+    /*Div do recurso sino*/
+    margin: 20px 60px;
+    background-color: #6F5688;
+    padding: 30px 50px 30px 30px;
+    border-radius: 50px;
+    border: 5px solid #2D0651;
+}
+
+.text_4 {
+    /*"P" do recurso sino*/
+    color: white;
+    margin: 0 auto;
+    width: 1000px;
+    font-size: 21px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0px 0px 0px 90px;
+}

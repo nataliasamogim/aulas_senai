@@ -1,0 +1,82 @@
+/*Início Footer*/
+
+.foot{ /*class foot*/
+    background-color: rgb(33, 48, 71);
+    margin-top: 5px;
+    margin-left: 7px;
+    margin-right: 7px;
+}
+
+/*Textarea*/
+.opiniao{ /*Div class opinião, que contém o textararea e o botão de enviar*/
+    display: flex;
+    justify-content: center;
+}
+
+.textarea{ /*Text area para colocar o que achou do site*/
+    border-radius: 8px;
+    margin: 10px 0 10px 0;
+    height: 30px;
+    width: 50%;
+    font-size: 13px;
+}
+
+.enviar_btn{ /*botão de enviar a opinião*/
+    width: 80px;
+    margin: 10px 0 9px 6px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.enviar_btn:hover{
+    background-color: #B68EC5;
+    color: #fff;
+}
+/*Fim textarea*/
+
+/*Sobre e redes sociais*/
+.footer_element{ /*div footer element, que contém as redes sociais e sobre nós*/
+    display: flex;
+    border-top: 1px solid #fff;
+    justify-content: space-between;
+}
+
+.sobre{ /*aside sobre, para dar cor ao titulo e a descrição do sobre nós*/
+    padding-left: 80px;
+    color: #fff;
+}
+
+.titulo{ /*O nome é "Redes sociais"*/
+    color: #fff;
+    display: flex;
+    padding-left: 40px;
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.titulo_sobre{ /*titulo do footer*/
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.redes{ /*Nav das redes sociais*/
+    align-items: center;
+    width: 300px;
+}
+
+.sociais { /*Ul que contem o li dos icones das redes sociais*/
+    list-style-type: none;
+    display: flex;
+    margin-left: 20px;
+}
+
+.sociais li img{ /*Aqui está modificando o img (icones das redes sociais) da li da ul sociais*/
+    max-width: 38px;
+    padding-right: 16px;
+}
+/*Fim sobre e redes sociais*/
+
+/*Fim Footer*/

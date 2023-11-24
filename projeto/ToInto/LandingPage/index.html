@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="imagem/logo do tointo.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/cadastro.css">
+    <link rel="stylesheet" href="css/planos.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/recursos.css">
+    <title>Tointo</title>
+</head>
+
+<!--Início Menu-->
+
+<header class="container"> <!--Header com nome container que contém o logo e o menu-->
+    <div class="img_logo"> <!--div da logo-->
+        <img class="logo" src="imagem/logo do tointo.png" alt=""> <!--logo Tointo-->
+    </div>
+    <nav class="menu">
+        <!--nav com a class menu que contém o home, recursos e planos que o site possui, ele está no header-->
+        <ul class="menu_1">
+            <a href="#home">
+                <li class="topico">Home</li>
+            </a> <!-- li home com o link da parte da descrição do site (Bem vindo ao Tointo)-->
+            <a href="#utilizacao">
+                <li class="topico">Recursos</li>
+            </a> <!--li recursos com o link da parte com os recurso do site (id utilização)-->
+            <a href="#plano">
+                <li class="topico">Planos</li>
+            </a> <!--li plano com o link da parte de plano do site, que mostrarar os planos que possui-->
+        </ul>
+
+        <ul class="menu_2"> <!--segunda ul do header, ela contém o input entrar e cadastrar free-->
+            <a href="login.html"><input class="entrar" type="button" value="Entrar"></a> <!--entrar-->
+            <a href="#cadastrar"><input class="cadastrar" type="button" value="Cadastrar-se Grátis"></a>
+            <!--cadastrar com o plano free-->
+        </ul>
+    </nav>
+</header>
+
+<!--Fim Menu-->
+
+<!--Início Body-->
+
+<body>
+
+    <main class="principal" id="home"> <!--main que contém a descrição e boas vindas-->
+        <div class="texto">
+            <h1 class="frase">Bem-vindos ao Tointo</h1>
+            <h3 class="significado">Together in the Organization</h3>
+            <p class="descricao">Com nossa lista de tarefas você poderá se organizar de uma maneira mais fácil e
+                funcional. Ela te
+                auxiliará diariamente em sua rotina, com lembretes e calendário. Conosco não irá se esquecer de seus
+                compromissos e perder seus horários.
+            </p>
+        </div>
+
+        <div class="img_lista"> <!-- div da imagem da página do site como exemplo-->
+            <img class="lista" src="imagem/lista.png" alt="">
+        </div>
+    </main>
+
+    <div class="fixed"> <!--div da imagem do whatsapp que fica fixed na tela-->
+        <a href="https://www.whatsapp.com/?lang=pt_br"><img class="whatsapp_fixed" src="imagem/whatsapp.png"
+                alt="whatsapp"></a>
+
+    </div>
+
+    <!--Inicio da descrição de cada recurso-->
+
+    <!--É importante destacar que em algumas divs o img vem antes do p por causa que no site eles estão intercalados, imagem e descrição/descrição e imagem-->
+
+    <section class="recursos" id="utilizacao"> <!--section para os recursos-->
+        <span class="title">Recursos</span>
+
+        <div class="relogio"> <!--div para o recurso relógio, que contém a imagem e a descrição dele-->
+            <article class="content_1">
+                <img class="imagem_1" src="imagem/classificação.png" alt="">
+                <p class="text_1">Utilize a ferramenta classificação para nomear aquilo que é mais importante para você.
+                </p>
+            </article>
+        </div>
+
+        <div class="calendario"> <!--div para o recurso calendário, que contém a descrição e a imagem dele-->
+            <article class="content_2">
+                <p class="text_2">Utilize a ferramenta calendário para manter a organização dos seus compromissos e
+                    prazos.</p>
+                <img class="imagem_2" src="imagem/calendario.png" alt="">
+            </article>
+        </div>
+
+        <div class="checklist"> <!--div para o recurso checklist, que contém a imagem e a descrição dele-->
+            <article class="content_3">
+                <img class="imagem_3" src="imagem/check.png" alt="">
+                <p class="text_3">Utilize a ferramenta checklist para manter a organização dos seus projetos passados e
+                    futuros.</p>
+            </article>
+        </div>
+
+        <div class="sino"> <!--div para o recurso sino, que contém a descrição e a imagem dele-->
+            <article class="content_4">
+                <p class="text_4">Utilize a ferramenta lembrete para que possamos te lembrar de seus compromissos e
+                    evitar a procrastinação. </p>
+                <img class="imagem_4" src="imagem/sinonovo.png" alt="">
+            </article>
+        </div>
+    </section>
+
+    <!--Fim Recursos-->
+
+    <!--Início Planos-->
+
+    <section class="planos" id="plano">
+        <div class="plano_free"> <!--div para o plano free-->
+            <img class="free" src="imagem/free.png" alt="">
+            <h1 class="h1_1">Free</h1>
+            <p class="p1">Use o TOINTO de forma gratuita <br> com funcionalidades básicas</p>
+            <h1 class="preco_1">R$00,00</h1>
+            <a href="#cadastrar"><button class="btn_1" type="button">Assine Agora</button></a>
+            <!--link do input cadastrar, que está no header,para poder acessar no header do site-->
+        </div>
+
+        <div class="plano_mensal"> <!--div plano mensal-->
+            <img class="oi" src="imagem/oi.png" alt="">
+            <h1 class="h1_2">Plano Mensal</h1>
+            <p class="p2">Tenha a maioria das funcionalidades <br> pagando um pequeno valor mensal</p>
+            <h1 class="preco_2">R$7,90/mês</h1>
+            <a href="cad_pagament.html"><button class="btn_2" type="button">Assine Agora</button></a>
+            <!--link do site da parte de pagamento mensal-->
+        </div>
+
+        <div class="plano_anual"> <!--div para o plano anual-->
+            <img class="anual" src="imagem/anual.png" alt="">
+            <h1 class="h1_3">Plano Anual</h1>
+            <p class="p3">Use todas as funcionalidades <br> pagando um plano anual</p>
+            <h1 class="preco_3">R$109,90/ano</h1>
+            <a href="cad_pagament.html"><button class="btn_3" type="button">Assine Agora</button></a>
+            <!--link do site da parte de pagamento anual-->
+        </div>
+    </section>
+
+    <!--Fim Planos-->
+
+    <!--Início Cadastro-->
+    <section class="form_cadastro">
+        <form class="cadastro" id="cadastrar" action="" > <!--form do cadastro-->
+            <h1 class="h1_cadastro">Cadastro</h1>
+
+            <div class="form_grupo"> <!--div para a parte do nome-->
+                <label class="nome" for="">Nome</label>
+                <input class="input_1" type="text" name="nome" id="nome" placeholder="Digite seu nome" data-min-length="3" data-max-length="100" data-only-letters>
+            </div>
+
+            <div class="form_grupo"> <!--div para a parte do email-->
+                <label class="email" for="">Email</label>
+                <input class="input_2" type="email" name="email" id="email" placeholder="Digite seu E-mail" data-email-validate data-min-length="10" data-max-length="40">
+            </div>
+
+            <div class="form_grupo"> <!--div para a parte da senha-->
+                <label class="senha" for="">Senha</label>
+                <input class="input_3" type="password" name="senha" id="senha" placeholder="Digite sua senha" data-password-validate data-min-length="8" data-max-length="15">
+            </div>
+
+            <div class="form_grupo">
+                <label class="confirmar" for="">Confirmar senha </label> <!--div para a parte de confirmar senha-->
+                <input class="input_4" type="password" name="password" id="password" placeholder="Digite novamente sua senha" data-equal="senha">
+            </div>
+            
+            <div class="buttons">
+                <div class="cad">
+                    <input class="submit_btn" id="btn_cadastrar" type="submit" value="Cadastrar"> <!--botão de cadastrar-->
+
+                </div>
+                <div class="can">
+                    <input class="submit_btn" id="btn_cancelar" type="button" value="Cancelar" onclick="limpaForm()";>
+
+                </div>
+
+
+            </div>
+
+
+        </form>
+        <p class="error-validation template"></p>
+        <script src="js/validar.js"></script>
+    </section>
+    
+   
+
+</body>
+
+<!--Fim Cadastro-->
+
+<!--Início Footer-->
+
+<footer class="foot">
+
+    <div class="opinião">
+        <!--div que contem o textarea para a pessoa escrever o que achou do site e o botão deenviar a resposta-->
+        <textarea class="textarea" placeholder="O que você achou?" name="opinião" id="opinião" cols="50"
+            rows="1"></textarea>
+        <button class="enviar_btn" type="submit">Enviar</button>
+    </div>
+
+    <div class="footer_element"> <!--div dentro do footer, para colocar a descrição SOBRE NÓs-->
+        <aside class="sobre">
+            <h2 class="descrição">Sobre Nós</h2>
+            <p class="nós">Nós do ProDS somos uma equipe que pensamos e desenvolvemos softwares <br> para ajudar no seu
+                cotidiano, de uma
+                forma fácil e rápida, sempre prezando pelo melhor de nossos usuários. <br> Somos uma startup jovem, mas
+                com muita experiência e vanguarda. <br> Tentamos facilitar ao máximo o manuseamento do site e estamos
+                sempre dispostos a melhorá-lo, priorizando as suas críticas! <br> Por isso, nosso produto recebeu o nome
+                Tointo, que em português significa "Juntos na Organização".</p>
+        </aside>
+
+        <nav class="redes"> <!--nav que contem as redes sociais do Instagram, Facebook e Whatsapp da empresa-->
+            <h2 class="titulo">Redes Sociais</h2>
+            <ul class="sociais">
+                <li><a href="https://www.instagram.com/"><img class="instagram" src="imagem/instagram.png"
+                            alt="instagram"></a></li>
+                <li><a href="https://pt-br.facebook.com/"><img class="facebook" src="imagem/facebook.png"
+                            alt="facebook"></a></li>
+                <li><a href="https://www.whatsapp.com/?lang=pt_br"><img class="whatsapp" src="imagem/whatsapp.png"
+                            alt="whatsapp"></a></li>
+            </ul>
+        </nav>
+    </div>
+
+</footer>
+
+
+<!--Fim Cadastro-->
+
+</html>

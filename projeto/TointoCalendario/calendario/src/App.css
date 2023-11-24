@@ -109,8 +109,14 @@ label.lembrete.form-label {
   margin-right: 15px;
 }
 
+.btn-seta1:hover, .btn-seta2:hover{
+  background-color: rgb(82, 8, 135);
+}
+
 .seta-perfil{
   margin-right: 10px;
+  display: flex;
+  align-items: center;
 }
 
 .add{
@@ -140,4 +146,44 @@ label.lembrete.form-label {
 .mb-3, input{
   margin-right: 10px;
 }
+
+
+/*Início do Perfil*/
+#dropdown-basic::after {
+  content: none;
+}
+
+.nome-perfil, .email-perfil{
+  text-align: center;
+  color: white;
+}
+
+.email-perfil, input{
+  border-bottom: 1px solid lightgrey;
+}
+
+.page-perfil{
+  background-color: rgb(72, 4, 120);
+  width: 370%;
+}
+
+.page-perfil input{
+  color: white;
+  background-color: rgb(72, 4, 120);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border: none;
+  text-align: start;
+  padding: 8px 15px 8px 15px;
+}
+
+.page-perfil input:hover{
+  background-color: rgb(150, 119, 181);
+}
+
+/*Fim do Perfil*/
+
+
+
 
