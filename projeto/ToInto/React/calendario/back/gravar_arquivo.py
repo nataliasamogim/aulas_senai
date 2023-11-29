@@ -37,9 +37,8 @@ if __name__ == "__main__":
     dados_teste = {
         "nome": "John Doe",
         "email": "john.doe@example.com",
-        "cidade": "Cityville",
-        "dataNascimento": "1990-01-01",
         "senha": "senha123",
+        "confirmsenha": "senha123",
     }
 
     gravar_em_arquivo(dados_teste)
