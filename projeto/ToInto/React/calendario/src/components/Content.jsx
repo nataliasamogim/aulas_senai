@@ -3,7 +3,7 @@ import { Home } from "../pages/Home";
 import { Routes, Route } from "react-router-dom";
 import { Login } from "../pages/LoginLP/Login";
 import NotFound from "../pages/NotFound"
-import {CadastroLP} from "../pages/Cadastro/CadastroLP"
+import CadastroLP from "../pages/Cadastro/CadastroLP"
 import {PlanosLP} from "./Planos/PlanosLP"
 import {App_calen} from "../pages/App_calen";
 import { App_todo } from "./App_todo";

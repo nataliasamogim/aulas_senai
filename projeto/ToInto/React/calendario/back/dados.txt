@@ -1,0 +1,35 @@
+
+Dados Gravados:
+Nome: 
+E-mail: 
+Senha: 
+Confirmar senha: 
+
+
+Dados Gravados:
+Nome: Malu
+E-mail: maria-luiza@gmail.br
+Senha: 12345
+Confirmar senha: 12345
+
+
+Dados Gravados:
+Nome: None
+E-mail: None
+Senha: None
+Confirmar senha: None
+
+
+Dados Gravados:
+Nome: None
+E-mail: None
+Senha: None
+Confirmar senha: None
+
+
+Dados Gravados:
+Nome: None
+E-mail: None
+Senha: None
+Confirmar senha: None
+
