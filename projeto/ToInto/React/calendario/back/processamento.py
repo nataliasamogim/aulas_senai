@@ -1,10 +1,11 @@
 # processamento.py
-from gravar_arquivo import gravar_em_arquivo;
-from gravar_arquivo import gravar_em_arquivo_log
 
-def processar_dados(dados):
-    # Função para processar os dados recebidos do Flask
-    # Retorna os dados processados
+#Importa as funções de gravar arquivo do formulário de cadastro e login
+from gravar_arquivo import gravar_em_arquivo; 
+from gravar_arquivo import gravar_em_arquivo_log 
+
+def processar_dados(dados): #Começo da função chamada dados que recebe dados
+    
     dados_processados = dados
 
     print("\nDados Recebidos do Cadastro:")
