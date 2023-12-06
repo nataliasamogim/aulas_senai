@@ -1,30 +1,39 @@
+/*  Descrição: Esse código CSS é responsável pela estilização do cabeçalho do
+Tointo, ele define o estilo dos elementos como a logo, os itens do menu de
+navegação (home, recurso e plano), e botões de "Entrar" e "Cadastrar" Ele
+também controla o comportamento visual durante interações do usuário (hover).
+Tem a intenção de facilitar o uso da aplicação para os usuários  */
 
-* { /*Fonte arial para o site inteiro*/
+* {
     font-family: Arial, Helvetica, sans-serif;
 }
-
+    
+/*Fonte arial para o site inteiro*/
+    
 /*-----Inicio Header-----*/
-
-header.container { /*container principal*/
+    
+header.container {
     display: flex;
     border-bottom: 4px solid rgb(124, 101, 147);
     top: 0;
     background: #61457C;
     position: fixed;
-    width: 97.4%;
+    width: 98.9%;
     max-width: none;
     height: 160px;
     margin-left: 7px;
     margin-right: 7px;
 }
-
-/*Logo Tointo*/
+    
+    
+/*ínicio Logo Tointo*/
+    
 .img_logo {
     /*tamanho da div da logo*/
     width: 200px;
     padding: 0 0 0 35px;
 }
-
+    
 .logo {
     /*tamanho da logo*/
     padding-top: 7px;
@@ -32,42 +41,42 @@ header.container { /*container principal*/
     width: 150px;
     border: none;
 }
+    
 /*Fim logo Tointo*/
-
-/*Inicio menu*/
+    
 nav.menu {
-    /*tamanho da nav (home, recurso e plano) e sua posição*/
+/*tamanho da nav (home, recurso e plano) e sua posição*/
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: 10px;
 }
-
-.menu_1, .menu_2{ /*home, recursos, planos e entrar, cadastrar-se gratis*/
+    
+.menu_1, .menu_2{
     margin-top: 15px;
 }
-
+    
 .topico {
     /*li do home, recurso e plano*/
     list-style-type: none;
     color: white;
     cursor: pointer;
 }
-
+    
 .menu .topico {
     /*Deixar os tópicos em linha*/
     display: inline;
     margin: 0 0 0 30px;
 }
-
+    
 .menu a {
     /*Estilizando o "a" do menu*/
     font-weight: bold;
     font-size: 22px;
     text-decoration: none;
 }
-
+    
 .entrar {
     /*Input do entrar*/
     font-size: 100%;
@@ -79,9 +88,9 @@ nav.menu {
     background-color: rgb(124, 101, 147);
     cursor: pointer;
 }
-/*Fim do menu*/
-
+    
 /*Input cadastrar*/
+    
 .cadastrar {
     /*Estilização do input cadastrar*/
     font-size: 100%;
@@ -89,25 +98,26 @@ nav.menu {
     border-radius: 15px;
     border: 1px solid #000000;
     color: #fff;
-    padding: 13px;
+    padding: 10px;
     margin-right: 20px;
     margin-left: 20px;
     background-color: rgb(124, 101, 147);
     cursor: pointer;
 }
-
+    
 /*Hover do cadastrar, entrar e tópico(o tópico é os li home, recursos e planos)*/
 .cadastrar:hover {
     background-color: #751A74;
     color: #fff;
 }
-
+    
 .entrar:hover {
     background-color: #751A74;
     color: #fff;
 }
-
+    
 .topico:hover {
     color: #A978A5;
 }
-/*Fim input cadastrar*/
+    
+/*-----Fim Header-----*/

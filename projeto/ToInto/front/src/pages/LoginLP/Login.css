@@ -1,3 +1,6 @@
+/*Descrição: Esse código CSS é responsável pela estilização do formulário de Login do Tointo, na qual define o estilo do corpo do
+formulário, os campos de email e senha, esqueceu a senha e mensagens de error. Além disso, ele também controla o comportamento visual 
+durante a interação do usuário(hover).*/
 
 .body_log { /*Foi feito o degradê do fundo e ajustes da letra*/
     background-image: linear-gradient(to right,#AC72BF ,#6B29A4 ,#570D70);
@@ -51,7 +54,8 @@
 .label_senha{ /*Foi dado a cor para a font da senha*/
     color: #fff;
 }
-/*botão entrar*/
+
+/*---Início botão entrar---*/
 .submit_btn-log{ /*Foi dado um tamanho e formato para o botão*/
     padding: 10px 38px 10px 38px;
     background-color: #a56aba;
@@ -76,19 +80,18 @@
     margin-right: 40px;
     margin-top: 10px;
 }
+/*---Fim botão entrar---*/
 
-/*fim botão entrar*/
-
-/*parágrafo*/
+/*---Início parágrafo(className de "esqueceu a senha")---*/
 .paragrafo{ /*Foi dado cor para a letra*/
     color: #fff;
 }
 .paragrafo:hover { /*Foi feito para mudar a cor após o clique*/
     color: #570D70;
 }
-/*Fim parágrafo
+/*---Fim parágrafo---*/
 
-/*recados de error*/
+/*---Recados de error---*/
 .error-validation {
     color: #fff;
     font-size: 15px;

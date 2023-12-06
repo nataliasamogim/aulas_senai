@@ -6,7 +6,7 @@ function RecursosLP() {
             <section className="recursos" id="utilizacao"> {/*section principal com todos recursos do site */}
                 <span className="title">Recursos</span>
 
-                <div className="relogio"> {/*Recurso do relogio*/}
+                <div className="classific"> {/*Recurso do relogio*/}
                     <article className="content_1">
                         <img className="imagem_1" src="image/classificação.png" alt=""/>
                             <p className="text_1">Utilize a ferramenta classificação para nomear aquilo que é mais importante para você.
