@@ -27,7 +27,7 @@ def validar_nome(nome):
 
     return {'erro': False, 'mensagem': ''}
 
-# Nome da função: validar_nome
+# Nome da função: validar_email
 # Autora: Maria Luiza
 # Data de criação/alteração: 01/12/2023
 # Parâmetros de entrada: 
@@ -77,15 +77,15 @@ def validar_senha(vsenha):
     # Adicione suas próprias regras de validação para senha aqui
     # Por exemplo, garantir que a senha contenha pelo menos um caractere maiúsculo, um minúsculo, um número e um caractere especial
     if len(vsenha) < 8 or len(vsenha) > 15:
-        erros.append('A senha deve ter entre 8 e 15 caracteres')
+        erros.append(' - A senha deve ter entre 8 e 15 caracteres')
     if not any(c.isupper() for c in vsenha):
-        erros.append("A senha deve conter um caractere maiúsculo\n")
+        erros.append(" - A senha deve conter um caractere maiúsculo\n")
     if not any(c.islower() for c in vsenha):
-        erros.append('A senha deve conter um caractere minúsculo\n')
+        erros.append(' - A senha deve conter um caractere minúsculo\n')
     if not any(c.isdigit() for c in vsenha):
-        erros.append('A senha deve conter pelo menos um número\n')
+        erros.append(' - A senha deve conter pelo menos um número\n')
     if not any(c in "!@#$%^&*()-_=+[]{}|;:'\",.<>/?`~" for c in vsenha):
-        erros.append('A senha deve conter um caractere especial')
+        erros.append(' - A senha deve conter um caractere especial')
 
     if erros:
         return {'erro': True, 'mensagem': erros}

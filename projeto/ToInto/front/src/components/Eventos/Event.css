@@ -1,9 +1,12 @@
-/*Inicio da div event*/
+/*Descrição detalhada: A class event está estilizando os eventos que aparecem em cada dia do calendario.*/
+
+/*Início do bloco (eventos)*/
 .event {
-    background-color: #71508f;
+    background-color: #71508F;
+    border-radius: 4px;
     color: white;
     padding: 4px;
     margin: 2px;
-    border-radius: 4px;
 }
-/*Fim da div event*/
+
+/*Fim do bloco (eventos)*/

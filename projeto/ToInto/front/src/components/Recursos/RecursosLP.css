@@ -1,3 +1,6 @@
+/* Esse código CSS é responsável pela estilização dos recursos da Landing Page do TOINTO, o código estiliza uma seção de
+recursos, apresentando quatro recursos com imagens, títulos e descrições, sendo eles classificação, calendário, checklist e lembretes . */
+
 /*Início Recursos*/
 
 .recursos {
@@ -13,25 +16,6 @@
     width: 150px;
     height: 150px;
 }
-
-/*Margin para as imagens, para que algumas fiquem no lado esquerdo e outras na direita*/
-.imagem_1 {
-    margin: 0px 0px 0px 80px;
-}
-
-.imagem_2 {
-    margin: 0px 80px 0px 0px;
-}
-
-.imagem_3 {
-    margin: 0px 0px 0px 80px;
-}
-
-.imagem_4 {
-    margin: 0px 80px 0px 0px;
-}
-
-/*Fim para as imagens, para que algumas fiquem no lado esquerdo e outras na direita*/
 
 .title {
     /*Span com o titulo Recurso*/
@@ -52,8 +36,32 @@
     /*Article de todas as div da section recurso*/
     display: flex;
     align-items: center;
+    width: 100%;
+    justify-content: center;
 }
 
+
+/*Início do bloco das margens para as imagens, para que algumas fiquem no lado esquerdo e outras na direita*/
+.imagem_1 {
+    margin: 0px 0px 0px 80px;
+}
+
+.imagem_2 {
+    margin: 0px 80px 0px 0px;
+}
+
+.imagem_3 {
+    margin: 0px 0px 0px 80px;
+}
+
+.imagem_4 {
+    margin: 0px 80px 0px 0px;
+}
+
+/*Fim do bloco das margens para as imagens, para que algumas fiquem no lado esquerdo e outras na direita*/
+
+
+/* Início dos ícones e descrição sobre cada recurso do TOINTO*/
 .classific {
     /*Div do recurso relógio*/
     margin: 20px 60px;
@@ -130,3 +138,7 @@
     font-family: Arial, Helvetica, sans-serif;
     margin: 0px 0px 0px 90px;
 }
+
+/* Fim dos ícones e descrição sobre cada recurso do TOINTO*/
+
+/* Fim Recursos*/

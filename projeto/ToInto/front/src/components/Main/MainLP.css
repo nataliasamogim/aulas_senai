@@ -1,11 +1,20 @@
-/*Começo do main*/
+/*  Esse trecho de código CSS é responsável pela estilização da
+    seção principal onde contêm a introdução do Tointo. Ele define
+    a posição dos elementos dentro dos blocos, como cores de fundo,
+    bordas e espaçamentos, além de estilizar elementos específicos
+    através de diferentes fontes, alinhamentos e tamanhos. Todas essas
+    definições têm o objetivo de criar uma apresentação atrativa e organizada
+    do segmento principal da página.*/
 
+    
+/*-----Começo do main-----*/
 .principal {
     /*Ajuste dos itens do main, como cor, borda e posição*/
     display: flex;
     background-color: #51326F;
     border-bottom: 4px solid rgb(124, 101, 147);
-    padding-top: 150px; 
+    padding-top: 170px;
+    padding-bottom: 10px;
     margin-left: 7px;
     margin-right: 7px;
 }
@@ -47,6 +56,7 @@
     text-align: center;
     margin-top: 0;
     color: #fff;
+
 }
 
 .lista {
@@ -65,4 +75,4 @@
 }
 
 
-/*Fim do main*/
+/*-----Fim do main-----*/

@@ -1,21 +1,38 @@
+{/*Nome componente: Perfil*/}
+{/*Autor(a):Natália Aparecida Samogim*/}
+{/*Data de criação: e data de alteração: 01/12/2023*/}
+{/*Descrição: representa a página de perfil do usuário, contendo:
+- foto de perfil;
+- nome de perfil;
+- email do usuário;
+- botão de sair;
+*/}
+{/*Observações pertinentes:
+- O código importa o componente `Dropdown` do pacote 'react-bootstrap para a criação de um menu suspenso, representando um perfil de usuário*/}
+
 import Dropdown from 'react-bootstrap/Dropdown';
+import { Link } from 'react-router-dom';
 
-
+{/*Nome função: Perfil*/}
+{/*Autor(a): Natália Aparecida Samogim*/}
+{/*Data de criação: e data de alteração: 01/12/2023*/}
+{/*Parâmetros de entrada: Nulo*/}
+{/*Retorno: retorna o perfil de usuário*/}
 function Perfil() {
     return (
 
-        <Dropdown>
-            <Dropdown.Toggle className='perfil' variant='outline' id="dropdown-basic"> {/*simbolo do perfil*/}
+        <Dropdown> {/*Engloba todo o conteúdo que será exibido quando o usuário interagir com o componente*/}
+            <Dropdown.Toggle className='perfil' variant='outline' id="dropdown-basic"> {/*Este é o botão de acionamento do menu suspenso que quando clicado, mostra ou esconde o menu */}
                 <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" className="bi bi-person-circle" viewBox="0 0 16 16" color="white">
                     <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
                     <path fillRule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
-                </svg>
+                </svg>{/*Imagem de perfil de usuário */}
             </Dropdown.Toggle>
 
-            <Dropdown.Menu className='page-perfil'> {/*textos do perfil, como o nome, email e o sair  */}
-                <Dropdown.ItemText className='nome-perfil'>Nome</Dropdown.ItemText>
-                <Dropdown.ItemText className='email-perfil'>tointo@listatarefas.com</Dropdown.ItemText>
-                <input type="button" value="Sair"/>
+            <Dropdown.Menu className='page-perfil'>
+                <Dropdown.ItemText className='nome-perfil'>Nome</Dropdown.ItemText> {/*Nome de usuário*/}
+                <Dropdown.ItemText className='email-perfil'>tointo@listatarefas.com</Dropdown.ItemText> {/*Email de usuário */}
+                <Link to="/" className='btn-sair'>Sair</Link> {/*Botão de sair do menu suspenso*/}
             </Dropdown.Menu>
         </Dropdown>
     );

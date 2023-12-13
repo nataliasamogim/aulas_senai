@@ -1,4 +1,10 @@
-/*Começo WhatsApp fixed*/
+/*  Esse código CSS estiliza o ícone do WhatsApp na página da
+    landing page, deixando a imagem fixa na tela em uma localização
+    específica (canto inferior direito), se tornando acessível para
+    os usuários enquanto navegam no site.*/
+
+
+/*  Começo WhatsApp fixed  */
 .whatsapp_fixed {
     position: fixed;
     height: 90px;
@@ -7,4 +13,4 @@
     left: 1400px;
 }
 
-/*fim whatsApp*/
+/*  fim whatsApp   */

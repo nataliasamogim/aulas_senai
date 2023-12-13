@@ -1,5 +1,8 @@
-/*Início Pagamento*/
+/*Descrição detalhada: Esse código é responsável pela estilização do pagamento do plano mensal e anual do Tointo, na qual define o estilo
+dos elementos como os inputs de cartão ou pix, além do botão de voltar e continuar. Ele também controla o comportamento visual durante
+interações do usuário (hover) e também tem a intenção de facilitar o uso da aplicação para os usuários.*/
 
+/*Início Pagamento*/
 body { /*Body para colocar o formulário no centro da página */
     display: flex;
     justify-content: center;
@@ -20,7 +23,7 @@ body { /*Body para colocar o formulário no centro da página */
     box-shadow: 20px 20px 50px rgb(58, 17, 58);
 }
 
-.h1_mensal { /*É o título */
+.h1_mensal { /*Título*/
     font-size: 2.5em;
     border-bottom: 1px solid white;
     margin-bottom: 60px;
@@ -34,11 +37,11 @@ body { /*Body para colocar o formulário no centro da página */
     margin-bottom: 100px;
 }
 
-.pix { /*div que contem o input e o span para o pagamento em cartão de crédito*/
+.pix { /*div que contem o input e o span para o pagamento em pix*/
     padding-bottom: 10px;
 }
 
-.cartao { /*div que contem o input e o span para o pagamento em boleto*/
+.cartao { /*div que contem o input e o span para o pagamento em cartão de crédito*/
     margin-bottom: 60px;
 }
 
@@ -46,12 +49,12 @@ body { /*Body para colocar o formulário no centro da página */
     font-size: 1.2em;
 }
 
-.input_pagamento { /*escolhas de pagamento*/
+.input_pagamento { /*inputs das escolhas de pagamento*/
     height: 17px;
     width: 17px
 }
 
-/*Botoes de voltar e continuar*/
+/*Início dos Botoes de voltar e continuar*/
 .button_btn {
     padding: 7px 17px 7px 17px;
     font-size: 1.1em;

@@ -1,6 +1,24 @@
+{/*Nome componente: Componente HeaderLP*/}
+{/*Autor(a):Natália Aparecida Samogim*/}
+{/*Data de criação:22/03/2023 e data de alteração: 01/12/2023*/}
+{/*representa o início do projeto, sendo menu lateral fixo contendo:
+-a logo do Tointo;
+-o 'Home';
+-o 'Recursos';
+-o 'Planos';
+-o botão 'Entrar';
+-o botão de 'Cadastrar-se Grátis'*/}
+{/*Observações pertinentes:
+- O código importa o componente `Link` do pacote 'react-router-dom' que direciona à página de Cadastro ou Login*/}
+
 import { Link } from 'react-router-dom';
 import './CabecalhoLP.css';
 
+{/*Nome função: HeaderLP*/}
+{/*Autor(a): Natália Aparecida Samogim*/}
+{/*Data de criação:22/03/2023  e data de alteração: 01/12/2023*/}
+{/*Parâmetros de entrada: Nulo*/}
+{/*Retorno: retorna o header*/}
 function CabecalhoLP() {
     return (
         <>
@@ -23,10 +41,8 @@ function CabecalhoLP() {
                     </ul>
 
                     <ul className="menu_2"> {/*rotas do botão entrar para o login e do botão cadastrar para o cadastro*/}
-                        <Link to="/login" className="entrar">Entrar</Link> {/*entrar*/}
-
-                        <Link to="/cadastro" className='cadastrar'>Cadastrar-se grátis</Link>
-                        {/*cadastrar com o plano free*/}
+                        <Link to="/login" className="entrar">Entrar</Link> {/*Direciona à página de Login*/}
+                        <Link to="/cadastro" className='cadastrar'>Cadastrar-se grátis</Link> {/*Direciona à página de Cadastro*/}
                     </ul>
                 </nav>
             </header>

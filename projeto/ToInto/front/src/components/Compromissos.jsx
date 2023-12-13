@@ -1,3 +1,10 @@
+{/* Componente Compromissos */}
+{/* Autor: Júlia Dias Lara*/}
+{/* 28/07/2023-01/12/2023 */}
+{/* Descrição detalhada: o componente cria uma interface para adicionar os compromissos, ao clicar no botão "+" é apresentado */}
+{/* um form com campos para inserir a data, horário, título, descrição e opções relacionadas a lembretes e salva os comprimissos */}
+{/* ao clicar no botão salvar */}
+
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -6,8 +13,15 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 
-
+{/* Função  Compromissos*/}
+{/* Autor: Júlia Dias Lara */}
+{/* 28/07/2023-01/12/2023*/}
+{/* Parâmetros entrada: nulo*/}
+{/* Retorno:nulo */}
+{/* Descrição/Observação: Permite ao usuário adicionar novos compromissos, Ele fornece campos para inserir informações relevantes, */}
+{/*  como data, horário, título e descrição, além de opções adicionais como a marcação de "importante" e a configuração de lembretes. */}
 function Compromissos() {
+
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -16,7 +30,7 @@ function Compromissos() {
   return (
     <>
       {/*Botão para ir para a parte de adicionar os comprimissos*/}
-      <Button variant='outline' className='plus' onClick={handleShow}  >
+      <Button className="plus " variant="outline" onClick={handleShow}  >
         <strong  className="add">+</strong>
       </Button>
 
@@ -74,7 +88,7 @@ function Compromissos() {
 
             {/*Início do campo importante */}
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <input className="import" type="checkbox" name="Importante" id="importante" />
+              <input type="checkbox" name="Importante" id="importante" />
               <Form.Label>Importante</Form.Label>
             </Form.Group>
             {/*Fim do importante*/}
@@ -88,8 +102,8 @@ function Compromissos() {
                 title="0 minutos"
                 id="bg-vertical-dropdown-1"
               >
-                <Dropdown.Item variant='outline' eventKey="1">5 minutos</Dropdown.Item>
-                <Dropdown.Item variant='outline' eventKey="2">15 minutos</Dropdown.Item>
+                <Dropdown.Item eventKey="1">5 minutos</Dropdown.Item>
+                <Dropdown.Item eventKey="2">15 minutos</Dropdown.Item>
                 <Dropdown.Item eventKey="3">30 minutos</Dropdown.Item>
                 <Dropdown.Item eventKey="4">1 hora</Dropdown.Item>
                 <Dropdown.Item eventKey="5">12 horas</Dropdown.Item>
@@ -104,7 +118,7 @@ function Compromissos() {
 
         {/*Início do footer que contém o botão salvar*/}
         <Modal.Footer>
-          <Button className='save' variant="outline-light" onClick={handleClose}>
+          <Button variant="outline-light" className="save" onClick={handleClose}>
             Salvar
           </Button>
         </Modal.Footer>

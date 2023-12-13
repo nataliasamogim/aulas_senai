@@ -6,7 +6,6 @@
 
 import React, {useState} from 'react';
 import './Login.css'
-import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom'; //recuperar a rota 
 
 {/*Utiliza o useState para a criação de um estado local chamado formValues(vai armazenar as informações do campo de email e senha) */}

@@ -1,19 +1,26 @@
-/*Início Footer*/
+/*Descrição detalhada: Esse código é responsável pela estilização do rodapé do Tointo, ele define o estilo
+dos elementos como o campo de opinião, o botão de "Enviar", os títulos, textos e redes sociais. Ele também controla
+o comportamento visual durante interações do usuário (hover).
+e também tem a intenção de facilitar o uso da aplicação para os usuários.*/
 
+/*-----Início do Footer------*/
+
+/*---Início bloco(footer)---*/
 .foot{ /*class foot*/
     background-color: rgb(33, 48, 71);
     margin-top: 5px;
     margin-left: 7px;
     margin-right: 7px;
 }
+/*---Fim bloco(footer)---*/
 
-/*Textarea*/
+/*---Início bloco (Textarea)---*/
 .opiniao{ /*Div class opinião, que contém o textararea e o botão de enviar*/
     display: flex;
     justify-content: center;
 }
 
-.textarea{ /*Text area para colocar o que achou do site*/
+.textarea{ /*Textarea para colocar o que achou do site*/
     border-radius: 8px;
     margin: 10px 0 10px 0;
     height: 30px;
@@ -21,7 +28,7 @@
     font-size: 13px;
 }
 
-.enviar_btn{ /*botão de enviar a opinião*/
+.enviar_btn{ /*class do botão enviar do campo de opinião*/
     width: 80px;
     margin: 10px 0 9px 6px;
     border-radius: 6px;
@@ -33,9 +40,11 @@
     background-color: #B68EC5;
     color: #fff;
 }
-/*Fim textarea*/
 
-/*Sobre e redes sociais*/
+/*---Fim bloco (Textarea)---*/
+
+/*Início do sobre nós e redes sociais*/
+
 .footer_element{ /*div footer element, que contém as redes sociais e sobre nós*/
     display: flex;
     border-top: 1px solid #fff;
@@ -47,7 +56,7 @@
     color: #fff;
 }
 
-.titulo{ /*O nome é "Redes sociais"*/
+.titulo{ /*class do título "Redes Sociais"*/
     color: #fff;
     display: flex;
     padding-left: 40px;
@@ -73,10 +82,12 @@
     margin-left: 20px;
 }
 
-.sociais li img{ /*Aqui está modificando o img (icones das redes sociais) da li da ul sociais*/
+.sociais li img{ /*Aqui está modificando os imgs (icones das redes sociais)*/
     max-width: 38px;
-    padding-right: 16px;
+    margin-right: 16px;
 }
-/*Fim sobre e redes sociais*/
+/*Fim do sobre nós e redes sociais*/
 
-/*Fim Footer*/
+/*Fim do Footer*/
+
+
