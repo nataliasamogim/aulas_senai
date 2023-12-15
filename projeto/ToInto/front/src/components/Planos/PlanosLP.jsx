@@ -26,7 +26,7 @@ function PlanosLP(){
             <h1 className="h1_1">Free</h1>
             <p className="p1">Use o TOINTO de forma gratuita <br/> com funcionalidades básicas</p>
             <h1 className="preco_1">R$00,00</h1>
-            <Link to="cadastrar" className="btn_1">Assine Agora</Link> {/*O link leva para a página de cadastro*/}
+            <Link to="cadastro" className="btn_1">Assine Agora</Link> {/*O link leva para a página de cadastro*/}
         </div>
 
         {/*Essa div chamada "plano_mensal" apresenta na LP o preço, a descrição, imagem do Plano Mensal*/}
@@ -35,7 +35,7 @@ function PlanosLP(){
             <h1 className="h1_2">Plano Mensal</h1>
             <p className="p2">Tenha a maioria das funcionalidades <br/> pagando um pequeno valor mensal</p>
             <h1 className="preco_2">R$7,90/mês</h1>
-            <Link to="cadastrar" className="btn_2">Assine Agora</Link> {/*O link leva para a página de cadastro*/}
+            <Link to="cadastro" className="btn_2">Assine Agora</Link> {/*O link leva para a página de cadastro*/}
         </div>
 
         {/*Essa div chamada "plano_anual" apresenta na LP o preço, a descrição, imagem do Plano Anual*/}
@@ -44,7 +44,7 @@ function PlanosLP(){
             <h1 className="h1_3">Plano Anual</h1>
             <p className="p3">Use todas as funcionalidades <br/> pagando um plano anual</p>
             <h1 className="preco_3">R$109,90/ano</h1>
-            <Link to="cadastrar" className="btn_3">Assine Agora</Link> {/*O link leva para a página de cadastro*/}
+            <Link to="cadastro" className="btn_3">Assine Agora</Link> {/*O link leva para a página de cadastro*/}
         </div>
     </section>
 
