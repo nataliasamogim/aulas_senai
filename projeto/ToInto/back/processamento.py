@@ -5,6 +5,7 @@
 # Além de armazenar as mensagens de erro recebidas do componete validacoes em uma lista chamada mesagens_erro.
 from gravar_arquivo import gravar_em_arquivo
 from gravar_arquivo import gravar_em_arquivo_log
+from gravar_banco import gravar_dados
 
 from validacoes import (
     validar_nome,
@@ -44,14 +45,13 @@ def processar_dados_cad(dados):
     # Função para processar os dados recebidos do Flask
     # Retorna os dados processados
     dados_processados = dados
+    dados_gravacao = []
 
-    print("\nDados Recebidos do Cadastro:")
-    print(f"Nome: {dados_processados.get('nome')}")
-    print(f"E-mail: {dados_processados.get('email')}")
-    print(f"Senha: {dados_processados.get('senha')}")
-    print(f"Confirmar senha: {dados_processados.get('confirmsenha')}")
-    print("\nDados Processados com Sucesso!\n")
-    print("\n")
+    dados_gravacao.append(dados_processados.get('nome')) 
+    dados_gravacao.append(dados_processados.get('email')) 
+    dados_gravacao.append(dados_processados.get('senha'))
+    gravar_dados(dados_gravacao)
+    print(dados_gravacao)
 
     mensagens_erro = []  # Cria uma lista vazia para armazenar mensagens de erro
 

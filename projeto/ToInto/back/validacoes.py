@@ -41,7 +41,7 @@ def validar_email(vemail):
     # Utilizando uma expressão regular simples para validar o formato do e-mail
     padrao_email = r'^\S+@\S+\.\S+$'
     if not re.match(padrao_email, vemail):
-        return {'erro': True, 'mensagem': 'E-mail inválido.'}
+        return {'erro': True, 'mensagem': 'E-mail inválido, exemplo: tointo@gmail.com'}
     return {'erro': False, 'mensagem': ''}
 
 
@@ -57,7 +57,7 @@ def validar_email(vemail):
 # Essa função tem a finalidade de validar se o campo confirmar senha está igual ao campo senha.
 def confirmar_senha(senha, confirmsenha):
     if confirmsenha != senha:
-        return {'erro': True, 'mensagem': 'Esse campo deve ser igual ao campo senha'}
+        return {'erro': True, 'mensagem': 'O campo confirmar senha deve ser igual ao campo senha'}
     return {'erro': False, 'mensagem': ''}
 
 
