@@ -33,3 +33,10 @@ E-mail: None
 Senha: None
 Confirmar senha: None
 
+
+Dados Gravados:
+Nome: Natalia Samogim
+E-mail: natalias@gmail.com
+Senha: Natali@1234
+Confirmar senha: Natali@1234
+
