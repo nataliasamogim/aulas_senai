@@ -1,3 +1,4 @@
+import conexao
 
 def gravar_dados(dados_gravacao):
     conex = conexao.conectar()
