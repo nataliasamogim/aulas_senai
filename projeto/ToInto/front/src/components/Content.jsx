@@ -11,6 +11,7 @@ import CadastroLP from "../pages/Cadastro/CadastroLP"
 import { PlanosLP } from "./Planos/PlanosLP"
 import { App_calen } from "../pages/App_calen";
 import { App_todo } from "./App_todo";
+import Cad_concluido from "../pages/Concluido/Cad_concluido";
 
 
 const Content = props => (
@@ -24,6 +25,7 @@ const Content = props => (
             <Route path="/calendario" exact element={<App_calen />} />
             <Route path="/Todolist" exact element={<App_todo />} />
             <Route path="/" exact element={<Home />} />
+            <Route path="/concluido" exact element={<Cad_concluido />} />
         </Routes>
     </main>
 );

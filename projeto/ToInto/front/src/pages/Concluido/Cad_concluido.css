@@ -1,0 +1,36 @@
+#container_cad {
+    width: 100%;
+    height: 745px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cad_concluido {
+    background-color: #7d5389;
+    width: 500px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.conteudo {
+    text-align: center;
+    padding: 18px;
+    color: white;
+
+}
+
+.subtitulo {
+    font-size: 1.4em;
+}
+
+.entr_log {
+    font-size: 1.2em;
+}
+
+.link_log {
+    color: rgb(175, 115, 221);
+    font-size: 1.1em;
+}
