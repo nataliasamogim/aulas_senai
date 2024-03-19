@@ -29,11 +29,11 @@ def selecionar_informacao_cad(id_cad):
         #return None
  
 
-def verificar_informacao_log(email,senha):
+def verificar_informacao_log(email, senha):
     conex = conexao.conectar()
     cursor = conex.cursor()
 
-    sql = "SELECT EMAIL, SENHA FROM CADASTRO WHERE EMAIL = %s AND SENHA = %s"
+    sql = "SELECT ID_CAD, EMAIL FROM CADASTRO WHERE EMAIL = %s AND SENHA = %s"
     val = (email, senha)
     cursor.execute(sql, val)
     login = cursor.fetchone()
@@ -45,7 +45,7 @@ def verificar_informacao_log(email,senha):
         return login
     else:
         print("Usuario não encontrado")  
-        return None
+        return {'erro': True, 'mensagens': 'Usuário não encontrado'}
     
 if __name__ == "__main__":
     id_cad = int(input("Digite o ID do cadastro que deseja selecionar:"))
@@ -63,4 +63,3 @@ if __name__ == "__main__":
     else:
         print("Usuario não encontrado")  
     
-verificar_informacao_log()
