@@ -66,6 +66,16 @@ const Modific_cart = () => {
         }
     };
 
+    
+    const limpaForm = () => {
+        setFormValues({
+            nome: '',
+            email: '',
+            senha: '', 
+            confirmsenha: '',
+        });
+    };
+
     return (
 
         <div className="form-container">
@@ -115,7 +125,7 @@ const Modific_cart = () => {
                             <input type='submit' className="btn_cartao" id="btn_sal_cart" value="Salvar" />
                         </div>
                         <div className="can_modif_cart"> {/*botão cancelar do footer */}
-                            <input type='submit' className="btn_cartao" id="btn_can_cart" onClick="limpaForm()" value="Cancelar" />
+                            <input type='submit' className="btn_cartao" id="btn_can_cart" onClick={limpaForm} value="Cancelar" />
                         </div>
                     </div>
                 </form>
