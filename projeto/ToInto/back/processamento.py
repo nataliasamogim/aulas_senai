@@ -167,7 +167,9 @@ def processar_dados_log(dados):
         # Chama a função para gravar os dados em um arquivo, caso não tenha mensagens de erro
         #gravar_em_arquivo_log(dados_processados)
         select_inf_log = verificar_informacao_log(dados_processados.get('email_log', ''),dados_processados.get('senha_log', ''))
-        return(select_inf_log)
+        print(select_inf_log)
+        return (select_inf_log)
+   
 
         # Retorna os dados processados
-        return {'erro': False, 'mensagem': 'Dados Processados com Sucesso!'}
+        #return {'erro': False, 'mensagem': 'Dados Processados com Sucesso!'}
