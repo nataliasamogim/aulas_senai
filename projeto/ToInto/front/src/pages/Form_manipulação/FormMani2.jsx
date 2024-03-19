@@ -8,9 +8,9 @@ const FormMani = () => {
     const navigate = useNavigate();
     const [formValues, setFormValues] = useState({
         foto: '',
-        nome: '',
-        email: '',
-        senha: '',
+        nome_novo: '',
+        email_novo: '',
+        senha_nova: '',
     });
 
     // Recupera o nome de usuário do localStorage quando o componente for montado
@@ -104,15 +104,15 @@ const FormMani = () => {
                     </div>
                     <div className="form_grupo">
                         <label className="nome">Nome</label>
-                        <input className="input_2" type="text" name="nome" id="nome" value={formValues.nome} onChange={handleChange} placeholder="Digite seu nome" data-min-length="3" data-max-length="100" data-only-letters />
+                        <input className="input_2" type="text" name="nome_novo" id="nome_novo" value={formValues.nome_novo} onChange={handleChange} placeholder="Digite seu nome" data-min-length="3" data-max-length="100" data-only-letters />
                     </div>
                     <div className="form_grupo">
                         <label className="email">Email</label>
-                        <input className="input_3" type="email" name="email" id="email" value={formValues.email} onChange={handleChange} placeholder="Digite seu E-mail" data-email-validate data-min-length="10" data-max-length="40" />
+                        <input className="input_3" type="email" name="email_novo" id="email_novo" value={formValues.email_novo} onChange={handleChange} placeholder="Digite seu E-mail" data-email-validate data-min-length="10" data-max-length="40" />
                     </div>
                     <div className="form_grupo">
                         <label className="senha">Senha</label>
-                        <input className="input_4" type="password" name="senha" id="senha" value={formValues.senha} onChange={handleChange} placeholder="Digite sua senha" data-password-validate data-min-length="8" data-max-length="15" />
+                        <input className="input_4" type="password" name="senha_nova" id="senha_nova" value={formValues.senha_nova} onChange={handleChange} placeholder="Digite sua senha" data-password-validate data-min-length="8" data-max-length="15" />
                     </div>
                     <div className="buttons">
                         <div className="salvar">
