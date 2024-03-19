@@ -2,14 +2,18 @@
 formulário, os campos de email e senha, esqueceu a senha e mensagens de error. Além disso, ele também controla o comportamento visual 
 durante a interação do usuário(hover).*/
 
-.body_log { /*Foi feito o degradê do fundo e ajustes da letra*/
-    background-image: linear-gradient(to right,#AC72BF ,#6B29A4 ,#570D70);
+.body_log {
+    /*Foi feito o degradê do fundo e ajustes da letra*/
+    background-image: linear-gradient(to right, #AC72BF, #6B29A4, #570D70);
     font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;
     height: 100vh;
     padding-top: 3%;
+    width: 1470px;
 }
-#login { /*Foi feito o login e posicionado no meio*/
+
+#login {
+    /*Foi feito o login e posicionado no meio*/
     background-color: #BC93CB;
     display: flex;
     flex-direction: column;
@@ -23,72 +27,93 @@ durante a interação do usuário(hover).*/
     align-items: center;
     box-shadow: 20px 20px 50px rgb(90, 56, 90);
 }
-.h1_login { /*Foi feito os ajustes do textos como cor e posição do login*/
+
+.h1_login {
+    /*Foi feito os ajustes do textos como cor e posição do login*/
     text-align: center;
     color: #fff;
 }
 
-.email_login { /*Foi feito o ajuste do tamanho e posição do texto da primeira caixa*/
+.email_login {
+    /*Foi feito o ajuste do tamanho e posição do texto da primeira caixa*/
     display: flex;
     flex-direction: column;
     padding: 10px 10px 10px 10px;
     width: 400px;
 }
-.senha_login { /*Foi feito o ajuste do tamanho e posição da segunda caixa*/
+
+.senha_login {
+    /*Foi feito o ajuste do tamanho e posição da segunda caixa*/
     display: flex;
     flex-direction: column;
     padding: 3px 10px 10px 10px;
     width: 400px;
 }
-.input_email { /*Foi dado o tamanho para o primeiro imput*/
+
+.input_email {
+    /*Foi dado o tamanho para o primeiro imput*/
     height: 30px;
     max-width: 400px;
 }
-.input_senha { /*Foi dado o tamanho para o segundo input*/
+
+.input_senha {
+    /*Foi dado o tamanho para o segundo input*/
     height: 30px;
     max-width: 400px;
 }
-.label_email{ /*Foi dado a cor para a font do email*/
+
+.label_email {
+    /*Foi dado a cor para a font do email*/
     color: #fff;
 }
-.label_senha{ /*Foi dado a cor para a font da senha*/
+
+.label_senha {
+    /*Foi dado a cor para a font da senha*/
     color: #fff;
 }
 
 /*---Início botão entrar---*/
-.submit_btn-log{ /*Foi dado um tamanho e formato para o botão*/
+.submit_btn-log {
+    /*Foi dado um tamanho e formato para o botão*/
     padding: 10px 38px 10px 38px;
     background-color: #a56aba;
     color: #fff;
     font-size: 20px;
-    border:none ;
+    border: none;
     border-radius: 5px;
     margin-left: 40px;
     text-decoration: none;
 }
-.submit_btn-log:hover{ /*Foi feito para que mudasse a cor após o clique*/
+
+.submit_btn-log:hover {
+    /*Foi feito para que mudasse a cor após o clique*/
     background-color: #570D70;
 }
 
-#btn_logar{
+#btn_logar {
     padding: 10px 50px 10px 50px;
 }
 
-.button_log{
+.button_log {
     display: flex;
     justify-content: space-around;
     margin-right: 40px;
     margin-top: 10px;
 }
+
 /*---Fim botão entrar---*/
 
 /*---Início parágrafo(className de "esqueceu a senha")---*/
-.paragrafo{ /*Foi dado cor para a letra*/
+.paragrafo {
+    /*Foi dado cor para a letra*/
     color: #fff;
 }
-.paragrafo:hover { /*Foi feito para mudar a cor após o clique*/
+
+.paragrafo:hover {
+    /*Foi feito para mudar a cor após o clique*/
     color: #570D70;
 }
+
 /*---Fim parágrafo---*/
 
 /*---Recados de error---*/
@@ -98,7 +123,7 @@ durante a interação do usuário(hover).*/
     position: relative;
     margin: 0;
 }
-  
+
 .template {
     display: none;
 }

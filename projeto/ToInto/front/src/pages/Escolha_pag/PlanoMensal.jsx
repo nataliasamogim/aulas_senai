@@ -4,7 +4,8 @@
 {/* Descrição detalhada: este componente representa uma seção de um formulário de pagamento para um plano mensal, */}
 {/* oferecendo escolhas de forma de pagamento por Pix ou cartão de crédito, com botões para voltar e continuar */}
 
-import './pages/Pagamento.css'
+import { Link } from 'react-router-dom';
+import './Pagamento.css'
 
 {/* Função Planomensal*/}
 {/* Autor: Júlia Dias Lara */}
@@ -13,7 +14,7 @@ import './pages/Pagamento.css'
 {/* Retorno:nulo */}
 {/* Descrição/Observação: Representa uma seção de pagamaento mensal, apresenta opções de pagamento (Pix e cartão de crédito) */}
 {/* e botões para navegação, como voltar e continuar. */}
-function Planomensal() {
+function PlanoMensal() {
     return (
         <>
             <section className="form_pagamento"> {/*Section que contém o formulário*/}
@@ -35,7 +36,8 @@ function Planomensal() {
 
                         <div className="btn"> {/*Botão de voltar e continuar*/}
                             <button className="button_btn" type="submit"><a href="index.html">Voltar</a></button>
-                            <a href=""><button className="button_btn" type="submit">Continuar</button></a>
+                            <Link to="/dadoscart" className="button_btn">Continuar</Link>
+                            {/*<a href=""><button className="button_btn" type="submit">Continuar</button></a>*/}
                         </div>
                     </div>
                 </form>
@@ -45,7 +47,7 @@ function Planomensal() {
     );
 }
 
-export { Planomensal };
+export { PlanoMensal };
 
 
 

@@ -9,6 +9,7 @@ body { /*Body para colocar o formulário no centro da página */
     align-items: center;
     height: 100vh; /*Tamanho para o Body*/
     background-color: #8B638B;
+    
 }
 
 .form_pagamento { /*Section do body*/
@@ -21,6 +22,7 @@ body { /*Body para colocar o formulário no centro da página */
     width: 540px;
     color: white;
     box-shadow: 20px 20px 50px rgb(58, 17, 58);
+    margin-top: 100px;
 }
 
 .h1_mensal { /*Título*/

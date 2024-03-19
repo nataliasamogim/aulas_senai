@@ -1,28 +1,24 @@
-{/* Nome do componente: CadastroLP*/ }
-{/* Autor: Maria Luiza*/ }
-{/* Data de criação: /alteração: 06-12-2023*/ }
-{/* Descrição detalhada: Nesse componente, o código lida com a manipulação de dados do formulário, realiza validações no 
-lado do cliente, e envia esses dados para um servidor, para ser processado e gravado em um documento txt. O componente é 
-configurado para fornecer feedback visual aos usuários sobre o sucesso ou falha no processamento do formulário.*/}
+{/* Nome do componente: FormMani*/ }
+{/* Autor: Laura, Natalia, Marilia*/ }
+{/* Data de criação: /alteração: 12-03-2024*/ }
+{/* Descrição detalhada: */ }
 
 import React, { useState } from 'react';
-import './CadastroLP.css';
-import { useNavigate } from 'react-router-dom'; //recuperar a rota 
-import { useParams } from 'react-router-dom';
+{/*import './FormMani.css';*/ }
+import { Form, useNavigate } from 'react-router-dom'; //recuperar a rota 
+import Foto_Perfil from './Foto_Perfil';
 
 {/*Utiliza o useState para a criação de um estado local chamado formValues(vai armazenar as informações do campo de email e senha) */ }
-const CadastroLP = () => {
-    const { plano } = useParams();
+const FormMani2 = () => {
     const navigate = useNavigate();
     const [formValues, setFormValues] = useState({
+        foto: '',
         nome: '',
         email: '',
         senha: '',
-        confirmsenha: '',
     });
 
 
-    console.log('Plano escolhido', plano);
     {/* O método handleChange é chamado sempre que um dos campos do formulário é alterado. 
 Ele atualiza o estado formValues com os novos valores do campo.*/}
     const handleChange = (e) => {
@@ -58,16 +54,9 @@ Ele atualiza o estado formValues com os novos valores do campo.*/}
             } else {
                 // Dados foram processados com sucesso
                 console.log('Dados processados com sucesso!', resposta);
+
                 //Navega para a tela do Cadastro concluído
-                if (plano == 'free') {
-                    navigate('/concluido')
-                } else {
-                    if (plano == 'mensal') {
-                        navigate('/mensal') //ajustar a rota ao criar a pagina
-                    } else {
-                        navigate('/anual') //ajustar a rota ao criar a pagina
-                    }
-                }
+                navigate('/concluido')
             }
         } catch (error) {
             console.error('Erro ao enviar dados:', error);
@@ -90,37 +79,42 @@ Ele atualiza o estado formValues com os novos valores do campo.*/}
             )}
 
             <section className="form_cadastro">
+
                 <form className="cadastro" id="cadastrar" action="" onSubmit={handleSubmit} /*O método handleSubmit é chamado quando o formulário é enviado.*/> {/*form do cadastro*/}
-                    <h1 className="h1_cadastro">Cadastro Plano {plano}</h1>
+                    <h1 className="h1_cadastro">Cadastro</h1>
+
+                    <div className="form_grupo"> {/*div para parte do nome*/}
+                        <Foto_Perfil />
+
+                        {/*<label className="foto">Foto Perfil</label> 
+                        <input className="input_1" type="file" name="foto" id="foto" value={formValues.foto} onChange={handleChange} />*/}
+                    </div>
 
                     <div className="form_grupo"> {/*div para parte do nome*/}
                         <label className="nome">Nome</label>
-                        <input className="input_1" type="text" name="nome" id="nome" value={formValues.nome} onChange={handleChange} placeholder="Digite seu nome" data-min-length="3" data-max-length="100" data-only-letters />
+                        <input className="input_2" type="text" name="nome" id="nome" value={formValues.nome} onChange={handleChange} placeholder="Digite seu nome" data-min-length="3" data-max-length="100" data-only-letters />
                     </div>
 
                     <div className="form_grupo"> {/*div para parte do e-mail*/}
                         <label className="email">Email</label>
-                        <input className="input_2" type="email" name="email" id="email" value={formValues.email} onChange={handleChange} placeholder="Digite seu E-mail" data-email-validate data-min-length="10" data-max-length="40" />
+                        <input className="input_3" type="email" name="email" id="email" value={formValues.email} onChange={handleChange} placeholder="Digite seu E-mail" data-email-validate data-min-length="10" data-max-length="40" />
                     </div>
 
                     <div className="form_grupo"> {/*div para parte da senha*/}
                         <label className="senha">Senha</label>
-                        <input className="input_3" type="password" name="senha" id="senha" value={formValues.senha} onChange={handleChange} placeholder="Digite sua senha" data-password-validate data-min-length="8" data-max-length="15" />
-                    </div>
-
-                    <div className="form_grupo"> {/*div para a parte de confirmar senha*/}
-                        <label className="confirmar">Confirmar senha </label>
-                        <input className="input_4" type="password" name="confirmsenha" id="password" value={formValues.confirmsenha} onChange={handleChange} placeholder="Digite novamente sua senha" data-equal="senha" />
+                        <input className="input_4" type="password" name="senha" id="senha" value={formValues.senha} onChange={handleChange} placeholder="Digite sua senha" data-password-validate data-min-length="8" data-max-length="15" />
                     </div>
 
                     <div className="buttons">
-                        <div className="cad"> {/*botão cadastrar do footer */}
-                            <input type='submit' className="submit_btn" id="btn_cadastrar" value="Cadastrar" />
+                        <div className="salvar"> {/*botão cadastrar do footer */}
+                            <input type='submit' className="submit_btn" id="btn_cadastrar" value="Salvar" />
                         </div>
                         <div className="can"> {/*botão cancelar do footer */}
                             <input type='submit' className="submit_btn" id="btn_cancelar" onClick="limpaForm()" value="Cancelar" />
                         </div>
                     </div>
+
+
                 </form>
 
                 <p className="error-validation template"></p> {/*implementação do java script */}
@@ -130,4 +124,4 @@ Ele atualiza o estado formValues com os novos valores do campo.*/}
     );
 };
 
-export default CadastroLP;
+export default FormMani2;

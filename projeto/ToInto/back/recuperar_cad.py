@@ -29,10 +29,7 @@ def selecionar_informacao_cad(id_cad):
         #return None
  
 
-def verificar_informacao_log():
-    email = input("Digite o email do login que deseja selecionar:")
-    senha = input("Digite a senha do login que deseja selecionar:")
-
+def verificar_informacao_log(email,senha):
     conex = conexao.conectar()
     cursor = conex.cursor()
 
@@ -66,4 +63,4 @@ if __name__ == "__main__":
     else:
         print("Usuario não encontrado")  
     
-    verificar_informacao_log()
+verificar_informacao_log()

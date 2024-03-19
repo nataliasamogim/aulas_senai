@@ -4,7 +4,7 @@
 {/* Descrição detalhada: este componente representa uma seção de um formulário de pagamento para um plano anual, */}
 {/* oferecendo escolhas de forma de pagamento por Pix ou cartão de crédito, com botões para voltar e continuar */}
 
-import './pages/Pagamento.css'
+import './Pagamento.css'
 
 {/* Função Planoanual*/}
 {/* Autor: Júlia Dias Lara */}
@@ -13,7 +13,7 @@ import './pages/Pagamento.css'
 {/* Retorno:nulo */}
 {/* Descrição/Observação: Representa uma seção de pagamaento anual, apresenta opções de pagamento (Pix e cartão de crédito) */}
 {/* e botões para navegação, como voltar e continuar. */}
-function Planoanual() {
+function PlanoAnual() {
     return (
         <>
             <section className="form_pagamento"> {/*Section que contém o formulário*/}
@@ -49,4 +49,4 @@ function Planoanual() {
     );
 }
 
-export { Planoanual };
+export { PlanoAnual };

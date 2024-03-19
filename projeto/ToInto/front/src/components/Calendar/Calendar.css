@@ -4,99 +4,116 @@
 
 /*Início do calendar*/
 
-*, ::after, ::before{
-    box-sizing: content-box !important;
+*,
+::after,
+::before {
+  box-sizing: content-box !important;
 }
 
 /* Início do bloco calendar*/
-.calendar { /*div principal do calendario*/
-    text-align: center;
-    width: 1267px;
-    height: 100%;
-    padding: 0px 16px 16px 16px;
-    margin-top: 6px;
-  }
-  /* Fim do bloco calendar*/
-  
-  /*Início do bloco header do calendario*/
-  .calendar-header { /*possui os mêses e as setas*/
-    display: flex;
-    justify-content: space-between;
-    color: white;
-    align-items: center;
-    margin-bottom: 16px;
-  }
-  
-  .calendar-header button { /*setas do header*/
-    background-color: rgb(72, 4, 120);
-    border-radius: 8px;
-    border: 1px solid transparent;
-    padding: 0.6em 1.2em;
-    cursor: pointer;
-  }
-  
-  .calendar-header button:hover { /*muda de cor*/
-    background-color: rgb(82, 8, 135);
-  }
-  /*Fim do bloco header do calendario*/
-  
-  /* Início do bloco calendar grid*/
-  .calendar-grid { /*semanas do mês*/
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 8px;
-    background-color: #9e80b3;
-    padding: 40px;
-    height: 650px;
-    border-radius: 4px;
-  }
-  /* Fim do bloco calendar grid*/
-  
-  /* Início do bloco dos dias */
-  .day-of-week { /*dias da semana*/
-    background-color: #7f549b;
-    padding: 8px;
-    color: white;
-    height: 25px;
-  }
-  
-  .empty-day { /*para dias que não tem no mes*/
-    background-color: transparent;
-  }
-  
-  .day { /*div dos dias nas semanas*/
-    position: relative;
-    padding: 10%;
-    border: dashed #71508f;
-    cursor: pointer;
-    color: white;
-    text-align: left;
-    display: flex;
-    justify-content: space-between;
-    padding-top: 4px;
-  }
-  
-  .day-number { /*dia na semana*/
-    font-weight: bold;
-    font-size: 140%;
-  }
-  
-  /* Fim do bloco dos dias */
-  
-  /*.event {
+.calendar {
+  /*div principal do calendario*/
+  text-align: center;
+  width: 200vh;
+  height: 100%;
+  margin-top: 6px;
+  margin-right: 25px;
+
+}
+
+/* Fim do bloco calendar*/
+
+/*Início do bloco header do calendario*/
+.calendar-header {
+  /*possui os mêses e as setas*/
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.calendar-header button {
+  /*setas do header*/
+  background-color: rgb(72, 4, 120);
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  cursor: pointer;
+}
+
+.calendar-header button:hover {
+  /*muda de cor*/
+  background-color: rgb(82, 8, 135);
+}
+
+/*Fim do bloco header do calendario*/
+
+/* Início do bloco calendar grid*/
+.calendar-grid {
+  /*semanas do mês*/
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  background-color: #9e80b3;
+  padding: 40px;
+  height: 650px;
+  border-radius: 4px;
+}
+
+/* Fim do bloco calendar grid*/
+
+/* Início do bloco dos dias */
+.day-of-week {
+  /*dias da semana*/
+  background-color: #7f549b;
+  padding: 8px;
+  color: white;
+  height: 25px;
+}
+
+.empty-day {
+  /*para dias que não tem no mes*/
+  background-color: transparent;
+}
+
+.day {
+  /*div dos dias nas semanas*/
+  position: relative;
+  padding: 10%;
+  border: dashed #71508f;
+  cursor: pointer;
+  color: white;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 4px;
+}
+
+.day-number {
+  /*dia na semana*/
+  font-weight: bold;
+  font-size: 140%;
+}
+
+/* Fim do bloco dos dias */
+
+/*.event {
     color: white;
     padding: 4px;
     margin: 2px;
   }*/
-  
-  /*Início do botão de adicionar evento*/
-  .todo_button { /*simbolo de mais nos dias*/
-    background-color: transparent;
-    border: none;
-    font-size: 20px;
-    color: lightgrey;
-    text-decoration: none;
-  }
-  /* Fim do botão de adicionar evento*/
-  
-  /*Fim do Calendar*/
+
+/*Início do botão de adicionar evento*/
+.todo_button {
+  /*simbolo de mais nos dias*/
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  color: lightgrey;
+  text-decoration: none;
+}
+
+/* Fim do botão de adicionar evento*/
+
+/*Fim do Calendar*/

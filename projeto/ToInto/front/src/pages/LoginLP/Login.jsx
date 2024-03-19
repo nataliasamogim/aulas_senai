@@ -1,45 +1,47 @@
-{/* Nome do componente: Login*/} 
-{/* Autor(a): Natália Ap. Samogim */} 
-{/* Data de criação:25/10/2023 e data de alteração: 06/12/2023*/}
-{/*Representa os campos de email e senha, além do recuperação de senha e botão de cadastrar e entrar do formulário do login*/}
-{/*Observação pertinente: o estado local armazena as informações recebida do formulário e os handle cuidam da sua interação */}
+{/*Utiliza o useState para a criação de um estado local chamado formValues(vai armazenar as informações do campo de email e senha) */}
+{/* Nome do componente: Login*/ }
+{/* Autor(a): Maria Luiza, Laura e Marília */ }
+{/* Data de criação:25/10/2023 e data de alteração: 14/03/2024*/ }
+{/*Representa os campos de email e senha, além do recuperação de senha e botão de cadastrar e entrar do formulário do login*/ }
+{/*Observação pertinente: o estado local armazena as informações recebida do formulário e os handle cuidam da sua interação */ }
 
 import React, {useState} from 'react';
 import './Login.css'
 import { useNavigate } from 'react-router-dom'; //recuperar a rota 
 
-{/*Utiliza o useState para a criação de um estado local chamado formValues(vai armazenar as informações do campo de email e senha) */}
-const Login = () => {
+
+{/*Utiliza o useState para a criação de um estado local chamado formValues(vai armazenar as informações do campo de email e senha) */ }
+const Login = ({ onLogin }) => {
   const navigate = useNavigate();
   const [formValues, setFormValues] = useState({
-        email_log: '',
-        senha_log: '',
+    email_log: '',
+    senha_log: '',
   });
 
-  {/*handleChange é uma função que utiliza o estado conforme as informações dos campos do formulário é modificada */}
+  {/*handleChange é uma função que utiliza o estado conforme as informações dos campos do formulário é modificada */ }
   const handleChange = (e) => {
-    const {name, value} = e.target;
+    const { name, value } = e.target;
     setFormValues((prevValues) => ({
-        ...prevValues,
-        [name]: value,
+      ...prevValues,
+      [name]: value,
     }));
   };
 
-      const [mensagensErro, setMensagensErro] = useState([]);
+  const [mensagensErro, setMensagensErro] = useState([]);
 
   {/*handleSubmit é chamada quando o formulário é enviado, ou seja, ela envia as informações do formulário para um endpoint 
   usando o fetch(é como uma porta de entrada para uma parte específica do sistema, na qual é utilizada para acessar uma funcionalidade
   específica) */}
   const handleSubmit = async (e) => {
-        e.preventDefault();
+    e.preventDefault();
 
-      try {
+    try {
       const resposta = await fetch('http://localhost:5000/receber-dados', {
         method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
+        headers: {
+          'Content-Type': 'application/json',
         },
-      body: JSON.stringify(formValues),
+        body: JSON.stringify(formValues),
       });
 
       const resultado = await resposta.json(); //mostra as mensagens de erro
@@ -48,17 +50,20 @@ const Login = () => {
         // Exibe mensagens de erro no console.log ou em algum local visível
         console.error('Erro no servidor:', resultado.mensagens);
 
-      // Atualiza o estado com as mensagens de erro para exibição no formulário
-      setMensagensErro(resultado.mensagens);
+        
+        // Atualiza o estado com as mensagens de erro para exibição no formulário
+        setMensagensErro(resultado.mensagens);
       } else {
         // Dados foram processados com sucesso
         console.log('Dados processados com sucesso!', resposta);
-
+        localStorage.setItem('username', resultado.username);
+        localStorage.setItem('ID', resultado.id);
+        onLogin(resultado.username); // Chama a função onLogin com o nome de usuário retornado
         //Navega para a tela de calendario
         navigate('/calendario')
       }
     } catch (error) {
-        console.error('Erro ao enviar dados:', error);
+      console.error('Erro ao enviar dados:', error);
     }
   };
 
@@ -104,8 +109,6 @@ const Login = () => {
               </div>
             </div>
           </form>
-          <p className="error-validation template"></p> {/*Validação com o java script */}
-          <script src="js/validar.js"></script>
         </div>
       </div>
     );

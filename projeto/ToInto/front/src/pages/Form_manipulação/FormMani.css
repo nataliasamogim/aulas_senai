@@ -94,6 +94,13 @@ para os usuários.*/
     padding-right: 5px;
 }
 
+.confirmar {
+    /*class da label Confirmar Senha*/
+    font-size: 1.1em;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
 /*---Início buttons---*/
 .buttons { /*botão de cadastrar e cancelar*/
     display: flex;

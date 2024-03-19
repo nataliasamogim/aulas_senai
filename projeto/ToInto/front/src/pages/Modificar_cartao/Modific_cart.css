@@ -1,14 +1,14 @@
-/*Descrição detalhada: Esse código é responsável pela estilização do Cadastro do Tointo, na qual define o estilo
-dos elementos como o corpo do cadastro, além dos campos de nome, email, senha, confirmar senha e error validation, além dos botões de cadastrar
-e entar. Ele também controla o comportamento visual durante interações do usuário (hover) e também tem a intenção de facilitar o uso da aplicação
-para os usuários.*/
+/*Descrição detalhada: Esse código é responsável pela estilização da parte de modificação dos dados da parte de pagamento por 
+Cartão do Tointo, na qual define o estilodos elementos, além dos campos de nome do titular, cpf, número do cartão, data de vencimento,
+código de segurança e error validation, além dos botões de salvar e cancelar. Ele também controla o comportamento visual durante 
+interações do usuário (hover) e também tem a intenção de facilitar o uso da aplicação para os usuários.*/
 
-/*--Início Cadastro--*/
+/*--Início Modificar Caartão--*/
 *, ::after, ::before{
     box-sizing: content-box;
 }
 
-.cadastro { /*class do form*/
+.modificar_cartao{ /*class do form*/
     /*deixei o formulário no centro da página */
     font-family: Arial, Helvetica, sans-serif;
     border: 1px solid;
@@ -17,14 +17,14 @@ para os usuários.*/
     margin-top: 110px;
     box-shadow: 20px 20px 50px #2D0651;
     width: 530px;
-    height: 500px;
+    height: 550px;
     margin-left: auto;
     margin-right: auto;
    
 }
 
-.h1_cadastro {
-    /*Título "Cadastro" do formulário*/
+.h1_modific_cartao {
+    /*Título "Cartão" do formulário*/
     border-bottom: 1px solid;
     text-align: center;
     color: white;
@@ -46,8 +46,8 @@ para os usuários.*/
     border: none;
 }
 
-.input_1, .input_2, .input_3, .input_4 {
-    /*class do input nome, email, senha e confirmar senha*/
+.input_1, .input_2, .input_3, .input_4, .input_5 {
+    /*class do input nome titular, cpf, número do cartão, data de vencimento e código de segurança*/
     border-radius: 8px;
     padding: 6px;
     margin-bottom: 15px;
@@ -55,57 +55,62 @@ para os usuários.*/
     font-size: 13px;
 }
 
-.submit_btn {
-    /*class do botão cadastrar*/
+.btn_cartao {
+    /*class do botão salvar*/
     padding: 10px;
-    font-size: 1.2em;
+    font-size: 1em;
     border-radius: 15px;
     cursor: pointer;
-    font-size: 20px;
     text-decoration: none;
     color: black;
     background-color: white;
 }
 
-.submit_btn:hover {
+.btn_cartao:hover {
     /*muda cor do botão*/
     background-color: #AFA4CF;
 }
 
-.nome {
-    /*class da label Nome*/
+.nome_titular {
+    /*class da label adionar cartão*/
     margin-top: 5px;
     font-size: 1.1em;
     padding-left: 5px;
     padding-right: 5px;
 }
 
-.email {
-    /*class da label Email*/
+.cpf {
+    /*class da label nome do titular*/
     font-size: 1.1em;
     padding-left: 5px;
     padding-right: 5px;
 }
 
-.senha {
-    /*class da label Senha*/
+.num_cartao {
+    /*class da label cpf*/
+    font-size: 1.1em;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.datavenc {
+    /*class da label numero do cartão*/
     font-size: 1.1em;
     padding-left: 5px;
     padding-right: 5px;
 }
 
 /*---Início buttons---*/
-.buttons { /*botão de cadastrar e cancelar*/
+.btn_modific_cart { /*botão de salvar e cancelar*/
     display: flex;
     justify-content: space-around;
-    margin-top: 15px;
 }
 
-.buttons div { /*Tamanho para a div que tem os botões cadastrar e cancelar*/
+.btn_modific_cart div { /*Tamanho para a div que tem os botões salvar e cancelar*/
     max-width: 100%;
 }
 
-.buttons div input{ /*input do botão*/
+.btn_modific_cart div input{ /*input do botão*/
     border: none;
 }
 /*---Fim buttons---*/
@@ -120,4 +125,4 @@ para os usuários.*/
     display: none;
 }
 
-/*--Fim Formulário--*/
+/*--Fim Modificar Cartão--*/

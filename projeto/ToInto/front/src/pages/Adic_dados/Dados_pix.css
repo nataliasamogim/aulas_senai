@@ -1,0 +1,21 @@
+.container_pix {
+    width: 100%;
+    height: 745px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.qrcode {
+    width: 25%;
+    margin-top: 40px;
+    border-radius: 50px;
+}
+
+#titulo_pix {
+    font-size: xx-large;
+    font-family: Arial;
+    color: white;
+}

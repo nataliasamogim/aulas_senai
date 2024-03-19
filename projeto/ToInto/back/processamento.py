@@ -6,13 +6,25 @@
 from gravar_arquivo import gravar_em_arquivo
 from gravar_arquivo import gravar_em_arquivo_log
 from gravar_banco import gravar_dados
+from recuperar_cad import verificar_informacao_log
 
 from validacoes import (
     validar_nome,
     validar_email,
     validar_senha,
-    confirmar_senha
+    #confirmar_senha
 )
+
+from validacoes_cartao import(
+    validar_nome_titular,
+    validar_cpf, 
+    validar_num_cartao,
+    validar_datavenc,
+    validar_codseg,
+
+)
+    
+
 
 # Nome da função: processar_dados
 # Autor: Maria Luiza
@@ -26,10 +38,12 @@ from validacoes import (
 # que é ele que está sendo preenchido.
 
 def processar_dados(dados):
-    if dados.get('nome') == None:
-        retorno = processar_dados_log(dados)
-    else:
+    if dados.get('nome') != None:
         retorno = processar_dados_cad(dados)
+    elif dados.get('nome_titular') != None:
+        retorno = processar_dados_cartao(dados)
+    else:
+        retorno = processar_dados_log(dados)
 
     return (retorno)
 
@@ -50,8 +64,7 @@ def processar_dados_cad(dados):
     dados_gravacao.append(dados_processados.get('nome')) 
     dados_gravacao.append(dados_processados.get('email')) 
     dados_gravacao.append(dados_processados.get('senha'))
-    gravar_dados(dados_gravacao)
-    print(dados_gravacao)
+   
 
     mensagens_erro = []  # Cria uma lista vazia para armazenar mensagens de erro
 
@@ -61,7 +74,7 @@ def processar_dados_cad(dados):
     mensagens_erro.append(validar_email(dados.get('email', '')))
     # Precisa ser dois parâmetros já que no componete validacoes colocamos dois parâmetros na função corfimar_senha
     mensagens_erro.append(validar_senha(dados.get('senha', '')))
-    mensagens_erro.append(confirmar_senha(dados.get('senha', ''), dados.get('confirmsenha', '')))
+    #mensagens_erro.append(confirmar_senha(dados.get('senha', ''), dados.get('confirmsenha', '')))
     # Fim do bloco (mensagens de erro)
 
     # Remove mensagens de erro vazias
@@ -74,6 +87,49 @@ def processar_dados_cad(dados):
     else:
         # Chama a função para gravar os dados em um arquivo, caso não tenha mensagens de erro
         gravar_em_arquivo(dados_processados)
+        gravar_dados(dados_gravacao)
+        print(dados_gravacao)
+        # Retorna os dados processados
+        return {'erro': False, 'mensagem': 'Dados Processados com Sucesso!'}
+    
+
+def processar_dados_cartao(dados):
+    # Função para processar os dados recebidos do Flask
+    # Retorna os dados processados
+    dados_processados = dados
+    dados_gravacao = []
+
+    dados_gravacao.append(dados_processados.get('nome_titular')) 
+    dados_gravacao.append(dados_processados.get('cpf')) 
+    dados_gravacao.append(dados_processados.get('num_cartao'))
+    dados_gravacao.append(dados_processados.get('datavenc'))
+    dados_gravacao.append(dados_processados.get('cod_seguranca'))
+
+
+    mensagens_erro = []  # Cria uma lista vazia para armazenar mensagens de erro
+
+    # Início do bloco (mensagens de erro)
+    # Os dados recebidos dos inputs serão validados pela função correspondente e caso haja erro será armazenado na variável mensagens_erro
+    mensagens_erro.append(validar_nome_titular(dados.get('nome_titular', '')))
+    mensagens_erro.append(validar_cpf(dados.get('cpf', '')))
+    # Precisa ser dois parâmetros já que no componete validacoes colocamos dois parâmetros na função corfimar_senha
+    mensagens_erro.append(validar_num_cartao(dados.get('num_cartao', '')))
+    mensagens_erro.append(validar_datavenc(dados.get('datavenc', '')))
+    mensagens_erro.append(validar_codseg(dados.get('cod_seguranca', '')))
+    # Fim do bloco (mensagens de erro)
+
+    # Remove mensagens de erro vazias
+    mensagens_erro = [msg for msg in mensagens_erro if msg['erro']]
+
+    print(mensagens_erro)
+
+    if mensagens_erro:
+        return {'erro': True, 'mensagens': mensagens_erro}
+    else:
+        # Chama a função para gravar os dados em um arquivo, caso não tenha mensagens de erro
+        gravar_em_arquivo(dados_processados)
+        #gravar_dados(dados_gravacao)
+        print(dados_gravacao)
         # Retorna os dados processados
         return {'erro': False, 'mensagem': 'Dados Processados com Sucesso!'}
     
@@ -109,6 +165,8 @@ def processar_dados_log(dados):
         return {'erro': True, 'mensagens': mensagens_erro}
     else:
         # Chama a função para gravar os dados em um arquivo, caso não tenha mensagens de erro
-        gravar_em_arquivo_log(dados_processados)
+        #gravar_em_arquivo_log(dados_processados)
+        verificar_informacao_log()
+
         # Retorna os dados processados
         return {'erro': False, 'mensagem': 'Dados Processados com Sucesso!'}

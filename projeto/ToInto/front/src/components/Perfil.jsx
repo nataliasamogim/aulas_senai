@@ -1,6 +1,6 @@
-{/*Nome componente: Perfil*/}
-{/*Autor(a):Natália Aparecida Samogim*/}
-{/*Data de criação: e data de alteração: 01/12/2023*/}
+{/*Nome componente: Perfil*/ }
+{/*Autor(a):Natália Aparecida Samogim*/ }
+{/*Data de criação: e data de alteração: 01/12/2023*/ }
 {/*Descrição: representa a página de perfil do usuário, contendo:
 - foto de perfil;
 - nome de perfil;
@@ -11,14 +11,18 @@
 - O código importa o componente `Dropdown` do pacote 'react-bootstrap para a criação de um menu suspenso, representando um perfil de usuário*/}
 
 import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 import { Link } from 'react-router-dom';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import '../App.css'
 
-{/*Nome função: Perfil*/}
-{/*Autor(a): Natália Aparecida Samogim*/}
-{/*Data de criação: e data de alteração: 01/12/2023*/}
-{/*Parâmetros de entrada: Nulo*/}
-{/*Retorno: retorna o perfil de usuário*/}
-function Perfil() {
+{/*Nome função: Perfil*/ }
+{/*Autor(a): Natália Aparecida Samogim*/ }
+{/*Data de criação: e data de alteração: 01/12/2023*/ }
+{/*Parâmetros de entrada: Nulo*/ }
+{/*Retorno: retorna o perfil de usuário*/ }
+function Perfil(props) {
+    const username = props.parametro;
     return (
 
         <Dropdown> {/*Engloba todo o conteúdo que será exibido quando o usuário interagir com o componente*/}
@@ -30,11 +34,23 @@ function Perfil() {
             </Dropdown.Toggle>
 
             <Dropdown.Menu className='page-perfil'>
-                <Dropdown.ItemText className='nome-perfil'>Nome</Dropdown.ItemText> {/*Nome de usuário*/}
+                <Dropdown.ItemText className='nome-perfil'>{username || 'teste'}</Dropdown.ItemText> {/*Nome de usuário*/}
                 <Dropdown.ItemText className='email-perfil'>tointo@listatarefas.com</Dropdown.ItemText> {/*Email de usuário */}
+                <Link to="/modificar" className='btn-sair'>Modificar cadastro</Link>
+                <DropdownButton
+                    as={ButtonGroup}
+                    title="Modificar pagamento"
+                    id="bg-vertical-dropdown-1"
+                >
+                    <Dropdown.Item eventKey="1">Modificar forma de pagamento</Dropdown.Item>
+                    <Dropdown.Item eventKey="2">Modificar dados do cartão</Dropdown.Item>
+                </DropdownButton>
+                {/*<Link to="/modificarpag" className='btn-sair'>Modificar pagamento</Link>*/}
                 <Link to="/" className='btn-sair'>Sair</Link> {/*Botão de sair do menu suspenso*/}
             </Dropdown.Menu>
         </Dropdown>
+
+
     );
 }
 
