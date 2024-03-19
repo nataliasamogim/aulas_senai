@@ -221,12 +221,22 @@ button.btn-close:focus {
   --bs-dropdown-link-active-bg: #bb80c7 !important;
 }
 
+button.plus.btn.btn-outiline {
+  padding: 0px;
+}
+
+button.btn {
+  width: auto;
+  padding: 5px;
+
+}
+
 /*Define a cor de fundo dos links ativos em um menu
  suspenso utilizando uma variável Bootstrap para roxo.*/
 
 
 .dropdown-item {
-  width: 150px !important;
+  width: 218px !important;
   color: rgb(46, 16, 68) !important;
 }
 
@@ -268,9 +278,8 @@ button.btn.btn-outline {
   width: 370%;
 }
 
-.page-perfil .btn-sair {
+.btn-sair {
   color: white;
-  background-color: rgb(72, 4, 120);
   display: flex;
   flex-direction: column;
   width: 91.8%;
@@ -278,6 +287,13 @@ button.btn.btn-outline {
   text-align: start;
   padding: 8px 15px 8px 15px;
   text-decoration: none;
+}
+
+.btn-dadoscart {
+  color: rgb(46, 16, 68);
+  text-decoration: none;
+  padding: 8px 15px 8px 15px;
+
 }
 
 .page-perfil .btn-sair:hover {
@@ -288,19 +304,23 @@ button.btn.btn-outline {
   color: #915d9b;
 }
 
-.dropdown-menu .show{
+.dropdown-menu .show {
   width: 250px;
 }
 
-#bg-vertical-dropdown-1{
+#bg-vertical-dropdown-1 {
   background-color: rgb(72, 4, 120);
   border: none;
   padding-left: 15px;
 }
 
+#bg-vertical-dropdown-1:hover{
+  background-color: rgb(150, 119, 181);
+}
+
 #bg-vertical-dropdown-1::after {
   border-top: 0em solid;
-
+  margin-left: 80px;
 }
 
 /*-----Fim do Perfil-----*/

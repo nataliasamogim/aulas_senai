@@ -43,7 +43,7 @@ function Perfil(props) {
                     id="bg-vertical-dropdown-1"
                 >
                     <Dropdown.Item eventKey="1">Modificar forma de pagamento</Dropdown.Item>
-                    <Link to="/modificarpag" className='btn-sair'>Modificar dados do cartão</Link>
+                    <Link to="/modificarpag" className='btn-dadoscart'>Modificar dados do cartão</Link>
                 </DropdownButton>
                 {/*<Link to="/modificarpag" className='btn-sair'>Modificar pagamento</Link>*/}
                 <Link to="/" className='btn-sair'>Sair</Link> {/*Botão de sair do menu suspenso*/}
