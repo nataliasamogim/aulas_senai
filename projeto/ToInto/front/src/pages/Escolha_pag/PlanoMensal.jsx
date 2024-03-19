@@ -3,9 +3,10 @@
 {/* 22/03/2023-06/12/2023 */}
 {/* Descrição detalhada: este componente representa uma seção de um formulário de pagamento para um plano mensal, */}
 {/* oferecendo escolhas de forma de pagamento por Pix ou cartão de crédito, com botões para voltar e continuar */}
-
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './Pagamento.css'
+import './Pagamento.css';
+
 
 {/* Função Planomensal*/}
 {/* Autor: Júlia Dias Lara */}
@@ -14,40 +15,57 @@ import './Pagamento.css'
 {/* Retorno:nulo */}
 {/* Descrição/Observação: Representa uma seção de pagamaento mensal, apresenta opções de pagamento (Pix e cartão de crédito) */}
 {/* e botões para navegação, como voltar e continuar. */}
+
 function PlanoMensal() {
+    // Estado para controlar a opção de pagamento selecionada
+    const [formaPagamento, setFormaPagamento] = useState('');
+
     return (
         <>
-            <section className="form_pagamento"> {/*Section que contém o formulário*/}
-                <form className="pagamento"> {/*Contém o h1 e as divs*/}
+            <section className="form_pagamento">
+                <form className="pagamento">
                     <h1 className="h1_mensal">Plano Mensal</h1>
 
                     <div className="content">
                         <h3 className="escolha">Escolha sua forma de pagamento</h3>
 
-                        <div className="pix"> {/*Div do input do cartão de crédito*/}
-                            <input className="pagamento" type="radio" name="pagamento" id="pagamento"/>
-                                <span className="span_frase">Pix</span>
+                        <div className="cartao">
+                            <input
+                                className="pagamento"
+                                type="radio"
+                                name="cartao"
+                                id="cartao"
+                                checked={formaPagamento === 'cartao'}
+                                onChange={() => setFormaPagamento('cartao')}
+                            />
+                            <span className="span_frase">Cartão de crédito</span>
                         </div>
 
-                        <div className="cartao"> {/*Div do input do boleto bancário*/}
-                            <input className="pagamento" type="radio" name="pagamento" id="pagamento"/>
-                                <span className="span_frase">Cartão de crédito</span>
+                        <div className="pix">
+                            <input
+                                className="pagamento"
+                                type="radio"
+                                name="pix"
+                                id="pix"
+                                checked={formaPagamento === 'pix'}
+                                onChange={() => setFormaPagamento('pix')}
+                            />
+                            <span className="span_frase">Pix</span>
                         </div>
 
-                        <div className="btn"> {/*Botão de voltar e continuar*/}
-                            <button className="button_btn" type="submit"><a href="index.html">Voltar</a></button>
-                            <Link to="/dadoscart" className="button_btn">Continuar</Link>
-                            {/*<a href=""><button className="button_btn" type="submit">Continuar</button></a>*/}
+                        <div className="btn">
+                            <Link to={formaPagamento === 'cartao' ? "/dadoscart" : formaPagamento === 'pix' ? "/dadospix" : "/mensal"} className="button_btn">Continuar</Link>
+                            <Link to="/" className="button_btn">Voltar</Link>
                         </div>
                     </div>
                 </form>
-
             </section>
         </>
     );
 }
 
 export { PlanoMensal };
+
 
 
 
