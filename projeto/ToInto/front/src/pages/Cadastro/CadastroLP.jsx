@@ -21,7 +21,6 @@ const CadastroLP = () => {
         confirmsenha: '',
     });
 
-
     console.log('Plano escolhido', plano);
     {/* O método handleChange é chamado sempre que um dos campos do formulário é alterado. 
 Ele atualiza o estado formValues com os novos valores do campo.*/}
@@ -74,6 +73,15 @@ Ele atualiza o estado formValues com os novos valores do campo.*/}
         }
     };
 
+    const limpaForm = () => {
+        setFormValues({
+            nome: '',
+            email: '',
+            senha: '', 
+            confirmsenha: '',
+        });
+    };
+
     return (
 
         <div className="form-container">
@@ -118,7 +126,7 @@ Ele atualiza o estado formValues com os novos valores do campo.*/}
                             <input type='submit' className="submit_btn" id="btn_cadastrar" value="Cadastrar" />
                         </div>
                         <div className="can"> {/*botão cancelar do footer */}
-                            <input type='submit' className="submit_btn" id="btn_cancelar" onClick="limpaForm()" value="Cancelar" />
+                            <input type='button' className="submit_btn" id="btn_cancelar" onClick={limpaForm} value="Cancelar" />
                         </div>
                     </div>
                 </form>

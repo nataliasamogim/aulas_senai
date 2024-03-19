@@ -67,6 +67,13 @@ const Login = ({ onLogin }) => {
     }
   };
 
+  const limpaForm = () => {
+    setFormValues({
+        email_log: '',
+        senha_log: '', 
+    });
+};
+
   return (
 
     <div className="form-container">
@@ -105,7 +112,7 @@ const Login = ({ onLogin }) => {
             </div>
             <div className="log_cancel"> {/*Link para o botão cancelar */}
               {/*<Link className="submit_btn-log" id="btn_cancelar" onclick="limpaForm()">Cancelar</Link>*/}
-              <input type="reset" value="Cancelar" className='submit_btn-log' id='btn_cancelar'/>
+              <input type="button" value="Cancelar" className='submit_btn-log' id='btn_cancelar' onClick={limpaForm}/>
             </div>
           </div>
         </form>
