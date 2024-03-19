@@ -42,7 +42,9 @@ def verificar_informacao_log(email, senha):
     if login:
         print("Usuário encontrado!")
         print(login)
-        return login
+        return(login)
+        return {'erro': False, 'mensagem': 'Usuário encontrado'}
+    
     else:
         print("Usuario não encontrado")  
         return {'erro': True, 'mensagens': 'Usuário não encontrado'}
