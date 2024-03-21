@@ -221,14 +221,10 @@ button.btn-close:focus {
   --bs-dropdown-link-active-bg: #bb80c7 !important;
 }
 
-button.plus.btn.btn-outiline {
-  padding: 0px;
-}
 
-button.btn {
-  width: auto;
-  padding: 5px;
-
+.btn{
+  width: 40px !important;
+  justify-content: left !important;
 }
 
 /*Define a cor de fundo dos links ativos em um menu
@@ -240,6 +236,9 @@ button.btn {
   color: rgb(46, 16, 68) !important;
 }
 
+.dropdown.btn-group {
+  width: 30%;
+}
 /*-----Fim dos compromissos-----*/
 
 
@@ -282,7 +281,7 @@ button.btn.btn-outline {
   color: white;
   display: flex;
   flex-direction: column;
-  width: 91.8%;
+  width: 94%;
   border: none;
   text-align: start;
   padding: 8px 15px 8px 15px;
@@ -326,4 +325,8 @@ button.btn.btn-outline {
 /*-----Fim do Perfil-----*/
 .dropdown {
   width: 10%;
+}
+
+.dropdown.btn-group{
+  width: 100%;
 }
