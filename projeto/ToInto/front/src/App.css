@@ -311,6 +311,7 @@ button.btn.btn-outline {
   background-color: rgb(72, 4, 120);
   border: none;
   padding-left: 15px;
+  border-radius: 0 !important;
 }
 
 #bg-vertical-dropdown-1:hover{

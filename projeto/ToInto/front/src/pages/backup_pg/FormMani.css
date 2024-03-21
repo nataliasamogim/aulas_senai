@@ -8,6 +8,20 @@ para os usuários.*/
     box-sizing: content-box;
 }
 
+.cadastro { /*class do form*/
+    /*deixei o formulário no centro da página */
+    font-family: Arial, Helvetica, sans-serif;
+    border: 1px solid;
+    background-color: #2D0651;
+    border-radius: 8px;
+    margin-top: 110px;
+    box-shadow: 20px 20px 50px #2D0651;
+    width: 500px;
+    height: 500px;
+    margin-left: auto;
+    margin-right: auto;
+   
+}
 
 .cadastro { /*class do form*/
     /*deixei o formulário no centro da página */
@@ -18,7 +32,7 @@ para os usuários.*/
     margin-top: 110px;
     box-shadow: 20px 20px 50px #2D0651;
     width: 530px;
-    height: 580px;
+    height: 530px;
     margin-left: auto;
     margin-right: auto;
    
@@ -41,6 +55,14 @@ para os usuários.*/
     flex-direction: column;
     color: white;
     padding: 3px 10px 10px 10px;
+}
+
+.form_grupo_foto {
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    color: white;
+    margin-top: 30px;
 }
 
 .form_grupo input{

@@ -17,6 +17,7 @@ import { PlanoMensal } from "../pages/Escolha_pag/PlanoMensal"
 import DadosCartao from "../pages/Adic_dados/DadosCartao";
 import Dados_pix from "../pages/Adic_dados/Dados_pix"
 import Modific_cart from "../pages/Modificar_cartao/Modific_cart";
+import Concluido_cadatualizado from "../pages/Concluido/Concluido_cadatualizado";
 
 
 const Content = props => (
@@ -33,9 +34,11 @@ const Content = props => (
             <Route path="/anual" exact element={<PlanoAnual />} />
             <Route path="/mensal" exact element={<PlanoMensal />} />
             <Route path="/modificar" exact element={<FormMani />} />
+            <Route path="/cadatualizado" exact element={<Concluido_cadatualizado />} />
             <Route path="/dadoscart" exact element={<DadosCartao />} />
             <Route path="/dadospix" exact element={<Dados_pix />} />
             <Route path="/modificarpag" exact element={<Modific_cart />} />
+
 
         </Routes>
     </main>

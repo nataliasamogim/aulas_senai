@@ -5,7 +5,7 @@ function Cad_concluido() {
     return (
         <>
             <div id="container_cad">
-                <div className="cad_concluido">
+                <div className="cad_concluido"> 
                     <div className="conteudo">
                         <h2 className="title_cad">Cadastro concluído!</h2>
                         <h5 className="subtitulo">Seu cadastro foi concluído, deseja fazer Login</h5>

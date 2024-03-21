@@ -1,127 +1,99 @@
-{/* Nome do componente: FormMani*/ }
-{/* Autor: Laura, Natalia, Marilia*/ }
-{/* Data de criação: /alteração: 12-03-2024*/ }
-{/* Descrição detalhada: */ }
-
 import React, { useState } from 'react';
-{/*import './FormMani.css';*/ }
-import { Form, useNavigate } from 'react-router-dom'; //recuperar a rota 
-import Foto_Perfil from './Foto_Perfil';
+import { useNavigate } from 'react-router-dom';
+import './FormMani.css';
 
-{/*Utiliza o useState para a criação de um estado local chamado formValues(vai armazenar as informações do campo de email e senha) */ }
-const FormMani2 = () => {
+// Imagem padrão
+const defaultPhoto = 'image/foto_perfil.jpg'; // Substitua 'url_da_imagem_padrao.jpg' pela URL da sua imagem padrão
+
+const FormMani = () => {
     const navigate = useNavigate();
     const [formValues, setFormValues] = useState({
         foto: '',
-        nome: '',
-        email: '',
-        senha: '',
+        nome_novo: '',
+        email_novo: '',
+        senha_nova: '',
     });
 
-
-    {/* O método handleChange é chamado sempre que um dos campos do formulário é alterado. 
-Ele atualiza o estado formValues com os novos valores do campo.*/}
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormValues((prevValues) => ({
+        setFormValues(prevValues => ({
             ...prevValues,
             [name]: value,
         }));
     };
 
-    const [mensagensErro, setMensagensErro] = useState([]);
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        setFormValues(prevValues => ({
+            ...prevValues,
+            foto: URL.createObjectURL(file),
+        }));
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         try {
-            const resposta = await fetch('http://localhost:5000/receber-dados', {
+            const response = await fetch('http://localhost:5000/receber-dados', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/json', // Definir cabeçalho Content-Type como JSON
                 },
-                body: JSON.stringify(formValues),
+                body: JSON.stringify(formValues), // Enviar os dados do formulário como JSON
             });
 
-            const resultado = await resposta.json();
-
-            if (resultado.erro) {
-                // Exibe mensagens de erro no console.log ou em algum local visível
-                console.error('Erro no servidor:', resultado.mensagens);
-
-                // Atualiza o estado com as mensagens de erro para exibição no formulário
-                setMensagensErro(resultado.mensagens);
-            } else {
-                // Dados foram processados com sucesso
-                console.log('Dados processados com sucesso!', resposta);
-
-                //Navega para a tela do Cadastro concluído
-                navigate('/concluido')
+            if (!response.ok) {
+                throw new Error('Erro ao enviar dados');
             }
+
+            const resultado = await response.json();
+            console.log('Dados processados com sucesso!', resultado);
+            navigate('/cadatualizado');
         } catch (error) {
             console.error('Erro ao enviar dados:', error);
         }
     };
 
     return (
-
         <div className="form-container">
-
-            {mensagensErro.length > 0 && (
-                <div style={{ color: 'white' }}>
-                    <p>Erro ao processar os dados:</p>
-                    <ul>
-                        {mensagensErro.map((mensagem, index) => (
-                            <li key={index}>{mensagem.mensagem}</li>
-                        ))}
-                    </ul>
+            <form className="cadastro" onSubmit={handleSubmit}>
+                <h1 className="h1_cadastro">Modificar Cadastro</h1>
+                <div className="form_grupo_foto">
+                    {/* Foto padrão */}
+                    {/* Exibir a foto selecionada ou a imagem padrão */}
+                    <img src={formValues.foto || defaultPhoto} alt="Profile" className="profile-photo" style={{ width: '85px', height: '85px', borderRadius: '50%' }} />
+                    {/*{formValues.foto && (
+                        <img src={formValues.foto} alt="Profile" style={{ width: '85px', height: '85px', borderRadius: '50%' }} />
+                    )}*/}
+                    <label htmlFor="upload-input">
+                        <span>Escolher Foto</span>
+                        <input type="file" id="upload-input" onChange={handleImageChange} style={{ display: 'none' }} accept="image/*" />
+                    </label>
                 </div>
-            )}
-
-            <section className="form_cadastro">
-
-                <form className="cadastro" id="cadastrar" action="" onSubmit={handleSubmit} /*O método handleSubmit é chamado quando o formulário é enviado.*/> {/*form do cadastro*/}
-                    <h1 className="h1_cadastro">Cadastro</h1>
-
-                    <div className="form_grupo"> {/*div para parte do nome*/}
-                        <Foto_Perfil />
-
-                        {/*<label className="foto">Foto Perfil</label> 
-                        <input className="input_1" type="file" name="foto" id="foto" value={formValues.foto} onChange={handleChange} />*/}
+                <div className="form_grupo">
+                    <label className="nome">Nome</label>
+                    <input className="input_2" type="text" name="nome_novo" value={formValues.nome_novo} onChange={handleChange} placeholder="Digite seu nome" />
+                </div>
+                <div className="form_grupo">
+                    <label className="email">Email</label>
+                    <input className="input_3" type="email" name="email_novo" value={formValues.email_novo} onChange={handleChange} placeholder="Digite seu E-mail" />
+                </div>
+                <div className="form_grupo">
+                    <label className="senha">Senha</label>
+                    <input className="input_4" type="password" name="senha_nova" value={formValues.senha_nova} onChange={handleChange} placeholder="Digite sua senha" />
+                </div>
+                <div className="buttons">
+                    <div className="salvar">
+                        <input type="submit" className="submit_btn" value="Salvar" />
                     </div>
-
-                    <div className="form_grupo"> {/*div para parte do nome*/}
-                        <label className="nome">Nome</label>
-                        <input className="input_2" type="text" name="nome" id="nome" value={formValues.nome} onChange={handleChange} placeholder="Digite seu nome" data-min-length="3" data-max-length="100" data-only-letters />
+                    <div className="can">
+                        <input type="button" className="submit_btn" value="Cancelar" />
                     </div>
-
-                    <div className="form_grupo"> {/*div para parte do e-mail*/}
-                        <label className="email">Email</label>
-                        <input className="input_3" type="email" name="email" id="email" value={formValues.email} onChange={handleChange} placeholder="Digite seu E-mail" data-email-validate data-min-length="10" data-max-length="40" />
-                    </div>
-
-                    <div className="form_grupo"> {/*div para parte da senha*/}
-                        <label className="senha">Senha</label>
-                        <input className="input_4" type="password" name="senha" id="senha" value={formValues.senha} onChange={handleChange} placeholder="Digite sua senha" data-password-validate data-min-length="8" data-max-length="15" />
-                    </div>
-
-                    <div className="buttons">
-                        <div className="salvar"> {/*botão cadastrar do footer */}
-                            <input type='submit' className="submit_btn" id="btn_cadastrar" value="Salvar" />
-                        </div>
-                        <div className="can"> {/*botão cancelar do footer */}
-                            <input type='submit' className="submit_btn" id="btn_cancelar" onClick="limpaForm()" value="Cancelar" />
-                        </div>
-                    </div>
-
-
-                </form>
-
-                <p className="error-validation template"></p> {/*implementação do java script */}
-                <script src="JavaScript/validar.js"></script>
-            </section>
+                </div>
+            </form>
         </div>
     );
 };
 
-export default FormMani2;
+export default FormMani;
+
+

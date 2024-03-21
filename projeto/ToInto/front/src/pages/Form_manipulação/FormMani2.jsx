@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, useNavigate } from 'react-router-dom';
 import './FormMani.css';
 
-const FormMani = () => {
+const FormMani2 = () => {
     const [username, setUsername] = useState('');
     const [editingUsername, setEditingUsername] = useState(false);
     const navigate = useNavigate();
@@ -21,14 +21,6 @@ const FormMani = () => {
         }
     }, []); // O segundo argumento [] garante que este efeito só será executado uma vez, após a montagem do componente
 
-    const handleInputChange = (e) => {
-        setUsername(e.target.value);
-    };
-
-    const handleInputBlur = () => {
-        localStorage.setItem('username', username);
-        setEditingUsername(false);
-    };
 
     const [profilePicture, setProfilePicture] = useState(null);
 
@@ -78,7 +70,9 @@ const FormMani = () => {
                 console.error('Erro no servidor:', resultado.mensagens);
             } else {
                 console.log('Dados processados com sucesso!', resposta);
-                navigate('/concluido');
+                
+               
+                
             }
         } catch (error) {
             console.error('Erro ao enviar dados:', error);
@@ -116,7 +110,7 @@ const FormMani = () => {
                     </div>
                     <div className="buttons">
                         <div className="salvar">
-                            <input type="submit" className="submit_btn" id="btn_cadastrar" value="Salvar" />
+                            <input type="submit" className="submit_btn" id="btn_salvar" value="Salvar" />
                         </div>
                         <div className="can">
                             <input type="button" className="submit_btn" id="btn_cancelar" onClick={() => setProfilePicture(null)} value="Cancelar" />
@@ -128,7 +122,7 @@ const FormMani = () => {
     );
 };
 
-export default FormMani;
+export default FormMani2;
 
 
 

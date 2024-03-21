@@ -60,7 +60,7 @@ Ele atualiza o estado formValues com os novos valores do campo.*/}
                 //Navega para a tela do Cadastro concluído
                 if (plano == 'free') {
                     navigate('/concluido')
-                } else {
+                } else { 
                     if (plano == 'mensal') {
                         navigate('/mensal') //ajustar a rota ao criar a pagina
                     } else {
