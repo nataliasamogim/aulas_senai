@@ -34,7 +34,7 @@ def verificar_informacao_log(email, senha):
     conex = conexao.conectar()
     cursor = conex.cursor()
 
-    sql = "SELECT ID_CAD, EMAIL FROM CADASTRO WHERE EMAIL = %s AND SENHA = %s"
+    sql = "SELECT ID_CAD, NOME_USUARIO, EMAIL FROM CADASTRO WHERE EMAIL = %s AND SENHA = %s"
     val = (email, senha)
     cursor.execute(sql, val)
     login = cursor.fetchone()

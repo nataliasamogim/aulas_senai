@@ -1,7 +1,7 @@
 {/*Utiliza o useState para a criação de um estado local chamado formValues(vai armazenar as informações do campo de email e senha) */ }
 {/* Nome do componente: Login*/ }
 {/* Autor(a): Maria Luiza, Laura e Marília */ }
-{/* Data de criação:25/10/2023 e data de alteração: 14/03/2024*/ }
+{/* Data de criação:25/10/2023 e data de alteração: 21/03/2024*/ }
 {/*Representa os campos de email e senha, além do recuperação de senha e botão de cadastrar e entrar do formulário do login*/ }
 {/*Observação pertinente: o estado local armazena as informações recebida do formulário e os handle cuidam da sua interação */ }
 
@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom'; //recuperar a rota
 
 
 {/*Utiliza o useState para a criação de um estado local chamado formValues(vai armazenar as informações do campo de email e senha) */ }
-const Login = ({ onLogin }) => {
+const Login = () => {
   const navigate = useNavigate();
   const [formValues, setFormValues] = useState({
     email_log: '',
@@ -56,8 +56,9 @@ const Login = ({ onLogin }) => {
       } else {
         // Dados foram processados com sucesso
         console.log('Dados processados com sucesso!', resposta);
-        localStorage.setItem('username', resultado.username);
-        localStorage.setItem('ID', resultado.id);
+        localStorage.setItem('ID', resultado.mensagem[0]);
+        localStorage.setItem('nome_usuario', resultado.mensagem[1]);
+        localStorage.setItem('email', resultado.mensagem[2]);
         //onLogin(resultado.username); // Chama a função onLogin com o nome de usuário retornado
         //Navega para a tela de calendario
         navigate('/calendario')
@@ -69,10 +70,10 @@ const Login = ({ onLogin }) => {
 
   const limpaForm = () => {
     setFormValues({
-        email_log: '',
-        senha_log: '', 
+      email_log: '',
+      senha_log: '',
     });
-};
+  };
 
   return (
 
@@ -112,7 +113,7 @@ const Login = ({ onLogin }) => {
             </div>
             <div className="log_cancel"> {/*Link para o botão cancelar */}
               {/*<Link className="submit_btn-log" id="btn_cancelar" onclick="limpaForm()">Cancelar</Link>*/}
-              <input type="button" value="Cancelar" className='submit_btn-log' id='btn_cancelar' onClick={limpaForm}/>
+              <input type="button" value="Cancelar" className='submit_btn-log' id='btn_cancelar' onClick={limpaForm} />
             </div>
           </div>
         </form>
