@@ -12,7 +12,7 @@ from validacoes import (
     validar_nome,
     validar_email,
     validar_senha,
-    #confirmar_senha
+    confirmar_senha
 )
 
 from validacoes_cartao import(
@@ -74,7 +74,7 @@ def processar_dados_cad(dados):
     mensagens_erro.append(validar_email(dados.get('email', '')))
     # Precisa ser dois parâmetros já que no componete validacoes colocamos dois parâmetros na função corfimar_senha
     mensagens_erro.append(validar_senha(dados.get('senha', '')))
-    #mensagens_erro.append(confirmar_senha(dados.get('senha', ''), dados.get('confirmsenha', '')))
+    mensagens_erro.append(confirmar_senha(dados.get('senha', ''), dados.get('confirmsenha', '')))
     # Fim do bloco (mensagens de erro)
 
     # Remove mensagens de erro vazias
@@ -173,3 +173,37 @@ def processar_dados_log(dados):
 
         # Retorna os dados processados
         #return {'erro': False, 'mensagem': 'Dados Processados com Sucesso!'}
+    
+def processar_dados_form_mani(dados):
+    # Função para processar os dados recebidos do Flask
+    # Retorna os dados processados
+    dados_processados = dados
+    dados_gravacao = []
+
+    dados_gravacao.append(dados_processados.get('nome_novo')) 
+    dados_gravacao.append(dados_processados.get('email_novo')) 
+    dados_gravacao.append(dados_processados.get('senha_nova'))
+   
+
+    mensagens_erro = []  # Cria uma lista vazia para armazenar mensagens de erro
+
+    # Início do bloco (mensagens de erro)
+    # Os dados recebidos dos inputs serão validados pela função correspondente e caso haja erro será armazenado na variável mensagens_erro
+    mensagens_erro.append(validar_nome(dados.get('nome_novo', '')))
+    mensagens_erro.append(validar_email(dados.get('email_novo', '')))
+    # Precisa ser dois parâmetros já que no componete validacoes colocamos dois parâmetros na função corfimar_senha
+    mensagens_erro.append(validar_senha(dados.get('senha_nova', '')))
+    # Fim do bloco (mensagens de erro)
+
+    # Remove mensagens de erro vazias
+    mensagens_erro = [msg for msg in mensagens_erro if msg['erro']]
+
+    print(mensagens_erro)
+
+    if mensagens_erro:
+        return {'erro': True, 'mensagens': mensagens_erro}
+    else:
+        # Chama a função para gravar os dados em um arquivo, caso não tenha mensagens de erro
+        gravar_em_arquivo(dados_processados)
+        # Retorna os dados processados
+        return {'erro': False, 'mensagem': 'Dados Processados com Sucesso!'}    

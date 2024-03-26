@@ -11,13 +11,12 @@ import CadastroLP from "../pages/Cadastro/CadastroLP"
 import { App_calen } from "../pages/App_calen";
 import { App_todo } from "./App_todo";
 import Cad_concluido from "../pages/Concluido/Cad_concluido";
-import FormMani from "../pages/backup_pg/FormMani";
-import { PlanoAnual } from "../pages/Escolha_pag/PlanoAnual";
-import { PlanoMensal } from "../pages/Escolha_pag/PlanoMensal"
+import FormMani from "../pages/Form_manipulacao/FormMani";
 import DadosCartao from "../pages/Adic_dados/DadosCartao";
 import Dados_pix from "../pages/Adic_dados/Dados_pix"
 import Modific_cart from "../pages/Modificar_cartao/Modific_cart";
 import Concluido_cadatualizado from "../pages/Concluido/Concluido_cadatualizado";
+import { Esc_Pag } from "../pages/Escolha_pag/Esc_Pag";
 
 
 const Content = props => (
@@ -29,17 +28,15 @@ const Content = props => (
             <Route path="/cadastro/:plano" exact element={<CadastroLP />} />
             <Route path="/calendario" exact element={<App_calen />} />
             <Route path="/Todolist" exact element={<App_todo />} />
-            <Route path="/" exact element={<Home />} />
             <Route path="/concluido" exact element={<Cad_concluido />} />
-            <Route path="/anual" exact element={<PlanoAnual />} />
-            <Route path="/mensal" exact element={<PlanoMensal />} />
+            <Route path="/escpag" exact element={<Esc_Pag />} />
             <Route path="/modificar" exact element={<FormMani />} />
             <Route path="/cadatualizado" exact element={<Concluido_cadatualizado />} />
             <Route path="/dadoscart" exact element={<DadosCartao />} />
             <Route path="/dadospix" exact element={<Dados_pix />} />
-            <Route path="/modificarpag" exact element={<Modific_cart />} />
-
-
+            <Route path="/modificarpag" exact element={<Esc_Pag/>} />
+            <Route path="/modificart" exact element={<Modific_cart />} />
+            <Route path="/pagamento" exact element={<Esc_Pag/>} />
         </Routes>
     </main>
 );

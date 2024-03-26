@@ -12,7 +12,7 @@ function Dados_pix() {
                 </div>
 
                 <div>
-                    <img src="image/tointoqr.png" alt="QRCODpix" className='qrcode' />
+                    <img src="image/QR_code.png" alt="QRCODpix" className='qrcode' />
                 </div>
 
             </div>

@@ -19,11 +19,12 @@ body { /*Body para colocar o formulário no centro da página */
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 540px;
+    width: 520px;
     color: white;
     box-shadow: 20px 20px 50px rgb(58, 17, 58);
     margin-top: 100px;
 }
+
 
 .h1_mensal { /*Título*/
     font-size: 2.5em;
@@ -33,6 +34,7 @@ body { /*Body para colocar o formulário no centro da página */
 
 .escolha { /*H3 com o título "Escolha sua forma de pagamento"*/
     font-size: 1.5em;
+    padding-bottom: 15px;
 }
 
 .content { /*Div que contém o H3*/
@@ -44,7 +46,7 @@ body { /*Body para colocar o formulário no centro da página */
 }
 
 .cartao { /*div que contem o input e o span para o pagamento em cartão de crédito*/
-    margin-bottom: 60px;
+    margin-bottom: 80px;
 }
 
 .span_frase { /*span das duas formas de pagamento*/
@@ -62,6 +64,28 @@ body { /*Body para colocar o formulário no centro da página */
     font-size: 1.1em;
     border-radius: 5px;
     border: none;
+    text-decoration: none;
+    color: white;
+    background-color: #823b9c;
+}
+
+
+.button_btn_voltar{
+    padding: 7px 30px 7px 30px;
+    font-size: 1.1em;
+    border-radius: 5px;
+    border: none;
+    text-decoration: none;
+    color: white;
+    background-color: #823b9c;
+
+}
+
+.button_btn_voltar:hover{
+    background-color: #823b9c;
+    font-size: 1.2em;
+    cursor: pointer;
+    color: white;
 }
 
 .button_btn:hover {
@@ -71,11 +95,10 @@ body { /*Body para colocar o formulário no centro da página */
     color: white;
 }
 
-.btn {
+.btn_pag {
     display: flex;
     justify-content: space-around;
-    width: 350px;
-    padding-left: 25px;
+    width: 345px;
 }
 
 .btn .button_btn a {

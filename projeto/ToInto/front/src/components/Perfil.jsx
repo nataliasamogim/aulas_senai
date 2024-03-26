@@ -25,7 +25,6 @@ import '../App.css'
 function Perfil(props) {
     const [nomeUsuario, setNomeUsuario] = useState('');
     const [Email, setEmail] = useState('');
-    const username = localStorage.getItem('username');
 
     useEffect(() => {
         const storedNome = localStorage.getItem('nome_usuario');
@@ -58,8 +57,8 @@ function Perfil(props) {
                     title="Modificar pagamento"
                     id="bg-vertical-dropdown-1"
                 >
-                    <Dropdown.Item eventKey="1">Modificar forma de pagamento</Dropdown.Item>
-                    <Link to="/modificarpag" className='btn-dadoscart'>Modificar dados do cartão</Link>
+                    <Link to="/modificarpag" className='btn-pagamento'>Modificar forma de pagamento</Link>
+                    <Link to="/modificart" className='btn-pagamento'>Modificar dados do cartão</Link>
                 </DropdownButton>
                 <Link to="/" className='btn-sair'>Sair</Link>
             </Dropdown.Menu>

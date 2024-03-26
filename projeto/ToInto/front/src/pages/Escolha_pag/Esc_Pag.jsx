@@ -16,7 +16,7 @@ import './Pagamento.css';
 {/* Descrição/Observação: Representa uma seção de pagamaento mensal, apresenta opções de pagamento (Pix e cartão de crédito) */}
 {/* e botões para navegação, como voltar e continuar. */}
 
-function PlanoMensal() {
+function Esc_Pag() {
     // Estado para controlar a opção de pagamento selecionada
     const [formaPagamento, setFormaPagamento] = useState('');
 
@@ -24,22 +24,10 @@ function PlanoMensal() {
         <>
             <section className="form_pagamento">
                 <form className="pagamento">
-                    <h1 className="h1_mensal">Plano Mensal</h1>
+                    <h1 className="h1_mensal">Pagamento</h1>
 
                     <div className="content">
                         <h3 className="escolha">Escolha sua forma de pagamento</h3>
-
-                        <div className="cartao">
-                            <input
-                                className="pagamento"
-                                type="radio"
-                                name="cartao"
-                                id="cartao"
-                                checked={formaPagamento === 'cartao'}
-                                onChange={() => setFormaPagamento('cartao')}
-                            />
-                            <span className="span_frase">Cartão de crédito</span>
-                        </div>
 
                         <div className="pix">
                             <input
@@ -53,9 +41,21 @@ function PlanoMensal() {
                             <span className="span_frase">Pix</span>
                         </div>
 
-                        <div className="btn">
-                            <Link to={formaPagamento === 'cartao' ? "/dadoscart" : formaPagamento === 'pix' ? "/dadospix" : "/mensal"} className="button_btn">Continuar</Link>
-                            <Link to="/" className="button_btn">Voltar</Link>
+                        <div className="cartao">
+                            <input
+                                className="pagamento"
+                                type="radio"
+                                name="cartao"
+                                id="cartao"
+                                checked={formaPagamento === 'cartao'}
+                                onChange={() => setFormaPagamento('cartao')}
+                            />
+                            <span className="span_frase">Cartão de crédito</span>
+                        </div>
+
+                        <div className="btn_pag">
+                            <Link to={formaPagamento === 'cartao' ? "/dadoscart" : formaPagamento === 'pix' ? "/dadospix" : "/escpag"} className="button_btn">Continuar</Link>
+                            <Link to="/" className="button_btn_voltar">Voltar</Link>
                         </div>
                     </div>
                 </form>
@@ -64,7 +64,7 @@ function PlanoMensal() {
     );
 }
 
-export { PlanoMensal };
+export { Esc_Pag };
 
 
 

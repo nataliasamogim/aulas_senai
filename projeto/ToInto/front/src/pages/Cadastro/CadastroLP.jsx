@@ -61,11 +61,7 @@ Ele atualiza o estado formValues com os novos valores do campo.*/}
                 if (plano == 'free') {
                     navigate('/concluido')
                 } else { 
-                    if (plano == 'mensal') {
-                        navigate('/mensal') //ajustar a rota ao criar a pagina
-                    } else {
-                        navigate('/anual') //ajustar a rota ao criar a pagina
-                    }
+                    navigate('/escpag') //ajustar a rota ao criar a pagina
                 }
             }
         } catch (error) {
@@ -130,9 +126,6 @@ Ele atualiza o estado formValues com os novos valores do campo.*/}
                         </div>
                     </div>
                 </form>
-
-                <p className="error-validation template"></p> {/*implementação do java script */}
-                <script src="JavaScript/validar.js"></script>
             </section>
         </div>
     );

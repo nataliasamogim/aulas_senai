@@ -30,10 +30,12 @@ const FormMani = () => {
         }));
     };
 
+    const [mensagensErro, setMensagensErro] = useState([]);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('http://localhost:5000/receber-dados', {
+            const resposta = await fetch('http://localhost:5000/receber-dados', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json', // Definir cabeçalho Content-Type como JSON
@@ -41,22 +43,49 @@ const FormMani = () => {
                 body: JSON.stringify(formValues), // Enviar os dados do formulário como JSON
             });
 
-            if (!response.ok) {
-                throw new Error('Erro ao enviar dados');
-            }
+            const resultado = await resposta.json();
 
-            const resultado = await response.json();
-            console.log('Dados processados com sucesso!', resultado);
-            navigate('/cadatualizado');
+            if (resultado.erro) {
+                // Exibe mensagens de erro no console.log ou em algum local visível
+                console.error('Erro no servidor:', resultado.mensagens);
+
+                // Atualiza o estado com as mensagens de erro para exibição no formulário
+                setMensagensErro(resultado.mensagens);
+            } else {
+                // Dados foram processados com sucesso
+                console.log('Dados processados com sucesso!', resposta);
+                navigate('/cadatualizado');
+            }
         } catch (error) {
             console.error('Erro ao enviar dados:', error);
         }
     };
 
+    const limpaForm = () => {
+        setFormValues({
+            nome: '',
+            email: '',
+            senha: '', 
+            confirmsenha: '',
+        });
+    };
+
     return (
         <div className="form-container">
+
+            {mensagensErro.length > 0 && (
+                <div style={{ color: 'white' }}>
+                    <p>Erro ao processar os dados:</p>
+                    <ul>
+                        {mensagensErro.map((mensagem, index) => (
+                            <li key={index}>{mensagem.mensagem}</li>
+                        ))}
+                    </ul>
+                </div>
+            )}
+
             <form className="cadastro" onSubmit={handleSubmit}>
-                <h1 className="h1_cadastro">Modificar Cadastro</h1>
+                <h1 className="h1_cadastro">Atualizar Cadastro</h1>
                 <div className="form_grupo_foto">
                     {/* Foto padrão */}
                     {/* Exibir a foto selecionada ou a imagem padrão */}
@@ -71,22 +100,22 @@ const FormMani = () => {
                 </div>
                 <div className="form_grupo">
                     <label className="nome">Nome</label>
-                    <input className="input_2" type="text" name="nome_novo" value={formValues.nome_novo} onChange={handleChange} placeholder="Digite seu nome" />
+                    <input className="input_2" type="text" name="nome_novo" id='nome_novo' value={formValues.nome_novo} onChange={handleChange} placeholder="Digite seu nome" />
                 </div>
                 <div className="form_grupo">
                     <label className="email">Email</label>
-                    <input className="input_3" type="email" name="email_novo" value={formValues.email_novo} onChange={handleChange} placeholder="Digite seu E-mail" />
+                    <input className="input_3" type="email" name="email_novo" id='email_novo' value={formValues.email_novo} onChange={handleChange} placeholder="Digite seu E-mail" />
                 </div>
                 <div className="form_grupo">
                     <label className="senha">Senha</label>
-                    <input className="input_4" type="password" name="senha_nova" value={formValues.senha_nova} onChange={handleChange} placeholder="Digite sua senha" />
+                    <input className="input_4" type="password" name="senha_nova" id='senha_nova' value={formValues.senha_nova} onChange={handleChange} placeholder="Digite sua senha" />
                 </div>
                 <div className="buttons">
                     <div className="salvar">
                         <input type="submit" className="submit_btn" value="Salvar" />
                     </div>
                     <div className="can">
-                        <input type="button" className="submit_btn" value="Cancelar" />
+                        <input type="button" className="submit_btn" value="Cancelar" onClick={limpaForm}/>
                     </div>
                 </div>
             </form>

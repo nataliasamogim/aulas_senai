@@ -281,18 +281,18 @@ button.btn.btn-outline {
   color: white;
   display: flex;
   flex-direction: column;
-  width: 94%;
+  width: 90%;
   border: none;
   text-align: start;
   padding: 8px 15px 8px 15px;
   text-decoration: none;
 }
 
-.btn-dadoscart {
+.btn-pagamento {
+  display: flex;
   color: rgb(46, 16, 68);
   text-decoration: none;
   padding: 8px 15px 8px 15px;
-
 }
 
 .page-perfil .btn-sair:hover {
