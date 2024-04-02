@@ -7,7 +7,7 @@ const defaultPhoto = 'image/foto_perfil.jpg'; // Substitua 'url_da_imagem_padrao
 
 const FormMani = () => {
     const [formAlter, setFormAlter] = useState({
-        id: '',
+        id: localStorage.getItem("ID"),
         foto: '',
         nome_novo: '',
         email_novo: '',
