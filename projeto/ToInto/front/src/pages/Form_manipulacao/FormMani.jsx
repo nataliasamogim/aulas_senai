@@ -6,8 +6,8 @@ import './FormMani.css';
 const defaultPhoto = 'image/foto_perfil.jpg'; // Substitua 'url_da_imagem_padrao.jpg' pela URL da sua imagem padrão
 
 const FormMani = () => {
-    const navigate = useNavigate();
-    const [formValues, setFormValues] = useState({
+    const [formAlter, setFormAlter] = useState({
+        id: '',
         foto: '',
         nome_novo: '',
         email_novo: '',
@@ -16,22 +16,22 @@ const FormMani = () => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormValues(prevValues => ({
-            ...prevValues,
+        setFormAlter(prevAlter => ({
+            ...prevAlter,
             [name]: value,
         }));
     };
 
     const handleImageChange = (e) => {
         const file = e.target.files[0];
-        setFormValues(prevValues => ({
-            ...prevValues,
+        setFormAlter(prevAlter => ({
+            ...prevAlter,
             foto: URL.createObjectURL(file),
         }));
     };
 
     const [mensagensErro, setMensagensErro] = useState([]);
-
+    const navigate = useNavigate();
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -40,7 +40,7 @@ const FormMani = () => {
                 headers: {
                     'Content-Type': 'application/json', // Definir cabeçalho Content-Type como JSON
                 },
-                body: JSON.stringify(formValues), // Enviar os dados do formulário como JSON
+                body: JSON.stringify(formAlter), // Enviar os dados do formulário como JSON
             });
 
             const resultado = await resposta.json();
@@ -52,8 +52,7 @@ const FormMani = () => {
                 // Atualiza o estado com as mensagens de erro para exibição no formulário
                 setMensagensErro(resultado.mensagens);
             } else {
-                // Dados foram processados com sucesso
-                console.log('Dados processados com sucesso!', resposta);
+                console.log('Dados atualizados com sucesso!', resposta);
                 navigate('/cadatualizado');
             }
         } catch (error) {
@@ -62,11 +61,11 @@ const FormMani = () => {
     };
 
     const limpaForm = () => {
-        setFormValues({
-            nome: '',
-            email: '',
-            senha: '', 
-            confirmsenha: '',
+        setFormAlter({
+            foto: '',
+            nome_novo: '',
+            email_novo: '',
+            senha_nova: '',
         });
     };
 
@@ -89,7 +88,7 @@ const FormMani = () => {
                 <div className="form_grupo_foto">
                     {/* Foto padrão */}
                     {/* Exibir a foto selecionada ou a imagem padrão */}
-                    <img src={formValues.foto || defaultPhoto} alt="Profile" className="profile-photo" style={{ width: '85px', height: '85px', borderRadius: '50%' }} />
+                    <img src={formAlter.foto || defaultPhoto} alt="Profile" className="profile-photo" style={{ width: '85px', height: '85px', borderRadius: '50%' }} />
                     {/*{formValues.foto && (
                         <img src={formValues.foto} alt="Profile" style={{ width: '85px', height: '85px', borderRadius: '50%' }} />
                     )}*/}
@@ -100,22 +99,22 @@ const FormMani = () => {
                 </div>
                 <div className="form_grupo">
                     <label className="nome">Nome</label>
-                    <input className="input_2" type="text" name="nome_novo" id='nome_novo' value={formValues.nome_novo} onChange={handleChange} placeholder="Digite seu nome" />
+                    <input className="input_2" type="text" name="nome_novo" id='nome_novo' value={formAlter.nome_novo} onChange={handleChange} placeholder="Digite seu nome" />
                 </div>
                 <div className="form_grupo">
                     <label className="email">Email</label>
-                    <input className="input_3" type="email" name="email_novo" id='email_novo' value={formValues.email_novo} onChange={handleChange} placeholder="Digite seu E-mail" />
+                    <input className="input_3" type="email" name="email_novo" id='email_novo' value={formAlter.email_novo} onChange={handleChange} placeholder="Digite seu E-mail" />
                 </div>
                 <div className="form_grupo">
                     <label className="senha">Senha</label>
-                    <input className="input_4" type="password" name="senha_nova" id='senha_nova' value={formValues.senha_nova} onChange={handleChange} placeholder="Digite sua senha" />
+                    <input className="input_4" type="password" name="senha_nova" id='senha_nova' value={formAlter.senha_nova} onChange={handleChange} placeholder="Digite sua senha" />
                 </div>
                 <div className="buttons">
                     <div className="salvar">
                         <input type="submit" className="submit_btn" value="Salvar" />
                     </div>
                     <div className="can">
-                        <input type="button" className="submit_btn" value="Cancelar" onClick={limpaForm}/>
+                        <input type="button" className="submit_btn" value="Cancelar" onClick={limpaForm} />
                     </div>
                 </div>
             </form>
