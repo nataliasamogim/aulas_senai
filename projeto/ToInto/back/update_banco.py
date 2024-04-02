@@ -1,18 +1,17 @@
 import conexao
 
-# Função para atualizar o nome de um autor
-def  modificar_usuario(id_cad, novo_nome, novo_email, nova_senha, nova_fotoperfil):
+# Função para atualizar os dados do usuário
+def atualizar_cad(novos_dados):
     conex = conexao.conectar()
     cursor = conex.cursor()
-
-    sql = "UPDATE CADASTRO SET NOME_USUARIO = %s , EMAIL = %s , SENHA = %s , FOTO_PERFIL = %s WHERE ID_CAD = %s"
-
-    val = ( novo_nome , novo_email, nova_senha, nova_fotoperfil, id_cad)
-
+    sql = f"UPDATE cadastro SET NOME_USUARIO = %s, EMAIL = %s, SENHA = %s WHERE ID_CAD = %s"
+    val = (novos_dados)
     cursor.execute(sql, val)
-
+    print('jjjjjjjj',sql, val)
     conex.commit()
-
-    print("Nome, email, senha e foto de perfil atualizadas com sucesso!", )
+    print("Dados alterados com sucesso")
     conex.close()
+    return {'erro': False, 'mensagem': 'Alteração realizada com sucesso'}
+
+ 
 

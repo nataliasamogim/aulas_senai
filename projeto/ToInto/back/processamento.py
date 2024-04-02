@@ -7,6 +7,7 @@ from gravar_arquivo import gravar_em_arquivo
 from gravar_arquivo import gravar_em_arquivo_log
 from gravar_banco import gravar_dados
 from recuperar_cad import verificar_informacao_log
+from recuperar_cad import recuperar_inf_formani
 
 from validacoes import (
     validar_nome,
@@ -23,7 +24,6 @@ from validacoes_cartao import(
     validar_codseg,
 
 )
-    
 
 
 # Nome da função: processar_dados
@@ -42,6 +42,8 @@ def processar_dados(dados):
         retorno = processar_dados_cad(dados)
     elif dados.get('nome_titular') != None:
         retorno = processar_dados_cartao(dados)
+    elif dados.get('nome_novo') != None:
+        retorno = processar_alterar_cad(dados)
     else:
         retorno = processar_dados_log(dados)
 
@@ -91,6 +93,37 @@ def processar_dados_cad(dados):
         print(dados_gravacao)
         # Retorna os dados processados
         return {'erro': False, 'mensagem': 'Dados Processados com Sucesso!'}
+    
+
+def processar_alterar_cad(dados):
+    # Função para processar os dados recebidos do Flask
+    # Retorna os dados processados
+    dados_processados = dados
+    print(dados_processados)
+
+    mensagens_erro = []  # Cria uma lista vazia para armazenar mensagens de erro
+
+    # Início do bloco (mensagens de erro)
+    # Os dados recebidos dos inputs serão validados pela função correspondente e caso haja erro será armazenado na variável mensagens_erro
+    mensagens_erro.append(validar_nome(dados_processados.get('nome_novo', '')))  # Valida o novo nome
+    mensagens_erro.append(validar_email(dados_processados.get('email_novo', '')))  # Valida o novo email
+    # Precisa ser dois parâmetros já que no componete validacoes colocamos dois parâmetros na função corfimar_senha
+    mensagens_erro.append(validar_senha(dados_processados.get('senha_nova', '')))  # Valida a nova senha
+    # Fim do bloco (mensagens de erro)
+
+    # Remove mensagens de erro vazias
+    mensagens_erro = [msg for msg in mensagens_erro if msg['erro']]
+
+    print(mensagens_erro)
+
+    if mensagens_erro:
+        return {'erro': True, 'mensagens': mensagens_erro}
+    else:
+        # Chama a função para atualizar os dados do cadastro
+        recebe_recup_formani = recuperar_inf_formani(dados_processados.get('id', ''))
+        print(recebe_recup_formani)
+        return recebe_recup_formani
+        
     
 
 def processar_dados_cartao(dados):
@@ -170,40 +203,6 @@ def processar_dados_log(dados):
         print(select_inf_log)
         return (select_inf_log)
    
-
         # Retorna os dados processados
         #return {'erro': False, 'mensagem': 'Dados Processados com Sucesso!'}
-    
-def processar_dados_form_mani(dados):
-    # Função para processar os dados recebidos do Flask
-    # Retorna os dados processados
-    dados_processados = dados
-    dados_gravacao = []
-
-    dados_gravacao.append(dados_processados.get('nome_novo')) 
-    dados_gravacao.append(dados_processados.get('email_novo')) 
-    dados_gravacao.append(dados_processados.get('senha_nova'))
-   
-
-    mensagens_erro = []  # Cria uma lista vazia para armazenar mensagens de erro
-
-    # Início do bloco (mensagens de erro)
-    # Os dados recebidos dos inputs serão validados pela função correspondente e caso haja erro será armazenado na variável mensagens_erro
-    mensagens_erro.append(validar_nome(dados.get('nome_novo', '')))
-    mensagens_erro.append(validar_email(dados.get('email_novo', '')))
-    # Precisa ser dois parâmetros já que no componete validacoes colocamos dois parâmetros na função corfimar_senha
-    mensagens_erro.append(validar_senha(dados.get('senha_nova', '')))
-    # Fim do bloco (mensagens de erro)
-
-    # Remove mensagens de erro vazias
-    mensagens_erro = [msg for msg in mensagens_erro if msg['erro']]
-
-    print(mensagens_erro)
-
-    if mensagens_erro:
-        return {'erro': True, 'mensagens': mensagens_erro}
-    else:
-        # Chama a função para gravar os dados em um arquivo, caso não tenha mensagens de erro
-        gravar_em_arquivo(dados_processados)
-        # Retorna os dados processados
-        return {'erro': False, 'mensagem': 'Dados Processados com Sucesso!'}    
+       

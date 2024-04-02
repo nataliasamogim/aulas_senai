@@ -1,18 +1,17 @@
 import conexao
-from update_banco import modificar_usuario
-from delete_banco import deletar_cad
 
 
-def selecionar_informacao_cad(id_cad):
+def recuperar_inf_formani(id_cad):
 
     conex = conexao.conectar()
     cursor = conex.cursor()
 
-    sql = "SELECT ID_CAD, NOME_USUARIO, EMAIL, SENHA, FOTO_PERFIL FROM CADASTRO WHERE ID_CAD = %s"
+    sql = "SELECT NOME_USUARIO, EMAIL FOTO_PERFIL FROM CADASTRO WHERE ID_CAD = %s"
     val = (id_cad,)
     cursor.execute(sql, val)
     usuario = cursor.fetchone()
     conex.close()
+    print(usuario)
     return usuario
 
     # if usuario:
@@ -48,21 +47,5 @@ def verificar_informacao_log(email, senha):
     else:
         print("Usuario não encontrado")
         return {'erro': True, 'mensagens':{'erro': True, 'mensagem': 'Usuário não encontrado'}}
-        #return {'erro': True, 'mensagem': 'E-mail inválido, exemplo: tointo@gmail.com'}
 
 
-if __name__ == "__main__":
-    id_cad = int(input("Digite o ID do cadastro que deseja selecionar:"))
-    linha = []
-    linha = selecionar_informacao_cad(id_cad)
-    if linha:
-        print("Usuário encontrado:")
-        print(linha)
-        novonome = input("Digite um novo nome:")
-        novoemail = input("Digite um novo email:")
-        novasenha = input("Digite uma nova senha:")
-        modificar_usuario(linha[0], novonome, novoemail, novasenha, linha[4])
-        print(selecionar_informacao_cad(linha[0]))
-        deletar_cad(linha[0])
-    else:
-        print("Usuario não encontrado")

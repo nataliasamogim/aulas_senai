@@ -40,3 +40,52 @@ E-mail: natalias@gmail.com
 Senha: Natali@1234
 Confirmar senha: Natali@1234
 
+
+Dados Gravados:
+Nome: Natalia
+E-mail: natisamogim@gmail.com
+Senha: Natalia@2828
+Confirmar senha: Natalia@2828
+
+
+Dados Gravados:
+Nome: Laura
+E-mail: laura@gmail.com
+Senha: Laura@12345
+Confirmar senha: Laura@12345
+
+
+Dados Gravados:
+Nome: None
+E-mail: None
+Senha: None
+Confirmar senha: None
+
+
+Dados Gravados:
+Nome: None
+E-mail: None
+Senha: None
+Confirmar senha: None
+
+
+Dados Gravados:
+Nome: None
+E-mail: None
+Senha: None
+Confirmar senha: None
+
+
+Dados Gravados:
+Nome: None
+E-mail: None
+Senha: None
+Confirmar senha: None
+
+
+Dados Gravados:
+Nome: None
+E-mail: None
+Senha: None
+Confirmar senha: None
+

@@ -15,7 +15,7 @@ CORS(app)  # Permita solicitações CORS
 def receber_dados():
     dados = request.json
     ret = processar_dados(dados)  # Chame a função processar_dados
-    
+
     
     print('************************************************************************\n')
     print(ret)
