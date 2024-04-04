@@ -51,7 +51,7 @@ def validar_num_cartao(num_cartao):
         if num_cartao.isdigit() == 16:
             return {'erro': False, 'mensagem': ''}
         else:
-            return {'erro': True, 'mensagem': 'O número do cartão precisa conter 16 dígitos'}
+            return {'erro': True, 'mensagem': 'O número do cartão precisa ter 16 dígitos'}
        
 
 def validar_datavenc(datavenc):
@@ -69,12 +69,11 @@ def validar_datavenc(datavenc):
         return {'erro': False, 'mensagem': ''}
         
     
-
 def validar_codseg(cod_seguranca):
     # Remove espaços em branco
     cod_seguranca = cod_seguranca.strip()
 
-    # Verifica se a numero do cartão contém apenas dígitos
+    # Verifica se o código de segurança contém apenas dígitos
     if cod_seguranca.isdigit() == 3:
         return {'erro': False, 'mensagem': ''}
     else:
