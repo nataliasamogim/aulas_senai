@@ -9,6 +9,7 @@ from gravar_banco import gravar_dados
 from recuperar_cad import verificar_informacao_log
 from recuperar_cad import recuperar_inf_formani
 from update_banco import atualizar_cad
+from delete_banco import deletar_cad
 
 from validacoes import (
     validar_nome,
@@ -43,14 +44,21 @@ def processar_dados(dados):
         retorno = processar_dados_cad(dados)
     elif dados.get('nome_titular') != None:
         retorno = processar_dados_cartao(dados)
-    elif dados.get('id') != None and dados.get('nome_novo') is None:
+    elif dados.get('id_cad') != None and dados.get('funcao') == 'del':
+        print('processar', dados)
+        retorno = excluir_todas_informacoes_usuario(dados.get('id_cad'))
+        #retorno ='retorno delete'
+    elif dados.get('id') != None and dados.get('funcao') != 'del':
+        print('processar select', dados)
         retorno = recuperar_inf_formani(dados.get('id', ''))
     elif dados.get('nome_novo') != None:
         retorno = processar_alterar_cad(dados)
     else:
+        print('processar', dados)
         retorno = processar_dados_log(dados)
 
     return (retorno)
+
 
 # Nome da função: processar_dados_cad
 # Data de criação/alteração: 01-12-2023
@@ -80,8 +88,7 @@ def processar_dados_cad(dados):
     mensagens_erro.append(validar_email(dados.get('email', '')))
     # Precisa ser dois parâmetros já que no componete validacoes colocamos dois parâmetros na função corfimar_senha
     mensagens_erro.append(validar_senha(dados.get('senha', '')))
-    mensagens_erro.append(confirmar_senha(
-        dados.get('senha', ''), dados.get('confirmsenha', '')))
+    mensagens_erro.append(confirmar_senha(dados.get('senha', ''), dados.get('confirmsenha', '')))
     # Fim do bloco (mensagens de erro)
 
     # Remove mensagens de erro vazias
@@ -225,3 +232,14 @@ def processar_dados_log(dados):
 
         # Retorna os dados processados
         # return {'erro': False, 'mensagem': 'Dados Processados com Sucesso!'}
+
+def excluir_todas_informacoes_usuario(cad_id):
+    try:
+        # Chama a função para excluir o usuário do banco de dados
+        deletar_cad(cad_id)
+        
+        # Retorna uma mensagem de sucesso
+        return {'erro': False, 'mensagem': 'Todas as informações do usuário foram excluídas com sucesso.'}
+    except Exception as e:
+        # Se ocorrer algum erro durante a exclusão, retorna uma mensagem de erro
+        return {'erro': True, 'mensagem': 'Erro ao excluir todas as informações do usuário: {}'.format(str(e))}

@@ -13,7 +13,9 @@
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
+
 import React, { useState, useEffect } from 'react';
 import '../App.css'
 
@@ -23,6 +25,7 @@ import '../App.css'
 {/*Parâmetros de entrada: Nulo*/ }
 {/*Retorno: retorna o perfil de usuário*/ }
 function Perfil(props) {
+    const navigate = useNavigate();
     const [nomeUsuario, setNomeUsuario] = useState('');
     const [Email, setEmail] = useState('');
 
@@ -39,6 +42,41 @@ function Perfil(props) {
             setEmail(storedEmail);
         }
     }, []); //Adicione o array de dependências vazio aqui
+
+    const excluirConta = () => {
+        const id_cad = localStorage.getItem('ID');
+
+        fetch('http://localhost:5000/receber-dados', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ 'funcao': 'del', 'id_cad': id_cad })
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao excluir conta');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data);
+                // Aqui você pode fazer algo após excluir as informações do usuário, como redirecionar para a página de login
+
+            })
+            .catch(error => {
+                console.error('Erro ao excluir conta:', error);
+            });
+
+            // Dados foram processados com sucesso
+            localStorage.setItem('ID', '' );
+            localStorage.setItem('nome_usuario', '' );
+            localStorage.setItem('email', '' );
+            //onLogin(resultado.username); // Chama a função onLogin com o nome de usuário retornado
+            //Navega para a tela de calendario
+            navigate('/')
+    };
+
     return (
         <Dropdown>
             <Dropdown.Toggle className='perfil' variant='outline' id="dropdown-basic">
@@ -60,6 +98,7 @@ function Perfil(props) {
                     <Link to="/modificarpag" className='btn-pagamento'>Modificar forma de pagamento</Link>
                     <Link to="/modificart" className='btn-pagamento'>Modificar dados do cartão</Link>
                 </DropdownButton>
+                <button onClick={excluirConta} className='btn-excluir'>Excluir conta</button>
                 <Link to="/" className='btn-sair'>Sair</Link>
             </Dropdown.Menu>
         </Dropdown>
