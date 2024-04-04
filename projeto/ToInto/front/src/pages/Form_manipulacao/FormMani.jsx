@@ -26,7 +26,7 @@ const FormMani = () => { // Declaração do componente FormMani como uma funçã
                     headers: {
                         'Content-Type': 'application/json', // Tipo de conteúdo da requisição
                     },
-                    body: JSON.stringify(formAlter), // Corpo da requisição contendo os dados do formulário
+                    body: JSON.stringify({id: localStorage.getItem("ID")}), // Corpo da requisição contendo os dados do formulário
                 });
 
                 // Verifica se a requisição foi bem-sucedida
@@ -36,7 +36,7 @@ const FormMani = () => { // Declaração do componente FormMani como uma funçã
 
                 // Extrai os dados da resposta e os converte para JSON
                 const userData = await resposta.json();
-                console.log('Dados do usuário:', userData);
+                //console.log('Dados do usuário:', userData);
 
                 // Atualiza o estado do formulário com os dados do usuário recebidos
                 setFormAlter({
@@ -88,7 +88,7 @@ const FormMani = () => { // Declaração do componente FormMani como uma funçã
                 },
                 body: JSON.stringify(formAlter), // Corpo da requisição contendo os dados do formulário em formato JSON
             });
-
+            console.log('teste envio',formAlter)
             // Extrai o resultado da resposta e o converte para JSON
             const resultado = await resposta.json();
             console.log('teste retorno', resultado);
@@ -101,7 +101,7 @@ const FormMani = () => { // Declaração do componente FormMani como uma funçã
                 // Atualiza o estado com as mensagens de erro para exibição no formulário
                 setMensagensErro(resultado.mensagens);
             } else {
-                console.log('Dados atualizados com sucesso!', resposta);
+                console.log('Dados atualizados com sucesso!', resultado);
                 navigate('/cadatualizado'); // Navega para outra rota
             }
         } catch (error) {
@@ -144,7 +144,7 @@ const FormMani = () => { // Declaração do componente FormMani como uma funçã
                     {/* Input para escolher a foto */}
                     <label htmlFor="upload-input">
                         <span>Escolher Foto</span>
-                        <input type="file" id="upload-input" onChange={handleImageChange} style={{ display: 'none' }} accept="image/*" />
+                        <input type="text" id="upload-input" onChange={handleImageChange} style={{ display: 'none' }} accept="image/*" />
                     </label>
                 </div>
                 <input className="id" type="hidden" name="id" id='id' value={formAlter.id}/>
