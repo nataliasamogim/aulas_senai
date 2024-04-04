@@ -42,8 +42,11 @@ def processar_dados(dados):
         retorno = processar_dados_cad(dados)
     elif dados.get('nome_titular') != None:
         retorno = processar_dados_cartao(dados)
-    elif dados.get('nome_novo') != None:
-        retorno = processar_alterar_cad(dados)
+    #elif dados.get('nome_novo') != None:
+        #retorno = processar_alterar_cad(dados)
+        #retorno ='retorno comum'
+    elif dados.get('id') != None:
+        retorno = recuperar_inf_formani(dados.get('id', ''))
     else:
         retorno = processar_dados_log(dados)
 
@@ -119,10 +122,10 @@ def processar_alterar_cad(dados):
     if mensagens_erro:
         return {'erro': True, 'mensagens': mensagens_erro}
     else:
-        # Chama a função para atualizar os dados do cadastro
-        recebe_recup_formani = recuperar_inf_formani(dados_processados.get('id', ''))
-        print(recebe_recup_formani)
-        return recebe_recup_formani
+        # Chamar a função para recuperar os dados do usuário do banco de dados
+        dados_usuario = recuperar_inf_formani(dados_processados.get('id', ''))
+        return(dados_usuario)
+        #return {'erro': False, 'mensagem': dados_usuario}
         
     
 
