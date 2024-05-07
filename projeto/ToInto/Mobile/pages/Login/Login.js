@@ -1,11 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import { Text, View, KeyboardAvoidingView, Image, TextInput, TouchableOpacity, Animated, Linking } from 'react-native';
-import styles from './Style.js';
+import styles from './LogStyle.js';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useEffect, useState } from 'react';
 
 
-export default function App() {
+export default function Login({navigation}) {
   const [offset] = useState(new Animated.ValueXY({ x: 0, y: 90 }));
 
   useEffect(() => { Animated.spring(offset.y, { toValue: 0, speed: 4, bounciness: 20 }).start(); }, []);
@@ -35,7 +35,7 @@ export default function App() {
       >
 
         <View style={styles.containerLogoLogin}>
-          <Image style={styles.logoLogin} resizeMode='contain' source={require('./assets/Images/logo.png')} />
+          <Image style={styles.logoLogin} resizeMode='contain' source={require('../../assets/images/logo.png')} />
         </View>
 
         <Animated.View style={[styles.container, { transform: [{ translateY: offset.y }] }]}>
@@ -58,12 +58,12 @@ export default function App() {
           </View>
 
           <View style={styles.buttons}>
-            <TouchableOpacity style={styles.btnSubmit}>
+            <TouchableOpacity style={styles.btnSubmit} onPress={() => navigation.navigate('Calendario')}>
               <Text style={styles.submitTxt}>Entrar</Text>
             </TouchableOpacity>
 
             <Text style={styles.titleNoCampo}>Não possui uma conta?</Text>
-            <TouchableOpacity style={styles.btnRegistrar}>
+            <TouchableOpacity style={styles.btnRegistrar} onPress={() => navigation.navigate('Cadastro')}>
               <Text style={styles.submitTxt}>Criar conta</Text>
             </TouchableOpacity>
           </View>
@@ -71,13 +71,13 @@ export default function App() {
 
           <View style={styles.socialContainer}>
             <TouchableOpacity onPress={handleFacebookPress}>
-              <Image source={require('./assets/Images/facebook.png')} style={styles.socialIcon} />
+              <Image source={require('../../assets/images/facebook.png')} style={styles.socialIcon} />
             </TouchableOpacity>
             <TouchableOpacity onPress={handleInstagramPress}>
-              <Image source={require('./assets/Images/Instagram2.png')} style={styles.socialIcon} />
+              <Image source={require('../../assets/images/Instagram2.png')} style={styles.socialIcon} />
             </TouchableOpacity>
             <TouchableOpacity onPress={handleWhatsPress}>
-              <Image source={require('./assets/Images/whatsapp.png')} style={styles.socialIcon} />
+              <Image source={require('../../assets/images/whatsapp.png')} style={styles.socialIcon} />
             </TouchableOpacity>
           </View>
 
