@@ -45,13 +45,13 @@ const CadastroForm = ({ navigation, handleSaibaMais }) => {
         </View>
         <View keyboardShouldPersistTaps="handled" style={styles.container}>
           <Text style={styles.label}>Nome Completo</Text>
-          <TextInput style={styles.inputs} value={nome} onChangeText={setNome} placeholder="Nome Completo" />
+          <TextInput style={styles.inputs} value={nome} onChangeText={setNome} placeholder="Digite seu nome completo" />
           <Text style={styles.label}>E-mail</Text>
-          <TextInput style={styles.inputs} value={email} onChangeText={setEmail} placeholder="E-mail" />
+          <TextInput style={styles.inputs} value={email} onChangeText={setEmail} placeholder="Digite seu e-mail" />
           <Text style={styles.label}>Senha</Text>
-          <TextInput secureTextEntry={true} style={styles.inputs} value={senha} onChangeText={setSenha} placeholder="Senha" />
+          <TextInput secureTextEntry={true} style={styles.inputs} value={senha} onChangeText={setSenha} placeholder="Digite sua senha" />
           <Text style={styles.label}>Confirmar Senha</Text>
-          <TextInput secureTextEntry={true} style={styles.inputs} value={confirmarSenha} onChangeText={setConfirmarSenha} placeholder="Confirmar senha" />
+          <TextInput secureTextEntry={true} style={styles.inputs} value={confirmarSenha} onChangeText={setConfirmarSenha} placeholder="Digite novamente sua senha" />
 
           <View style={styles.selectableBoxes}>
             <TouchableOpacity style={[styles.box, selectedBox === 1 && styles.selected]} onPress={() => handleBoxPress(1)}>
