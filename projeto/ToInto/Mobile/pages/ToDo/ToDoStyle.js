@@ -92,6 +92,14 @@ export default styles = StyleSheet.create({
     desc: {
         color: 'white',
         fontSize: 18
+    },
+    botaoMais:{
+        color: 'white',
+        fontSize: 48
+    },
+    adicionar:{
+        alignItems: 'flex-end',
+        paddingRight: 10
     }
 
 
