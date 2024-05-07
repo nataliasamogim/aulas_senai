@@ -1,11 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import { Text, View, KeyboardAvoidingView, Image, TouchableOpacity } from 'react-native';
-import styles from './Style_todo';
+import styles from './ToDoStyle.js';
 import { CheckBox } from 'react-native-elements';
 import { useState } from 'react';
 
 
-export default function App() {
+export default function ToDo({ navigation }) {
     const [checked, setChecked] = useState(false);
     const handleCheckBox = () => {
         setChecked(!checked);
@@ -17,15 +17,15 @@ export default function App() {
 
             <View style={styles.header}>
             <TouchableOpacity>
-                <Image style={styles.Menu} resizeMode='contain' source={require('./assets/images/menubranco.png')} />
+                <Image style={styles.Menu} resizeMode='contain' source={require('../../assets/Image/image.png')} />
             </TouchableOpacity>
             <TouchableOpacity>
-                <Image style={styles.FotoPerfil} resizeMode='contain' source={require('./assets/images/foto_perfil.jpg')} />
+                <Image style={styles.FotoPerfil} resizeMode='contain' source={require('../../assets/Image/foto_perfil.jpg')} />
             </TouchableOpacity>
             </View>
 
             <View style={styles.containerData}>
-                <Text style={styles.data}> 28/04 </Text>
+                <Text style={styles.data}> 09/05 </Text>
                 <Text style={styles.dia}> Quinta-Feira </Text>
             </View>
 
@@ -39,30 +39,34 @@ export default function App() {
                             uncheckedColor='white'
                         />
                         <View style={styles.ContainerTitulo}>
-                            <Text style={styles.titulo}>10:00</Text>
-                            <Text style={styles.titulo2}>Dentista</Text>
+                            <Text style={styles.titulo}>08:00</Text>
+                            <Text style={styles.titulo2}>Apresentação SENAI</Text>
                         </View>
                     </View>
 
                     <View style={styles.containerEdit}>
                     <TouchableOpacity>
-                        <Image style={styles.fotoEdit} resizeMode='contain' source={require('./assets/images/lapisbranco.png')} />
+                        <Image style={styles.fotoEdit} resizeMode='contain' source={require('../../assets/Image/lapisbranco.png')} />
                     </TouchableOpacity>
                     <TouchableOpacity>
-                        <Image style={styles.fotoEdit2} resizeMode='contain' source={require('./assets/images/lixobrancodois.png')} />
+                        <Image style={styles.fotoEdit2} resizeMode='contain' source={require('../../assets/Image/lixobrancodois.png')} />
                     </TouchableOpacity>
                     </View>
-                    
-
                 </View>
 
                 <View style={styles.descricao}>
                     <Text style={styles.desc}> Descrição................. </Text>
                 </View>
 
+                <View style={styles.adicionar}>
+                <TouchableOpacity onPress={()=> navigation.navigate('Compromissos')}>
+                    <Text style={styles.botaoMais}>+</Text>
+                </TouchableOpacity>
+
+                </View>
+
                 <StatusBar style="auto" />
             </View>
-
         </KeyboardAvoidingView>
 
 
