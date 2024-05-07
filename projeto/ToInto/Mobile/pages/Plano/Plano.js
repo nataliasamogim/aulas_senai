@@ -1,9 +1,9 @@
-import { View, TextInput, Image, KeyboardAvoidingView, TouchableOpacity, Text, Alert, Modal, TouchableHighlight } from "react-native";
+import { View, Image, KeyboardAvoidingView, TouchableOpacity, Text, } from "react-native";
 import styles from './PlanoStyle.js';
 import { Ionicons } from '@expo/vector-icons';
 import { useEffect, useState } from 'react';
 
-const PlanoMensal = () => {
+const PlanoMensal = ({navigation}) => {
     const [selectedOption, setSelectedOption] = useState(null);
 
     const handleOptionSelect = (option) => {
@@ -14,10 +14,14 @@ const PlanoMensal = () => {
         <KeyboardAvoidingView style={styles.background}>
             <View style={styles.containerLogos}>
                 <View style={styles.containerMenu}>
-                    <Image style={styles.menu} resizeMode='contain' source={require('./assets/images/menu.png')} />
+                    <TouchableOpacity>
+                    <Image style={styles.menu} resizeMode='contain' source={require('../../assets/images/image.png')} />
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.containerPerfil}>
-                    <Image style={styles.perfil} resizeMode='contain' source={require('./assets/images/foto_perfil.jpg')} />
+                    <TouchableOpacity>
+                    <Image style={styles.perfil} resizeMode='contain' source={require('../../assets/images/foto_perfil.jpg')} />
+                    </TouchableOpacity>
                 </View>
             </View>
 
@@ -48,7 +52,7 @@ const PlanoMensal = () => {
                 </View>
 
                 <View style={styles.buttonsPlano}>
-                    <TouchableOpacity style={styles.btnContinuar}>
+                    <TouchableOpacity style={styles.btnContinuar} onPress={() => navigation.navigate('Calendario')}>
                         <Text style={styles.submitTxt}>Continuar</Text>
                     </TouchableOpacity>
 
