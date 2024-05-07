@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
-import { View, Text, Button, TextInput, KeyboardAvoidingView, Image, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, KeyboardAvoidingView, Image, TouchableOpacity} from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { CheckBox } from 'react-native-elements';
-import styles from './Styles.js';
+import styles from './CompStyle.js';
 
-const Compromissos = () => {
+const Compromissos = ({ navigation }) => {
   const [horario, setHorario] = useState('');
   const [titulo, setTitulo] = useState('');
   const [descricao, setDescricao] = useState('');
-  const [importante, setImportante] = useState(false);
   const [lembrete, setLembrete] = useState(0);
   const [checked, setChecked] = useState(false);
 
@@ -33,10 +32,10 @@ const Compromissos = () => {
     <KeyboardAvoidingView style={styles.background} behavior="padding">
       <View style={styles.header}>
         <View style={styles.containerMenu}>
-          <Image style={styles.menu} resizeMode='contain' source={require('./assets/image/menu.png')} />
+          <Image style={styles.menu} resizeMode='contain' source={require('../../assets/image/menu.png')} />
         </View>
         <View style={styles.containerPerfil}>
-          <Image style={styles.perfil} resizeMode='contain' source={require('./assets/image/foto_perfil.jpg')} />
+          <Image style={styles.perfil} resizeMode='contain' source={require('../../assets/image/foto_perfil.jpg')} />
         </View>
       </View>
 
@@ -89,9 +88,9 @@ const Compromissos = () => {
         <View style={styles.dropdown}>
           <Text style={styles.label}>Lembre-me</Text>
           <Picker selectedValue={lembrete} onValueChange={(itemValue) => setLembrete(itemValue)} style={styles.lembrete}>
-              {timeOptions.map((option) => (
-                <Picker.Item key={option.value} label={option.label} value={option.value} />
-              ))}
+            {timeOptions.map((option) => (
+              <Picker.Item key={option.value} label={option.label} value={option.value} />
+            ))}
           </Picker>
 
           {/* Checkbox */}
@@ -101,10 +100,11 @@ const Compromissos = () => {
         </View>
 
         <View style={styles.botao}>
-          <TouchableOpacity style={styles.btn} onPress={handleSalvar}>
+          <TouchableOpacity style={styles.btn} onPress={() => navigation.goBack()}>
             <Text style={styles.btnTxt}>Criar</Text>
           </TouchableOpacity>
         </View>
+
       </View>
     </KeyboardAvoidingView>
   );
