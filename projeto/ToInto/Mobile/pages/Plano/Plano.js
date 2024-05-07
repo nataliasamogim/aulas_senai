@@ -15,7 +15,7 @@ const PlanoMensal = ({navigation}) => {
             <View style={styles.containerLogos}>
                 <View style={styles.containerMenu}>
                     <TouchableOpacity>
-                    <Image style={styles.menu} resizeMode='contain' source={require('../../assets/images/image.png')} />
+                    <Image style={styles.menu} resizeMode='contain' source={require('../../assets/images/menu.png')} />
                     </TouchableOpacity>
                 </View>
                 <View style={styles.containerPerfil}>
@@ -56,7 +56,7 @@ const PlanoMensal = ({navigation}) => {
                         <Text style={styles.submitTxt}>Continuar</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.btnVoltar}>
+                    <TouchableOpacity style={styles.btnVoltar} onPress={() => navigation.goBack()} >
                         <Text style={styles.submitTxt}>Voltar</Text>
                     </TouchableOpacity>
                 </View>

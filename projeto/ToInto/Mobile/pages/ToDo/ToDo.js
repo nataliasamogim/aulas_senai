@@ -17,10 +17,10 @@ export default function ToDo({ navigation }) {
 
             <View style={styles.header}>
             <TouchableOpacity>
-                <Image style={styles.Menu} resizeMode='contain' source={require('../../assets/Image/image.png')} />
+                <Image style={styles.Menu} resizeMode='contain' source={require('../../assets/images/menu.png')} />
             </TouchableOpacity>
             <TouchableOpacity>
-                <Image style={styles.FotoPerfil} resizeMode='contain' source={require('../../assets/Image/foto_perfil.jpg')} />
+                <Image style={styles.FotoPerfil} resizeMode='contain' source={require('../../assets/images/foto_perfil.jpg')} />
             </TouchableOpacity>
             </View>
 
@@ -46,10 +46,10 @@ export default function ToDo({ navigation }) {
 
                     <View style={styles.containerEdit}>
                     <TouchableOpacity>
-                        <Image style={styles.fotoEdit} resizeMode='contain' source={require('../../assets/Image/lapisbranco.png')} />
+                        <Image style={styles.fotoEdit} resizeMode='contain' source={require('../../assets/images/lapisbranco.png')} />
                     </TouchableOpacity>
                     <TouchableOpacity>
-                        <Image style={styles.fotoEdit2} resizeMode='contain' source={require('../../assets/Image/lixobrancodois.png')} />
+                        <Image style={styles.fotoEdit2} resizeMode='contain' source={require('../../assets/images/lixobrancodois.png')} />
                     </TouchableOpacity>
                     </View>
                 </View>

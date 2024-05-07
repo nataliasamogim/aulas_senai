@@ -1,6 +1,6 @@
 import { View, TextInput, Image, KeyboardAvoidingView, TouchableOpacity, Text, Alert, Modal, TouchableHighlight } from "react-native";
 import styles from "./CalenStyle";
-const Calendario = () => {
+const Calendario = ({ navigation }) => {
 
     return (
         <KeyboardAvoidingView style={styles.background}>
@@ -18,7 +18,7 @@ const Calendario = () => {
             </View>
 
             <View style={styles.buttonsCalen}>
-                <TouchableOpacity style={styles.btnMais}>
+                <TouchableOpacity style={styles.btnMais} onPress={() => navigation.navigate('ToDoList')}>
                     <Text style={styles.submitTxt}>+</Text>
                 </TouchableOpacity>
             </View>

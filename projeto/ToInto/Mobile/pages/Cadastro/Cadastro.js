@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { View, TextInput, Image, KeyboardAvoidingView, TouchableOpacity, Text, Alert, Modal, TouchableHighlight } from "react-native";
-import styles from './Style.js';
+import styles from './CadStyle.js';
 import { LinearGradient } from 'expo-linear-gradient';
 
-const CadastroForm = ({ handleSaibaMais }) => {
+
+const CadastroForm = ({ navigation, handleSaibaMais }) => {
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
@@ -11,6 +12,7 @@ const CadastroForm = ({ handleSaibaMais }) => {
   const [selectedBox, setSelectedBox] = useState(null);
 
   const handleCadastro = () => {
+
     if (senha !== confirmarSenha) {
       Alert.alert("Erro: As senhas não coincidem")
       return;
@@ -19,6 +21,9 @@ const CadastroForm = ({ handleSaibaMais }) => {
     console.log("Email: ", email);
     console.log("Senha: ", senha);
     console.log("Confirmar Senha: ", confirmarSenha);
+
+    console.log('Cadastro bem sucedido!');
+    navigation.navigate('PlanoMensal');
 
     // Aqui você pode adicionar a lógica para enviar os dados do formulário
     // Por enquanto, apenas limpamos os campos do formulário
@@ -36,7 +41,7 @@ const CadastroForm = ({ handleSaibaMais }) => {
     <KeyboardAvoidingView style={styles.background} behavior="padding">
       <LinearGradient style={styles.background} colors={['#AC72BF', '#6B29A4', '#570D70']}>
         <View style={styles.containerLogo}>
-          <Image style={styles.logo} resizeMode='contain' source={require('./assets/images/logo.png')} />
+          <Image style={styles.logo} resizeMode='contain' source={require('../../assets/images/logo.png')} />
         </View>
         <View keyboardShouldPersistTaps="handled" style={styles.container}>
           <Text style={styles.label}>Nome Completo</Text>
@@ -50,21 +55,21 @@ const CadastroForm = ({ handleSaibaMais }) => {
 
           <View style={styles.selectableBoxes}>
             <TouchableOpacity style={[styles.box, selectedBox === 1 && styles.selected]} onPress={() => handleBoxPress(1)}>
-              <Image source={require('./assets/images/free.png')} style={styles.imagemcaixa} />
+              <Image source={require('../../assets/images/free.png')} style={styles.imagemcaixa} />
               <Text style={[styles.boxText, selectedBox === 1 && styles.selectedText]}>Free</Text>
               <Text style={[styles.boxSubtitle, selectedBox === 1 && styles.selectedText]}>R$00,00</Text>
               <Text style={[styles.saibaMais, selectedBox === 1 && styles.selectedText]} onPress={() => handleSaibaMais("free")}>Saiba Mais</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={[styles.box, selectedBox === 2 && styles.selected]} onPress={() => handleBoxPress(2)}>
-              <Image source={require('./assets/images/oi.png')} style={styles.imagemcaixa} />
+              <Image source={require('../../assets/images/oi.png')} style={styles.imagemcaixa} />
               <Text style={[styles.boxText, selectedBox === 2 && styles.selectedText]}>Mensal</Text>
               <Text style={[styles.boxSubtitle, selectedBox === 2 && styles.selectedText]}>R$7,90/mês</Text>
               <Text style={[styles.saibaMais, selectedBox === 2 && styles.selectedText]} onPress={() => handleSaibaMais("mensal")}>Saiba Mais</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={[styles.box, selectedBox === 3 && styles.selected]} onPress={() => handleBoxPress(3)}>
-              <Image source={require('./assets/images/anual.png')} style={styles.imagemcaixa} />
+              <Image source={require('../../assets/images/anual.png')} style={styles.imagemcaixa} />
               <Text style={[styles.boxText, selectedBox === 3 && styles.selectedText]}>Anual</Text>
               <Text style={[styles.boxSubtitle, selectedBox === 3 && styles.selectedText]}>R$109,90/ano</Text>
               <Text style={[styles.saibaMais, selectedBox === 3 && styles.selectedText]} onPress={() => handleSaibaMais("anual")}>Saiba Mais</Text>
@@ -73,7 +78,7 @@ const CadastroForm = ({ handleSaibaMais }) => {
 
           <View style={styles.buttons}>
             <TouchableOpacity style={styles.btnSubmit} onPress={handleCadastro}>
-              <Text style={styles.submitTxt}>Cadastrar</Text>
+              <Text style={styles.submitTxt} >Cadastrar</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.btnSubmit}>
               <Text style={styles.submitTxt}>Cancelar</Text>
@@ -85,7 +90,7 @@ const CadastroForm = ({ handleSaibaMais }) => {
   );
 }
 
-const App = () => {
+const Cadastro = ({ navigation }) => {
   const [showModal, setShowModal] = useState(false);
   const [modalContent, setModalContent] = useState(null);
 
@@ -119,7 +124,7 @@ const App = () => {
 
   return (
     <View style={{ flex: 1 }}>
-      <CadastroForm handleSaibaMais={handleSaibaMais} />
+      <CadastroForm navigation={navigation} handleSaibaMais={handleSaibaMais} />
       {modalContent && (
         <Modal visible={showModal} animationType="slide" transparent={true} onRequestClose={handleCloseModal}>
           <View style={styles.modalContainer}>
@@ -139,4 +144,4 @@ const App = () => {
   );
 }
 
-export default App;
+export default Cadastro;

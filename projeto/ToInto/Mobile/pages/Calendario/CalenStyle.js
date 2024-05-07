@@ -13,26 +13,26 @@ export default styles = StyleSheet.create({
         paddingRight: 10,
         borderBottomWidth: 0.8,
         borderBottomColor: '#fff',
-        top: 35, 
+        top: 5, 
         paddingBottom: 10
     },
     perfil: {
-        width: 70,
-        height: 70, 
+        width: 60,
+        height: 60, 
         borderRadius: 50,
     },
     menu: {
-        width: 60,
-        height: 60, 
+        width: 50,
+        height: 50, 
         top: 5
     },
     containerImage:{
         alignItems: 'center',
-        marginTop: 40
+        marginTop: 20
     },
     fotoCalen: {
-        width: 600,
-        height: 600,
+        width: 550,
+        height: 550,
     },
     buttonsCalen: {
         display:'flex', 

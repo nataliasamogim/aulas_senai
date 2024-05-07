@@ -5,6 +5,8 @@ import Login from './pages/Login/Login';
 import Calendario from './pages/Calendario/Calendario';
 import CadastroForm from './pages/Cadastro/Cadastro';
 import Compromissos from './pages/Compromissos/Compromissos';
+import ToDo from './pages/ToDo/ToDo';
+import PlanoMensal from './pages/Plano/Plano';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,6 +18,8 @@ function App() {
         <Stack.Screen name="Calendario" component={Calendario} />
         <Stack.Screen name="Cadastro" component={CadastroForm} />
         <Stack.Screen name="Compromissos" component={Compromissos} />
+        <Stack.Screen name="ToDoList" component={ToDo} />
+        <Stack.Screen name="PlanoMensal" component={PlanoMensal} />
       </Stack.Navigator>
     </NavigationContainer>
   );

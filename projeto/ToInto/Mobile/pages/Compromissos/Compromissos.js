@@ -32,10 +32,10 @@ const Compromissos = ({ navigation }) => {
     <KeyboardAvoidingView style={styles.background} behavior="padding">
       <View style={styles.header}>
         <View style={styles.containerMenu}>
-          <Image style={styles.menu} resizeMode='contain' source={require('../../assets/image/menu.png')} />
+          <Image style={styles.menu} resizeMode='contain' source={require('../../assets/images/menu.png')} />
         </View>
         <View style={styles.containerPerfil}>
-          <Image style={styles.perfil} resizeMode='contain' source={require('../../assets/image/foto_perfil.jpg')} />
+          <Image style={styles.perfil} resizeMode='contain' source={require('../../assets/images/foto_perfil.jpg')} />
         </View>
       </View>
 

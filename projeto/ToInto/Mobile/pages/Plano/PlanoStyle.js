@@ -17,13 +17,13 @@ export default styles = StyleSheet.create({
         paddingBottom: 10
     },
     perfil: {
-        width: 70,
-        height: 70, 
+        width: 60,
+        height: 60, 
         borderRadius: 50,
     },
     menu: {
-        width: 60,
-        height: 60, 
+        width: 50,
+        height: 50, 
         top: 5
     },
     containerText: {
