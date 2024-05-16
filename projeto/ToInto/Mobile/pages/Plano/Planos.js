@@ -3,7 +3,7 @@ import styles from './PlanoStyle.js';
 import { Ionicons } from '@expo/vector-icons';
 import { useEffect, useState } from 'react';
 
-const PlanoMensal = ({navigation}) => {
+const Planos = ({navigation}) => {
     const [selectedOption, setSelectedOption] = useState(null);
 
     const handleOptionSelect = (option) => {
@@ -12,22 +12,10 @@ const PlanoMensal = ({navigation}) => {
 
     return (
         <KeyboardAvoidingView style={styles.background}>
-            <View style={styles.containerLogos}>
-                <View style={styles.containerMenu}>
-                    <TouchableOpacity>
-                    <Image style={styles.menu} resizeMode='contain' source={require('../../assets/images/menu.png')} />
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.containerPerfil}>
-                    <TouchableOpacity>
-                    <Image style={styles.perfil} resizeMode='contain' source={require('../../assets/images/foto_perfil.jpg')} />
-                    </TouchableOpacity>
-                </View>
-            </View>
 
             <View style={styles.container}>
                 <View style={styles.containerText}>
-                    <Text style={styles.texto}>Plano Mensal</Text>
+                    <Text style={styles.texto}>Planos</Text>
                 </View>
                 <View style={styles.containerSubtext}>
                     <Text style={styles.subtext}>Escolha sua forma de pagamento</Text>
@@ -67,4 +55,4 @@ const PlanoMensal = ({navigation}) => {
     )
 }
 
-export default PlanoMensal;
+export default Planos;

@@ -1,35 +1,14 @@
 import React, { useState } from "react";
 import { View, TextInput, Image, KeyboardAvoidingView, TouchableOpacity, Text, Alert, Modal, TouchableHighlight } from "react-native";
-import styles from './CadStyle.js';
+import styles from './ModificPlanoStyle.js';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useNavigation } from "@react-navigation/native";
 
 
-const CadastroForm = ({ handleSaibaMais }) => {
-  const [nome, setNome] = useState('');
-  const [email, setEmail] = useState('');
-  const [senha, setSenha] = useState('');
-  const [confirmarSenha, setConfirmarSenha] = useState('');
+const ModificarPlano = ({ navigation, handleSaibaMais }) => {
+
   const [selectedBox, setSelectedBox] = useState(null);
-  const navigation = useNavigation();
 
-  const handleCadastro = (selectedBox) => {
-
-    if (senha !== confirmarSenha) {
-      Alert.alert("Erro: As senhas não coincidem")
-      return;
-    }
-    console.log("Nome Completo: ", nome);
-    console.log("Email: ", email);
-    console.log("Senha: ", senha);
-    console.log("Confirmar Senha: ", confirmarSenha);
-
-    // Aqui você pode adicionar a lógica para enviar os dados do formulário
-    // Por enquanto, apenas limpamos os campos do formulário
-    setNome('');
-    setEmail('');
-    setSenha('');
-    setConfirmarSenha('');
+  const handleModifPlano = (selectedBox) => {
 
     if (selectedBox === 2) {
       navigation.navigate('Planos');
@@ -38,9 +17,10 @@ const CadastroForm = ({ handleSaibaMais }) => {
     } else if (selectedBox === 1) {
       navigation.navigate('Calendario');
     } else {
-      navigation.navigate('Cadastro')
+      navigation.navigate('Modificar escolha Plano')
     }
   };
+
 
   const handleBoxPress = (boxNumber) => {
     setSelectedBox(boxNumber === selectedBox ? null : boxNumber);
@@ -49,25 +29,8 @@ const CadastroForm = ({ handleSaibaMais }) => {
   return (
     <KeyboardAvoidingView style={styles.background} behavior="padding">
       <LinearGradient style={styles.background} colors={['#AC72BF', '#6B29A4', '#570D70']}>
-        <View style={styles.containerLogo}>
-          <Image style={styles.logo} resizeMode='contain' source={require('../../assets/images/logo.png')} />
-        </View>
+
         <View keyboardShouldPersistTaps="handled" style={styles.container}>
-          <Text style={styles.label}>Nome Completo</Text>
-          <TextInput style={styles.inputs} value={nome} onChangeText={setNome} placeholder="Digite seu nome completo" />
-          <Text value={nome} style={styles.erro} ></Text>
-
-          <Text style={styles.label}>E-mail</Text>
-          <TextInput style={styles.inputs} value={email} onChangeText={setEmail} placeholder="Digite seu e-mail" />
-          <Text value={email} style={styles.erro}></Text>
-
-          <Text style={styles.label}>Senha</Text>
-          <TextInput secureTextEntry={true} style={styles.inputs} value={senha} onChangeText={setSenha} placeholder="Digite sua senha" />
-          <Text value={senha} style={styles.erro}></Text>
-          
-          <Text style={styles.label}>Confirmar Senha</Text>
-          <TextInput secureTextEntry={true} style={styles.inputs} value={confirmarSenha} onChangeText={setConfirmarSenha} placeholder="Digite novamente sua senha" />
-          <Text value={confirmarSenha} style={styles.erro}></Text>
 
           <View style={styles.selectableBoxes}>
             <TouchableOpacity style={[styles.box, selectedBox === 1 && styles.selected]} onPress={() => handleBoxPress(1)}>
@@ -93,20 +56,21 @@ const CadastroForm = ({ handleSaibaMais }) => {
           </View>
 
           <View style={styles.buttons}>
-            <TouchableOpacity style={styles.btnSubmit} onPress={() => handleCadastro(selectedBox)}>
-              <Text style={styles.submitTxt}>Cadastrar</Text>
+            <TouchableOpacity style={styles.btnSubmit} onPress={() => handleModifPlano(selectedBox)}>
+              <Text style={styles.submitTxt} >Salvar</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.btnSubmit}>
               <Text style={styles.submitTxt}>Cancelar</Text>
             </TouchableOpacity>
           </View>
         </View>
+        
       </LinearGradient>
     </KeyboardAvoidingView>
   );
 }
 
-const Cadastro = ({ navigation }) => {
+const ModificPlano = ({ navigation }) => {
   const [showModal, setShowModal] = useState(false);
   const [modalContent, setModalContent] = useState(null);
 
@@ -140,7 +104,7 @@ const Cadastro = ({ navigation }) => {
 
   return (
     <View style={{ flex: 1 }}>
-      <CadastroForm navigation={navigation} handleSaibaMais={handleSaibaMais} />
+      <ModificarPlano navigation={navigation} handleSaibaMais={handleSaibaMais} />
       {modalContent && (
         <Modal visible={showModal} animationType="slide" transparent={true} onRequestClose={handleCloseModal}>
           <View style={styles.modalContainer}>
@@ -160,4 +124,4 @@ const Cadastro = ({ navigation }) => {
   );
 }
 
-export default Cadastro;
+export default ModificPlano;

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, KeyboardAvoidingView, Image, TouchableOpacity} from 'react-native';
+import { View, Text, TextInput, KeyboardAvoidingView, Image, TouchableOpacity } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { CheckBox } from 'react-native-elements';
 import styles from './CompStyle.js';
@@ -30,14 +30,6 @@ const Compromissos = ({ navigation }) => {
 
   return (
     <KeyboardAvoidingView style={styles.background} behavior="padding">
-      <View style={styles.header}>
-        <View style={styles.containerMenu}>
-          <Image style={styles.menu} resizeMode='contain' source={require('../../assets/images/menu.png')} />
-        </View>
-        <View style={styles.containerPerfil}>
-          <Image style={styles.perfil} resizeMode='contain' source={require('../../assets/images/foto_perfil.jpg')} />
-        </View>
-      </View>
 
       <View style={styles.container}>
 
@@ -52,7 +44,7 @@ const Compromissos = ({ navigation }) => {
         <Text style={styles.titleInput}>Título</Text>
         <TextInput
           style={styles.input}
-          placeholder="Título"
+          placeholder="Digite um título"
           value={titulo}
           onChangeText={(text) => setTitulo(text)}
         />
@@ -60,7 +52,7 @@ const Compromissos = ({ navigation }) => {
         <Text style={styles.titleInput}>Horário</Text>
         <TextInput
           style={styles.input}
-          placeholder="Horário"
+          placeholder="Selecione um horário"
           value={horario}
           onChangeText={(text) => setHorario(text)}
           keyboardType="numeric"
@@ -69,20 +61,23 @@ const Compromissos = ({ navigation }) => {
         <Text style={styles.titleInput}>Descrição</Text>
         <TextInput
           style={[styles.input]}
-          placeholder="Descrição"
+          placeholder="Digite uma descrição"
           value={descricao}
           onChangeText={(text) => setDescricao(text)}
           multiline
         />
 
-        <View style={styles.checkbox}>
+        <View style={styles.checkboxText}>
           <CheckBox
             checked={checked}
             onPress={handleCheckBox}
             checkedColor='white' // Define a cor do checkbox quando estiver marcado
             uncheckedColor='white' // Define a cor do checkbox quando estiver desmarcado
           />
-          <Text style={styles.impText}>Importante</Text>
+          <View style={styles.containerTexto}>
+            <Text style={styles.impText}>Importante</Text>
+          </View>
+
         </View>
 
         <View style={styles.dropdown}>
@@ -105,6 +100,18 @@ const Compromissos = ({ navigation }) => {
           </TouchableOpacity>
         </View>
 
+      </View>
+
+      <View style={styles.containerLogos}>
+        <TouchableOpacity style={styles.containerMenu} onPress={() => navigation.navigate('MenuHSI')}>
+          <Image style={styles.menu} resizeMode='contain' source={require('../../assets/images/menu.png')} />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.containerCalen} onPress={() => navigation.navigate('Calendario')}>
+          <Image style={styles.iconeCalen} resizeMode='contain' source={require('../../assets/images/iconeCalen.png')} />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.containericonePerfil} onPress={() => navigation.navigate('Perfil')}>
+          <Image style={styles.perfil} resizeMode='contain' source={require('../../assets/images/foto_perfil.jpg')} />
+        </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>
   );

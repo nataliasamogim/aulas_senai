@@ -5,26 +5,21 @@ export default styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#6B29A4'
     },
-    containerLogos: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        paddingLeft: 10, 
-        paddingRight: 10,
-        borderBottomWidth: 0.8,
-        borderBottomColor: '#fff',
-        top: 5, 
-        paddingBottom: 10
-    },
     perfil: {
-        width: 60,
-        height: 60, 
+        width: 55,
+        height: 55, 
         borderRadius: 50,
+        top: 10,
     },
     menu: {
+        width: 48,
+        height: 48, 
+        top: 12
+    },
+    iconeCalen: {
         width: 50,
         height: 50, 
-        top: 5
+        top: 12
     },
     containerImage:{
         alignItems: 'center',
@@ -51,6 +46,20 @@ export default styles = StyleSheet.create({
     submitTxt: {
         color: '#fff',
         fontSize: 20
-    }
+    },
+    containerLogos: {
+        backgroundColor: '#E0',
+        height: 83,
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingLeft: 10, 
+        paddingRight: 10,
+        borderTopWidth: 0.8,
+        borderTopColor: '#fff',
+        top: 15,
+        paddingRight: 20,
+        paddingLeft: 20
+    },
 
 });

@@ -4,30 +4,18 @@ import { CheckBox } from "react-native-elements";
 export default styles = StyleSheet.create({
     background: {
         flex: 1,
-        alignItems: 'center',
         backgroundColor: '#6B29A4',
     },
-    header: {
-        display: "flex",
-        flexDirection: 'row',
-        justifyContent: "space-around",
-        width: '150%',
-        top: 38,
-        borderBottomWidth: 1,
-        borderBottomColor: '#fff'
-    },
-    FotoPerfil: {
-        width: 60,
-        height: 60,
-        borderRadius: 35,
-        bottom: 7,
+    containerTarefas: {
+        alignItems: 'center',
+
     },
     containerData: {
         width: '90%',
         padding: 13,
         backgroundColor: '#AE80D6',
-        marginTop: 50,
-        alignItems: "center",
+        marginTop: 20,
+        alignItems: 'center',
     },
     data: {
         color: 'white',
@@ -37,16 +25,16 @@ export default styles = StyleSheet.create({
         color: 'white',
         fontSize: 19.6,
     },
-    ContainerTitulo: {
+    containerHoraTitle: {
         display: "flex",
         flexDirection: 'row',
     },
-    titulo: {
+    horario: {
         color: 'white',
         fontSize: 20,
         paddingLeft: 0
     },
-    titulo2: {
+    titulo: {
         color: 'white',
         fontSize: 20,
         paddingLeft: 0,
@@ -57,50 +45,77 @@ export default styles = StyleSheet.create({
         flexDirection: 'column',
         backgroundColor: '#AE80D6',
         width: '90%',
-        top: 30,
+        top: 25,
     },
-    componentes: {
+    componentesTarefas: {
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'space-between',   
+        justifyContent: 'space-between',
     },
     containerComp: {
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
     },
-    containerEdit: {
+    containerEditExcluir: {
         display: 'flex1',
         flexDirection: 'row',
         alignItems: 'center',
-        paddingRight: 18
+        paddingRight: 14
     },
     fotoEdit: {
         width: 30,
         height: 30,
-        marginRight: 7
+        marginRight: 4
     },
     fotoEdit2: {
-        width: 25,
-        height: 25,
+        width: 22,
+        height: 22,
     },
     descricao: {
-        display: 'flex',
-        flexDirection: "column",
-        padding: 15
+        paddingLeft: 15,
+     
     },
-    desc: {
+    textDesc: {
         color: 'white',
         fontSize: 18
     },
-    botaoMais:{
+    botaoMais: {
         color: 'white',
         fontSize: 48
     },
-    adicionar:{
+    adicionar: {
         alignItems: 'flex-end',
-        paddingRight: 10
-    }
+        paddingRight: 13
+    },
+    containerLogos: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingLeft: 10,
+        paddingRight: 10,
+        borderTopWidth: 0.8,
+        borderTopColor: '#fff',
+        top: 375,
+        paddingRight: 20,
+        paddingLeft: 20
+    },
+    perfil: {
+        width: 55,
+        height: 55,
+        borderRadius: 50,
+        top: 10,
+    },
+    menu: {
+        width: 48,
+        height: 48,
+        top: 12
+    },
+    iconeCalen: {
+        width: 50,
+        height: 50,
+        top: 12
+    },
 
 
 });

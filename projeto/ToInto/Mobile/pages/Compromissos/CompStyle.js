@@ -3,44 +3,17 @@ import { StyleSheet } from 'react-native';
 export default styles = StyleSheet.create({
     background: {
         flex: 1,
-        backgroundColor: '#773AAB',
+        backgroundColor: '#6B29A4',
         justifyContent: 'center',
     },
-
-    header: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        borderBottomWidth: 1,
-        paddingLeft: 10, 
-        paddingRight: 10,
-        borderBottomColor: '#fff',
-        paddingBottom: 10
-    },
-
-    perfil: {
-        height: 55,
-        width: 55,
-        borderRadius: 50,
-    },
-
-    menu: {
-        height: 40,
-        width: 40,
-        top: 7,
-    },
-
     container: {
         backgroundColor: '#AE80D6',
         height: 550,
         width: 350,
         borderRadius: 15,
-        marginTop: 30,
-        marginLeft: 50,
         alignItems: 'center',
-        
+        marginLeft: 50
     },
-
     containerTitle: {
         borderRadius: 15,
         backgroundColor: '#6B29A4',
@@ -83,21 +56,25 @@ export default styles = StyleSheet.create({
         height: 40,
         color: '#222',
         marginBottom: 15,
-        fontSize: 17,
+        fontSize: 15,
         borderRadius: 5,
         padding: 10,
 
     },
 
-    checkbox: {
+    checkboxText: {
         flexDirection: 'row', // alinha os itens horizontalmente
         alignItems: 'center',
-        alignSelf: 'flex-start'
+        alignSelf: 'flex-start',
+        justifyContent: 'center'
+    },
+    containerTexto: {
+        alignItems: 'center',
     },
 
     impText: {
         fontSize: 18,
-        color: '#fff'
+        color: '#fff',
     },
 
     dropdown: {
@@ -105,16 +82,13 @@ export default styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center'
     },
-
     label: {
         padding: 5,
         fontSize: 20,
         color: 'white',
-        marginRight: 10
     },
 
     lembrete: {
-        height: 5,
         width: 180,
         backgroundColor: '#6B29A4',
         color: '#fff',
@@ -131,8 +105,38 @@ export default styles = StyleSheet.create({
     },
     btnTxt: {
         color: '#fff',
-        fontSize: 19
-    }
+        fontSize: 18
+    },
+    containerLogos: {
+        backgroundColor: '#E0',
+        height: 83,
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingLeft: 10, 
+        paddingRight: 10,
+        borderTopWidth: 0.8,
+        borderTopColor: '#fff',
+        top: 52,
+        paddingRight: 20,
+        paddingLeft: 20
+    },
+    perfil: {
+        width: 55,
+        height: 55, 
+        borderRadius: 50,
+        top: 10,
+    },
+    menu: {
+        width: 48,
+        height: 48, 
+        top: 12
+    },
+    iconeCalen: {
+        width: 50,
+        height: 50, 
+        top: 12
+    },
 
 
 });

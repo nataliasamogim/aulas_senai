@@ -6,36 +6,8 @@ export default styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#6B29A4',
-        width: 450,
-    },
-    containerLogo: {
-        flex: 0.17,
-        position: 'relative',
-        
-        //backgroundColor: '#fff',
-    },
-    logo: {
-        width: 280,
-        height: 100,
-        position: 'absolute',
-        top: 15
-    },
-    container: {
-        flex: 1,
-        width: '90%',
-    },
-    inputs: {
-        backgroundColor: '#fff',
-        width: 400,
-        color: '#222',
-        marginBottom: 15,
-        fontSize: 15,
-        borderRadius: 5,
-        padding: 7,
-
-    },
-    erro: {
-        fontSize: 10,
+        width:450,
+        height:800,
     },
     btnSubmit: {
         backgroundColor: '#570D70',
@@ -57,44 +29,42 @@ export default styles = StyleSheet.create({
         color: '#fff',
         fontSize: 18,
     },
-    label: {
-        fontSize: 18,
-        color: '#fff',
-    },
     selectableBoxes: {
-        flexDirection: 'row',
+        flexDirection: 'column',
         justifyContent: 'space-between',
-        marginTop: 20,
+        top: 30,
     },
     box: {
-        width: 90,
-        height: 120,
+        width: 400,
+        height: 180,
         backgroundColor: '#AC72BF',
         borderWidth: 2,
         borderColor: 'black',
         alignItems: 'center',
         paddingTop: 6,
+        marginBottom:20,
         color: '#fff',
+        marginLeft:15,
     },
     selected: {
         backgroundColor: '#570D70',
     },
     imagemcaixa: {
-        width: 40,
-        height: 40,
+        width: 80,
+        height: 80,
     },
     boxText: {
         color: '#fff',
-        fontSize: 20,
+        fontSize: 25,
     },
     boxSubtitle: {
         color: '#fff',
-        fontSize: 12,
+        fontSize: 15,
     },
     saibaMais: {
         paddingTop: 10,
         color: '#570D70',
-        fontSize: 12,
+        fontSize: 15,
     },
     selectedText: {
         color: '#fff',
