@@ -40,7 +40,7 @@ const ToDo = ({ route, navigation }) => {
                         </View>
 
                         <View style={styles.containerEditExcluir}>
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={() => navigation.navigate('Compromissos', { selectedDate })}>
                                 <Image style={styles.fotoEdit} resizeMode='contain' source={require('../../assets/images/lapisbranco.png')} />
                             </TouchableOpacity>
                             <TouchableOpacity>
