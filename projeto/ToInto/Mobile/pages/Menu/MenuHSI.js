@@ -3,7 +3,7 @@ import { View, Text, TextInput, KeyboardAvoidingView, Image, TouchableOpacity, S
 import styles from './MenuStyle.js';
 import { CheckBox } from 'react-native-elements';
 
-const MenuHSI = () => {
+const MenuHSI = ({navigation}) => {
     const [sectionOffsets, setSectionOffsets] = useState({});
     const scrollRef = useRef(null);
 

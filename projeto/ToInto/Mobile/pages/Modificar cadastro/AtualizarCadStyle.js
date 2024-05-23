@@ -17,8 +17,6 @@ export default styles = StyleSheet.create({
         fontSize: 30,
         marginBottom: 15,
         color: '#570D70',
-        borderBottomWidth: 0.8,
-        borderBottomColor: '#570D70',
     },
     formGrupoFoto: {
         alignItems: 'center',

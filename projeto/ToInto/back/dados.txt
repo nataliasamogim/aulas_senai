@@ -89,3 +89,10 @@ E-mail: None
 Senha: None
 Confirmar senha: None
 
+
+Dados Gravados:
+Nome: Julia Dias 
+E-mail: juliadias@gmail.com
+Senha: JuliaD@1234
+Confirmar senha: JuliaD@1234
+

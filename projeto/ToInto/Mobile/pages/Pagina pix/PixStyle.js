@@ -2,13 +2,23 @@ import { StyleSheet } from "react-native";
 
 export default styles = StyleSheet.create({
     background:{
-        backgroundColor: '#AE80D6',
-        width: 450,
-        height: 800
+        flex: 1,
+        backgroundColor: '#6B29A4',
+        alignItems: 'center',
+        justifyContent: 'center',
+
     },
     containerPix:{
-        alignItems: 'center',
-        paddingTop: 140
+        alignItems: 'center'
+    },
+    textPix: {
+        fontSize: 30,
+        color: 'white'
+    },
+    textPix2: {
+        marginBottom: 10,
+        fontSize: 20,
+        color: 'white' 
     },
     Pix:{
         width: 380,

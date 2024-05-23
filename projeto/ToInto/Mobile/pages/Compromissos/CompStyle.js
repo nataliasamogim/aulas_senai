@@ -137,6 +137,20 @@ export default styles = StyleSheet.create({
         height: 50, 
         top: 12
     },
+    btnHorario: {
+        backgroundColor: '#fff',
+        width: '90%',
+        height: 40,
+        color: '#222',
+        marginBottom: 15,
+        fontSize: 15,
+        borderRadius: 5,
+        padding: 10,
+        justifyContent: 'center', // Centraliza o texto verticalmente
+    },
+    btnHorarioText: {
+        fontSize: 15,
+    },
 
 
 });

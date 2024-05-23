@@ -3,22 +3,25 @@ import { Text, View, KeyboardAvoidingView, Image, TouchableOpacity } from 'react
 import styles from './ToDoStyle.js';
 import { CheckBox } from 'react-native-elements';
 import { useState } from 'react';
+import { format, parseISO } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
 
-
-export default function ToDo({ navigation }) {
+const ToDo = ({ route, navigation }) => {
+    const selectedDate = route?.params?.selectedDate || new Date().toISOString().split('T')[0];
     const [checked, setChecked] = useState(false);
     const handleCheckBox = () => {
         setChecked(!checked);
     };
 
+    const formattedDate = format(parseISO(selectedDate), 'dd/MM', { locale: ptBR });
+    const dayOfWeek = format(parseISO(selectedDate), 'EEEE', { locale: ptBR });
+
     return (
-
         <KeyboardAvoidingView style={styles.background}>
-
             <View style={styles.containerTarefas}>
                 <View style={styles.containerData}>
-                    <Text style={styles.data}> 09/05 </Text>
-                    <Text style={styles.dia}> Quinta-Feira </Text>
+                    <Text style={styles.data}>{formattedDate}</Text>
+                    <Text style={styles.dia}>{dayOfWeek}</Text>
                 </View>
 
                 <View style={styles.content}>
@@ -51,13 +54,12 @@ export default function ToDo({ navigation }) {
                     </View>
 
                     <View style={styles.adicionar}>
-                        <TouchableOpacity onPress={() => navigation.navigate('Compromissos')}>
+                        <TouchableOpacity onPress={() => navigation.navigate('Compromissos', { selectedDate })}>
                             <Text style={styles.botaoMais}>+</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
             </View>
-
 
             <View style={styles.containerLogos}>
                 <TouchableOpacity style={styles.containerMenu} onPress={() => navigation.navigate('MenuHSI')}>
@@ -70,8 +72,8 @@ export default function ToDo({ navigation }) {
                     <Image style={styles.perfil} resizeMode='contain' source={require('../../assets/images/foto_perfil.jpg')} />
                 </TouchableOpacity>
             </View>
-        </KeyboardAvoidingView >
-
-
+        </KeyboardAvoidingView>
     );
 }
+
+export default ToDo;

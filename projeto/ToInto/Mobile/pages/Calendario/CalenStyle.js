@@ -5,6 +5,10 @@ export default styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#6B29A4'
     },
+    container: {
+        height: 565,
+        marginTop: 30,
+    },
     perfil: {
         width: 55,
         height: 55, 
@@ -14,7 +18,7 @@ export default styles = StyleSheet.create({
     menu: {
         width: 48,
         height: 48, 
-        top: 12
+        top: 14
     },
     iconeCalen: {
         width: 50,
@@ -57,9 +61,10 @@ export default styles = StyleSheet.create({
         paddingRight: 10,
         borderTopWidth: 0.8,
         borderTopColor: '#fff',
-        top: 15,
+        top: 50,
         paddingRight: 20,
-        paddingLeft: 20
+        paddingLeft: 20,
+        position: 'relative'
     },
 
 });

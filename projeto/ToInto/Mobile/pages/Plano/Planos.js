@@ -1,18 +1,28 @@
-import { View, Image, KeyboardAvoidingView, TouchableOpacity, Text, } from "react-native";
-import styles from './PlanoStyle.js';
+import React, { useState } from "react";
+import { View, Image, KeyboardAvoidingView, TouchableOpacity, Text } from "react-native";
 import { Ionicons } from '@expo/vector-icons';
-import { useEffect, useState } from 'react';
+import { useNavigation } from '@react-navigation/native'; // Importe o hook de navegação
+import styles from './PlanoStyle.js';
 
-const Planos = ({navigation}) => {
+const Planos = () => {
+    const navigation = useNavigation(); // Inicialize o hook de navegação
     const [selectedOption, setSelectedOption] = useState(null);
 
     const handleOptionSelect = (option) => {
         setSelectedOption(option);
     };
 
+    const handleContinuar = () => {
+        // Navegue para a página correspondente quando o botão "Continuar" for clicado
+        if (selectedOption === 'option1') {
+            navigation.navigate('Pix');
+        } else if (selectedOption === 'option2') {
+            navigation.navigate('Cartão de Crédito');
+        }
+    };
+
     return (
         <KeyboardAvoidingView style={styles.background}>
-
             <View style={styles.container}>
                 <View style={styles.containerText}>
                     <Text style={styles.texto}>Planos</Text>
@@ -40,7 +50,7 @@ const Planos = ({navigation}) => {
                 </View>
 
                 <View style={styles.buttonsPlano}>
-                    <TouchableOpacity style={styles.btnContinuar} onPress={() => navigation.navigate('Calendario')}>
+                    <TouchableOpacity style={styles.btnContinuar} onPress={handleContinuar}>
                         <Text style={styles.submitTxt}>Continuar</Text>
                     </TouchableOpacity>
 
@@ -50,7 +60,6 @@ const Planos = ({navigation}) => {
                 </View>
 
             </View>
-
         </KeyboardAvoidingView>
     )
 }

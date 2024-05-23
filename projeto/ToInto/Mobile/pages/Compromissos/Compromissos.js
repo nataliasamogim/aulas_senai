@@ -1,15 +1,45 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, KeyboardAvoidingView, Image, TouchableOpacity } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { CheckBox } from 'react-native-elements';
 import styles from './CompStyle.js';
+import DateTimePicker from '@react-native-community/datetimepicker';
+import { format, parseISO } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
 
-const Compromissos = ({ navigation }) => {
-  const [horario, setHorario] = useState('');
-  const [titulo, setTitulo] = useState('');
-  const [descricao, setDescricao] = useState('');
+const Compromissos = ({ route, navigation }) => {
+  const selectedDate = route?.params?.selectedDate || new Date().toISOString().split('T')[0];
+  const [horario, setHorario] = useState(new Date());
   const [lembrete, setLembrete] = useState(0);
   const [checked, setChecked] = useState(false);
+  const [newTask, setNewTask] = useState('');
+  const [description, setDescription] = useState('');
+  const [category, setCategory] = useState('');
+  const [showTimePicker, setShowTimePicker] = useState(false);
+
+  useEffect(() => {
+    if (new Date(selectedDate).toDateString() === new Date().toDateString()) {
+      setHorario(new Date());
+    }
+  }, [selectedDate]);
+
+  const addTask = () => {
+    if (newTask.trim() !== '') {
+      const newTaskObj = {
+        title: newTask,
+        description,
+        category,
+        time: horario.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        date: selectedDate
+      };
+
+      setNewTask('');
+      setDescription('');
+      setCategory('');
+      setHorario(new Date());
+      navigation.goBack();
+    }
+  };
 
   const handleSalvar = () => {
     // Lógica para salvar os compromissos
@@ -28,42 +58,51 @@ const Compromissos = ({ navigation }) => {
     { label: '24 horas', value: 1440 }
   ];
 
+  const formattedDate = format(parseISO(selectedDate), 'dd/MM', { locale: ptBR });
+  const dayOfWeek = format(parseISO(selectedDate), 'EEEE', { locale: ptBR });
+
   return (
     <KeyboardAvoidingView style={styles.background} behavior="padding">
-
       <View style={styles.container}>
-
         <View style={styles.containerData}>
-          <Text style={styles.data}>04/04</Text>
-        </View>
-
-        <View style={styles.semana}>
-          <Text style={styles.dataSemana}>Quinta-feira</Text>
+          <Text style={styles.data}>{formattedDate}</Text>
+          <Text style={styles.dataSemana}>{dayOfWeek}</Text>
         </View>
 
         <Text style={styles.titleInput}>Título</Text>
         <TextInput
           style={styles.input}
           placeholder="Digite um título"
-          value={titulo}
-          onChangeText={(text) => setTitulo(text)}
+          value={newTask}
+          onChangeText={setNewTask}
         />
 
         <Text style={styles.titleInput}>Horário</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Selecione um horário"
-          value={horario}
-          onChangeText={(text) => setHorario(text)}
-          keyboardType="numeric"
-        />
+        <TouchableOpacity onPress={() => setShowTimePicker(true)} style={styles.btnHorario}>
+          
+            <Text style={styles.btnHorarioText}>{horario.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</Text>
+          
+        </TouchableOpacity>
+        {showTimePicker && (
+          <DateTimePicker
+            value={horario}
+            mode="time"
+            display="default"
+            onChange={(event, selectedTime) => {
+              setShowTimePicker(false);
+              if (selectedTime) {
+                setHorario(selectedTime);
+              }
+            }}
+          />
+        )}
 
         <Text style={styles.titleInput}>Descrição</Text>
         <TextInput
           style={[styles.input]}
           placeholder="Digite uma descrição"
-          value={descricao}
-          onChangeText={(text) => setDescricao(text)}
+          value={description}
+          onChangeText={setDescription}
           multiline
         />
 
@@ -71,13 +110,12 @@ const Compromissos = ({ navigation }) => {
           <CheckBox
             checked={checked}
             onPress={handleCheckBox}
-            checkedColor='white' // Define a cor do checkbox quando estiver marcado
-            uncheckedColor='white' // Define a cor do checkbox quando estiver desmarcado
+            checkedColor='white'
+            uncheckedColor='white'
           />
           <View style={styles.containerTexto}>
             <Text style={styles.impText}>Importante</Text>
           </View>
-
         </View>
 
         <View style={styles.dropdown}>
@@ -88,18 +126,16 @@ const Compromissos = ({ navigation }) => {
             ))}
           </Picker>
 
-          {/* Checkbox */}
           <TouchableOpacity onPress={handleCheckBox}>
             <View style={[styles.checkbox, { backgroundColor: checked ? 'purple' : 'white' }]} />
           </TouchableOpacity>
         </View>
 
         <View style={styles.botao}>
-          <TouchableOpacity style={styles.btn} onPress={() => navigation.goBack()}>
+          <TouchableOpacity style={styles.btn} onPress={addTask}>
             <Text style={styles.btnTxt}>Criar</Text>
           </TouchableOpacity>
         </View>
-
       </View>
 
       <View style={styles.containerLogos}>

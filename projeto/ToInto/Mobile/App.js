@@ -88,9 +88,9 @@ function App() {
         <Stack.Screen name="Cartão de Crédito" component={AdicionarDadosCartao}
           options={{
             headerStyle: {
-              backgroundColor: '#6B29A4', // Cor de fundo da barra de navegação
+              backgroundColor: '#AC72BF', // Cor de fundo da barra de navegação
             },
-            headerTintColor: '#000', // Cor do texto do título
+            headerTintColor: '#fff', // Cor do texto do título
             headerTitleStyle: {
               fontWeight: 'bold', // Estilo do texto do título
             },
@@ -99,9 +99,9 @@ function App() {
         <Stack.Screen name="Modificar Cartão" component={ModificarDadosCartao}
           options={{
             headerStyle: {
-              backgroundColor: '#6B29A4', // Cor de fundo da barra de navegação
+              backgroundColor: '#AC72BF', // Cor de fundo da barra de navegação
             },
-            headerTintColor: '#000', // Cor do texto do título
+            headerTintColor: '#fff', // Cor do texto do título
             headerTitleStyle: {
               fontWeight: 'bold', // Estilo do texto do título
             },
