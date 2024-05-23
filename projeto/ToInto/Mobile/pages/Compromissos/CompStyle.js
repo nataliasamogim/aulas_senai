@@ -22,14 +22,14 @@ export default styles = StyleSheet.create({
     },
 
     containerData: {
-        backgroundColor: '#6B29A4',
-        borderRadius: 5,
         width: 160,
         marginTop:20,
         marginBottom:0,
     },
 
     data: {
+        backgroundColor: '#6B29A4',
+        borderRadius: 5,
         fontSize: 45,
         color: '#fff',
         textAlign: 'center',
