@@ -334,3 +334,17 @@ button.btn.btn-outline {
 .dropdown.btn-group{
   width: 100%;
 }
+
+/*---------Modal de confirmação do excluir conta--------*/
+.botaocancelarModal, .botaoexcluirModal{
+  background-color: #570D70 !important;
+  color: #fff;
+  width: 30px;
+  border-color: #570D70 !important;
+  width: 60px !important;
+}
+
+.modal-footer{
+  border-top: none !important;
+}
+
