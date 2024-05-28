@@ -13,32 +13,51 @@ const CadastroForm = ({ handleSaibaMais }) => {
   const [selectedBox, setSelectedBox] = useState(null);
   const navigation = useNavigation();
 
-  const handleCadastro = (selectedBox) => {
-
+  const handleCadastrar = async (selectedBox) => {
     if (senha !== confirmarSenha) {
       Alert.alert("Erro: As senhas não coincidem")
       return;
     }
-    console.log("Nome Completo: ", nome);
-    console.log("Email: ", email);
-    console.log("Senha: ", senha);
-    console.log("Confirmar Senha: ", confirmarSenha);
-
-    // Aqui você pode adicionar a lógica para enviar os dados do formulário
-    // Por enquanto, apenas limpamos os campos do formulário
-    setNome('');
-    setEmail('');
-    setSenha('');
-    setConfirmarSenha('');
-
-    if (selectedBox === 2) {
-      navigation.navigate('Planos');
-    } else if (selectedBox === 3) {
-      navigation.navigate('Planos');
-    } else if (selectedBox === 1) {
-      navigation.navigate('Calendario');
+    if (nome.trim() !== '' && email.trim() !== '' && senha.trim() !== '' && confirmarSenha.trim() !== '') {  // Verifica se ambos os campos estão preenchidos
+      const formCadastro = {
+        acao: 'salvar_cad',
+        nome: nome,
+        email: email,
+        senha: senha,
+        confirmarSenha: confirmarSenha,
+      };
+      try {
+        const response = await fetch('http://10.135.60.38:8085/receber-dados', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formCadastro)
+        });
+        if (response.ok) {
+          setNome('');
+          setEmail('');
+          setSenha('');
+          setConfirmarSenha('');
+          if (selectedBox === 2) {
+            navigation.navigate('Planos');
+          } else if (selectedBox === 3) {
+            navigation.navigate('Planos');
+          } else if (selectedBox === 1) {
+            navigation.navigate('Calendario');
+          } else {
+            navigation.navigate('Cadastro');
+          }
+          
+        } else {
+          const responseData = await response.json();
+          console.error('Erro ao receber dados do Cadastro:', responseData.mensagens);
+        }
+      } catch (error) {
+        console.error('Erro ao receber dados do Cadastro:', error);
+      }
     } else {
-      navigation.navigate('Cadastro')
+      console.error('Por favor, preencha todos os campos de cadastro');
     }
   };
 
@@ -55,19 +74,19 @@ const CadastroForm = ({ handleSaibaMais }) => {
         <View keyboardShouldPersistTaps="handled" style={styles.container}>
           <Text style={styles.label}>Nome Completo</Text>
           <TextInput style={styles.inputs} value={nome} onChangeText={setNome} placeholder="Digite seu nome completo" />
-          <Text value={nome} style={styles.erro} ></Text>
+          <Text style={styles.erro} ></Text>
 
           <Text style={styles.label}>E-mail</Text>
           <TextInput style={styles.inputs} value={email} onChangeText={setEmail} placeholder="Digite seu e-mail" />
-          <Text value={email} style={styles.erro}></Text>
+          <Text style={styles.erro}></Text>
 
           <Text style={styles.label}>Senha</Text>
           <TextInput secureTextEntry={true} style={styles.inputs} value={senha} onChangeText={setSenha} placeholder="Digite sua senha" />
-          <Text value={senha} style={styles.erro}></Text>
+          <Text style={styles.erro}></Text>
           
           <Text style={styles.label}>Confirmar Senha</Text>
           <TextInput secureTextEntry={true} style={styles.inputs} value={confirmarSenha} onChangeText={setConfirmarSenha} placeholder="Digite novamente sua senha" />
-          <Text value={confirmarSenha} style={styles.erro}></Text>
+          <Text style={styles.erro}></Text>
 
           <View style={styles.selectableBoxes}>
             <TouchableOpacity style={[styles.box, selectedBox === 1 && styles.selected]} onPress={() => handleBoxPress(1)}>
@@ -93,7 +112,7 @@ const CadastroForm = ({ handleSaibaMais }) => {
           </View>
 
           <View style={styles.buttons}>
-            <TouchableOpacity style={styles.btnSubmit} onPress={() => handleCadastro(selectedBox)}>
+            <TouchableOpacity style={styles.btnSubmit} onPress={() => handleCadastrar(selectedBox)}>
               <Text style={styles.submitTxt}>Cadastrar</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.btnSubmit}>
@@ -109,6 +128,7 @@ const CadastroForm = ({ handleSaibaMais }) => {
 const Cadastro = ({ navigation }) => {
   const [showModal, setShowModal] = useState(false);
   const [modalContent, setModalContent] = useState(null);
+  
 
   // Definição do objeto planos
   const planos = {

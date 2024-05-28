@@ -40,6 +40,14 @@ from validacoes_cartao import (
 # que é ele que está sendo preenchido.
 
 def processar_dados(dados):
+# Processamento do Mobile -----------------------------------------------
+    if dados.get('acao') == 'salvar_log':                                 
+        print('Sim')
+    else: 
+        print('Não')
+#-------------------------------------------------------------------------
+
+# Processamento do Desktop -----------------------------------------------------
     if dados.get('nome') != None:
         retorno = processar_dados_cad(dados)
     elif dados.get('nome_titular') != None:
@@ -58,6 +66,7 @@ def processar_dados(dados):
         retorno = processar_dados_log(dados)
 
     return (retorno)
+#-------------------------------------------------------------------------------
 
 
 # Nome da função: processar_dados_cad

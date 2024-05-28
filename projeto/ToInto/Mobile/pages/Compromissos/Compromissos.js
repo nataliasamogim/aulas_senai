@@ -12,9 +12,8 @@ const Compromissos = ({ route, navigation }) => {
   const [horario, setHorario] = useState(new Date());
   const [lembrete, setLembrete] = useState(0);
   const [checked, setChecked] = useState(false);
-  const [newTask, setNewTask] = useState('');
-  const [description, setDescription] = useState('');
-  const [category, setCategory] = useState('');
+  const [titulo, setTitulo] = useState('');
+  const [descricao, setDescricao] = useState('');
   const [showTimePicker, setShowTimePicker] = useState(false);
 
   useEffect(() => {
@@ -23,21 +22,38 @@ const Compromissos = ({ route, navigation }) => {
     }
   }, [selectedDate]);
 
-  const addTask = () => {
-    if (newTask.trim() !== '') {
-      const newTaskObj = {
-        title: newTask,
-        description,
-        category,
+  const addTask = async () => {
+    if (titulo.trim() !== '') {
+      const formComrpomisso = {
+        acao: 'salvar_compromisso',
+        titulo: titulo,
+        descricao: descricao,
+        lembrete: lembrete,
         time: horario.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         date: selectedDate
       };
 
-      setNewTask('');
-      setDescription('');
-      setCategory('');
-      setHorario(new Date());
-      navigation.goBack();
+      try {
+        const response = await fetch('http://10.135.60.38:8085/receber-dados', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formComrpomisso)
+        });
+        if (response.ok) {
+          setTitulo('');
+          setDescricao('');
+          setHorario(new Date());
+          setLembrete('');
+          navigation.goBack();
+        } else {
+          const responseData = await response.json();
+          console.error('Erro ao adicionar tarefa:', responseData.mensagens);
+        }
+      } catch (error) {
+        console.error('Erro ao adicionar tarefa:', error);
+      }
     }
   };
 
@@ -73,15 +89,15 @@ const Compromissos = ({ route, navigation }) => {
         <TextInput
           style={styles.input}
           placeholder="Digite um título"
-          value={newTask}
-          onChangeText={setNewTask}
+          value={titulo}
+          onChangeText={setTitulo}
         />
 
         <Text style={styles.titleInput}>Horário</Text>
         <TouchableOpacity onPress={() => setShowTimePicker(true)} style={styles.btnHorario}>
-          
-            <Text style={styles.btnHorarioText}>{horario.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</Text>
-          
+
+          <Text style={styles.btnHorarioText}>{horario.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</Text>
+
         </TouchableOpacity>
         {showTimePicker && (
           <DateTimePicker
@@ -101,8 +117,8 @@ const Compromissos = ({ route, navigation }) => {
         <TextInput
           style={[styles.input]}
           placeholder="Digite uma descrição"
-          value={description}
-          onChangeText={setDescription}
+          value={descricao}
+          onChangeText={setDescricao}
           multiline
         />
 

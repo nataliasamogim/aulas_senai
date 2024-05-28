@@ -17,7 +17,7 @@ export default function Login({ navigation }) {
         senha: senha,
       };
       try {
-        const response = await fetch('http://10.135.60.10:8085/receber-dados', {
+        const response = await fetch('http://10.135.60.38:8085/receber-dados', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
