@@ -1,4 +1,3 @@
-import { StatusBar } from 'expo-status-bar';
 import { Text, View, KeyboardAvoidingView, Image, TouchableOpacity } from 'react-native';
 import styles from './ToDoStyle.js';
 import { CheckBox } from 'react-native-elements';

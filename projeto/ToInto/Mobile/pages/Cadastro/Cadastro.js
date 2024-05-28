@@ -24,7 +24,7 @@ const CadastroForm = ({ handleSaibaMais }) => {
         nome: nome,
         email: email,
         senha: senha,
-        confirmarSenha: confirmarSenha,
+        confirmarsenha: confirmarSenha,
       };
       try {
         const response = await fetch('http://10.135.60.38:8085/receber-dados', {

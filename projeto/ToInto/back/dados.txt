@@ -96,3 +96,24 @@ E-mail: juliadias@gmail.com
 Senha: JuliaD@1234
 Confirmar senha: JuliaD@1234
 
+
+Dados Gravados:
+Nome: Malu
+E-mail: maria-luiza@gmail.br
+Senha: Malu@12345
+Confirmar senha: Malu@12345
+
+
+Dados Gravados:
+Nome: Malu
+E-mail: maria-luiza@gmail.br
+Senha: Malu@12345
+Confirmar senha: Malu@12345
+
+
+Dados Gravados:
+Nome: Valdirene
+E-mail: valdirene@gmail.com
+Senha: Valdirene@12345
+Confirmar senha: Valdirene@12345
+

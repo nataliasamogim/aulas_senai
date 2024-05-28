@@ -5,7 +5,6 @@ import Login from './pages/Login/Login';
 import Calendario from './pages/Calendario/Calendario';
 import CadastroForm from './pages/Cadastro/Cadastro';
 import Compromissos from './pages/Compromissos/Compromissos';
-import ToDo from './pages/ToDo/ToDo';
 import Planos from './pages/Plano/Planos';
 import AdicionarDadosCartao from './pages/Dados Cartao/Cartao';
 import ModificarDadosCartao from './pages/Modificar cartao/ModificCart';
@@ -14,6 +13,7 @@ import ModificPlano from './pages/Modificar plano/ModificPlano';
 import Pix from './pages/Pagina pix/Pix';
 import Perfil from './pages/Pagina perfil/Perfil';
 import AtualizarCad from './pages/Modificar cadastro/AtualizarCad';
+import ToDo from './pages/ToDo/ToDo';
 
 const Stack = createNativeStackNavigator();
 

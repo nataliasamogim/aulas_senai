@@ -27,6 +27,14 @@ os usuários.*/
 
 }
 
+.plano_free {
+    margin-left: 30px;
+}
+
+.plano_anual {
+    margin-right: 30px;
+}
+
 .planos img {
     /*tamanho das imagens e sua margem*/
     max-width: 90px;

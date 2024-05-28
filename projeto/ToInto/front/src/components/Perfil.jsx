@@ -97,8 +97,8 @@ function Perfil(props) {
                 >
                     <Link to="/modificarpag" className='btn-pagamento'>Modificar forma de pagamento</Link>
                     <Link to="/modificart" className='btn-pagamento'>Modificar dados do cartão</Link>
-                    <Link to="/modificplano" className='btn-pagamento'>Modificar plano</Link>
                 </DropdownButton>
+                <Link to="/modificplano" className='btn-sair'>Modificar plano</Link>
                 <button onClick={excluirConta} className='btn-excluir'>Excluir conta</button>
                 <Link to="/" className='btn-sair'>Sair</Link>
             </Dropdown.Menu>
