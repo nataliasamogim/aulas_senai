@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
-import { View, Image, Text, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
+import { View, Image, Text, TouchableOpacity, KeyboardAvoidingView, Modal } from 'react-native';
 import styles from './PerfilStyle.js';
 
 const Perfil = ({ navigation }) => {
   const [showOptions, setShowOptions] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
   const handleOptionSelect = (option) => {
     setShowOptions(false);
-    navigation.navigate(option);
+    if (option === 'Excluir') {
+      setModalVisible(true);
+    } else {
+      navigation.navigate(option);
+    }
   };
 
   return (
@@ -55,7 +60,7 @@ const Perfil = ({ navigation }) => {
           <Text style={styles.botao}>Modificar Plano</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.buttonExclui} title="Excluir conta" onPress={() => navigation.navigate('Login')}>
+        <TouchableOpacity style={styles.buttonExclui} title="Excluir conta" onPress={() => handleOptionSelect('Excluir')}>
           <Text style={styles.botao}>Excluir Conta</Text>
         </TouchableOpacity>
       </View>
@@ -65,7 +70,6 @@ const Perfil = ({ navigation }) => {
           <Text style={styles.botao}>Sair</Text>
         </TouchableOpacity>
       </View>
-
 
       <View style={styles.containerLogos}>
         <TouchableOpacity style={styles.containerMenu} onPress={() => navigation.navigate('MenuHSI')}>
@@ -79,9 +83,37 @@ const Perfil = ({ navigation }) => {
         </TouchableOpacity>
       </View>
 
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(false);
+        }}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>Tem certeza que deseja excluir a conta?</Text>
+            <View style={styles.buttonsModal}>
+              <TouchableOpacity
+                style={styles.closeButton}
+                onPress={() => setModalVisible(false)}
+              >
+                <Text style={styles.closeButtonText}>Fechar</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={styles.confirmButton}
+                onPress={() => setModalVisible(false)}
+              >
+                <Text style={styles.closeButtonText}>Confirmar</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
     </KeyboardAvoidingView>
   );
-
 };
 
 export default Perfil;

@@ -29,11 +29,11 @@ export default styles = StyleSheet.create({
         marginBottom: 20,
         textAlign: 'center',
     },
-    
+
     botao: {
         fontSize: 20,
         color: 'white',
-        textAlign:'center',
+        textAlign: 'center',
         alignItems: 'center',
         padding: 4
     },
@@ -51,14 +51,14 @@ export default styles = StyleSheet.create({
         padding: 5,
         borderRadius: 5,
         margin: 10,
-        backgroundColor: '#AE80D6' ,
+        backgroundColor: '#AE80D6',
         width: '90%',
         marginBottom: 15
     },
     buttonExclui: {
         padding: 5,
         borderRadius: 5,
-        backgroundColor: '#AE80D6' ,
+        backgroundColor: '#AE80D6',
         width: '90%',
         marginBottom: 15,
     },
@@ -69,20 +69,20 @@ export default styles = StyleSheet.create({
         margin: 10,
         width: '20%',
         fontSize: 17,
-        
+
     },
     containerSair: {
         alignItems: 'center'
     },
     buttonText: {
-        fontSize: 16,      
+        fontSize: 16,
     },
-    
+
     ModifPag: {
         padding: 5,
         marginBottom: 5,
         borderRadius: 5,
-        backgroundColor: '#AE80D6' ,
+        backgroundColor: '#AE80D6',
         width: '90%'
     },
 
@@ -93,13 +93,13 @@ export default styles = StyleSheet.create({
         width: '95%'
     },
 
-    optionPag:{
+    optionPag: {
         backgroundColor: '#773AAB',
         marginBottom: 8,
         padding: 7,
         borderRadius: 5
     },
-    optionCart:{
+    optionCart: {
         backgroundColor: '#773AAB',
         padding: 7,
         borderRadius: 5
@@ -108,7 +108,7 @@ export default styles = StyleSheet.create({
     option: {
         fontSize: 20,
         color: 'white',
-        textAlign:'center',
+        textAlign: 'center',
         alignItems: 'center',
     },
     containerLogos: {
@@ -116,8 +116,8 @@ export default styles = StyleSheet.create({
         height: 83,
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'space-between',      
-        paddingLeft: 10, 
+        justifyContent: 'space-between',
+        paddingLeft: 10,
         paddingRight: 10,
         borderTopWidth: 0.8,
         borderTopColor: '#fff',
@@ -127,19 +127,75 @@ export default styles = StyleSheet.create({
     },
     perfil: {
         width: 55,
-        height: 55, 
+        height: 55,
         borderRadius: 50,
         top: 8,
     },
     menu: {
         width: 48,
-        height: 48, 
+        height: 48,
         top: 12
     },
     iconeCalen: {
         width: 50,
-        height: 50, 
+        height: 50,
         top: 10
+    },
+
+    centeredView: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    },
+
+    modalView: {
+        margin: 20,
+        backgroundColor: '#6B29A4',
+        borderRadius: 20,
+        padding: 35,
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
+    },
+    modalText: {
+        marginBottom: 15,
+        textAlign: 'center',
+        color: 'white',
+        fontSize: 20
+    },
+    buttonsModal: {
+        flexDirection: 'row',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignSelf: 'center'
+    },
+    closeButton: {
+        backgroundColor: '#AE80D6',
+        borderRadius: 10,
+        padding: 10,
+        elevation: 2,
+        margin: 5,
+    },
+    confirmButton: {
+        backgroundColor: '#AE80D6',
+        borderRadius: 10,
+        padding: 10,
+        elevation: 2,
+        margin: 5,
+        marginLeft: 40,
+    },
+    closeButtonText: {
+        color: 'white',
+        fontWeight: 'bold',
+        textAlign: 'center',
+        fontSize: 15,
     },
 
 });
