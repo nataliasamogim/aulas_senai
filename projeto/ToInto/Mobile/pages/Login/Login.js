@@ -5,7 +5,43 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useEffect, useState } from 'react';
 
 
-export default function Login({navigation}) {
+export default function Login({ navigation }) {
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
+
+  const handleEntrar = async () => {
+    if (email.trim() !== '' && senha.trim() !== '') {  // Verifica se ambos os campos estão preenchidos
+      const formLogin = {
+        acao: 'salvar_log',
+        email: email,
+        senha: senha,
+      };
+      try {
+        const response = await fetch('http://10.135.60.10:8085/receber-dados', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formLogin)
+        });
+        if (response.ok) {
+          setEmail('');
+          setSenha('');
+          navigation.navigate('Calendario');
+        } else {
+          const responseData = await response.json();
+          console.error('Erro ao receber dados do Login:', responseData.mensagens);
+        }
+      } catch (error) {
+        console.error('Erro ao receber dados do Login:', error);
+      }
+    } else {
+      console.error('Por favor, preencha todos os campos de login');
+    }
+  };
+  
+  
+
   const [offset] = useState(new Animated.ValueXY({ x: 0, y: 90 }));
 
   useEffect(() => { Animated.spring(offset.y, { toValue: 0, speed: 4, bounciness: 20 }).start(); }, []);
@@ -29,23 +65,19 @@ export default function Login({navigation}) {
 
   return (
     <KeyboardAvoidingView style={styles.background}>
-      <LinearGradient
-        colors={['#AC72BF', '#6B29A4', '#570D70']}
-        style={styles.background}
-      >
-
+      <LinearGradient colors={['#AC72BF', '#6B29A4', '#570D70']} style={styles.background}>
         <View style={styles.containerLogoLogin}>
           <Image style={styles.logoLogin} resizeMode='contain' source={require('../../assets/images/logo.png')} />
         </View>
 
         <Animated.View style={[styles.container, { transform: [{ translateY: offset.y }] }]}>
-
           <Text style={styles.titleCampo}>E-mail</Text>
           <View style={styles.containerInput}>
             <TextInput style={styles.inputs}
               placeholder='Digite seu e-mail'
               autoCorrect={false}
-              onChange={() => { }} />
+              value={email}
+              onChangeText={setEmail} />
           </View>
 
           <Text style={styles.titleCampo}>Senha</Text>
@@ -54,11 +86,12 @@ export default function Login({navigation}) {
               secureTextEntry={true}
               placeholder='Digite sua senha'
               autoCorrect={false}
-              onChange={() => { }} />
+              value={senha}
+              onChangeText={setSenha} />
           </View>
 
           <View style={styles.buttons}>
-            <TouchableOpacity style={styles.btnSubmit} onPress={() => navigation.navigate('Calendario')}>
+            <TouchableOpacity style={styles.btnSubmit} onPress={handleEntrar}>
               <Text style={styles.submitTxt}>Entrar</Text>
             </TouchableOpacity>
 
