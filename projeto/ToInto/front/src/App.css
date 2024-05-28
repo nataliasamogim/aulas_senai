@@ -192,7 +192,7 @@ svg.bi.bi-justify:hover {
 }
 
 .home_calen {
-  color: #570D70;
+  color: #fff;
 }
 
 /*-----Fim menu lateral-----*/
@@ -277,7 +277,7 @@ button.btn.btn-outline {
   width: 250%;
 }
 
-.btn-sair {
+.btn-sair, .btn-excluir {
   color: white;
   display: flex;
   flex-direction: column;
@@ -286,6 +286,7 @@ button.btn.btn-outline {
   text-align: start;
   padding: 8px 15px 8px 15px;
   text-decoration: none;
+  background-color: rgb(72, 4, 120)
 }
 
 .btn-pagamento {
@@ -295,7 +296,9 @@ button.btn.btn-outline {
   padding: 8px 15px 8px 15px;
 }
 
-.page-perfil .btn-sair:hover {
+
+
+.page-perfil .btn-sair:hover ,.btn-excluir:hover {
   background-color: rgb(150, 119, 181);
 }
 
@@ -320,7 +323,7 @@ button.btn.btn-outline {
 
 #bg-vertical-dropdown-1::after {
   border-top: 0em solid;
-  margin-left: 80px;
+  margin-left: 140px;
 }
 
 /*-----Fim do Perfil-----*/

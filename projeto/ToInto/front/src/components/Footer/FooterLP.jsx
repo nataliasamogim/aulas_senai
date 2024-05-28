@@ -27,13 +27,6 @@ function FooterLP() {
 
             <footer className="foot">
 
-                <div className="opiniao">
-                    {/*div que contem o textarea para a pessoa escrever o que achou do site e o botão deenviar a resposta*/}
-                    <textarea className="textarea" placeholder="O que você achou?" name="opinião" id="opinião" cols="50"
-                        rows="1"></textarea>
-                    <button className="enviar_btn" type="submit">Enviar</button>
-                </div>
-
                 <div className="footer_element"> {/*div dentro do footer, para colocar a descrição SOBRE NÓs*/}
                     <aside className="sobre">
                         <h2 className="titulo_sobre">Sobre Nós</h2>{/* Começo da descrição sobre nós*/}

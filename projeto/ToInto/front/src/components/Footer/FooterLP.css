@@ -14,40 +14,11 @@ e também tem a intenção de facilitar o uso da aplicação para os usuários.*
 }
 /*---Fim bloco(footer)---*/
 
-/*---Início bloco (Textarea)---*/
-.opiniao{ /*Div class opinião, que contém o textararea e o botão de enviar*/
-    display: flex;
-    justify-content: center;
-}
-
-.textarea{ /*Textarea para colocar o que achou do site*/
-    border-radius: 8px;
-    margin: 10px 0 10px 0;
-    height: 30px;
-    width: 50%;
-    font-size: 13px;
-}
-
-.enviar_btn{ /*class do botão enviar do campo de opinião*/
-    width: 80px;
-    margin: 10px 0 9px 6px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 13px;
-}
-
-.enviar_btn:hover{
-    background-color: #B68EC5;
-    color: #fff;
-}
-
-/*---Fim bloco (Textarea)---*/
 
 /*Início do sobre nós e redes sociais*/
 
 .footer_element{ /*div footer element, que contém as redes sociais e sobre nós*/
     display: flex;
-    border-top: 1px solid #fff;
     justify-content: space-between;
 }
 
