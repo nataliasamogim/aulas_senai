@@ -22,40 +22,45 @@ const Compromissos = ({ route, navigation }) => {
     }
   }, [selectedDate]);
 
+  const [mensagensErro, setMensagensErro] = useState([]);
+
   const addTask = async () => {
     if (titulo.trim() !== '') {
-      const formComrpomisso = {
+      const formCompromisso = {
         acao: 'salvar_compromisso',
+        date: selectedDate,
         titulo: titulo,
-        descricao: descricao,
-        lembrete: lembrete,
         time: horario.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-        date: selectedDate
+        descricao: descricao,
+        importante: checked,
+        lembrete: lembrete, 
       };
-
       try {
-        const response = await fetch('http://10.135.60.38:8085/receber-dados', {
+        const response = await fetch('http://10.135.60.24:8085/receber-dados', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify(formComrpomisso)
+          body: JSON.stringify(formCompromisso)
         });
-        if (response.ok) {
+        const resultado = await response.json();
+        if (resultado.erro) {
+          console.error('Erro no servidor:', resultado.mensagens);
+          setMensagensErro(resultado.mensagens);
+        } else {
           setTitulo('');
           setDescricao('');
           setHorario(new Date());
           setLembrete('');
           navigation.goBack();
-        } else {
-          const responseData = await response.json();
-          console.error('Erro ao adicionar tarefa:', responseData.mensagens);
         }
       } catch (error) {
         console.error('Erro ao adicionar tarefa:', error);
       }
     }
   };
+
+  
 
   const handleSalvar = () => {
     // Lógica para salvar os compromissos
@@ -79,6 +84,16 @@ const Compromissos = ({ route, navigation }) => {
 
   return (
     <KeyboardAvoidingView style={styles.background} behavior="padding">
+      {mensagensErro.length > 0 && (
+        <View style={{ color: 'white' }}>
+          <Text>Erro ao processar os dados:</Text>
+          <View>
+            {mensagensErro.map((mensagem, index) => (
+              <Text key={index}>{mensagem.mensagem}</Text>
+            ))}
+          </View>
+        </View>
+      )}
       <View style={styles.container}>
         <View style={styles.containerData}>
           <Text style={styles.data}>{formattedDate}</Text>
