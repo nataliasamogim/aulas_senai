@@ -5,7 +5,7 @@
 # Além de armazenar as mensagens de erro recebidas do componete validacoes em uma lista chamada mesagens_erro.
 from gravar_arquivo import gravar_em_arquivo
 from gravar_arquivo import gravar_em_arquivo_log
-from gravar_banco import gravar_dados
+from gravar_banco import gravar_dados, gravar_dados_compromisso
 from recuperar_cad import verificar_informacao_log
 from recuperar_cad import recuperar_inf_formani
 from update_banco import atualizar_cad
@@ -24,6 +24,11 @@ from validacoes_cartao import (
     validar_num_cartao,
     validar_datavenc,
     validar_codseg,
+)
+
+from validar_compromissos import (
+    validar_titulo,
+    validar_descricao
 
 )
 
@@ -41,29 +46,36 @@ from validacoes_cartao import (
 
 def processar_dados(dados):
 # Processamento do Mobile -----------------------------------------------
-    if dados.get('acao') == 'salvar_log':                                 
-        print('Sim')
-    else: 
-        print('Não')
+    if dados.get('acao') == 'salvar_cad': 
+        print('Cadastro')                                
+        retorno = processar_dados_cad(dados)
+    elif dados.get('acao') == 'salvar_compromisso':
+        print('Compromissos')
+        retorno = processar_dados_compromisso(dados)
+    elif dados.get('acao') == 'salvar_log':
+        print('Compromissos')
+        retorno = processar_dados_log(dados)
+    else:
+        
 #-------------------------------------------------------------------------
 
 # Processamento do Desktop -----------------------------------------------------
-    if dados.get('nome') != None:
-        retorno = processar_dados_cad(dados)
-    elif dados.get('nome_titular') != None:
-        retorno = processar_dados_cartao(dados)
-    elif dados.get('id_cad') != None and dados.get('funcao') == 'del':
-        print('processar', dados)
-        retorno = excluir_todas_informacoes_usuario(dados.get('id_cad'))
-        #retorno ='retorno delete'
-    elif dados.get('id') != None and dados.get('funcao') != 'del':
-        print('processar select', dados)
-        retorno = recuperar_inf_formani(dados.get('id', ''))
-    elif dados.get('nome_novo') != None:
-        retorno = processar_alterar_cad(dados)
-    else:
-        print('processar', dados)
-        retorno = processar_dados_log(dados)
+        if dados.get('nome') != None:
+            retorno = processar_dados_cad(dados)
+        elif dados.get('nome_titular') != None:
+            retorno = processar_dados_cartao(dados)
+        elif dados.get('id_cad') != None and dados.get('funcao') == 'del':
+            #print('processar', dados)
+            retorno = excluir_todas_informacoes_usuario(dados.get('id_cad'))
+            #retorno ='retorno delete'
+        elif dados.get('id') != None and dados.get('funcao') != 'del':
+            #print('processar select', dados)
+            retorno = recuperar_inf_formani(dados.get('id', ''))
+        elif dados.get('nome_novo') != None:
+            retorno = processar_alterar_cad(dados)
+        else:
+            #print('processar', dados)
+            retorno = processar_dados_log(dados)
 
     return (retorno)
 #-------------------------------------------------------------------------------
@@ -88,6 +100,7 @@ def processar_dados_cad(dados):
     dados_gravacao.append(dados_processados.get('nome'))
     dados_gravacao.append(dados_processados.get('email'))
     dados_gravacao.append(dados_processados.get('senha'))
+    dados_gravacao.append(dados_processados.get('planos'))
 
     mensagens_erro = []  # Cria uma lista vazia para armazenar mensagens de erro
 
@@ -103,13 +116,13 @@ def processar_dados_cad(dados):
     # Remove mensagens de erro vazias
     mensagens_erro = [msg for msg in mensagens_erro if msg['erro']]
 
-    print(mensagens_erro)
+    #print(mensagens_erro)
 
     if mensagens_erro:
         return {'erro': True, 'mensagens': mensagens_erro}
     else:
         # Chama a função para gravar os dados em um arquivo, caso não tenha mensagens de erro
-        gravar_em_arquivo(dados_processados)
+        #gravar_em_arquivo(dados_processados)
         gravar_dados(dados_gravacao)
         print(dados_gravacao)
         # Retorna os dados processados
@@ -252,3 +265,40 @@ def excluir_todas_informacoes_usuario(cad_id):
     except Exception as e:
         # Se ocorrer algum erro durante a exclusão, retorna uma mensagem de erro
         return {'erro': True, 'mensagem': 'Erro ao excluir todas as informações do usuário: {}'.format(str(e))}
+    
+
+
+def processar_dados_compromisso(dados):
+    dados_processados = dados
+    dados_gravacao = []
+
+    dados_gravacao.append(dados_processados.get('date'))
+    dados_gravacao.append(dados_processados.get('titulo'))
+    dados_gravacao.append(dados_processados.get('time'))
+    dados_gravacao.append(dados_processados.get('descricao'))
+    dados_gravacao.append(dados_processados.get('lembrete'))
+    dados_gravacao.append(dados_processados.get('importante'))
+
+    mensagens_erro = []  # Cria uma lista vazia para armazenar mensagens de erro
+
+    # Início do bloco (mensagens de erro)
+    # Os dados recebidos dos inputs serão validados pela função correspondente e caso haja erro será armazenado na variável mensagens_erro
+    mensagens_erro.append(validar_titulo(dados.get('titulo', '')))
+    mensagens_erro.append(validar_descricao(dados.get('descricao', '')))
+    # Fim do bloco (mensagens de erro)
+
+    # Remove mensagens de erro vazias
+    mensagens_erro = [msg for msg in mensagens_erro if msg['erro']]
+
+    print(mensagens_erro)
+
+    if mensagens_erro:
+        print()
+        return {'erro': True, 'mensagens': mensagens_erro}
+    else:
+        # Chama a função para gravar os dados em um arquivo, caso não tenha mensagens de erro
+        #gravar_em_arquivo(dados_processados)
+        gravar_dados_compromisso(dados_gravacao)
+        print(dados_gravacao)
+        # Retorna os dados processados
+        return {'erro': False, 'mensagem': 'Dados Processados com Sucesso!'}
