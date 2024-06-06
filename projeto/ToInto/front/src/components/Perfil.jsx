@@ -15,8 +15,9 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
-
 import React, { useState, useEffect } from 'react';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 import '../App.css'
 
 {/*Nome função: Perfil*/ }
@@ -28,6 +29,7 @@ function Perfil(props) {
     const navigate = useNavigate();
     const [nomeUsuario, setNomeUsuario] = useState('');
     const [Email, setEmail] = useState('');
+    const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
         const storedNome = localStorage.getItem('nome_usuario');
@@ -68,42 +70,61 @@ function Perfil(props) {
                 console.error('Erro ao excluir conta:', error);
             });
 
-            // Dados foram processados com sucesso
-            localStorage.setItem('ID', '' );
-            localStorage.setItem('nome_usuario', '' );
-            localStorage.setItem('email', '' );
-            //onLogin(resultado.username); // Chama a função onLogin com o nome de usuário retornado
-            //Navega para a tela de calendario
-            navigate('/')
+        // Dados foram processados com sucesso
+        localStorage.setItem('ID', '');
+        localStorage.setItem('nome_usuario', '');
+        localStorage.setItem('email', '');
+        //onLogin(resultado.username); // Chama a função onLogin com o nome de usuário retornado
+        //Navega para a tela de calendario
+        navigate('/')
     };
 
     return (
-        <Dropdown>
-            <Dropdown.Toggle className='perfil' variant='outline' id="dropdown-basic">
-                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" className="bi bi-person-circle" viewBox="0 0 16 16" color="white">
-                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-                    <path fillRule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
-                </svg>
-            </Dropdown.Toggle>
+        <>
+            <Dropdown>
+                <Dropdown.Toggle className='perfil' variant='outline' id="dropdown-basic">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" className="bi bi-person-circle" viewBox="0 0 16 16" color="white">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                        <path fillRule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                    </svg>
+                </Dropdown.Toggle>
 
-            <Dropdown.Menu className='page-perfil'>
-                <Dropdown.ItemText className='nome-perfil'>{nomeUsuario}</Dropdown.ItemText>
-                <Dropdown.ItemText className='email-perfil'>{Email}</Dropdown.ItemText>
-                <Link to="/modificar" className='btn-sair'>Modificar cadastro</Link>
-                <DropdownButton
-                    as={ButtonGroup}
-                    title="Modificar pagamento"
-                    id="bg-vertical-dropdown-1"
-                >
-                    <Link to="/modificarpag" className='btn-pagamento'>Modificar forma de pagamento</Link>
-                    <Link to="/modificart" className='btn-pagamento'>Modificar dados do cartão</Link>
-                </DropdownButton>
-                <Link to="/modificplano" className='btn-sair'>Modificar plano</Link>
-                <button onClick={excluirConta} className='btn-excluir'>Excluir conta</button>
-                <Link to="/" className='btn-sair'>Sair</Link>
-            </Dropdown.Menu>
-        </Dropdown>
-    );
-};
+                <Dropdown.Menu className='page-perfil'>
+                    <Dropdown.ItemText className='nome-perfil'>{nomeUsuario}</Dropdown.ItemText>
+                    <Dropdown.ItemText className='email-perfil'>{Email}</Dropdown.ItemText>
+                    <Link to="/modificar" className='btn-sair'>Modificar cadastro</Link>
+                    <DropdownButton
+                        as={ButtonGroup}
+                        title="Modificar pagamento"
+                        id="bg-vertical-dropdown-1"
+                    >
+                        <Link to="/modificarpag" className='btn-pagamento'>Modificar forma de pagamento</Link>
+                        <Link to="/modificart" className='btn-pagamento'>Modificar dados do cartão</Link>
+                    </DropdownButton>
+                    <button onClick={() => setShowModal(true)} className='btn-excluir'>Excluir conta</button>
+                    <Link to="/" className='btn-sair'>Sair</Link>
+                </Dropdown.Menu>
+            </Dropdown>
+
+
+            <Modal show={showModal} onHide={() => setShowModal(false)}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Excluir conta</Modal.Title>
+                </Modal.Header>
+            <Modal.Body>Você realmente deseja excluir a conta?</Modal.Body>
+                <Modal.Footer className='botaoexcluir'>
+                    <Button className='botaocancelarModal' onClick={() => setShowModal(false)}>
+                        Cancelar
+                    </Button>
+                    <Button className='botaoexcluirModal' onClick={excluirConta}>
+                        Excluir
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+        </>
+);
+
+}
 
 export default Perfil;
