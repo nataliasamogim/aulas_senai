@@ -9,55 +9,59 @@ const CadastroForm = ({ handleSaibaMais }) => {
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
-  const [confirmarSenha, setConfirmarSenha] = useState('');
+  const [confirmsenha, setConfirmSenha] = useState('');
   const [selectedBox, setSelectedBox] = useState(null);
   const navigation = useNavigation();
 
+  const [mensagensErro, setMensagensErro] = useState([]);
+
   const handleCadastrar = async (selectedBox) => {
-    if (senha !== confirmarSenha) {
-      Alert.alert("Erro: As senhas não coincidem")
-      return;
-    }
-    if (nome.trim() !== '' && email.trim() !== '' && senha.trim() !== '' && confirmarSenha.trim() !== '') {  // Verifica se ambos os campos estão preenchidos
+    if (nome.trim() !== '') {  // Verifica se ambos os campos estão preenchidos
       const formCadastro = {
         acao: 'salvar_cad',
         nome: nome,
         email: email,
         senha: senha,
-        confirmarsenha: confirmarSenha,
+        confirmsenha: confirmsenha,
+        planos: selectedBox
       };
+
       try {
-        const response = await fetch('http://10.135.60.38:8085/receber-dados', {
+        const response = await fetch('http://10.135.60.24:8085/receber-dados', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify(formCadastro)
         });
-        if (response.ok) {
+        const resultado = await response.json();
+
+        if (resultado.erro) {
+
+          // Exibe mensagens de erro no console.log ou em algum local visível
+          console.error('Erro no servidor:', resultado.mensagens);
+
+          // Atualiza o estado com as mensagens de erro para exibição no formulário
+          setMensagensErro(resultado.mensagens);
+
+        } else {
           setNome('');
           setEmail('');
           setSenha('');
-          setConfirmarSenha('');
+          setConfirmSenha('');
           if (selectedBox === 2) {
             navigation.navigate('Planos');
           } else if (selectedBox === 3) {
             navigation.navigate('Planos');
           } else if (selectedBox === 1) {
-            navigation.navigate('Calendario');
+            navigation.navigate('Login');
           } else {
             navigation.navigate('Cadastro');
           }
-          
-        } else {
-          const responseData = await response.json();
-          console.error('Erro ao receber dados do Cadastro:', responseData.mensagens);
         }
       } catch (error) {
         console.error('Erro ao receber dados do Cadastro:', error);
       }
-    } else {
-      console.error('Por favor, preencha todos os campos de cadastro');
     }
   };
 
@@ -67,6 +71,18 @@ const CadastroForm = ({ handleSaibaMais }) => {
 
   return (
     <KeyboardAvoidingView style={styles.background} behavior="padding">
+
+      {mensagensErro.length > 0 && (
+        <View style={{ color: 'white' }}>
+          <Text>Erro ao processar os dados:</Text>
+          <View>
+            {mensagensErro.map((mensagem, index) => (
+              <Text key={index}>{mensagem.mensagem}</Text>
+            ))}
+          </View>
+        </View>
+      )}
+
       <LinearGradient style={styles.background} colors={['#AC72BF', '#6B29A4', '#570D70']}>
         <View style={styles.containerLogo}>
           <Image style={styles.logo} resizeMode='contain' source={require('../../assets/images/logo.png')} />
@@ -74,19 +90,15 @@ const CadastroForm = ({ handleSaibaMais }) => {
         <View keyboardShouldPersistTaps="handled" style={styles.container}>
           <Text style={styles.label}>Nome Completo</Text>
           <TextInput style={styles.inputs} value={nome} onChangeText={setNome} placeholder="Digite seu nome completo" />
-          <Text style={styles.erro} ></Text>
 
           <Text style={styles.label}>E-mail</Text>
           <TextInput style={styles.inputs} value={email} onChangeText={setEmail} placeholder="Digite seu e-mail" />
-          <Text style={styles.erro}></Text>
 
           <Text style={styles.label}>Senha</Text>
           <TextInput secureTextEntry={true} style={styles.inputs} value={senha} onChangeText={setSenha} placeholder="Digite sua senha" />
-          <Text style={styles.erro}></Text>
-          
+
           <Text style={styles.label}>Confirmar Senha</Text>
-          <TextInput secureTextEntry={true} style={styles.inputs} value={confirmarSenha} onChangeText={setConfirmarSenha} placeholder="Digite novamente sua senha" />
-          <Text style={styles.erro}></Text>
+          <TextInput secureTextEntry={true} style={styles.inputs} value={confirmsenha} onChangeText={setConfirmSenha} placeholder="Digite novamente sua senha" />
 
           <View style={styles.selectableBoxes}>
             <TouchableOpacity style={[styles.box, selectedBox === 1 && styles.selected]} onPress={() => handleBoxPress(1)}>
@@ -111,6 +123,13 @@ const CadastroForm = ({ handleSaibaMais }) => {
             </TouchableOpacity>
           </View>
 
+          <View style={styles.containerConta}>
+            <Text style={styles.titleNoCampo}>Já possui uma conta?</Text>
+            <TouchableOpacity style={styles.btnRegistrar} onPress={() => navigation.navigate('Login')}>
+              <Text style={styles.Txtentrar}>Entrar</Text>
+            </TouchableOpacity>
+          </View>
+
           <View style={styles.buttons}>
             <TouchableOpacity style={styles.btnSubmit} onPress={() => handleCadastrar(selectedBox)}>
               <Text style={styles.submitTxt}>Cadastrar</Text>
@@ -128,7 +147,7 @@ const CadastroForm = ({ handleSaibaMais }) => {
 const Cadastro = ({ navigation }) => {
   const [showModal, setShowModal] = useState(false);
   const [modalContent, setModalContent] = useState(null);
-  
+
 
   // Definição do objeto planos
   const planos = {

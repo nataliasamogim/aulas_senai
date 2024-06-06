@@ -34,9 +34,7 @@ export default styles = StyleSheet.create({
         padding: 7,
 
     },
-    erro: {
-        fontSize: 10,
-    },
+
     btnSubmit: {
         backgroundColor: '#570D70',
         justifyContent: 'center',
@@ -133,11 +131,26 @@ export default styles = StyleSheet.create({
         textAlign: 'center',
         color: '#fff',
     },
+    containerConta: {
+        alignItems: 'center',
+        marginTop: 20,
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center'
+    },
+    titleNoCampo:{
+        color: '#fff', 
+        fontSize: 16,
+        marginRight: 5
+    },
+    Txtentrar: {
+        color: '#fff',
+        fontSize: 18,
+    },
     closeButton: {
         backgroundColor: '#570D70',
         paddingVertical: 10,
         borderRadius: 15,
-        marginTop: 0,
         width: 150,
     },
     closeButtonText: {
