@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Compromissos from './pages/Compromissos/Compromissos';
 import Login from './pages/Login/Login';
 import Calendario from './pages/Calendario/Calendario';
 import CadastroForm from './pages/Cadastro/Cadastro';
-import Compromissos from './pages/Compromissos/Compromissos';
 import Planos from './pages/Plano/Planos';
 import AdicionarDadosCartao from './pages/Dados Cartao/Cartao';
 import ModificarDadosCartao from './pages/Modificar cartao/ModificCart';
@@ -21,6 +21,17 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen name="Cadastro" component={CadastroForm}
+          options={{
+            headerStyle: {
+              backgroundColor: '#AC72BF', // Cor de fundo da barra de navegação
+            },
+            headerTintColor: '#fff', // Cor do texto do título
+            headerTitleStyle: {
+              fontWeight: 'bold', // Estilo do texto do título
+            },
+          }} />
+
         <Stack.Screen name="Login" component={Login}
           options={{
             headerStyle: {
@@ -31,20 +42,11 @@ function App() {
               fontWeight: 'bold', // Estilo do texto do título
             },
           }} />
+
         <Stack.Screen name="Calendario" component={Calendario}
           options={{
             headerStyle: {
               backgroundColor: '#6B29A4', // Cor de fundo da barra de navegação
-            },
-            headerTintColor: '#fff', // Cor do texto do título
-            headerTitleStyle: {
-              fontWeight: 'bold', // Estilo do texto do título
-            },
-          }} />
-        <Stack.Screen name="Cadastro" component={CadastroForm}
-          options={{
-            headerStyle: {
-              backgroundColor: '#AC72BF', // Cor de fundo da barra de navegação
             },
             headerTintColor: '#fff', // Cor do texto do título
             headerTitleStyle: {
