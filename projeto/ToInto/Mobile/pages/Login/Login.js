@@ -8,15 +8,14 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export default function Login({ navigation }) {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
-
   const [mensagensErro, setMensagensErro] = useState([]);
 
   const handleEntrar = async () => {
-    if (email.trim() !== '' && senha.trim() !== '') { // Verifica se ambos os campos estão preenchidos
+    if (email.trim() !== '' && senha.trim() !== '') {
       const formLogin = {
         acao: 'salvar_log',
-        email: email,
-        senha: senha,
+        email_log: email,
+        senha_log: senha,
       };
       try {
         const response = await fetch('http://10.135.60.24:8085/receber-dados', {
@@ -26,26 +25,39 @@ export default function Login({ navigation }) {
           },
           body: JSON.stringify(formLogin)
         });
+
+        if (!response.ok) {
+          throw new Error('Erro na rede');
+        }
+
         const resultado = await response.json();
 
         if (resultado.erro) {
-          setMensagensErro(resultado.mensagens);
-          console.log('Dados do Login:', resultado.mensagens);
-
+          if (resultado.mensagens && resultado.mensagens.mensagem) {
+            setMensagensErro([resultado.mensagens.mensagem]); // Define a mensagem de erro do backend
+            console.error('Erro:', resultado.mensagens.mensagem);
+          } else if (resultado.mensagens) {
+            setMensagensErro(resultado.mensagens); // Define as mensagens de erro se forem múltiplas
+            console.error('Erro 2:', resultado.mensagens);
+          } else {
+            setMensagensErro(['Erro desconhecido']); // Mensagem de erro genérica
+          }
         } else {
-          console.error('Erro ao receber dados do Login:', resultado.mensagens);
-          await AsyncStorage.setItem('ID', resultado.mensagem[0]); // Salva o ID no AsyncStorage
+          console.log('Dados do Login:', resultado.mensagem);
+          await AsyncStorage.setItem('ID', JSON.stringify(resultado.mensagem[0])); // Salva o ID no AsyncStorage
           await AsyncStorage.setItem('nome_usuario', resultado.mensagem[1]);
           await AsyncStorage.setItem('email', resultado.mensagem[2]);
           setEmail('');
           setSenha('');
+          setMensagensErro([]); // Limpa as mensagens de erro ao fazer login com sucesso
           navigation.navigate('Calendario');
         }
       } catch (error) {
         console.error('Erro ao receber dados do Login:', error);
+        setMensagensErro(['Erro ao conectar com o servidor. Por favor, tente novamente.']); // Define uma mensagem de erro de conexão
       }
     } else {
-      console.error('Por favor, preencha todos os campos de login');
+      setMensagensErro(['Por favor, preencha todos os campos.']); // Mensagem de erro se os campos não estiverem preenchidos
     }
   };
 
@@ -78,15 +90,19 @@ export default function Login({ navigation }) {
   };
 
   return (
+
+
+
     <KeyboardAvoidingView style={styles.background}>
       {mensagensErro.length > 0 && (
-        <View style={{ color: 'white' }}>
-          <Text>Erro ao processar os dados:</Text>
+        <View style={{ backgroundColor: '#AC72BF', padding: 10, borderRadius: 5, margin: 10 }}>
+          <Text style={{ color: 'black', fontWeight: 'bold' }}>Erro ao processar os dados:</Text>
           <View>
             {mensagensErro.map((mensagem, index) => (
-              <Text key={index}>{mensagem.mensagem}</Text>
+              <Text key={index} style={{ color: 'black' }}>{mensagem.erro ? mensagem.mensagem : mensagem}</Text>
             ))}
           </View>
+
         </View>
       )}
       <LinearGradient colors={['#AC72BF', '#6B29A4', '#570D70']} style={styles.background}>
@@ -131,7 +147,6 @@ export default function Login({ navigation }) {
               <Image source={require('../../assets/images/whatsapp.png')} style={styles.socialIcon} />
             </TouchableOpacity>
           </View>
-
         </Animated.View>
         <StatusBar style="auto" />
       </LinearGradient>
