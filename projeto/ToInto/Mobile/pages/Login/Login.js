@@ -3,14 +3,16 @@ import { Text, View, KeyboardAvoidingView, Image, TextInput, TouchableOpacity, A
 import styles from './LogStyle.js';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useEffect, useState } from 'react';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Login({ navigation }) {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
 
+  const [mensagensErro, setMensagensErro] = useState([]);
+
   const handleEntrar = async () => {
-    if (email.trim() !== '' && senha.trim() !== '') {  // Verifica se ambos os campos estão preenchidos
+    if (email.trim() !== '' && senha.trim() !== '') { // Verifica se ambos os campos estão preenchidos
       const formLogin = {
         acao: 'salvar_log',
         email: email,
@@ -24,13 +26,20 @@ export default function Login({ navigation }) {
           },
           body: JSON.stringify(formLogin)
         });
-        if (response.ok) {
+        const resultado = await response.json();
+
+        if (resultado.erro) {
+          setMensagensErro(resultado.mensagens);
+          console.log('Dados do Login:', resultado.mensagens);
+
+        } else {
+          console.error('Erro ao receber dados do Login:', resultado.mensagens);
+          await AsyncStorage.setItem('ID', resultado.mensagem[0]); // Salva o ID no AsyncStorage
+          await AsyncStorage.setItem('nome_usuario', resultado.mensagem[1]);
+          await AsyncStorage.setItem('email', resultado.mensagem[2]);
           setEmail('');
           setSenha('');
           navigation.navigate('Calendario');
-        } else {
-          const responseData = await response.json();
-          console.error('Erro ao receber dados do Login:', responseData.mensagens);
         }
       } catch (error) {
         console.error('Erro ao receber dados do Login:', error);
@@ -39,12 +48,17 @@ export default function Login({ navigation }) {
       console.error('Por favor, preencha todos os campos de login');
     }
   };
-  
-  
 
   const [offset] = useState(new Animated.ValueXY({ x: 0, y: 90 }));
 
-  useEffect(() => { Animated.spring(offset.y, { toValue: 0, speed: 4, bounciness: 20 }).start(); }, []);
+  useEffect(() => {
+    Animated.spring(offset.y, {
+      toValue: 0,
+      speed: 4,
+      bounciness: 20
+    }).start();
+  }, []);
+
   const handleFacebookPress = () => {
     const facebookURL = 'https://www.facebook.com/?locale=pt_BR'
     Linking.openURL(facebookURL)
@@ -54,7 +68,7 @@ export default function Login({ navigation }) {
   const handleInstagramPress = () => {
     const instagramURL = 'https://www.instagram.com/'
     Linking.openURL(instagramURL)
-      .catch(err => console.error('Erro ao abrir o link Inatagram: ', err));
+      .catch(err => console.error('Erro ao abrir o link Instagram: ', err));
   };
 
   const handleWhatsPress = () => {
@@ -65,6 +79,16 @@ export default function Login({ navigation }) {
 
   return (
     <KeyboardAvoidingView style={styles.background}>
+      {mensagensErro.length > 0 && (
+        <View style={{ color: 'white' }}>
+          <Text>Erro ao processar os dados:</Text>
+          <View>
+            {mensagensErro.map((mensagem, index) => (
+              <Text key={index}>{mensagem.mensagem}</Text>
+            ))}
+          </View>
+        </View>
+      )}
       <LinearGradient colors={['#AC72BF', '#6B29A4', '#570D70']} style={styles.background}>
         <View style={styles.containerLogoLogin}>
           <Image style={styles.logoLogin} resizeMode='contain' source={require('../../assets/images/logo.png')} />
@@ -94,13 +118,7 @@ export default function Login({ navigation }) {
             <TouchableOpacity style={styles.btnSubmit} onPress={handleEntrar}>
               <Text style={styles.submitTxt}>Entrar</Text>
             </TouchableOpacity>
-
-            <Text style={styles.titleNoCampo}>Não possui uma conta?</Text>
-            <TouchableOpacity style={styles.btnRegistrar} onPress={() => navigation.navigate('Cadastro')}>
-              <Text style={styles.submitTxt}>Criar conta</Text>
-            </TouchableOpacity>
           </View>
-
 
           <View style={styles.socialContainer}>
             <TouchableOpacity onPress={handleFacebookPress}>
@@ -120,4 +138,3 @@ export default function Login({ navigation }) {
     </KeyboardAvoidingView>
   );
 }
-
