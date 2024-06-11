@@ -1,14 +1,87 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, TextInput, Image, KeyboardAvoidingView, TouchableOpacity, Text, Alert } from "react-native";
 import styles from './AtualizarCadStyle.js';
 import { LinearGradient } from 'expo-linear-gradient';
 import * as ImagePicker from 'expo-image-picker';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-
-const AtualizarCad = () => {
+const AtualizarCad = ({ navigation }) => {
     const PlaceholderImage = require('../../assets/images/foto_perfil.jpg');
     const [selectedImage, setSelectedImage] = useState(null);
-    const [refreshImage, setRefreshImage] = useState(false);
+    const [nome, setNome] = useState('');
+    const [email, setEmail] = useState('');
+    const [senha, setSenha] = useState('');
+    const [mensagensErro, setMensagensErro] = useState([]);
+    
+    useEffect(() => {
+        // Função assíncrona para buscar dados do usuário
+        const showDados = async () => {
+            try {
+                // Faz uma requisição para receber os dados do usuário do servidor
+                const resposta = await fetch('http://10.135.60.20:8085/receber-dados', {
+                    method: 'POST', // Método da requisição
+                    headers: {
+                        'Content-Type': 'application/json', // Tipo de conteúdo da requisição
+                    },
+                    body: JSON.stringify({ id: await AsyncStorage.getItem("ID") }), // Corpo da requisição contendo os dados do formulário
+                });
+
+                // Verifica se a requisição foi bem-sucedida
+                if (!resposta.ok) {
+                    throw new Error('Erro ao obter dados do usuário'); // Lança um erro se a requisição falhar
+                }
+
+                // Extrai os dados da resposta e os converte para JSON
+                const userData = await resposta.json();
+                //console.log('Dados do usuário:', userData);
+
+                // Atualiza o estado do formulário com os dados do usuário recebidos
+                setNome(userData.mensagem[1]); // Define o novo valor para 'nome'
+                setEmail(userData.mensagem[2]); // Define o novo valor para 'email'
+            } catch (error) {
+                console.error('Erro ao buscar dados do usuário:', error); // Captura e exibe qualquer erro ocorrido durante a busca dos dados do usuário
+            }
+        };
+
+        showDados(); // Chama a função para buscar os dados do usuário quando o componente é montado
+    }, []); // Array de dependências vazio, indica que este efeito deve ser executado apenas uma vez
+
+    const handleAtualizar = async () => {
+        try {
+            // Faz uma requisição para enviar os dados do formulário para o servidor
+            const resposta = await fetch('http://10.135.60.20:8085/receber-dados', {
+                method: 'POST', // Método da requisição
+                headers: {
+                    'Content-Type': 'application/json', // Tipo de conteúdo da requisição
+                },
+                body: JSON.stringify({
+                    acao: 'atualizar_cad',
+                    id: await AsyncStorage.getItem('ID'),
+                    nome_novo: nome,
+                    email_novo: email,
+                    senha_nova: senha,
+                    foto: selectedImage,
+                }), // Corpo da requisição contendo os dados do formulário em formato JSON
+            });
+            // Extrai o resultado da resposta e o converte para JSON
+            const resultado = await resposta.json();
+            console.log('teste retorno', resultado);
+
+            // Verifica se ocorreu algum erro no servidor
+            if (resultado.erro) {
+                // Exibe mensagens de erro no console ou em algum local visível
+                console.error('Erro no servidor:', resultado.mensagens);
+
+                // Atualiza o estado com as mensagens de erro para exibição no formulário
+                setMensagensErro(resultado.mensagens);
+            } else {
+                console.log('Dados atualizados com sucesso!', resultado);
+                navigation.goBack();
+            }
+        } catch (error) {
+            console.error('Erro ao enviar dados:', error); // Captura e exibe qualquer erro ocorrido durante o envio dos dados do formulário
+        }
+    };
 
     const pickImageAsync = async () => {
         const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -27,7 +100,6 @@ const AtualizarCad = () => {
         console.log(result.assets[0].uri);
         if (!result.cancelled) {
             setSelectedImage(result.assets[0].uri); // Definir a imagem selecionada
-            setRefreshImage(prevState => !prevState); // Forçar a atualização da imagem
         } else {
             Alert.alert("Você não selecionou nenhuma imagem.");
         }
@@ -35,27 +107,37 @@ const AtualizarCad = () => {
 
     return (
         <KeyboardAvoidingView style={styles.background} behavior="padding">
+            {mensagensErro.length > 0 && (
+                <View style={{ color: 'white' }}>
+                    <Text>Erro ao processar os dados:</Text>
+                    <View>
+                        {mensagensErro.map((mensagem, index) => (
+                            <Text key={index}>{mensagem.mensagem}</Text>
+                        ))}
+                    </View>
+                </View>
+            )}
             <LinearGradient style={styles.background} colors={['#AC72BF', '#6B29A4', '#570D70']}>
                 <View style={styles.containercad}>
                     <Text style={styles.tittle}>Modificar Cadastro</Text>
                     <View style={styles.containerfoto}>
                         <TouchableOpacity style={styles.formGrupoFoto} onPress={pickImageAsync}>
-                            <Image key={refreshImage} source={selectedImage ? { uri: selectedImage } : PlaceholderImage} style={styles.FotoPerfil} />
+                            <Image source={selectedImage ? { uri: selectedImage } : PlaceholderImage} style={styles.FotoPerfil} />
                         </TouchableOpacity>
                     </View>
                 </View>
                 <View keyboardShouldPersistTaps="handled" style={styles.container}>
                     <Text style={styles.label}>Nome Completo</Text>
-                    <TextInput style={styles.inputs} placeholder="Digite seu nome completo" />
+                    <TextInput style={styles.inputs} value={nome} onChangeText={setNome} placeholder="Digite seu nome completo" />
                     <Text style={styles.label}>E-mail</Text>
-                    <TextInput style={styles.inputs} placeholder="Digite seu e-mail" />
+                    <TextInput style={styles.inputs} value={email} onChangeText={setEmail} placeholder="Digite seu e-mail" />
                     <Text style={styles.label}>Senha</Text>
-                    <TextInput secureTextEntry={true} style={styles.inputs} placeholder="Digite sua senha" />
+                    <TextInput secureTextEntry={true} style={styles.inputs} value={senha} onChangeText={setSenha} placeholder="Digite sua senha" />
                     <View style={styles.buttons}>
-                        <TouchableOpacity style={styles.btnSubmit}>
+                        <TouchableOpacity style={styles.btnSubmit} onPress={handleAtualizar}>
                             <Text style={styles.submitTxt}>Salvar</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.btnSubmit}>
+                        <TouchableOpacity style={styles.btnSubmit} onPress={() => navigation.goBack()}>
                             <Text style={styles.submitTxt}>Cancelar</Text>
                         </TouchableOpacity>
                     </View>
