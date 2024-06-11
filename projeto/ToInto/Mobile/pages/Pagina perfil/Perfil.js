@@ -1,10 +1,27 @@
-import React, { useState } from 'react';
 import { View, Image, Text, TouchableOpacity, KeyboardAvoidingView, Modal } from 'react-native';
 import styles from './PerfilStyle.js';
+import React, { useState, useEffect } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Perfil = ({ navigation }) => {
   const [showOptions, setShowOptions] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+  const [nomeUsuario, setNomeUsuario] = useState('');
+  const [Email, setEmail] = useState('');
+
+  useEffect(() => {
+      const storedNome = AsyncStorage.getItem('nome_usuario');
+      if (storedNome) {
+          setNomeUsuario(storedNome);
+      }
+  }, []); //Adicione o array de dependências vazio aqui
+
+  useEffect(() => {
+      const storedEmail = AsyncStorage.getItem('email');
+      if (storedEmail) {
+          setEmail(storedEmail);
+      }
+  }, []); //Adicione o array de dependências vazio aqui
 
   const handleOptionSelect = (option) => {
     setShowOptions(false);
@@ -20,8 +37,8 @@ const Perfil = ({ navigation }) => {
 
       <View style={styles.containerPerfil}>
         <Image style={styles.foto} resizeMode='contain' source={require('../../assets/images/foto_perfil.jpg')} />
-        <Text style={styles.text}>Nome</Text>
-        <Text style={styles.text2}>tointo@gmail.com</Text>
+        <Text style={styles.text}>{nomeUsuario}</Text>
+        <Text style={styles.text2}>{Email}</Text>
       </View>
 
       <View style={styles.containerButtons}>
