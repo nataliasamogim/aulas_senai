@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 27/02/2024 às 13:37
+-- Tempo de geração: 11/06/2024 às 14:21
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -40,11 +40,45 @@ CREATE TABLE `cadastro` (
 --
 
 INSERT INTO `cadastro` (`ID_CAD`, `NOME_USUARIO`, `EMAIL`, `SENHA`, `FOTO_PERFIL`) VALUES
-(1, 'Maria Luiza', 'maria-poli@gmail.com', 'ML12345!', NULL),
-(2, 'Natália', 'natalia-samogim@gmail.com', 'NA82060!', NULL),
+(1, '0', 'maria-poli@gmail.com', 'ML12345!', NULL),
+(2, 'Natalia', 'natalia@gmail.com', 'Natalia@12345', NULL),
 (3, 'Laura', 'laura-figueiredo@gmail.com', 'LAURALINDA', NULL),
 (4, 'Júlia Dias', 'julia-dias@gmail.com', 'JU181904', NULL),
-(5, 'Marília', 'marília@gmail.com', 'Marilia@1234', NULL);
+(5, 'Marília', 'marília@gmail.com', 'Marilia@1234', NULL),
+(6, 'Malu', 'maria-luiza@gmail.br', 'Malu@1234', NULL),
+(7, 'Natalia', 'natalia@gmail.br', 'Natalia@12345', NULL),
+(8, 'Natalia', 'natalia@gmail.br', 'Natalia@12345', NULL),
+(9, '', '', '', NULL),
+(10, '', '', '', NULL),
+(11, 'Malu', 'maria-luiza@gmail.br', 'Malu@12345', NULL),
+(12, '', '', '', NULL),
+(13, 'Malu', 'maria-luiza@gmail.br', 'Malu@12345', NULL),
+(14, 'Malu', 'maria-luiza@gmail.br', 'Malu@12345', NULL),
+(15, 'Malu', 'maria-luiza@gmail.br', 'Malu@12345', NULL),
+(16, '', '', '', NULL),
+(17, 'Malu', 'maria-luiza@gmail.br', 'Malu@123456', NULL),
+(18, 'Malu', 'maria-luiza@gmail.br', 'Malu@123456', NULL),
+(19, 'Malu', 'maria-luiza@gmail.br', 'Malu@12345', NULL),
+(20, 'Malu', 'maria-luiza@gmail.br', 'Malu@12345', NULL),
+(27, 'Malu', 'maria-luiza@gmail.br', 'Laura@2007', NULL),
+(28, 'Jonghyun', 'jonghyun@gmail.com', 'Laura@2007', NULL),
+(29, 'Marilia', 'marilia@gmail.com', 'Marilia@2006', NULL),
+(30, 'Valdirene ', 'valdirene@gmail.com', 'Valdirene@2007', ''),
+(31, 'Dean', 'dean@gmail.com', 'Dean_1967', NULL),
+(32, 'Julia Dias ', 'juliadias@gmail.com', 'JuliaD@1234', NULL),
+(33, 'Malu', 'maria-luiza@gmail.br', 'Malu@12345', NULL),
+(34, 'Malu', 'maria-luiza@gmail.br', 'Malu@12345', NULL),
+(35, 'Valdirene', 'valdirene@gmail.com', 'Valdirene@12345', NULL),
+(36, 'vfvv', 'svvsv@nvnfej.com', '12345678Ma@', NULL),
+(37, 'gbthnh', 'nthnht@envefn.com', 'Malu@12345', NULL),
+(38, 'djvfiuhv', 'veije@dvif.com', 'Ma@123455', NULL),
+(39, 'btgbt', 'rt4bt@hvrfh.v', '123456Aa@', NULL),
+(40, 'fghfuygutyu', 'ruryutyu@fgdfg.fdfer', '123456aA#', NULL),
+(41, 'ffjfff', 'fff@gdyeg.geh', '123456aA@', NULL),
+(42, 'vihuvy', 'tvt5@hv.gcr', '123456Aa@', NULL),
+(43, 'Malu', 'malu@gmail.com', 'Malu@1234567', NULL),
+(44, 'Laura Figueiredo', 'lauraffigueiredo2007@gmail.com', 'L@ura2007', NULL),
+(45, 'Laura Figueiredo', 'laura@gmail.com', 'Laura@2404', NULL);
 
 -- --------------------------------------------------------
 
@@ -53,8 +87,10 @@ INSERT INTO `cadastro` (`ID_CAD`, `NOME_USUARIO`, `EMAIL`, `SENHA`, `FOTO_PERFIL
 --
 
 CREATE TABLE `compras` (
+  `id_compra` int(11) NOT NULL,
   `ID_PLANO` int(11) NOT NULL,
   `ID_DADOS_PAG` int(11) DEFAULT NULL,
+  `ID_CAD` int(11) NOT NULL,
   `DESC_COMPRA` varchar(200) NOT NULL,
   `VALOR_COMPRA` float(5,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
@@ -63,11 +99,13 @@ CREATE TABLE `compras` (
 -- Despejando dados para a tabela `compras`
 --
 
-INSERT INTO `compras` (`ID_PLANO`, `ID_DADOS_PAG`, `DESC_COMPRA`, `VALOR_COMPRA`) VALUES
-(1, 1, 'Comprou o Plano Anual', 109.90),
-(2, 2, 'Comprou o Plano Mensal', 7.90),
-(3, NULL, 'Comprou o Plano Grátis', 0.00),
-(4, 4, 'Comprou o Plano Anual', 109.90);
+INSERT INTO `compras` (`id_compra`, `ID_PLANO`, `ID_DADOS_PAG`, `ID_CAD`, `DESC_COMPRA`, `VALOR_COMPRA`) VALUES
+(1, 1, 1, 1, 'Comprou o Plano Anual', 109.90),
+(2, 2, 2, 2, 'Comprou o Plano Mensal', 7.90),
+(3, 3, NULL, 3, 'Comprou o Plano Grátis', 0.00),
+(5, 3, NULL, 41, 'Comprou o Plano Grátis', 0.00),
+(6, 3, NULL, 43, 'Comprou o Plano Grátis', 0.00),
+(7, 3, NULL, 44, 'Comprou o Plano Grátis', 0.00);
 
 -- --------------------------------------------------------
 
@@ -197,8 +235,7 @@ CREATE TABLE `planos` (
 INSERT INTO `planos` (`ID_PLANO`, `TIPO_PLANO`, `VALOR_PLANO`) VALUES
 (1, 'Anual', 109.90),
 (2, 'Mensal', 7.90),
-(3, 'Grátis', 0.00),
-(4, 'Anual', 109.90);
+(3, 'Grátis', 0.00);
 
 --
 -- Índices para tabelas despejadas
@@ -214,8 +251,10 @@ ALTER TABLE `cadastro`
 -- Índices de tabela `compras`
 --
 ALTER TABLE `compras`
+  ADD PRIMARY KEY (`id_compra`),
   ADD KEY `ID_PLANO` (`ID_PLANO`),
-  ADD KEY `ID_DADOS_PAG` (`ID_DADOS_PAG`);
+  ADD KEY `ID_DADOS_PAG` (`ID_DADOS_PAG`),
+  ADD KEY `ID_CAD` (`ID_CAD`);
 
 --
 -- Índices de tabela `compromissos`
@@ -258,7 +297,13 @@ ALTER TABLE `planos`
 -- AUTO_INCREMENT de tabela `cadastro`
 --
 ALTER TABLE `cadastro`
-  MODIFY `ID_CAD` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID_CAD` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+
+--
+-- AUTO_INCREMENT de tabela `compras`
+--
+ALTER TABLE `compras`
+  MODIFY `id_compra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de tabela `compromissos`
@@ -299,7 +344,8 @@ ALTER TABLE `planos`
 --
 ALTER TABLE `compras`
   ADD CONSTRAINT `compras_ibfk_1` FOREIGN KEY (`ID_PLANO`) REFERENCES `planos` (`ID_PLANO`),
-  ADD CONSTRAINT `compras_ibfk_2` FOREIGN KEY (`ID_DADOS_PAG`) REFERENCES `dados_pag` (`ID_DADOS_PAG`);
+  ADD CONSTRAINT `compras_ibfk_2` FOREIGN KEY (`ID_DADOS_PAG`) REFERENCES `dados_pag` (`ID_DADOS_PAG`),
+  ADD CONSTRAINT `compras_ibfk_3` FOREIGN KEY (`ID_CAD`) REFERENCES `cadastro` (`ID_CAD`);
 
 --
 -- Restrições para tabelas `compromissos`
