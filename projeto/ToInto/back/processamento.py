@@ -143,9 +143,9 @@ def processar_alterar_cad(dados):
     update_dados.append(dados_processados.get('email_novo'))
     update_dados.append(dados_processados.get('senha_nova'))
     update_dados.append(dados_processados.get('foto', ''))
-    # Adicione o ID do usuário
     update_dados.append(dados_processados.get('id'))
-
+    # Adicione o ID do usuário
+    
     print(update_dados)
 
     mensagens_erro = []  # Cria uma lista vazia para armazenar mensagens de erro
