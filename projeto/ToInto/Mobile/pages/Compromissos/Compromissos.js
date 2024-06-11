@@ -6,6 +6,7 @@ import styles from './CompStyle.js';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { format, parseISO } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Compromissos = ({ route, navigation }) => {
   const selectedDate = route?.params?.selectedDate || new Date().toISOString().split('T')[0];
@@ -28,6 +29,7 @@ const Compromissos = ({ route, navigation }) => {
     if (titulo.trim() !== '') {
       const formCompromisso = {
         acao: 'salvar_compromisso',
+        id_cad: await AsyncStorage.getItem('ID'),
         date: selectedDate,
         titulo: titulo,
         time: horario.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
@@ -36,7 +38,7 @@ const Compromissos = ({ route, navigation }) => {
         lembrete: lembrete, 
       };
       try {
-        const response = await fetch('http://10.135.60.24:8085/receber-dados', {
+        const response = await fetch('http://10.135.60.20:8085/receber-dados', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
