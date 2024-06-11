@@ -10,18 +10,44 @@ const Perfil = ({ navigation }) => {
   const [Email, setEmail] = useState('');
 
   useEffect(() => {
-      const storedNome = AsyncStorage.getItem('nome_usuario');
+    const fetchNomeUsuario = async () => {
+      const storedNome = await AsyncStorage.getItem('nome_usuario');
       if (storedNome) {
-          setNomeUsuario(storedNome);
+        setNomeUsuario(storedNome);
       }
-  }, []); //Adicione o array de dependências vazio aqui
+    };
+    fetchNomeUsuario();
+  }, []);
 
   useEffect(() => {
-      const storedEmail = AsyncStorage.getItem('email');
+    const fetchEmail = async () => {
+      const storedEmail = await AsyncStorage.getItem('email');
       if (storedEmail) {
-          setEmail(storedEmail);
+        setEmail(storedEmail);
       }
-  }, []); //Adicione o array de dependências vazio aqui
+    };
+    fetchEmail();
+  }, []);
+
+  // Função para buscar os dados do perfil
+  const fetchPerfilData = async () => {
+    const storedNome = await AsyncStorage.getItem('nome_usuario');
+    const storedEmail = await AsyncStorage.getItem('email');
+    if (storedNome) {
+      setNomeUsuario(storedNome);
+    }
+    if (storedEmail) {
+      setEmail(storedEmail);
+    }
+  };
+
+  // Atualiza o perfil a cada 10 segundos
+  useEffect(() => {
+    const interval = setInterval(() => {
+      fetchPerfilData();
+    }, 500); // 1 segundos
+    return () => clearInterval(interval);
+  }, []);
 
   const handleOptionSelect = (option) => {
     setShowOptions(false);
@@ -29,6 +55,39 @@ const Perfil = ({ navigation }) => {
       setModalVisible(true);
     } else {
       navigation.navigate(option);
+    }
+  };
+
+  const excluirConta = async () => {
+    const id_cad = await AsyncStorage.getItem('ID');
+
+    if (!id_cad) {
+      console.error('ID não encontrado no AsyncStorage');
+      return;
+    }
+
+    try {
+      const response = await fetch('http://10.135.60.20:8085/receber-dados', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ 'funcao': 'del', 'id_cad': id_cad })
+      });
+
+      if (!response.ok) {
+        throw new Error('Erro ao excluir conta');
+      }
+
+      const data = await response.json();
+      console.log(data);
+
+      // Dados foram processados com sucesso
+      await AsyncStorage.multiRemove(['ID', 'nome_usuario', 'email']);
+      // Navega para a tela de cadastro
+      navigation.navigate('Cadastro');
+    } catch (error) {
+      console.error('Erro ao excluir conta:', error);
     }
   };
 
@@ -121,7 +180,7 @@ const Perfil = ({ navigation }) => {
 
               <TouchableOpacity
                 style={styles.confirmButton}
-                onPress={() => setModalVisible(false)}
+                onPress={excluirConta}
               >
                 <Text style={styles.closeButtonText}>Confirmar</Text>
               </TouchableOpacity>
