@@ -55,6 +55,9 @@ def processar_dados(dados):
     elif dados.get('acao') == 'salvar_log':
         print('Compromissos')
         retorno = processar_dados_log(dados)
+    elif dados.get('acao') == 'atualizar_cad':
+        print('atualizar')
+        retorno = processar_alterar_cad(dados)
     else:
         
 #-------------------------------------------------------------------------
@@ -136,10 +139,10 @@ def processar_alterar_cad(dados):
 
     update_dados = []
 
-    update_dados.append(dados_processados.get('foto', ''))
     update_dados.append(dados_processados.get('nome_novo'))
     update_dados.append(dados_processados.get('email_novo'))
     update_dados.append(dados_processados.get('senha_nova'))
+    update_dados.append(dados_processados.get('foto', ''))
     # Adicione o ID do usuário
     update_dados.append(dados_processados.get('id'))
 
@@ -272,12 +275,13 @@ def processar_dados_compromisso(dados):
     dados_processados = dados
     dados_gravacao = []
 
-    dados_gravacao.append(dados_processados.get('date'))
+    dados_gravacao.append(dados_processados.get('id_cad'))
     dados_gravacao.append(dados_processados.get('titulo'))
+    dados_gravacao.append(dados_processados.get('date'))
     dados_gravacao.append(dados_processados.get('time'))
     dados_gravacao.append(dados_processados.get('descricao'))
-    dados_gravacao.append(dados_processados.get('lembrete'))
     dados_gravacao.append(dados_processados.get('importante'))
+    dados_gravacao.append(dados_processados.get('lembrete'))
 
     mensagens_erro = []  # Cria uma lista vazia para armazenar mensagens de erro
 
