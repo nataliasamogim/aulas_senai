@@ -12,7 +12,7 @@ const AtualizarCad = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
     const [mensagensErro, setMensagensErro] = useState([]);
-    
+
     useEffect(() => {
         // Função assíncrona para buscar dados do usuário
         const showDados = async () => {
@@ -47,6 +47,8 @@ const AtualizarCad = ({ navigation }) => {
     }, []); // Array de dependências vazio, indica que este efeito deve ser executado apenas uma vez
 
     const handleAtualizar = async () => {
+        const id_str = await AsyncStorage.getItem('ID');
+        const nome_str = nome;
         try {
             // Faz uma requisição para enviar os dados do formulário para o servidor
             const resposta = await fetch('http://10.135.60.20:8085/receber-dados', {
@@ -56,7 +58,7 @@ const AtualizarCad = ({ navigation }) => {
                 },
                 body: JSON.stringify({
                     acao: 'atualizar_cad',
-                    id: await AsyncStorage.getItem('ID'),
+                    id: id_str,
                     nome_novo: nome,
                     email_novo: email,
                     senha_nova: senha,
@@ -75,8 +77,11 @@ const AtualizarCad = ({ navigation }) => {
                 // Atualiza o estado com as mensagens de erro para exibição no formulário
                 setMensagensErro(resultado.mensagens);
             } else {
-                console.log('Dados atualizados com sucesso!', resultado);
+                console.log('Dados atualizados com sucesso upd!', resultado);
                 navigation.goBack();
+                await AsyncStorage.setItem('ID', id_str); // Salva o ID no AsyncStorage
+                await AsyncStorage.setItem('nome_usuario', nome_str);
+                await AsyncStorage.setItem('email', email);
             }
         } catch (error) {
             console.error('Erro ao enviar dados:', error); // Captura e exibe qualquer erro ocorrido durante o envio dos dados do formulário
