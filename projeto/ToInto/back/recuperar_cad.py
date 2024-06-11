@@ -12,6 +12,7 @@ def recuperar_inf_formani(id_cad):
     conex.close()
 
     if usuario:
+        print('Usuario Laura')
         return {'erro': False, 'mensagem': usuario}
 
     else:
@@ -29,12 +30,12 @@ def verificar_informacao_log(email, senha):
     conex.close()
 
     if login:
-        print("Usuário encontrado!")
-        print(login)
         return {'erro': False, 'mensagem': login}
 
     else:
         print("Usuario não encontrado")
         return {'erro': True, 'mensagens':{'erro': True, 'mensagem': 'Usuário não encontrado'}}
+    
+    
 
 

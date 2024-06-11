@@ -47,6 +47,7 @@ const FormMani = () => { // Declaração do componente FormMani como uma funçã
             } catch (error) {
                 console.error('Erro ao buscar dados do usuário:', error); // Captura e exibe qualquer erro ocorrido durante a busca dos dados do usuário
             }
+            
         };
 
         showDados(); // Chama a função para buscar os dados do usuário quando o componente é montado
