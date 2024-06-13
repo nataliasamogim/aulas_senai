@@ -3,7 +3,7 @@ import { View, TextInput, Image, KeyboardAvoidingView, TouchableOpacity, Text, A
 import styles from './CadStyle.js';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from "@react-navigation/native";
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const CadastroForm = ({ handleSaibaMais }) => {
   const [nome, setNome] = useState('');
@@ -27,7 +27,7 @@ const CadastroForm = ({ handleSaibaMais }) => {
       };
 
       try {
-        const response = await fetch('http://10.135.60.24:8085/receber-dados', {
+        const response = await fetch('http://10.135.60.38:8085/receber-dados', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -49,11 +49,13 @@ const CadastroForm = ({ handleSaibaMais }) => {
           setEmail('');
           setSenha('');
           setConfirmSenha('');
-          if (selectedBox === 2) {
+          await AsyncStorage.setItem('ID', JSON.stringify(resultado.mensagens.mensagem));
+          console.log(resultado.mensagem)
+          if (selectedBox == 2) {
             navigation.navigate('Planos');
-          } else if (selectedBox === 3) {
+          } else if (selectedBox == 3) {
             navigation.navigate('Planos');
-          } else if (selectedBox === 1) {
+          } else if (selectedBox == 1) {
             navigation.navigate('Login');
           } else {
             navigation.navigate('Cadastro');
@@ -127,7 +129,7 @@ const CadastroForm = ({ handleSaibaMais }) => {
             <Text style={styles.titleNoCampo}>Já possui uma conta?</Text>
             <TouchableOpacity style={styles.btnRegistrar} onPress={() => navigation.navigate('Login')}>
               <Text style={styles.Txtentrar}>Entrar</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> 
           </View>
 
           <View style={styles.buttons}>
