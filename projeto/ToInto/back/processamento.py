@@ -8,7 +8,6 @@ from gravar_arquivo import gravar_em_arquivo_log
 from gravar_banco import gravar_dados, gravar_dados_compromisso, gravar_dados_cartao
 from recuperar_cad import verificar_informacao_log
 from recuperar_cad import recuperar_inf_formani
-from recuperar_cart import recuperar_inf_cartao
 from update_banco import atualizar_cad
 from delete_banco import deletar_cad
 from tratar_hora import data
