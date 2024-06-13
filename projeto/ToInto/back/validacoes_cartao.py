@@ -48,7 +48,7 @@ def validar_num_cartao(num_cartao):
         num_cartao = num_cartao.strip()
 
         # Verifica se a numero do cartão contém apenas dígitos
-        if num_cartao.isdigit() == 16:
+        if len(num_cartao) == 16 and num_cartao.isdigit():
             return {'erro': False, 'mensagem': ''}
         else:
             return {'erro': True, 'mensagem': 'O número do cartão precisa ter 16 dígitos'}
@@ -59,7 +59,7 @@ def validar_datavenc(datavenc):
         return {'erro': True, 'mensagem': 'Data de vencimento não fornecida!'}
 
     # Formato esperado: DD/MM/AA
-    data = datetime.strptime(datavenc, '%d/%m/%Y')
+    data = datetime.strptime(datavenc, '%Y-%m-%d')
 
     # Verifica se a data é futura
     hoje = datetime.today()
@@ -74,7 +74,7 @@ def validar_codseg(cod_seguranca):
     cod_seguranca = cod_seguranca.strip()
 
     # Verifica se o código de segurança contém apenas dígitos
-    if cod_seguranca.isdigit() == 3:
+    if len(cod_seguranca) == 3 and cod_seguranca.isdigit():
         return {'erro': False, 'mensagem': ''}
     else:
         return {'erro': True, 'mensagem': 'O código de segurança está incorreto!'}
