@@ -132,9 +132,14 @@ def processar_dados_cad(dados):
         # Chama a função para gravar os dados em um arquivo, caso não tenha mensagens de erro
         #gravar_em_arquivo(dados_processados)
         retorno=gravar_dados(dados_gravacao)
-        print(dados_gravacao)
+        if (retorno['erro']):
+            print(retorno)
         # Retorna os dados processados
-        return {'erro': False, 'mensagem': retorno}
+            retorno2 = []
+            retorno2.append(retorno)
+            return {'erro': True, 'mensagens': retorno2}
+        else:
+            return {'erro': False, 'mensagens': retorno}
 
 
 def processar_alterar_cad(dados):
@@ -186,8 +191,9 @@ def processar_dados_cartao(dados):
     # Retorna os dados processados
     dados_processados = dados
     dados_gravacao = []
-    idcad = dados_processados.get('id')
-    dados_gravacao.append(idcad[1:3])
+    #idcad = dados_processados.get('id')
+    #dados_gravacao.append(idcad[1:3])
+    dados_gravacao.append(dados_processados.get('id'))
     dados_gravacao.append(dados_processados.get('cpf'))
     dados_gravacao.append(data())
     dados_gravacao.append(dados_processados.get('num_cartao'))
