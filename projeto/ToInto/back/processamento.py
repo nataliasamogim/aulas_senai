@@ -5,11 +5,13 @@
 # Além de armazenar as mensagens de erro recebidas do componete validacoes em uma lista chamada mesagens_erro.
 from gravar_arquivo import gravar_em_arquivo
 from gravar_arquivo import gravar_em_arquivo_log
-from gravar_banco import gravar_dados, gravar_dados_compromisso
+from gravar_banco import gravar_dados, gravar_dados_compromisso, gravar_dados_cartao
 from recuperar_cad import verificar_informacao_log
 from recuperar_cad import recuperar_inf_formani
+from recuperar_cart import recuperar_inf_cartao
 from update_banco import atualizar_cad
 from delete_banco import deletar_cad
+from tratar_hora import data
 
 from validacoes import (
     validar_nome,
@@ -58,6 +60,9 @@ def processar_dados(dados):
     elif dados.get('acao') == 'atualizar_cad':
         print('atualizar')
         retorno = processar_alterar_cad(dados)
+    elif dados.get('acao') == 'salvar_cart':
+        print ('Dados Cartao')
+        retorno = processar_dados_cartao(dados)
     else:
         
 #-------------------------------------------------------------------------
@@ -126,10 +131,10 @@ def processar_dados_cad(dados):
     else:
         # Chama a função para gravar os dados em um arquivo, caso não tenha mensagens de erro
         #gravar_em_arquivo(dados_processados)
-        gravar_dados(dados_gravacao)
+        retorno=gravar_dados(dados_gravacao)
         print(dados_gravacao)
         # Retorna os dados processados
-        return {'erro': False, 'mensagem': 'Dados Processados com Sucesso!'}
+        return {'erro': False, 'mensagem': retorno}
 
 
 def processar_alterar_cad(dados):
@@ -143,9 +148,9 @@ def processar_alterar_cad(dados):
     update_dados.append(dados_processados.get('email_novo'))
     update_dados.append(dados_processados.get('senha_nova'))
     update_dados.append(dados_processados.get('foto', ''))
-    update_dados.append(dados_processados.get('id'))
     # Adicione o ID do usuário
-    
+    update_dados.append(dados_processados.get('id'))
+
     print(update_dados)
 
     mensagens_erro = []  # Cria uma lista vazia para armazenar mensagens de erro
@@ -181,13 +186,15 @@ def processar_dados_cartao(dados):
     # Retorna os dados processados
     dados_processados = dados
     dados_gravacao = []
-
-    dados_gravacao.append(dados_processados.get('nome_titular'))
+    idcad = dados_processados.get('id')
+    dados_gravacao.append(idcad[1:3])
     dados_gravacao.append(dados_processados.get('cpf'))
+    dados_gravacao.append(data())
     dados_gravacao.append(dados_processados.get('num_cartao'))
-    dados_gravacao.append(dados_processados.get('datavenc'))
     dados_gravacao.append(dados_processados.get('cod_seguranca'))
-
+    dados_gravacao.append(dados_processados.get('datavenc'))
+    dados_gravacao.append(dados_processados.get('nome_titular'))
+    
     mensagens_erro = []  # Cria uma lista vazia para armazenar mensagens de erro
 
     # Início do bloco (mensagens de erro)
@@ -209,9 +216,7 @@ def processar_dados_cartao(dados):
         return {'erro': True, 'mensagens': mensagens_erro}
     else:
         # Chama a função para gravar os dados em um arquivo, caso não tenha mensagens de erro
-        gravar_em_arquivo(dados_processados)
-        # gravar_dados(dados_gravacao)
-        print(dados_gravacao)
+        retorno=gravar_dados_cartao(dados_gravacao)
         # Retorna os dados processados
         return {'erro': False, 'mensagem': 'Dados Processados com Sucesso!'}
 
@@ -274,7 +279,6 @@ def excluir_todas_informacoes_usuario(cad_id):
 def processar_dados_compromisso(dados):
     dados_processados = dados
     dados_gravacao = []
-
     dados_gravacao.append(dados_processados.get('id_cad'))
     dados_gravacao.append(dados_processados.get('titulo'))
     dados_gravacao.append(dados_processados.get('date'))
