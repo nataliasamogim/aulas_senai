@@ -4,14 +4,17 @@ import styles from './DadCartStyle.js';
 import { LinearGradient } from 'expo-linear-gradient';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from "moment";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const AdicionarDadosCartao = ({ navigation }) => {
+const AdicionarDadosCartao = (navigation) => {
   const [nomeTitular, setNomeTitular] = useState('');
   const [cpf, setCpf] = useState('');
   const [numCartao, setNumCartao] = useState('');
   const [dataVenc, setDataVenc] = useState('');
   const [codSeguranca, setCodSeguranca] = useState('');
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+
+  const [mensagensErro, setMensagensErro] = useState([]);
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -23,32 +26,73 @@ const AdicionarDadosCartao = ({ navigation }) => {
 
   const handleConfirm = (date) => {
     hideDatePicker();
-    setDataVenc(moment(date).format("DD/MM/YYYY"));
+    setDataVenc(moment(date).format("YYYY-MM-DD"));
   };
 
-  const handleDadosCartao = () => {
-    console.log("Nome Titular: ", nomeTitular);
-    console.log("Cpf: ", cpf);
-    console.log("Número Cartão: ", numCartao);
-    console.log("Data Vencimento: ", dataVenc);
-    console.log("Código de segurança: ", codSeguranca);
+  const handleAdicionarCart = async () => {
+    const idtxt = await AsyncStorage.getItem('ID')
+    if (nomeTitular.trim() !== '') {  // Verifica se ambos os campos estão preenchidos
+      const formAdicionarCart = {
+        acao: 'salvar_cart',
+        id: idtxt.substring(1,2),
+        cpf: cpf, 
+        num_cartao: numCartao,
+        cod_seguranca: codSeguranca,
+        datavenc: dataVenc,
+        nome_titular: nomeTitular,
+      };
+      console.log(formAdicionarCart)
+      try {
+        const response = await fetch('http://10.135.60.38:8085/receber-dados', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formAdicionarCart)
+        });
+        const resultado = await response.json();
 
-    navigation.navigate('Modificar Cartão');
+        if (resultado.erro) {
 
-    // Aqui você pode adicionar a lógica para enviar os dados do formulário
-    // Por enquanto, apenas limpamos os campos do formulário
-    setNomeTitular('');
-    setCpf('');
-    setNumCartao('');
-    setDataVenc('');
-    setCodSeguranca('');
-  }
+          // Exibe mensagens de erro no console.log ou em algum local visível
+          console.error('Erro no servidor:', resultado.mensagens);
+
+          // Atualiza o estado com as mensagens de erro para exibição no formulário
+          setMensagensErro(resultado.mensagens);
+
+        } else {
+          console.log('Dados criados com sucesso!')
+          setNomeTitular('');
+          setCpf('');
+          setNumCartao('');
+          setDataVenc('');
+          setCodSeguranca('');
+        }
+      } catch (error) {
+        console.error('Erro ao receber dados do Adicionar Cartão:', error);
+      }
+
+      navigation.navigate('Calendario')
+    }
+  };
 
   return (
     <KeyboardAvoidingView style={styles.background} behavior="padding">
+
+      {mensagensErro.length > 0 && (
+        <View style={{ color: 'white' }}>
+          <Text>Erro ao processar os dados:</Text>
+          <View>
+            {mensagensErro.map((mensagem, index) => (
+              <Text key={index}>{mensagem.mensagem}</Text>
+            ))}
+          </View>
+        </View>
+      )}
+
       <LinearGradient style={styles.background} colors={['#AC72BF', '#6B29A4', '#570D70']}>
         <View style={styles.containerTitulo}>
-            <Text style={styles.titulo}>Adicionar dados do cartão</Text>
+          <Text style={styles.titulo}>Adicionar dados do cartão</Text>
         </View>
         <View keyboardShouldPersistTaps="handled" style={styles.container}>
           <Text style={styles.label}>Nome Completo do Titular</Text>
@@ -68,10 +112,10 @@ const AdicionarDadosCartao = ({ navigation }) => {
             onCancel={hideDatePicker}
           />
           <Text style={styles.label}>Código de segurança</Text>
-          <TextInput  style={styles.inputs} value={codSeguranca} onChangeText={setCodSeguranca} placeholder="Digite o código de segurança" />
+          <TextInput style={styles.inputs} value={codSeguranca} onChangeText={setCodSeguranca} placeholder="Digite o código de segurança" />
 
           <View style={styles.buttons}>
-            <TouchableOpacity style={styles.btnSubmit} onPress={handleDadosCartao}>
+            <TouchableOpacity style={styles.btnSubmit} onPress={handleAdicionarCart}>
               <Text style={styles.submitTxt} >Salvar</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.btnSubmit}>
