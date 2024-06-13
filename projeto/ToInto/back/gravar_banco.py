@@ -4,11 +4,25 @@ def gravar_dados(dados_gravacao):
     conex = conexao.conectar()
     cursor = conex.cursor()
 
-    sql = "INSERT INTO cadastro (NOME_USUARIO, EMAIL, SENHA) VALUES (%s, %s, %s)"
-    nome, email, senha, opc = dados_gravacao
-    val = (nome, email, senha)
-    cursor.execute(sql, val)
-    conex.commit()
+    vemail = [dados_gravacao[1]]
+    print('vemail: ', vemail)
+    sql = "SELECT ID_CAD FROM CADASTRO WHERE EMAIL = %s limit 1"
+     #val = (nome, email, senha)
+    cursor.execute(sql, vemail)
+    check = cursor.fetchone()
+    print('valida gravado: ', check)
+
+    if check == None:
+
+        sql = "INSERT INTO cadastro (NOME_USUARIO, EMAIL, SENHA) VALUES (%s, %s, %s)"
+        nome, email, senha, opc = dados_gravacao
+        val = (nome, email, senha)
+        cursor.execute(sql, val)
+        conex.commit()
+    
+    else:
+
+        return {'erro': True, 'mensagem': 'usuario ja cadastrado'}
 
     if opc == 1:
         #nome, email, senha = dados_gravacao
@@ -23,10 +37,19 @@ def gravar_dados(dados_gravacao):
         teste = cursor.execute(sql, id)
         print(teste)
         conex.commit()
-        
+    else:
+         #nome, email, senha = dados_gravacao
+        sql = "SELECT ID_CAD FROM CADASTRO WHERE NOME_USUARIO = %s AND EMAIL = %s AND SENHA = %s"
+        #val = (nome, email, senha)
+        cursor.execute(sql, val)
+        id = cursor.fetchone()
+        #print(id)    
 
     print("Dados do cadastro inseridos com sucesso!") 
     conex.close()
+
+    return  {'erro': False, 'mensagem': id}
+
 
 def gravar_dados_compromisso(dados_gravacao):
     conex = conexao.conectar()
@@ -37,4 +60,16 @@ def gravar_dados_compromisso(dados_gravacao):
     cursor.execute(sql, dados_gravacao)
     conex.commit()
     print("Dados do compromisso inseridos com sucesso!") 
+    conex.close()
+
+
+def gravar_dados_cartao(dados_gravacao):
+    conex = conexao.conectar()
+    cursor = conex.cursor()
+    print(dados_gravacao)
+    sql = "INSERT INTO dados_pag (TIPO_PAG, ID_CAD, CPF, DATA_PAG, NUM_CARTAO, CVV, DATA_VENC, NOME_CARTAO) VALUES ('1', %s, %s, %s, %s, %s, %s, %s)"
+
+    cursor.execute(sql, dados_gravacao)
+    conex.commit()
+    print("Dados do cartão inseridos com sucesso!") 
     conex.close()
