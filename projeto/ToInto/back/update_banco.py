@@ -13,14 +13,15 @@ def atualizar_cad(novos_dados):
     conex.close()
     return {'erro': False, 'mensagem': 'Alteração realizada com sucesso'}
 
+
 def atualizar_cart(novos_dados):
     print('teste dados:', novos_dados)
     conex = conexao.conectar()
     cursor = conex.cursor()
-    sql = "UPDATE cartao SET NOMETITULAR = %s, CPF = %s, NUMCARTAO = %s, DATAVENC = %s, CODSEGURANCA = %s  WHERE ID_DADOS_PAG = %s"
+    sql = "UPDATE cartao SET CPF = %s, NUM_CARTAO = %s, CVV = %s, DATAVENC = %s, NOME_CARTAO = %s  WHERE ID_CAD = %s"
     val = (novos_dados)
     cursor.execute(sql, val)
     conex.commit()
     conex.close()
-    return {'erro': False, 'mensagem': 'Alteração realizada com sucesso'}
+    return {'erro': False, 'mensagem': 'Alteração do dados de cartão realizada com sucesso'}
 
