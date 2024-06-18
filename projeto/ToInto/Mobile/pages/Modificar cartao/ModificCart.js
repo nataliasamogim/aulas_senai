@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, TextInput, KeyboardAvoidingView, TouchableOpacity, Text, Alert } from "react-native";
 import styles from './ModificCartStyle.js';
 import { LinearGradient } from 'expo-linear-gradient';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from "moment";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const ModificarDadosCartao = ({ navigation }) => {
   const [nomeTitular, setNomeTitular] = useState('');
@@ -23,7 +24,7 @@ const ModificarDadosCartao = ({ navigation }) => {
 
   const handleConfirm = (date) => {
     hideDatePicker();
-    setDataVenc(moment(date).format("DD/MM/YYYY"));
+    setDataVenc(moment(date).format("YYYY-MM-DD"));
   };
 
   const handleDadosCartao = () => {
@@ -33,22 +34,109 @@ const ModificarDadosCartao = ({ navigation }) => {
     console.log("Data Vencimento: ", dataVenc);
     console.log("Código de segurança: ", codSeguranca);
 
-    navigation.navigate('Calendario');
+
 
     // Aqui você pode adicionar a lógica para enviar os dados do formulário
     // Por enquanto, apenas limpamos os campos do formulário
-    setNomeTitular('');
-    setCpf('');
-    setNumCartao('');
-    setDataVenc('');
-    setCodSeguranca('');
+
   }
+
+  useEffect(() => {
+    // Função assíncrona para buscar dados do usuário
+    const showDados = async () => {
+      try {
+        // Faz uma requisição para receber os dados do usuário do servidor
+        const resposta = await fetch('http://10.135.60.38:8085/receber-dados', {
+          method: 'POST', // Método da requisição
+          headers: {
+            'Content-Type': 'application/json', // Tipo de conteúdo da requisição
+          },
+          body: JSON.stringify({acao: 'recuperar_cart', id_cadastro: await AsyncStorage.getItem("ID") }), // Corpo da requisição contendo os dados do formulário
+        });
+
+        // Verifica se a requisição foi bem-sucedida
+        if (!resposta.ok) {
+          throw new Error('Erro ao obter dados do cartão'); // Lança um erro se a requisição falhar
+        }
+
+        // Extrai os dados da resposta e os converte para JSON
+        const dadosCart = await resposta.json();
+        //console.log('Dados do usuário:', userData);
+        console.log("Dados recebidos ", dadosCart.mensagem);
+        // Atualiza o estado do formulário com os dados do usuário recebidos
+        setNomeTitular(dadosCart.mensagem[7]); // Define o novo valor para 'nome'
+        setCpf(dadosCart.mensagem[2]);
+        setNumCartao(dadosCart.mensagem[4]);
+        setDataVenc(dadosCart.mensagem[6]);
+        setCodSeguranca(dadosCart.mensagem[5].toString());
+      } catch (error) {
+        console.error('Erro ao buscar dados do cartão 2:', error); // Captura e exibe qualquer erro ocorrido durante a busca dos dados do usuário
+      }
+    };
+
+    showDados(); // Chama a função para buscar os dados do usuário quando o componente é montado
+  }, []); // Array de dependências vazio, indica que este efeito deve ser executado apenas uma vez
+
+  const [mensagensErro, setMensagensErro] = useState([]);
+  const handleAtualizarCart = async () => {
+    const id_str = await AsyncStorage.getItem('ID');
+    try {
+      // Faz uma requisição para enviar os dados do formulário para o servidor
+      const resposta = await fetch('http://10.135.60.38:8085/receber-dados', {
+        method: 'POST', // Método da requisição
+        headers: {
+          'Content-Type': 'application/json', // Tipo de conteúdo da requisição
+        },
+        body: JSON.stringify({
+          acao: 'atualizar_cart',
+          id: id_str,
+          novo_Cpf: cpf,
+          novo_numCartao: numCartao,
+          novo_cvv: codSeguranca,
+          nova_dataVenc: dataVenc,
+          novo_nomeTitular: nomeTitular,
+        }), // Corpo da requisição contendo os dados do formulário em formato JSON
+      });
+      // Extrai o resultado da resposta e o converte para JSON
+      const resultado = await resposta.json();
+      console.log('teste retorno do cartão', resultado);
+
+      // Verifica se ocorreu algum erro no servidor
+      if (resultado.erro) {
+        // Exibe mensagens de erro no console ou em algum local visível
+        console.error('Erro no servidor:', resultado.mensagens);
+
+        // Atualiza o estado com as mensagens de erro para exibição no formulário
+        setMensagensErro(resultado.mensagens);
+      } else {
+        console.log('Dados de cartão atualizados com sucesso!', resultado);
+        navigation.navigate('Calendario');
+        setNomeTitular('');
+        setCpf('');
+        setNumCartao('');
+        setDataVenc('');
+        setCodSeguranca('');
+      }
+    } catch (error) {
+      console.error('Erro ao enviar dados do cartão:', error); // Captura e exibe qualquer erro ocorrido durante o envio dos dados do formulário
+    }
+  };
 
   return (
     <KeyboardAvoidingView style={styles.background} behavior="padding">
+      {mensagensErro.length > 0 && (
+        <View style={{ color: 'white' }}>
+          <Text>Erro ao processar os dados:</Text>
+          <View>
+            {mensagensErro.map((mensagem, index) => (
+              <Text key={index}>{mensagem.mensagem}</Text>
+            ))}
+          </View>
+        </View>
+      )}
       <LinearGradient style={styles.background} colors={['#AC72BF', '#6B29A4', '#570D70']}>
         <View style={styles.containerTitulo}>
-            <Text style={styles.titulo}>Modificar dados do cartão</Text>
+          <Text style={styles.titulo}>Modificar dados do cartão</Text>
         </View>
         <View keyboardShouldPersistTaps="handled" style={styles.container}>
           <Text style={styles.label}>Nome Completo do Titular</Text>
@@ -68,10 +156,10 @@ const ModificarDadosCartao = ({ navigation }) => {
             onCancel={hideDatePicker}
           />
           <Text style={styles.label}>Código de segurança</Text>
-          <TextInput  style={styles.inputs} value={codSeguranca} onChangeText={setCodSeguranca} placeholder="Digite o código de segurança" />
+          <TextInput style={styles.inputs} value={codSeguranca} onChangeText={setCodSeguranca} placeholder="Digite o código de segurança" />
 
           <View style={styles.buttons}>
-            <TouchableOpacity style={styles.btnSubmit} onPress={handleDadosCartao}>
+            <TouchableOpacity style={styles.btnSubmit} onPress={handleAtualizarCart}>
               <Text style={styles.submitTxt} >Salvar</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.btnSubmit}>
