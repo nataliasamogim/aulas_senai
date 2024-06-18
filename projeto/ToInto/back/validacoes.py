@@ -77,7 +77,7 @@ def validar_senha(vsenha):
     # Adicione suas próprias regras de validação para senha aqui
     # Por exemplo, garantir que a senha contenha pelo menos um caractere maiúsculo, um minúsculo, um número e um caractere especial
     if len(vsenha) < 8 or len(vsenha) > 15:
-        erros.append(' - A senha deve ter entre 8 e 15 caracteres')
+        erros.append(' - A senha deve ter entre 8 e 15 caracteres\n')
     if not any(c.isupper() for c in vsenha):
         erros.append(" - A senha deve conter um caractere maiúsculo\n")
     if not any(c.islower() for c in vsenha):

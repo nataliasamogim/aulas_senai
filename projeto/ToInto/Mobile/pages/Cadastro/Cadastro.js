@@ -15,6 +15,8 @@ const CadastroForm = ({ handleSaibaMais }) => {
 
   const [mensagensErro, setMensagensErro] = useState([]);
 
+  const [showErrorModal, setShowErrorModal] = useState(false);
+
   const handleCadastrar = async (selectedBox) => {
     if (nome.trim() !== '') {  // Verifica se ambos os campos estão preenchidos
       const formCadastro = {
@@ -27,7 +29,7 @@ const CadastroForm = ({ handleSaibaMais }) => {
       };
 
       try {
-        const response = await fetch('http://10.135.60.38:8085/receber-dados', {
+        const response = await fetch('http://10.135.60.20:8085/receber-dados', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -37,13 +39,8 @@ const CadastroForm = ({ handleSaibaMais }) => {
         const resultado = await response.json();
 
         if (resultado.erro) {
-
-          // Exibe mensagens de erro no console.log ou em algum local visível
-          console.error('Erro no servidor:', resultado.mensagens);
-
-          // Atualiza o estado com as mensagens de erro para exibição no formulário
           setMensagensErro(resultado.mensagens);
-
+          setShowErrorModal(true); // Exibir modal de erro
         } else {
           setNome('');
           setEmail('');
@@ -73,17 +70,6 @@ const CadastroForm = ({ handleSaibaMais }) => {
 
   return (
     <KeyboardAvoidingView style={styles.background} behavior="padding">
-
-      {mensagensErro.length > 0 && (
-        <View style={{ color: 'white' }}>
-          <Text>Erro ao processar os dados:</Text>
-          <View>
-            {mensagensErro.map((mensagem, index) => (
-              <Text key={index}>{mensagem.mensagem}</Text>
-            ))}
-          </View>
-        </View>
-      )}
 
       <LinearGradient style={styles.background} colors={['#AC72BF', '#6B29A4', '#570D70']}>
         <View style={styles.containerLogo}>
@@ -129,7 +115,7 @@ const CadastroForm = ({ handleSaibaMais }) => {
             <Text style={styles.titleNoCampo}>Já possui uma conta?</Text>
             <TouchableOpacity style={styles.btnRegistrar} onPress={() => navigation.navigate('Login')}>
               <Text style={styles.Txtentrar}>Entrar</Text>
-            </TouchableOpacity> 
+            </TouchableOpacity>
           </View>
 
           <View style={styles.buttons}>
@@ -142,6 +128,25 @@ const CadastroForm = ({ handleSaibaMais }) => {
           </View>
         </View>
       </LinearGradient>
+
+      {/* Modal de Erro */}
+      <Modal visible={showErrorModal} animationType="slide" transparent={true} onRequestClose={() => setShowErrorModal(false)}>
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalTitle}>Erro ao processar os dados:</Text>
+            <View style={styles.containerErro}>
+              {mensagensErro.map((mensagem, index) => (
+                <Text key={index} style={styles.textErro}>
+                  {mensagem.mensagem}
+                </Text>
+              ))}
+            </View>
+            <TouchableHighlight style={styles.closeButton} onPress={() => setShowErrorModal(false)}>
+              <Text style={styles.closeButtonText}>Fechar</Text>
+            </TouchableHighlight>
+          </View>
+        </View>
+      </Modal>
     </KeyboardAvoidingView>
   );
 }
