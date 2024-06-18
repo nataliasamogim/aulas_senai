@@ -3,12 +3,12 @@
 # Data de criação/alteração: 01-12-2023
 # Descrição detalhada: Nesse componente processamos os dados recebidos do formulário e printamos eles no terminal.
 # Além de armazenar as mensagens de erro recebidas do componete validacoes em uma lista chamada mesagens_erro.
-from gravar_arquivo import gravar_em_arquivo
-from gravar_arquivo import gravar_em_arquivo_log
 from gravar_banco import gravar_dados, gravar_dados_compromisso, gravar_dados_cartao
 from recuperar_cad import verificar_informacao_log
 from recuperar_cad import recuperar_inf_formani
+from recuperar_cart import recuperar_inf_cart
 from update_banco import atualizar_cad
+from update_banco import atualizar_cart
 from delete_banco import deletar_cad
 from tratar_hora import data
 
@@ -32,7 +32,6 @@ from validar_compromissos import (
     validar_descricao
 
 )
-
 
 # Nome da função: processar_dados
 # Autor: Maria Luiza
@@ -62,6 +61,11 @@ def processar_dados(dados):
     elif dados.get('acao') == 'salvar_cart':
         print ('Dados Cartao')
         retorno = processar_dados_cartao(dados)
+    elif dados.get('acao') == 'recuperar_cart' :
+        retorno = recuperar_inf_cart(dados.get('id_cadastro', ''))
+    elif dados.get('acao') == 'atualizar_cart':
+        print ('Atualizar dados do cartão')
+        retorno = processar_alterar_cart(dados)
     else:
         
 #-------------------------------------------------------------------------
@@ -87,7 +91,6 @@ def processar_dados(dados):
     return (retorno)
 #-------------------------------------------------------------------------------
 
-
 # Nome da função: processar_dados_cad
 # Data de criação/alteração: 01-12-2023
 # Parâmetros entrada:
@@ -96,7 +99,6 @@ def processar_dados(dados):
 # Nome: retorna mensagem de erro, tipo: boleano, finalidade: retornar ao usuário qual o erro.
 # 2° Retorno:
 # Nome: retorna a mensagem para o terminal e console, tipo: boleano, finalidade: permite que o usuário prossiga seu cadastro
-
 
 def processar_dados_cad(dados):
     # Função para processar os dados recebidos do Flask
@@ -140,7 +142,6 @@ def processar_dados_cad(dados):
         else:
             return {'erro': False, 'mensagens': retorno}
 
-
 def processar_alterar_cad(dados):
     # Função para processar os dados recebidos do Flask
     # Retorna os dados processados
@@ -183,7 +184,7 @@ def processar_alterar_cad(dados):
         return {'erro': False, 'mensagem': alterar_cad}
         # Chamar a função para recuperar os dados do usuário do banco de dados
         # return {'erro': False, 'mensagem': dados_usuario}
-
+        
 
 def processar_dados_cartao(dados):
     # Função para processar os dados recebidos do Flask
@@ -221,10 +222,9 @@ def processar_dados_cartao(dados):
         return {'erro': True, 'mensagens': mensagens_erro}
     else:
         # Chama a função para gravar os dados em um arquivo, caso não tenha mensagens de erro
-        retorno=gravar_dados_cartao(dados_gravacao)
+        retorno = gravar_dados_cartao(dados_gravacao)
         # Retorna os dados processados
         return {'erro': False, 'mensagem': 'Dados Processados com Sucesso!'}
-
 
 # Nome da função: processar_dados_log
 # Data de criação/alteração: 01-12-2023
@@ -280,7 +280,6 @@ def excluir_todas_informacoes_usuario(cad_id):
         return {'erro': True, 'mensagem': 'Erro ao excluir todas as informações do usuário: {}'.format(str(e))}
     
 
-
 def processar_dados_compromisso(dados):
     dados_processados = dados
     dados_gravacao = []
@@ -315,3 +314,53 @@ def processar_dados_compromisso(dados):
         print(dados_gravacao)
         # Retorna os dados processados
         return {'erro': False, 'mensagem': 'Dados Processados com Sucesso!'}
+    
+def processar_alterar_cart(dados):
+    # Função para processar os dados recebidos do Flask
+    # Retorna os dados processados
+    dados_processados = dados
+
+    update_dadosCart = []
+
+    update_dadosCart.append(dados_processados.get('novo_Cpf'))
+    update_dadosCart.append(dados_processados.get('novo_numCartao'))
+    update_dadosCart.append(dados_processados.get('novo_cvv'))
+    update_dadosCart.append(dados_processados.get('nova_dataVenc'))
+    update_dadosCart.append(dados_processados.get('novo_nomeTitular'))
+    # Adicione o ID do usuário
+    update_dadosCart.append(dados_processados.get('id'))
+
+    print(update_dadosCart)
+
+    mensagens_erro = []  # Cria uma lista vazia para armazenar mensagens de erro
+
+    # Início do bloco (mensagens de erro)
+    # Os dados recebidos dos inputs serão validados pela função correspondente e caso haja erro será armazenado na variável mensagens_erro
+    mensagens_erro.append(validar_cpf(
+        dados_processados.get('novo_Cpf', '')))  # Valida o novo cpf
+    mensagens_erro.append(validar_num_cartao(
+        dados_processados.get('novo_numCartao', '')))  # Valida o novo número do cartão
+    # Precisa ser dois parâmetros já que no componete validacoes colocamos dois parâmetros na função corfimar_senha
+    mensagens_erro.append(validar_codseg(
+        dados_processados.get('novo_cvv', '')))  # Valida o novo cvv
+    # Fim do bloco (mensagens de erro)
+    mensagens_erro.append(validar_datavenc(
+        dados_processados.get('nova_dataVenc', '')))  # Valida a nova data de vencimento
+    # Fim do bloco (mensagens de erro)
+    mensagens_erro.append(validar_nome_titular(
+        dados_processados.get('novo_nomeTitular', '')))  # Valida o novo nome do titular
+    # Fim do bloco (mensagens de erro)
+
+    # Remove mensagens de erro vazias
+    mensagens_erro = [msg for msg in mensagens_erro if msg['erro']]
+
+    print(mensagens_erro)
+
+    if mensagens_erro:
+        return {'erro': True, 'mensagens': mensagens_erro}
+    else:
+        alterar_cart = atualizar_cart(update_dadosCart)
+        print('teste', alterar_cart)
+        return {'erro': False, 'mensagem': alterar_cart}
+        # Chamar a função para recuperar os dados do usuário do banco de dados
+        # return {'erro': False, 'mensagem': dados_usuario}
