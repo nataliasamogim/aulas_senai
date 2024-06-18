@@ -81,7 +81,7 @@ const Compromissos = ({ route, navigation }) => {
     { label: '24 horas', value: 1440 }
   ];
 
-  const formattedDate = format(parseISO(selectedDate), 'dd/MM', { locale: ptBR });
+  const formattedDate = format(parseISO(selectedDate), 'MM-dd', { locale: ptBR });
   const dayOfWeek = format(parseISO(selectedDate), 'EEEE', { locale: ptBR });
 
   return (
