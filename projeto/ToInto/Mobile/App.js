@@ -5,6 +5,7 @@ import Compromissos from './pages/Compromissos/Compromissos';
 import Login from './pages/Login/Login';
 import Calendario from './pages/Calendario/Calendario';
 import CadastroForm from './pages/Cadastro/Cadastro';
+import Lp from './pages/Lp/Lp';
 import Planos from './pages/Plano/Planos';
 import AdicionarDadosCartao from './pages/Dados Cartao/Cartao';
 import ModificarDadosCartao from './pages/Modificar cartao/ModificCart';
@@ -21,6 +22,17 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+      <Stack.Screen name="LandingPage" component={Lp}
+          options={{
+            headerStyle: {
+              backgroundColor: '#AC72BF', // Cor de fundo da barra de navegação
+            },
+            headerTintColor: '#fff', // Cor do texto do título
+            headerTitleStyle: {
+              fontWeight: 'bold', // Estilo do texto do título
+            },
+          }} />
+
         <Stack.Screen name="Cadastro" component={CadastroForm}
           options={{
             headerStyle: {
