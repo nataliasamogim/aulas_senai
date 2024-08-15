@@ -135,10 +135,9 @@ def processar_dados_cad(dados):
         retorno=gravar_dados(dados_gravacao)
         if (retorno['erro']):
             print(retorno)
-        # Retorna os dados processados
-            retorno2 = []
-            retorno2.append(retorno)
-            return {'erro': True, 'mensagens': retorno2}
+        # Retorna os dados processados=
+            mensagens_erro.append(retorno)
+            return {'erro': True, 'mensagens': mensagens_erro}
         else:
             return {'erro': False, 'mensagens': retorno}
 
@@ -193,6 +192,7 @@ def processar_dados_cartao(dados):
     dados_gravacao = []
     #idcad = dados_processados.get('id')
     #dados_gravacao.append(idcad[1:3])
+    dados_gravacao.append(dados_processados.get('escolha_pag'))
     dados_gravacao.append(dados_processados.get('id'))
     dados_gravacao.append(dados_processados.get('cpf'))
     dados_gravacao.append(data())
@@ -313,7 +313,7 @@ def processar_dados_compromisso(dados):
         gravar_dados_compromisso(dados_gravacao)
         print(dados_gravacao)
         # Retorna os dados processados
-        return {'erro': False, 'mensagem': 'Dados Processados com Sucesso!'}
+        return {'erro': False, 'mensagem': 'Dados do compromissos criados com sucesso'}
     
 def processar_alterar_cart(dados):
     # Função para processar os dados recebidos do Flask
@@ -362,5 +362,3 @@ def processar_alterar_cart(dados):
         alterar_cart = atualizar_cart(update_dadosCart)
         print('teste', alterar_cart)
         return {'erro': False, 'mensagem': alterar_cart}
-        # Chamar a função para recuperar os dados do usuário do banco de dados
-        # return {'erro': False, 'mensagem': dados_usuario}
