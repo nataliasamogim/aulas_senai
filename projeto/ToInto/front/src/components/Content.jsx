@@ -14,6 +14,7 @@ import Modific_cart from "../pages/Modificar_cartao/Modific_cart";
 import { ModificPlano } from "../pages/Modific_plano/Modific_plano";
 import Concluido_cadatualizado from "../pages/Concluido/Concluido_cadatualizado";
 import { Esc_Pag } from "../pages/Escolha_pag/Esc_Pag";
+import Recuperacao from "../pages/Esq_senha/Recuperacao";
 
 const Content = props => (
     <main className="Content">
@@ -34,6 +35,7 @@ const Content = props => (
             <Route path="/modificart" exact element={<Modific_cart />} />
             <Route path="/modificplano" exact element={<ModificPlano />} />
             <Route path="/pagamento" exact element={<Esc_Pag />} />
+            <Route path="/esq_senha" exact element={<Recuperacao />}/>
         </Routes>
     </main>
 );

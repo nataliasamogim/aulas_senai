@@ -1,0 +1,34 @@
+
+
+.esqueceu-container{
+    margin-top: 55%;
+    background-color: #8d7fb9;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.7);
+}
+
+h1.h1_rec_senha {
+    color: white
+}
+
+input.btn_recsenha {
+    width: 140px;
+    height: 30px;
+    border-radius: 5px;
+    background-color: #AFA4CF;
+    border-color: white;
+    color: #531889;
+}
+.btn_rec_senha {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 15px;
+}
+
+input.input_email {
+    height: 35px;
+    border-radius: 3px;
+}

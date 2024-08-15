@@ -75,6 +75,10 @@ const Login = () => {
     });
   };
 
+  const handleForgotPassword = () => {
+    navigate('/esq_senha');
+  };
+
   return (
 
     <div className="form-container">
@@ -103,13 +107,16 @@ const Login = () => {
             <label className="label_senha">Senha</label>
             <input className="input_senha" type="password" name="senha_log" id="senha" value={formValues.senha_log} onChange={handleChange} data-password-validate data-required />
           </div>
-          <p className="paragrafo">Esqueceu a senha?</p>
+
+          {/* Botão "Esqueceu a senha?" com navegação usando useNavigate */}
+          <p className="paragrafo" onClick={handleForgotPassword}>
+            Esqueceu a senha
+          </p>
 
           <div className="button_log">
             <div className="log_entrar"> {/*Rota para o calendario */}
               {/*<Link to="/calendario" className="submit_btn-log" id="btn_logar">Entrar</Link>*/}
               <input type="submit" value="Entrar" className='submit_btn-log' id='btn_logar' />
-
             </div>
             <div className="log_cancel"> {/*Link para o botão cancelar */}
               {/*<Link className="submit_btn-log" id="btn_cancelar" onclick="limpaForm()">Cancelar</Link>*/}
