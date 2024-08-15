@@ -101,6 +101,7 @@ function Perfil(props) {
                         <Link to="/modificarpag" className='btn-pagamento'>Modificar forma de pagamento</Link>
                         <Link to="/modificart" className='btn-pagamento'>Modificar dados do cartão</Link>
                     </DropdownButton>
+                    <Link to="/modificplano" className='btn-sair'>Modificar Plano</Link>
                     <button onClick={() => setShowModal(true)} className='btn-excluir'>Excluir conta</button>
                     <Link to="/" className='btn-sair'>Sair</Link>
                 </Dropdown.Menu>
