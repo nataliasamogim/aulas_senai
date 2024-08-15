@@ -53,7 +53,7 @@ def processar_dados(dados):
         print('Compromissos')
         retorno = processar_dados_compromisso(dados)
     elif dados.get('acao') == 'salvar_log':
-        print('Compromissos')
+        print('Login')
         retorno = processar_dados_log(dados)
     elif dados.get('acao') == 'atualizar_cad':
         print('atualizar')
@@ -84,6 +84,8 @@ def processar_dados(dados):
             retorno = recuperar_inf_formani(dados.get('id', ''))
         elif dados.get('nome_novo') != None:
             retorno = processar_alterar_cad(dados)
+        elif dados.get('titulo') != None:
+            retorno = processar_dados_compromisso(dados)
         else:
             #print('processar', dados)
             retorno = processar_dados_log(dados)
