@@ -38,7 +38,7 @@ const Compromissos = ({ route, navigation }) => {
         lembrete: lembrete, 
       };
       try {
-        const response = await fetch('http://10.135.60.20:8085/receber-dados', {
+        const response = await fetch('http://10.135.60.29:8085/receber-dados', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -81,7 +81,7 @@ const Compromissos = ({ route, navigation }) => {
     { label: '24 horas', value: 1440 }
   ];
 
-  const formattedDate = format(parseISO(selectedDate), 'MM-dd', { locale: ptBR });
+  const formattedDate = format(parseISO(selectedDate), 'dd/MM', { locale: ptBR });
   const dayOfWeek = format(parseISO(selectedDate), 'EEEE', { locale: ptBR });
 
   return (

@@ -4,15 +4,17 @@ import styles from './DadCartStyle.js';
 import { LinearGradient } from 'expo-linear-gradient';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from "moment";
+import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const AdicionarDadosCartao = (navigation) => {
+const AdicionarDadosCartao = () => {
   const [nomeTitular, setNomeTitular] = useState('');
   const [cpf, setCpf] = useState('');
   const [numCartao, setNumCartao] = useState('');
   const [dataVenc, setDataVenc] = useState('');
   const [codSeguranca, setCodSeguranca] = useState('');
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  const navigation = useNavigation();
 
   const [mensagensErro, setMensagensErro] = useState([]);
 
@@ -30,20 +32,22 @@ const AdicionarDadosCartao = (navigation) => {
   };
 
   const handleAdicionarCart = async () => {
-    const idtxt = await AsyncStorage.getItem('ID')
+    const id_cad = await AsyncStorage.getItem('ID')
+     // Acessa o primeiro (e único) elemento do array
     if (nomeTitular.trim() !== '') {  // Verifica se ambos os campos estão preenchidos
       const formAdicionarCart = {
         acao: 'salvar_cart',
-        id: idtxt.substring(1,2),
-        cpf: cpf, 
+        id: id_cad,
+        cpf: cpf,
         num_cartao: numCartao,
         cod_seguranca: codSeguranca,
         datavenc: dataVenc,
         nome_titular: nomeTitular,
+        escolha_pag: '2'
       };
       console.log(formAdicionarCart)
       try {
-        const response = await fetch('http://10.135.60.38:8085/receber-dados', {
+        const response = await fetch('http://10.135.60.29:8085/receber-dados', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -67,12 +71,12 @@ const AdicionarDadosCartao = (navigation) => {
           setNumCartao('');
           setDataVenc('');
           setCodSeguranca('');
+          navigation.navigate('Login')
         }
       } catch (error) {
         console.error('Erro ao receber dados do Adicionar Cartão:', error);
       }
-
-      navigation.navigate('Calendario')
+      
     }
   };
 
