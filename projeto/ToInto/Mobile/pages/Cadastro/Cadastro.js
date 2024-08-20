@@ -29,7 +29,7 @@ const CadastroForm = ({ handleSaibaMais }) => {
       };
 
       try {
-        const response = await fetch('http://10.135.60.20:8085/receber-dados', {
+        const response = await fetch('http://10.135.60.29:8085/receber-dados', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -46,8 +46,11 @@ const CadastroForm = ({ handleSaibaMais }) => {
           setEmail('');
           setSenha('');
           setConfirmSenha('');
+          console.log(resultado)
           await AsyncStorage.setItem('ID', JSON.stringify(resultado.mensagens.mensagem));
-          console.log(resultado.mensagem)
+          console.log(await AsyncStorage.getItem('ID'))
+         
+          
           if (selectedBox == 2) {
             navigation.navigate('Planos');
           } else if (selectedBox == 3) {
