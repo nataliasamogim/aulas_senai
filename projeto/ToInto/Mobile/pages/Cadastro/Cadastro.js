@@ -47,8 +47,8 @@ const CadastroForm = ({ handleSaibaMais }) => {
           setSenha('');
           setConfirmSenha('');
           console.log(resultado)
-          await AsyncStorage.setItem('ID', JSON.stringify(resultado.mensagens.mensagem));
-          console.log(await AsyncStorage.getItem('ID'))
+          await AsyncStorage.setItem('ID', JSON.stringify(resultado.mensagens.mensagem[0]));
+          await AsyncStorage.setItem('opc', JSON.stringify(resultado.mensagens.mensagem[1]));
          
           
           if (selectedBox == 2) {
