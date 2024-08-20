@@ -27,31 +27,18 @@ const ModificarDadosCartao = ({ navigation }) => {
     setDataVenc(moment(date).format("YYYY-MM-DD"));
   };
 
-  const handleDadosCartao = () => {
-    console.log("Nome Titular: ", nomeTitular);
-    console.log("Cpf: ", cpf);
-    console.log("Número Cartão: ", numCartao);
-    console.log("Data Vencimento: ", dataVenc);
-    console.log("Código de segurança: ", codSeguranca);
-
-
-
-    // Aqui você pode adicionar a lógica para enviar os dados do formulário
-    // Por enquanto, apenas limpamos os campos do formulário
-
-  }
-
   useEffect(() => {
     // Função assíncrona para buscar dados do usuário
     const showDados = async () => {
+      const id_cad = await AsyncStorage.getItem('ID')
       try {
         // Faz uma requisição para receber os dados do usuário do servidor
-        const resposta = await fetch('http://10.135.60.38:8085/receber-dados', {
+        const resposta = await fetch('http://10.135.60.29:8085/receber-dados', {
           method: 'POST', // Método da requisição
           headers: {
             'Content-Type': 'application/json', // Tipo de conteúdo da requisição
           },
-          body: JSON.stringify({acao: 'recuperar_cart', id_cadastro: await AsyncStorage.getItem("ID") }), // Corpo da requisição contendo os dados do formulário
+          body: JSON.stringify({ acao: 'recuperar_cart', id_cadastro: id_cad }), // Corpo da requisição contendo os dados do formulário
         });
 
         // Verifica se a requisição foi bem-sucedida
@@ -62,7 +49,7 @@ const ModificarDadosCartao = ({ navigation }) => {
         // Extrai os dados da resposta e os converte para JSON
         const dadosCart = await resposta.json();
         //console.log('Dados do usuário:', userData);
-        console.log("Dados recebidos ", dadosCart.mensagem);
+        console.log("Dados recebidos", dadosCart.mensagem);
         // Atualiza o estado do formulário com os dados do usuário recebidos
         setNomeTitular(dadosCart.mensagem[7]); // Define o novo valor para 'nome'
         setCpf(dadosCart.mensagem[2]);
@@ -79,17 +66,17 @@ const ModificarDadosCartao = ({ navigation }) => {
 
   const [mensagensErro, setMensagensErro] = useState([]);
   const handleAtualizarCart = async () => {
-    const id_str = await AsyncStorage.getItem('ID');
+    const id_cad = await AsyncStorage.getItem('ID');
     try {
       // Faz uma requisição para enviar os dados do formulário para o servidor
-      const resposta = await fetch('http://10.135.60.38:8085/receber-dados', {
+      const resposta = await fetch('http://10.135.60.29:8085/receber-dados', {
         method: 'POST', // Método da requisição
         headers: {
           'Content-Type': 'application/json', // Tipo de conteúdo da requisição
         },
         body: JSON.stringify({
           acao: 'atualizar_cart',
-          id: id_str,
+          id: id_cad,
           novo_Cpf: cpf,
           novo_numCartao: numCartao,
           novo_cvv: codSeguranca,
@@ -173,3 +160,5 @@ const ModificarDadosCartao = ({ navigation }) => {
 }
 
 export default ModificarDadosCartao;
+
+
