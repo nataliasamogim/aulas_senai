@@ -86,6 +86,8 @@ def processar_dados(dados):
             retorno = processar_alterar_cad(dados)
         elif dados.get('titulo') != None:
             retorno = processar_dados_compromisso(dados)
+        elif dados.get('acao') == 'selecionar_cart':
+            retorno = recuperar_inf_cart(dados.get('id_cadastro', ''))
         else:
             #print('processar', dados)
             retorno = processar_dados_log(dados)
@@ -195,6 +197,7 @@ def processar_dados_cartao(dados):
     #idcad = dados_processados.get('id')
     #dados_gravacao.append(idcad[1:3])
     dados_gravacao.append(dados_processados.get('escolha_pag'))
+    dados_gravacao.append(dados_processados.get('opc_cad'))
     dados_gravacao.append(dados_processados.get('id'))
     dados_gravacao.append(dados_processados.get('cpf'))
     dados_gravacao.append(data())
