@@ -33,6 +33,7 @@ const AdicionarDadosCartao = () => {
 
   const handleAdicionarCart = async () => {
     const id_cad = await AsyncStorage.getItem('ID')
+    const opc_cad = await AsyncStorage.getItem('opc')
      // Acessa o primeiro (e único) elemento do array
     if (nomeTitular.trim() !== '') {  // Verifica se ambos os campos estão preenchidos
       const formAdicionarCart = {
@@ -43,7 +44,8 @@ const AdicionarDadosCartao = () => {
         cod_seguranca: codSeguranca,
         datavenc: dataVenc,
         nome_titular: nomeTitular,
-        escolha_pag: '2'
+        escolha_pag: '2',
+        plano_esc: opc_cad
       };
       console.log(formAdicionarCart)
       try {
