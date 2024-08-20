@@ -89,6 +89,10 @@ export default function Login({ navigation }) {
       .catch(err => console.error('Erro ao abrir o link Whatsapp: ', err));
   };
 
+  const handleForgotPassword = () => {
+    navigation.navigate('RecuperarSenha'); 
+  };
+
   return (
 
 
@@ -128,6 +132,12 @@ export default function Login({ navigation }) {
               autoCorrect={false}
               value={senha}
               onChangeText={setSenha} />
+          </View>
+
+          <View>
+            <TouchableOpacity onPress={handleForgotPassword}>
+              <Text style={styles.recSenha}>Esqueceu sua senha?</Text>
+            </TouchableOpacity>
           </View>
 
           <View style={styles.buttons}>

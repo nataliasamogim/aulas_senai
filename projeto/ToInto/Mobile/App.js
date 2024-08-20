@@ -15,6 +15,7 @@ import Pix from './pages/Pagina pix/Pix';
 import Perfil from './pages/Pagina perfil/Perfil';
 import AtualizarCad from './pages/Modificar cadastro/AtualizarCad';
 import ToDo from './pages/ToDo/ToDo';
+import RecuperarSenha from './pages/Recuperar senha/RecSenha';
 
 const Stack = createNativeStackNavigator();
 
@@ -45,6 +46,17 @@ function App() {
           }} />
 
         <Stack.Screen name="Login" component={Login}
+          options={{
+            headerStyle: {
+              backgroundColor: '#AC72BF', // Cor de fundo da barra de navegação
+            },
+            headerTintColor: '#fff', // Cor do texto do título
+            headerTitleStyle: {
+              fontWeight: 'bold', // Estilo do texto do título
+            },
+          }} />
+        
+        <Stack.Screen name="RecuperarSenha" component={RecuperarSenha}
           options={{
             headerStyle: {
               backgroundColor: '#AC72BF', // Cor de fundo da barra de navegação

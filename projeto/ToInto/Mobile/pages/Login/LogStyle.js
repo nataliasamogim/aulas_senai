@@ -83,5 +83,12 @@ export default styles = StyleSheet.create({
         justifyContent: 'space-around',
         marginTop: 20,
     },
+    recSenha: {
+        color: 'white', 
+        textAlign: 'center', 
+        marginTop: 8,
+        fontSize: 17,
+        marginBottom: 10,
+    }
     
   });
