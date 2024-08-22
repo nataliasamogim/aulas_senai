@@ -22,7 +22,7 @@ const Content = props => (
             <Route path="/" exact element={<Home />} />
             <Route path="*" element={<NotFound />} />
             <Route path="/Login" exact element={<Login />} />
-            <Route path="/cadastro/:plano" exact element={<CadastroLP />} />
+            <Route path="/cadastro" exact element={<CadastroLP />} />
             <Route path="/calendario" exact element={<App_calen />} />
             <Route path="/Todolist" exact element={<App_todo />} />
             <Route path="/concluido" exact element={<Cad_concluido />} />

@@ -87,7 +87,12 @@ const FormMani = () => { // Declaração do componente FormMani como uma funçã
                 headers: {
                     'Content-Type': 'application/json', // Tipo de conteúdo da requisição
                 },
-                body: JSON.stringify(formAlter), // Corpo da requisição contendo os dados do formulário em formato JSON
+                body: JSON.stringify({
+                    acao: 'atualizar_cad',
+                    id: formAlter.id,
+                    nome_novo: formAlter.nome_novo,
+                    email_novo: formAlter.email_novo,
+                    senha_nova: formAlter.senha_nova,}), // Corpo da requisição contendo os dados do formulário em formato JSON
             });
             console.log('teste envio',formAlter)
             // Extrai o resultado da resposta e o converte para JSON
@@ -102,7 +107,10 @@ const FormMani = () => { // Declaração do componente FormMani como uma funçã
                 // Atualiza o estado com as mensagens de erro para exibição no formulário
                 setMensagensErro(resultado.mensagens);
             } else {
-                console.log('Dados atualizados com sucesso!', resultado);
+                localStorage.setItem('ID', formAlter.id);
+                localStorage.setItem('nome_usuario', formAlter.nome_novo);
+                localStorage.setItem('email', formAlter.email_novo);
+                console.log('Dados atualizados com sucesso!', formAlter);
                 navigate('/cadatualizado'); // Navega para outra rota
             }
         } catch (error) {

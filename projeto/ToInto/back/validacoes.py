@@ -44,6 +44,11 @@ def validar_email(vemail):
         return {'erro': True, 'mensagem': 'E-mail inválido, exemplo: tointo@gmail.com'}
     return {'erro': False, 'mensagem': ''}
 
+def validar_emailVazio(vemail):
+    if vemail == '': 
+        return {'erro': True, 'mensagem': 'O campo de email não pode ser vazio'}
+    return {'erro': False, 'mensagem': ''}
+
 
 # Nome da função: confirmar_senha
 # Autora: Maria Luiza

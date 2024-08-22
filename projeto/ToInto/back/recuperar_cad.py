@@ -12,7 +12,6 @@ def recuperar_inf_formani(id_cad):
     conex.close()
 
     if usuario:
-        print('Usuario Laura')
         return {'erro': False, 'mensagem': usuario}
 
     else:

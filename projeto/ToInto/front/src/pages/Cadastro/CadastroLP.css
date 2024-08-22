@@ -8,7 +8,7 @@ para os usuários.*/
     box-sizing: content-box;
 }
 
-.cadastro { /*class do form*/
+.form_cadastro .cadastro { /*class do form*/
     /*deixei o formulário no centro da página */
     font-family: Arial, Helvetica, sans-serif;
     border: 1px solid;
@@ -17,7 +17,7 @@ para os usuários.*/
     margin-top: 110px;
     box-shadow: 20px 20px 50px #2D0651;
     width: 530px;
-    height: 500px;
+    height: 580px;
     margin-left: auto;
     margin-right: auto;
    
@@ -55,22 +55,73 @@ para os usuários.*/
     font-size: 13px;
 }
 
-.submit_btn {
-    /*class do botão cadastrar*/
+.submit_btn, .submit_can, .submit_cad {
+    /*class do botão free, mensal e anual*/
     padding: 10px;
     font-size: 1.2em;
     border-radius: 15px;
     cursor: pointer;
     font-size: 20px;
     text-decoration: none;
-    color: black;
-    background-color: white;
+    color: white;
+    background-color: #2D0651;
+    margin-bottom: 20px;
+    border-color: white;
+    
+}
+
+.btn_free  .submit_btn{
+    background-color: rgb(124,101,147);
+    color: white;
+    
+}
+
+.btn_mensal  .submit_btn{
+    background-color: rgb(124,101,147);
+    color: white;
+    
+}
+
+.btn_anual  .submit_btn{
+    background-color: rgb(124,101,147);
+    color: white;
+    
+}
+
+.submit_btn, .submit_can:hover, .submit_cad:hover {
+    /*muda cor do botão*/
+    background-color: rgb(124,101,147);
+}
+
+.submit_can, .submit_cad{
+    margin-left: 64px;
+    width: 150px;
+}
+
+.btn_can_cad{
+    margin-top: 20px;
+    display: flex;
+}
+
+.submit_btn {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    color: #333;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit_btn.selected{
+    background-color: rgb(124,101,147); /* Cor para o botão selecionado */
+    color: white; /* Cor do texto para o botão selecionado */
 }
 
 .submit_btn:hover {
-    /*muda cor do botão*/
-    background-color: #AFA4CF;
+    background-color: #ddd;
 }
+
 
 .nome {
     /*class da label Nome*/
@@ -95,6 +146,13 @@ para os usuários.*/
 }
 
 /*---Início buttons---*/
+
+.free_img, .mensal_img, .anual_img{
+    width:30px;
+    height: 30px;
+    margin-right: 5px;
+}
+
 .buttons { /*botão de cadastrar e cancelar*/
     display: flex;
     justify-content: space-around;
@@ -107,6 +165,26 @@ para os usuários.*/
 
 .buttons div input{ /*input do botão*/
     border: none;
+}
+
+.buttons .submit_btn {
+    width: 130px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.buttons .submit_btn{
+    width: 130px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.btn_free .btn_mensal .btn_anual {
+    width: 200px,
+}
+
+.btn_can_cad{
+    flex-direction: row;
 }
 /*---Fim buttons---*/
 

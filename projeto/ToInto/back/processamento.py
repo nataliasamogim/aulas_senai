@@ -15,6 +15,7 @@ from tratar_hora import data
 from validacoes import (
     validar_nome,
     validar_email,
+    validar_emailVazio,
     validar_senha,
     confirmar_senha
 )
@@ -197,7 +198,7 @@ def processar_dados_cartao(dados):
     #idcad = dados_processados.get('id')
     #dados_gravacao.append(idcad[1:3])
     dados_gravacao.append(dados_processados.get('escolha_pag'))
-    dados_gravacao.append(dados_processados.get('opc_cad'))
+    dados_gravacao.append(dados_processados.get('plano_esc'))
     dados_gravacao.append(dados_processados.get('id'))
     dados_gravacao.append(dados_processados.get('cpf'))
     dados_gravacao.append(data())
@@ -252,10 +253,8 @@ def processar_dados_log(dados):
 
     # Início do bloco (mensagens de erro)
     # Os dados recebidos dos inputs serão validados pela função correspondente e caso haja erro será armazenado na variável mensagens_erro
-    mensagens_erro.append(validar_email(
+    mensagens_erro.append(validar_emailVazio(
         dados_processados.get('email_log', '')))
-    mensagens_erro.append(validar_senha(
-        dados_processados.get('senha_log', '')))
     mensagens_erro = [msg for msg in mensagens_erro if msg['erro']]
 
     print(mensagens_erro)
