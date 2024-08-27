@@ -48,6 +48,8 @@ const CadastroForm = ({ handleSaibaMais }) => {
           setConfirmSenha('');
           console.log(resultado)
           await AsyncStorage.setItem('ID', JSON.stringify(resultado.mensagens.mensagem[0]));
+          await AsyncStorage.setItem('nome_usuario', JSON.stringify(resultado.mensagens.mensagem[2]));
+          await AsyncStorage.setItem('email', JSON.stringify(resultado.mensagens.mensagem[3]));
           await AsyncStorage.setItem('opc', JSON.stringify(resultado.mensagens.mensagem[1]));
          
           
