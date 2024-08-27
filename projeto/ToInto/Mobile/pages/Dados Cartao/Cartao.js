@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, TextInput, KeyboardAvoidingView, TouchableOpacity, Text, Alert } from "react-native";
+import { View, TextInput, KeyboardAvoidingView, TouchableOpacity, Text, Alert, Modal, TouchableHighlight } from "react-native";
 import styles from './DadCartStyle.js';
 import { LinearGradient } from 'expo-linear-gradient';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
@@ -17,6 +17,7 @@ const AdicionarDadosCartao = () => {
   const navigation = useNavigation();
 
   const [mensagensErro, setMensagensErro] = useState([]);
+  const [showErrorModal, setShowErrorModal] = useState(false);
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -35,8 +36,6 @@ const AdicionarDadosCartao = () => {
     const id_cad = await AsyncStorage.getItem('ID')
     const opc_cad = await AsyncStorage.getItem('opc')
     console.log(opc_cad)
-     // Acessa o primeiro (e único) elemento do array
-    if (nomeTitular.trim() !== '') {  // Verifica se ambos os campos estão preenchidos
       const formAdicionarCart = {
         acao: 'salvar_cart',
         id: id_cad,
@@ -50,7 +49,7 @@ const AdicionarDadosCartao = () => {
       };
       console.log(formAdicionarCart)
       try {
-        const response = await fetch('http://10.135.60.29:8085/receber-dados', {
+        const response = await fetch('http://10.135.60.17:8085/receber-dados', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -66,6 +65,7 @@ const AdicionarDadosCartao = () => {
 
           // Atualiza o estado com as mensagens de erro para exibição no formulário
           setMensagensErro(resultado.mensagens);
+          setShowErrorModal(true); // Exibir modal de erro
 
         } else {
           console.log('Dados criados com sucesso!')
@@ -79,23 +79,10 @@ const AdicionarDadosCartao = () => {
       } catch (error) {
         console.error('Erro ao receber dados do Adicionar Cartão:', error);
       }
-      
-    }
   };
 
   return (
     <KeyboardAvoidingView style={styles.background} behavior="padding">
-
-      {mensagensErro.length > 0 && (
-        <View style={{ color: 'white' }}>
-          <Text>Erro ao processar os dados:</Text>
-          <View>
-            {mensagensErro.map((mensagem, index) => (
-              <Text key={index}>{mensagem.mensagem}</Text>
-            ))}
-          </View>
-        </View>
-      )}
 
       <LinearGradient style={styles.background} colors={['#AC72BF', '#6B29A4', '#570D70']}>
         <View style={styles.containerTitulo}>
@@ -131,6 +118,23 @@ const AdicionarDadosCartao = () => {
           </View>
         </View>
       </LinearGradient>
+
+       {/* Modal de Erro */}
+       <Modal visible={showErrorModal} animationType="slide" transparent={true} onRequestClose={() => setShowErrorModal(false)}>
+          <View style={styles.modalContainer}>
+            <View style={styles.modalContent}>
+              <Text style={styles.modalTitle}>Erro ao processar os dados:</Text>
+                <View style={styles.containerErro}>
+                  {mensagensErro.map((mensagem, index) => (
+                    <Text key={index} style={styles.textErro}> - {mensagem.mensagem}</Text>
+                  ))}
+                </View>
+            </View>
+              <TouchableHighlight style={styles.closeButton} onPress={() => setShowErrorModal(false)}>
+                <Text style={styles.closeButtonText}>Fechar</Text>
+              </TouchableHighlight>
+          </View>
+        </Modal>
     </KeyboardAvoidingView>
   );
 }
