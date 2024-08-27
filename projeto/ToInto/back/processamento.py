@@ -309,7 +309,6 @@ def processar_dados_compromisso(dados):
     print(mensagens_erro)
 
     if mensagens_erro:
-        print()
         return {'erro': True, 'mensagens': mensagens_erro}
     else:
         # Chama a função para gravar os dados em um arquivo, caso não tenha mensagens de erro
