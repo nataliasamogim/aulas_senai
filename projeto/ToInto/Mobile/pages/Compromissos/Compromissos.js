@@ -63,11 +63,6 @@ const Compromissos = ({ route, navigation }) => {
   };
 
   
-
-  const handleSalvar = () => {
-    // Lógica para salvar os compromissos
-  };
-
   const handleCheckBox = () => {
     setChecked(!checked);
   };
