@@ -2,8 +2,8 @@ import re
 from datetime import datetime
 
 def validar_nome_titular(nome_titular):
-    if len(nome_titular) > 19:
-            return {'erro': True, 'mensagem': 'O nome deve ter no máximo 19 caracteres'}
+    if len(nome_titular) < 1 or len(nome_titular) > 19:
+        return {'erro': True, 'mensagem': 'O nome do titular não pode estar vazio e precisa ter no máximo 19 caracteres'}
     
     return {'erro': False, 'mensagem': ''}
 
