@@ -69,12 +69,13 @@ export default styles = StyleSheet.create({
     boxTextL: {
         color: '#fff',
         fontSize: 20,
+        marginTop: 3
     },
 
     boxTextC: {
         color: '#fff',
         fontSize: 20,
-        marginTop: 8
+        marginTop: 9
     },
 
     selectedText: {
