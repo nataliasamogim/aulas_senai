@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { Text, View, KeyboardAvoidingView, Image, TextInput, TouchableOpacity, Animated, Linking } from 'react-native';
+import { Text, View, KeyboardAvoidingView, Image, TextInput, TouchableOpacity, Animated, Linking, Modal, TouchableHighlight } from 'react-native';
 import styles from './LogStyle.js';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useEffect, useState } from 'react';
@@ -8,7 +8,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export default function Login({ navigation }) {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
-  const [mensagensErro, setMensagensErro] = useState([]);
+  const [mensagensErro, setMensagensErro] = useState([]); // Estado para armazenar mensagens de erro
+  const [showErrorModal, setShowErrorModal] = useState(false); // Estado para controlar a exibição do modal de erro
 
   const handleEntrar = async () => {
     if (email.trim() !== '' && senha.trim() !== '') {
@@ -18,7 +19,7 @@ export default function Login({ navigation }) {
         senha_log: senha,
       };
       try {
-        const response = await fetch('http://10.135.60.20:8085/receber-dados', {
+        const response = await fetch('http://10.135.60.17:8085/receber-dados', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -26,22 +27,19 @@ export default function Login({ navigation }) {
           body: JSON.stringify(formLogin)
         });
 
-        if (!response.ok) {
-          throw new Error('Erro na rede');
-        }
-
         const resultado = await response.json();
 
         if (resultado.erro) {
-          if (resultado.mensagens && resultado.mensagens.mensagem) {
-            setMensagensErro([resultado.mensagens.mensagem]); // Define a mensagem de erro do backend
-            console.error('Erro:', resultado.mensagens.mensagem);
-          } else if (resultado.mensagens) {
-            setMensagensErro(resultado.mensagens); // Define as mensagens de erro se forem múltiplas
-            console.error('Erro 2:', resultado.mensagens);
+          console.error('Erro no servidor:', resultado.mensagens);
+
+          // Corrigido para garantir que as mensagens de erro sejam exibidas corretamente
+          if (Array.isArray(resultado.mensagens)) {
+            setMensagensErro(resultado.mensagens);
           } else {
-            setMensagensErro(['Erro desconhecido']); // Mensagem de erro genérica
+            setMensagensErro([{ mensagem: 'Erro desconhecido' }]); // Mensagem de erro padrão
           }
+
+          setShowErrorModal(true); // Exibir modal de erro
         } else {
           console.log('Dados do Login:', resultado.mensagem);
           await AsyncStorage.setItem('ID', JSON.stringify(resultado.mensagem[0])); // Salva o ID no AsyncStorage
@@ -50,14 +48,19 @@ export default function Login({ navigation }) {
           setEmail('');
           setSenha('');
           setMensagensErro([]); // Limpa as mensagens de erro ao fazer login com sucesso
+          setShowErrorModal(false); // Esconder modal de erro
           navigation.navigate('Calendario');
         }
       } catch (error) {
         console.error('Erro ao receber dados do Login:', error);
-        setMensagensErro(['Erro ao conectar com o servidor. Por favor, tente novamente.']); // Define uma mensagem de erro de conexão
+
+        // Mensagem de erro em caso de falha na conexão ou outro problema
+        setMensagensErro([{ mensagem: 'Erro de conexão. Tente novamente mais tarde.' }]);
+        setShowErrorModal(true); // Exibir modal de erro
       }
     } else {
-      setMensagensErro(['Por favor, preencha todos os campos.']); // Mensagem de erro se os campos não estiverem preenchidos
+      setMensagensErro([{ mensagem: 'Por favor, preencha todos os campos.' }]);
+      setShowErrorModal(true); // Exibir modal de erro
     }
   };
 
@@ -71,44 +74,12 @@ export default function Login({ navigation }) {
     }).start();
   }, []);
 
-  const handleFacebookPress = () => {
-    const facebookURL = 'https://www.facebook.com/?locale=pt_BR'
-    Linking.openURL(facebookURL)
-      .catch(err => console.error('Erro ao abrir o link Facebook: ', err));
-  };
-
-  const handleInstagramPress = () => {
-    const instagramURL = 'https://www.instagram.com/'
-    Linking.openURL(instagramURL)
-      .catch(err => console.error('Erro ao abrir o link Instagram: ', err));
-  };
-
-  const handleWhatsPress = () => {
-    const whatsappURL = 'https://www.whatsapp.com/?lang=pt_BR'
-    Linking.openURL(whatsappURL)
-      .catch(err => console.error('Erro ao abrir o link Whatsapp: ', err));
-  };
-
   const handleForgotPassword = () => {
-    navigation.navigate('RecuperarSenha'); 
+    navigation.navigate('RecuperarSenha');
   };
 
   return (
-
-
-
     <KeyboardAvoidingView style={styles.background}>
-      {mensagensErro.length > 0 && (
-        <View style={{ backgroundColor: '#AC72BF', padding: 10, borderRadius: 5, margin: 10 }}>
-          <Text style={{ color: 'black', fontWeight: 'bold' }}>Erro ao processar os dados:</Text>
-          <View>
-            {mensagensErro.map((mensagem, index) => (
-              <Text key={index} style={{ color: 'black' }}>{mensagem.erro ? mensagem.mensagem : mensagem}</Text>
-            ))}
-          </View>
-
-        </View>
-      )}
       <LinearGradient colors={['#AC72BF', '#6B29A4', '#570D70']} style={styles.background}>
         <View style={styles.containerLogoLogin}>
           <Image style={styles.logoLogin} resizeMode='contain' source={require('../../assets/images/logo.png')} />
@@ -147,19 +118,36 @@ export default function Login({ navigation }) {
           </View>
 
           <View style={styles.socialContainer}>
-            <TouchableOpacity onPress={handleFacebookPress}>
+            <TouchableOpacity>
               <Image source={require('../../assets/images/facebook.png')} style={styles.socialIcon} />
             </TouchableOpacity>
-            <TouchableOpacity onPress={handleInstagramPress}>
+            <TouchableOpacity>
               <Image source={require('../../assets/images/Instagram2.png')} style={styles.socialIcon} />
             </TouchableOpacity>
-            <TouchableOpacity onPress={handleWhatsPress}>
+            <TouchableOpacity>
               <Image source={require('../../assets/images/whatsapp.png')} style={styles.socialIcon} />
             </TouchableOpacity>
           </View>
         </Animated.View>
         <StatusBar style="auto" />
       </LinearGradient>
+
+      {/* Modal de Erro */}
+      <Modal visible={showErrorModal} animationType="slide" transparent={true} onRequestClose={() => setShowErrorModal(false)}>
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalTitle}>Erro ao processar os dados:</Text>
+            <View style={styles.containerErro}>
+              {mensagensErro.map((mensagem, index) => (
+                <Text key={index} style={styles.textErro}>{mensagem.mensagem}</Text>
+              ))}
+            </View>
+          </View>
+          <TouchableHighlight style={styles.closeButton} onPress={() => setShowErrorModal(false)}>
+            <Text style={styles.closeButtonText}>Fechar</Text>
+          </TouchableHighlight>
+        </View>
+      </Modal>
     </KeyboardAvoidingView>
   );
-}
+};
