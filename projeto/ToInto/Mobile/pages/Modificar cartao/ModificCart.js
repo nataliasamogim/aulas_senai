@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, TextInput, KeyboardAvoidingView, TouchableOpacity, Text, Alert } from "react-native";
+import { View, TextInput, KeyboardAvoidingView, TouchableOpacity, Text, Alert, Modal, TouchableHighlight } from "react-native";
 import styles from './ModificCartStyle.js';
 import { LinearGradient } from 'expo-linear-gradient';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
@@ -65,11 +65,12 @@ const ModificarDadosCartao = ({ navigation }) => {
   }, []); // Array de dependências vazio, indica que este efeito deve ser executado apenas uma vez
 
   const [mensagensErro, setMensagensErro] = useState([]);
+  const [showErrorModal, setShowErrorModal] = useState(false);
   const handleAtualizarCart = async () => {
     const id_cad = await AsyncStorage.getItem('ID');
     try {
       // Faz uma requisição para enviar os dados do formulário para o servidor
-      const resposta = await fetch('http://10.135.60.29:8085/receber-dados', {
+      const resposta = await fetch('http://10.135.60.17:8085/receber-dados', {
         method: 'POST', // Método da requisição
         headers: {
           'Content-Type': 'application/json', // Tipo de conteúdo da requisição
@@ -95,6 +96,7 @@ const ModificarDadosCartao = ({ navigation }) => {
 
         // Atualiza o estado com as mensagens de erro para exibição no formulário
         setMensagensErro(resultado.mensagens);
+        setShowErrorModal(true); // Exibir modal de erro
       } else {
         console.log('Dados de cartão atualizados com sucesso!', resultado);
         navigation.navigate('Calendario');
@@ -111,16 +113,6 @@ const ModificarDadosCartao = ({ navigation }) => {
 
   return (
     <KeyboardAvoidingView style={styles.background} behavior="padding">
-      {mensagensErro.length > 0 && (
-        <View style={{ color: 'white' }}>
-          <Text>Erro ao processar os dados:</Text>
-          <View>
-            {mensagensErro.map((mensagem, index) => (
-              <Text key={index}>{mensagem.mensagem}</Text>
-            ))}
-          </View>
-        </View>
-      )}
       <LinearGradient style={styles.background} colors={['#AC72BF', '#6B29A4', '#570D70']}>
         <View style={styles.containerTitulo}>
           <Text style={styles.titulo}>Modificar dados do cartão</Text>
@@ -155,6 +147,23 @@ const ModificarDadosCartao = ({ navigation }) => {
           </View>
         </View>
       </LinearGradient>
+
+       {/* Modal de Erro */}
+       <Modal visible={showErrorModal} animationType="slide" transparent={true} onRequestClose={() => setShowErrorModal(false)}>
+          <View style={styles.modalContainer}>
+            <View style={styles.modalContent}>
+              <Text style={styles.modalTitle}>Erro ao processar os dados:</Text>
+                <View style={styles.containerErro}>
+                  {mensagensErro.map((mensagem, index) => (
+                    <Text key={index} style={styles.textErro}> - {mensagem.mensagem}</Text>
+                  ))}
+                </View>
+            </View>
+              <TouchableHighlight style={styles.closeButton} onPress={() => setShowErrorModal(false)}>
+                <Text style={styles.closeButtonText}>Fechar</Text>
+              </TouchableHighlight>
+          </View>
+        </Modal>
     </KeyboardAvoidingView>
   );
 }

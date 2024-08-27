@@ -339,6 +339,8 @@ def processar_alterar_cart(dados):
 
     # Início do bloco (mensagens de erro)
     # Os dados recebidos dos inputs serão validados pela função correspondente e caso haja erro será armazenado na variável mensagens_erro
+    mensagens_erro.append(validar_nome_titular(
+        dados_processados.get('novo_nomeTitular', '')))  # Valida o novo nome do titular
     mensagens_erro.append(validar_cpf(
         dados_processados.get('novo_Cpf', '')))  # Valida o novo cpf
     mensagens_erro.append(validar_num_cartao(
@@ -349,9 +351,6 @@ def processar_alterar_cart(dados):
     # Fim do bloco (mensagens de erro)
     mensagens_erro.append(validar_datavenc(
         dados_processados.get('nova_dataVenc', '')))  # Valida a nova data de vencimento
-    # Fim do bloco (mensagens de erro)
-    mensagens_erro.append(validar_nome_titular(
-        dados_processados.get('novo_nomeTitular', '')))  # Valida o novo nome do titular
     # Fim do bloco (mensagens de erro)
 
     # Remove mensagens de erro vazias
