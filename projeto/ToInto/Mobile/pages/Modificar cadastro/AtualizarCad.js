@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, TextInput, Image, KeyboardAvoidingView, TouchableOpacity, Text, Alert } from "react-native";
+import { View, TextInput, Image, KeyboardAvoidingView, TouchableOpacity, Text, Alert, Modal, TouchableHighlight } from "react-native";
 import styles from './AtualizarCadStyle.js';
 import { LinearGradient } from 'expo-linear-gradient';
 import * as ImagePicker from 'expo-image-picker';
@@ -12,13 +12,14 @@ const AtualizarCad = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
     const [mensagensErro, setMensagensErro] = useState([]);
+    const [showErrorModal, setShowErrorModal] = useState(false);
 
     useEffect(() => {
         // Função assíncrona para buscar dados do usuário
         const showDados = async () => {
             try {
                 // Faz uma requisição para receber os dados do usuário do servidor
-                const resposta = await fetch('http://10.135.60.20:8085/receber-dados', {
+                const resposta = await fetch('http://10.135.60.17:8085/receber-dados', {
                     method: 'POST', // Método da requisição
                     headers: {
                         'Content-Type': 'application/json', // Tipo de conteúdo da requisição
@@ -51,7 +52,7 @@ const AtualizarCad = ({ navigation }) => {
         const nome_str = nome;
         try {
             // Faz uma requisição para enviar os dados do formulário para o servidor
-            const resposta = await fetch('http://10.135.60.20:8085/receber-dados', {
+            const resposta = await fetch('http://10.135.60.17:8085/receber-dados', {
                 method: 'POST', // Método da requisição
                 headers: {
                     'Content-Type': 'application/json', // Tipo de conteúdo da requisição
@@ -76,6 +77,7 @@ const AtualizarCad = ({ navigation }) => {
 
                 // Atualiza o estado com as mensagens de erro para exibição no formulário
                 setMensagensErro(resultado.mensagens);
+                setShowErrorModal(true); // Exibir modal de erro
             } else {
                 console.log('Dados atualizados com sucesso upd!', resultado);
                 navigation.goBack();
@@ -112,16 +114,6 @@ const AtualizarCad = ({ navigation }) => {
 
     return (
         <KeyboardAvoidingView style={styles.background} behavior="padding">
-            {mensagensErro.length > 0 && (
-                <View style={{ color: 'white' }}>
-                    <Text>Erro ao processar os dados:</Text>
-                    <View>
-                        {mensagensErro.map((mensagem, index) => (
-                            <Text key={index}>{mensagem.mensagem}</Text>
-                        ))}
-                    </View>
-                </View>
-            )}
             <LinearGradient style={styles.background} colors={['#AC72BF', '#6B29A4', '#570D70']}>
                 <View style={styles.containercad}>
                     <Text style={styles.tittle}>Modificar Cadastro</Text>
@@ -148,6 +140,23 @@ const AtualizarCad = ({ navigation }) => {
                     </View>
                 </View>
             </LinearGradient>
+
+             {/* Modal de Erro */}
+            <Modal visible={showErrorModal} animationType="slide" transparent={true} onRequestClose={() => setShowErrorModal(false)}>
+                <View style={styles.modalContainer}>
+                <View style={styles.modalContent}>
+                <Text style={styles.modalTitle}>Erro ao processar os dados:</Text>
+                    <View style={styles.containerErro}>
+                        {mensagensErro.map((mensagem, index) => (
+                            <Text key={index} style={styles.textErro}>{mensagem.mensagem}</Text>
+                        ))}
+                    </View>
+                    </View>
+                    <TouchableHighlight style={styles.closeButton} onPress={() => setShowErrorModal(false)}>
+                    <Text style={styles.closeButtonText}>Fechar</Text>
+                    </TouchableHighlight>
+                </View>
+            </Modal>
         </KeyboardAvoidingView>
     );
 }

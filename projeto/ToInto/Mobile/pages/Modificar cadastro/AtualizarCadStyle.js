@@ -67,7 +67,76 @@ export default styles = StyleSheet.create({
         fontSize: 18,
         color: '#fff',
     },
-
-
-
+    modalContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      },
+      modalContent: {
+        backgroundColor: '#AC72BF',
+        borderRadius: 20,
+        width: '80%',
+        padding: 20,
+        shadowColor: "#fff",
+        shadowOffset: {
+          width: 0,
+          height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
+        alignItems: 'center',
+      },
+      modalTitle: {
+        fontSize: 24,
+        marginBottom: 10,
+        textAlign: 'center',
+        color: '#fff',
+        marginTop: 20, // Espaçamento acima do título
+      },
+      modalText: {
+        marginBottom: 10, // Espaçamento entre as mensagens de erro
+        fontSize: 18,
+        textAlign: 'left', // Alinhamento do texto para a esquerda
+        color: '#fff',
+      },
+      containerConta: {
+        alignItems: 'center',
+        marginTop: 20,
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+      },
+      titleNoCampo:{
+        color: '#fff', 
+        fontSize: 16,
+        marginRight: 5,
+      },
+      Txtentrar: {
+        color: '#fff',
+        fontSize: 18,
+      },
+      closeButton: {
+        backgroundColor: '#570D70',
+        paddingVertical: 10,
+        borderRadius: 15,
+        width: 150,
+        marginTop: 20, // Espaçamento acima do botão Fechar
+      },
+      closeButtonText: {
+        color: '#fff',
+        fontWeight: 'bold',
+        fontSize: 18,
+        textAlign: 'center',
+      },
+      containerErro: {
+        marginBottom: 20,
+      },
+      textErro: {
+        textAlign: 'center', 
+        marginBottom: 10,
+        fontSize: 18,
+        color: '#fff',
+      },
 });
