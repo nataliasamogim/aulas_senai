@@ -2,25 +2,43 @@ import React, { useState } from "react";
 import { View, TextInput, Image, KeyboardAvoidingView, TouchableOpacity, Text, Alert, Modal, TouchableHighlight } from "react-native";
 import styles from './ModificPlanoStyle.js';
 import { LinearGradient } from 'expo-linear-gradient';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const ModificarPlano = ({ navigation, handleSaibaMais }) => {
 
   const [selectedBox, setSelectedBox] = useState(null);
 
-  const handleModifPlano = (selectedBox) => {
-
-    if (selectedBox === 2) {
-      navigation.navigate('Planos');
-    } else if (selectedBox === 3) {
-      navigation.navigate('Planos');
-    } else if (selectedBox === 1) {
-      navigation.navigate('Calendario');
-    } else {
-      navigation.navigate('Modificar escolha Plano')
+  const handleModifPlano = async (selectedBox) => {
+    try {
+      // Faz uma requisição para receber os dados do usuário do servidor
+      const resposta = await fetch('http://10.135.60.29:8085/receber-dados', {
+          method: 'POST', // Método da requisição
+          headers: {
+              'Content-Type': 'application/json', // Tipo de conteúdo da requisição
+          },
+          body: JSON.stringify({ acao: 'atualizar_plano', id_cad: await AsyncStorage.getItem("ID"), plano: selectedBox }), // Corpo da requisição contendo os dados do formulário
+      });
+      const resultado = await resposta.json();
+      // Verifica se a requisição foi bem-sucedida
+      if (selectedBox == '') {
+          throw new Error('Precisa selecionar o plano que deseja'); // Lança um erro se a requisição falhar
+      }
+      else {
+        if (selectedBox === 2) {
+          navigation.navigate('Planos');
+        } else if (selectedBox === 3) {
+          navigation.navigate('Planos');
+        } else if (selectedBox === 1) {
+          navigation.navigate('Calendario');
+        } else {
+          navigation.navigate('Modificar escolha Plano')
+        }
+      }
+    } catch (error) {
+      console.error('Erro ao enviar dados:', error); // Captura e exibe qualquer erro ocorrido durante o envio dos dados do formulário
     }
-  };
-
+  };  
 
   const handleBoxPress = (boxNumber) => {
     setSelectedBox(boxNumber === selectedBox ? null : boxNumber);
