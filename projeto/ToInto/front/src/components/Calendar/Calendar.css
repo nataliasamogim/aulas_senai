@@ -18,10 +18,17 @@
   height: 100%;
   margin-top: 6px;
   margin-right: 25px;
+  display: flex;
+  margin-bottom: 13px;
+}
+/* Fim do bloco calendar*/
 
+.calendarioTotal{
+  width: 80%;
+  height: 70%;
+  
 }
 
-/* Fim do bloco calendar*/
 
 /*Início do bloco header do calendario*/
 .calendar-header {
@@ -31,6 +38,7 @@
   color: white;
   align-items: center;
   margin-bottom: 16px;
+  width: 88.1%;
 }
 
 .calendar-header button {
@@ -57,8 +65,9 @@
   gap: 8px;
   background-color: #9e80b3;
   padding: 40px;
-  height: 650px;
+  height: 540px;
   border-radius: 4px;
+  width: 78%;
 }
 
 /* Fim do bloco calendar grid*/
@@ -112,6 +121,142 @@
   font-size: 20px;
   color: lightgrey;
   text-decoration: none;
+}
+
+/*.toDoList{
+  background-color: #9e80b3;
+  width: 40%;
+  margin-top: 8.1%;
+  border-radius: 5px;
+}
+
+#DataTodo{
+  color: white;
+  font-size: 33px;
+  margin: 17px;
+}
+
+
+.butTodo{
+background-color: transparent;
+  color: white;
+  border: none;
+  font-size: 34px;
+  margin-top: 470px;
+  bottom: 0;
+  margin-left: 300px;
+}
+  */
+
+
+
+.toDoList {
+  background-color: #9e80b3;
+  width: 40%;
+  height: 580px; /* Altura fixa para corresponder à altura do calendário */
+  border-radius: 5px;
+  padding: 20px;
+  color: white;
+  margin-top: 8.1%;
+  overflow-y: auto; /* Habilita a rolagem se as tarefas ultrapassarem a altura */
+  flex-direction: column;
+  display: flex;
+ 
+
+}
+
+
+#DataTodo {
+  color: white;
+  font-size: 33px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.butTodo {
+  background-color: transparent;
+  color: white;
+  border: none;
+  font-size: 34px;
+  display: block;
+  margin-left: auto;
+  cursor: pointer;
+  margin-top: auto;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  padding-left: 0 !important;
+}
+
+li {
+  background-color: #7a5897;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  flex-direction: column; /* Alinha título e descrição em coluna */
+  align-items: flex-start;
+}
+
+.descricaoTarefa {
+  display: block;
+  text-align: start;
+  word-break: break-all;
+}
+
+.hora_titulo{
+  display: flex;
+}
+
+.titulo_tarefa{
+  word-break: break-all;
+}
+
+.buttonEditar {
+  background-color: #7a5897;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  /*align-self: flex-end; Posiciona o botão à direita */
+}
+
+.buttonExcluir{
+  background-color: #7a5897;
+  border: none;
+  border-radius: 3px;
+  margin-left: 10px;
+}
+
+#botoes{
+  display: flex;
+  align-self: flex-end;
+}
+
+
+li .descricao {
+  margin-top: 5px; /* Espaçamento entre título e descrição */
+  font-size: 14px; /* Tamanho menor para a descrição */
+}
+
+#nenhuma-task{
+  align-items: center;
+  background-color: transparent;
+}
+
+.check_tarefa{
+  display: flex;
+}
+
+.container-check{
+  padding-right: 5px;
+}
+
+.tarefa_edit_lixo{
+  display: flex;
+  justify-content: space-between;
 }
 
 /* Fim do botão de adicionar evento*/
