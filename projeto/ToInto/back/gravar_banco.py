@@ -116,5 +116,5 @@ def gravar_dados_compromisso(dados_gravacao):
 
     cursor.execute(sql, dados_gravacao)
     conex.commit()
-    print("Dados do compromisso inseridos com sucesso!") 
+    print("Dados do compromisso inseridos com sucesso!")
     conex.close()
