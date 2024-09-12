@@ -11,11 +11,13 @@ export default styles = StyleSheet.create({
 
     },
     containerData: {
+        backgroundColor: '#AE80D6',
         width: '90%',
         padding: 13,
-        backgroundColor: '#AE80D6',
         marginTop: 20,
         alignItems: 'center',
+        borderColor: '#fff',
+        borderWidth: 1,
     },
     data: {
         color: 'white',
@@ -43,7 +45,6 @@ export default styles = StyleSheet.create({
     content: {
         display: 'flex',
         flexDirection: 'column',
-        backgroundColor: '#AE80D6',
         width: '90%',
         top: 25,
     },
@@ -58,36 +59,44 @@ export default styles = StyleSheet.create({
         alignItems: 'center',
     },
     containerEditExcluir: {
-        display: 'flex1',
+        display: 'flex',
         flexDirection: 'row',
-        alignItems: 'center',
-        paddingRight: 14
     },
     fotoEdit: {
-        width: 30,
-        height: 30,
-        marginRight: 4
+        width: 24,
+        height: 24,
+        marginLeft: 10
     },
     fotoEdit2: {
-        width: 22,
-        height: 22,
+        width: 18,
+        height: 18,
     },
     descricao: {
         paddingLeft: 15,
-     
     },
     textDesc: {
         color: 'white',
         fontSize: 18
     },
+    adicionar: {
+        position: 'absolute',
+        bottom: 40,
+        right: 20,
+        backgroundColor: '#AE80D6',
+        padding: 0,
+        justifyContent: 'center',
+        alignItems:'center',
+        display: 'flex',
+        borderRadius: 80,
+        height: 60,
+        width:60
+    },
     botaoMais: {
         color: 'white',
-        fontSize: 48
+        fontSize: 35,
+
     },
-    adicionar: {
-        alignItems: 'flex-end',
-        paddingRight: 13
-    },
+
     containerLogos: {
         display: 'flex',
         flexDirection: 'row',
@@ -116,6 +125,20 @@ export default styles = StyleSheet.create({
         height: 50,
         top: 12
     },
-
-
+    componentesTarefas: {
+        marginBottom: 6, // Adiciona espaço entre as tarefas
+        padding: 6,
+        backgroundColor: '#AE80D6', // Cor de fundo para destacar cada tarefa
+        borderRadius: 5,
+        borderColor: '#fff',
+        borderWidth: 1,
+        //display: 'flex',
+        //flexDirection: 'row'
+    },
+    noTaskMessage: {
+        color: 'white',
+        fontSize: 16,
+        marginLeft: 130
+    }
 });
+
