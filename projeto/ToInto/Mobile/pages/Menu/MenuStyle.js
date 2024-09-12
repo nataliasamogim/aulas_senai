@@ -9,7 +9,7 @@ export default styles = StyleSheet.create({
         display: 'flex',
         flexDirection:'row',
         justifyContent: 'space-around',
-        paddingTop: 16,
+        paddingTop: 8,
         paddingBottom: 16,
         alignItems: 'center',
         backgroundColor: '#AE80D6'
@@ -102,7 +102,7 @@ export default styles = StyleSheet.create({
     },
     containerLogos: {
         backgroundColor: '#E0',
-        height: 83,
+        height: 94,
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -110,7 +110,6 @@ export default styles = StyleSheet.create({
         paddingRight: 10,
         borderTopWidth: 0.8,
         borderTopColor: '#fff',
-        top: 10,
         paddingRight: 20,
         paddingLeft: 20
     },
