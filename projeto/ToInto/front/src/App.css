@@ -14,7 +14,7 @@
 .menu-cal-per {
   display: flex;
   justify-content: space-between;
-  background-image: linear-gradient(to left, #AC72BF, #6B29A4, #570D70);
+  background-image: linear-gradient(to bottom, #AC72BF, #6B29A4, #570D70);
   padding-top: 10px;
 
 }
@@ -197,54 +197,10 @@ svg.bi.bi-justify:hover {
 
 /*-----Fim menu lateral-----*/
 
-/*-----Início dos Compromissos-----*/
-.mb-3,
-.import {
-  margin-right: 25px;
-}
-
-.modal-header,
-.modal-body,
-.modal-footer {
-  background-color: #915d9b !important;
-  color: white;
-}
-
-.form-control.form-control:focus,
-button.btn-close:focus {
-  border-color: #cccccc;
-  outline: 0;
-  box-shadow: none;
-}
-
-.dropdown-menu {
-  --bs-dropdown-link-active-bg: #bb80c7 !important;
-}
-
-
-.btn{
-  width: 40px !important;
-  justify-content: left !important;
-}
-
-/*Define a cor de fundo dos links ativos em um menu
- suspenso utilizando uma variável Bootstrap para roxo.*/
-
-
-.dropdown-item {
-  width: 218px !important;
-  color: rgb(46, 16, 68) !important;
-}
-
-.dropdown.btn-group {
-  width: 30%;
-}
-/*-----Fim dos compromissos-----*/
-
 
 /*-----Início do Perfil-----*/
-#dropdown-basic {
-  width: 50px !important;
+#dropdown-basic:hover {
+  background-color: aqua;
 }
 
 #dropdown-basic::after {
@@ -277,7 +233,7 @@ button.btn.btn-outline {
   width: 250%;
 }
 
-.btn-sair, .btn-excluir {
+.btn-sair, .btn-excluir{
   color: white;
   display: flex;
   flex-direction: column;
@@ -297,7 +253,6 @@ button.btn.btn-outline {
 }
 
 
-
 .page-perfil .btn-sair:hover ,.btn-excluir:hover {
   background-color: rgb(150, 119, 181);
 }
@@ -313,18 +268,20 @@ button.btn.btn-outline {
 #bg-vertical-dropdown-1 {
   background-color: rgb(72, 4, 120);
   border: none;
-  padding-left: 15px;
+  text-align: start;
   border-radius: 0 !important;
+  padding: 8px 15px 8px 15px;
 }
 
 #bg-vertical-dropdown-1:hover{
-  background-color: rgb(150, 119, 181);
+  background-color: rgb(150, 119, 181) !important;
+  border: none !important;
 }
 
 #bg-vertical-dropdown-1::after {
   border-top: 0em solid;
-  margin-left: 140px;
-}
+  margin-left: 112px;
+  }
 
 /*-----Fim do Perfil-----*/
 .dropdown {
@@ -347,4 +304,3 @@ button.btn.btn-outline {
 .modal-footer{
   border-top: none !important;
 }
-
