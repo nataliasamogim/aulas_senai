@@ -8,7 +8,7 @@ Bootstrap e do React Router para criar links. No geral, é uma representação v
 Observação Pertinentes: Este componente é importado no App_todo*/}
 
 import { useState } from 'react';
-import Compromissos from './Compromissos';
+import Compromissos from '../pages/Compromissos/Compromissos';
 import 'bootstrap/dist/css/bootstrap.min.css';
 {/*Nome da função: Todolist_2
 Autor: Laura
