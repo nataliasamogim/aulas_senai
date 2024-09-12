@@ -9,6 +9,7 @@ import Lp from './pages/Lp/Lp';
 import Planos from './pages/Plano/Planos';
 import AdicionarDadosCartao from './pages/Dados Cartao/Cartao';
 import ModificarDadosCartao from './pages/Modificar cartao/ModificCart';
+import ModificarCompromissos from './pages/Modificar comp/ModificComp';
 import MenuHSI from './pages/Menu/MenuHSI';
 import ModificPlano from './pages/Modificar plano/ModificPlano';
 import Pix from './pages/Pagina pix/Pix';
@@ -23,7 +24,7 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-      <Stack.Screen name="LandingPage" component={Lp}
+        <Stack.Screen name="LandingPage" component={Lp}
           options={{
             headerStyle: {
               backgroundColor: '#AC72BF', // Cor de fundo da barra de navegação
@@ -55,7 +56,7 @@ function App() {
               fontWeight: 'bold', // Estilo do texto do título
             },
           }} />
-        
+
         <Stack.Screen name="RecuperarSenha" component={RecuperarSenha}
           options={{
             headerStyle: {
@@ -79,6 +80,17 @@ function App() {
           }} />
 
         <Stack.Screen name="Compromissos" component={Compromissos}
+          options={{
+            headerStyle: {
+              backgroundColor: '#6B29A4', // Cor de fundo da barra de navegação
+            },
+            headerTintColor: '#fff', // Cor do texto do título
+            headerTitleStyle: {
+              fontWeight: 'bold', // Estilo do texto do título
+            },
+          }} />
+
+        <Stack.Screen name="Modificar Compromissos" component={ModificarCompromissos}
           options={{
             headerStyle: {
               backgroundColor: '#6B29A4', // Cor de fundo da barra de navegação
