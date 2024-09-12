@@ -14,10 +14,10 @@ CORS(app)  # Permita solicitações CORS
 @app.route('/receber-dados', methods=['POST'])
 def receber_dados():
     dados = request.json
-    print(dados)
+    print('recebidos do front ',dados)
     ret = processar_dados(dados)  # Chame a função processar_dados
 
-    
+
     print('************************************************************************\n')
     print(ret)
     print('************************************************************************\n')
@@ -25,5 +25,5 @@ def receber_dados():
 
 
 if __name__ == '__main__':
-     #app.run(debug=True)
+    #app.run(debug=True)
     app.run(port=8085, host='10.135.60.20', debug=True, threaded=True)

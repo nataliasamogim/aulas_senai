@@ -7,10 +7,13 @@ from gravar_banco import gravar_dados, gravar_dados_compromisso, gravar_dados_ca
 from recuperar_cad import verificar_informacao_log
 from recuperar_cad import recuperar_inf_formani
 from recuperar_cart import recuperar_inf_cart
-from update_banco import atualizar_cad
+from recuperar_comp import recuperar_inf_comp
+from update_banco import atualizar_cad, atualizar_compromisso
 from update_banco import atualizar_cart
 from delete_banco import deletar_cad
+from delete_banco import deletar_compromisso
 from tratar_hora import data
+from consulta_data import consultar_tarefas_por_usuario
 
 from validacoes import (
     validar_nome,
@@ -62,11 +65,21 @@ def processar_dados(dados):
     elif dados.get('acao') == 'salvar_cart':
         print ('Dados Cartao')
         retorno = processar_dados_cartao(dados)
-    elif dados.get('acao') == 'recuperar_cart' :
+    elif dados.get('acao') == 'recuperar_cart':
         retorno = recuperar_inf_cart(dados.get('id_cadastro', ''))
+    elif dados.get('acao') == 'recuperar_comp':
+        retorno = recuperar_inf_comp(dados.get('id_cad', ''), dados.get('data_comp', ''))
     elif dados.get('acao') == 'atualizar_cart':
         print ('Atualizar dados do cartão')
         retorno = processar_alterar_cart(dados)
+    elif dados.get('acao') == 'atualizar_plano':
+        retorno = processar_dados_cartao(dados)
+    elif dados.get('acao') == 'atualizar_comp':
+        retorno = processar_alterar_comp(dados)
+    elif dados.get('acao') == 'deletar_comp':
+        retorno = deletar_compromisso(dados.get('id_comp', ''))
+    elif dados.get('acao') == 'consulta_data':
+        retorno = consultar_data(dados)
     else:
         
 #-------------------------------------------------------------------------
@@ -94,6 +107,8 @@ def processar_dados(dados):
             retorno = processar_dados_log(dados)
 
     return (retorno)
+
+
 #-------------------------------------------------------------------------------
 
 # Nome da função: processar_dados_cad
@@ -318,6 +333,43 @@ def processar_dados_compromisso(dados):
         # Retorna os dados processados
         return {'erro': False, 'mensagem': 'Dados do compromissos criados com sucesso'}
     
+def processar_alterar_comp(dados):
+    print ('processamento', dados)
+    dados_processados = dados
+    dados_gravacao = []
+    dados_gravacao.append(dados_processados.get('id_cad'))
+    dados_gravacao.append(dados_processados.get('id_tarefa'))
+    dados_gravacao.append(dados_processados.get('titulo'))
+    dados_gravacao.append(dados_processados.get('date'))
+    dados_gravacao.append(dados_processados.get('time'))
+    dados_gravacao.append(dados_processados.get('descricao'))
+    dados_gravacao.append(dados_processados.get('importante'))
+    dados_gravacao.append(dados_processados.get('lembrete'))
+
+    mensagens_erro = []  # Cria uma lista vazia para armazenar mensagens de erro
+
+    # Início do bloco (mensagens de erro)
+    # Os dados recebidos dos inputs serão validados pela função correspondente e caso haja erro será armazenado na variável mensagens_erro
+    mensagens_erro.append(validar_titulo(dados.get('titulo', '')))
+    mensagens_erro.append(validar_descricao(dados.get('descricao', '')))
+    # Fim do bloco (mensagens de erro)
+
+    # Remove mensagens de erro vazias
+    mensagens_erro = [msg for msg in mensagens_erro if msg['erro']]
+
+    print(mensagens_erro)
+
+    if mensagens_erro:
+        return {'erro': True, 'mensagens': mensagens_erro}
+    else:
+        # Chama a função para gravar os dados em um arquivo, caso não tenha mensagens de erro
+        #gravar_em_arquivo(dados_processados)
+        atualizar_compromisso(dados_gravacao)
+        print(dados_gravacao)
+        # Retorna os dados processados
+        return {'erro': False, 'mensagem': 'Dados do compromissos criados com sucesso'}
+    
+
 def processar_alterar_cart(dados):
     # Função para processar os dados recebidos do Flask
     # Retorna os dados processados
@@ -352,6 +404,9 @@ def processar_alterar_cart(dados):
     mensagens_erro.append(validar_datavenc(
         dados_processados.get('nova_dataVenc', '')))  # Valida a nova data de vencimento
     # Fim do bloco (mensagens de erro)
+    mensagens_erro.append(validar_nome_titular(
+        dados_processados.get('novo_nomeTitular', '')))  # Valida o novo nome do titular
+    # Fim do bloco (mensagens de erro)
 
     # Remove mensagens de erro vazias
     mensagens_erro = [msg for msg in mensagens_erro if msg['erro']]
@@ -364,3 +419,15 @@ def processar_alterar_cart(dados):
         alterar_cart = atualizar_cart(update_dadosCart)
         print('teste', alterar_cart)
         return {'erro': False, 'mensagem': alterar_cart}
+    
+
+
+#Função para buscar data e marcar a bolinha amarela no calendário
+def consultar_data(dados): 
+    print('Dentro função consultar_data', dados)   
+    user_id = dados.get('user_id')
+    if user_id:
+        resultado = consultar_tarefas_por_usuario(user_id)
+        return resultado  
+    else:
+        return {'erro': True, 'mensagem': 'ID de usuário não fornecido'}
