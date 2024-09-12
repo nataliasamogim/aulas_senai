@@ -124,15 +124,18 @@ const ToDo = ({ route, navigation }) => {
                             tarefas.map((tarefa) => (
                                 <View key={tarefa.id_comp} style={styles.componentesTarefas}>
                                     <View style={styles.containerComp}>
-                                        <CheckBox
-                                            checked={checkedTasks[tarefa.id_comp] || false}
-                                            onPress={() => handleCheckBox(tarefa.id_comp)}
-                                            checkedColor="white"
-                                            uncheckedColor="white"
-                                        />
-                                        <View style={styles.containerHoraTitle}>
-                                            <Text style={styles.horario}>{tarefa.horario}</Text>
-                                            <Text style={styles.titulo}>{tarefa.titulo}</Text>
+                                        <View style={styles.check_tarefa}>
+                                            <CheckBox
+                                                style={styles.check}
+                                                checked={checkedTasks[tarefa.id_comp] || false}
+                                                onPress={() => handleCheckBox(tarefa.id_comp)}
+                                                checkedColor="white"
+                                                uncheckedColor="white"
+                                            />
+                                            <View style={styles.containerHoraTitle}>
+                                                <Text style={styles.horario}>{tarefa.horario}</Text>
+                                                <Text style={styles.titulo}>{tarefa.titulo}</Text>
+                                            </View>
                                         </View>
 
                                         <View style={styles.containerEditExcluir}>
