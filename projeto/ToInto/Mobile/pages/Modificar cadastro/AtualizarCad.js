@@ -19,7 +19,7 @@ const AtualizarCad = ({ navigation }) => {
         const showDados = async () => {
             try {
                 // Faz uma requisição para receber os dados do usuário do servidor
-                const resposta = await fetch('http://10.135.60.17:8085/receber-dados', {
+                const resposta = await fetch('http://10.135.60.20:8085/receber-dados', {
                     method: 'POST', // Método da requisição
                     headers: {
                         'Content-Type': 'application/json', // Tipo de conteúdo da requisição
@@ -141,19 +141,19 @@ const AtualizarCad = ({ navigation }) => {
                 </View>
             </LinearGradient>
 
-             {/* Modal de Erro */}
+            {/* Modal de Erro */}
             <Modal visible={showErrorModal} animationType="slide" transparent={true} onRequestClose={() => setShowErrorModal(false)}>
                 <View style={styles.modalContainer}>
-                <View style={styles.modalContent}>
-                <Text style={styles.modalTitle}>Erro ao processar os dados:</Text>
-                    <View style={styles.containerErro}>
-                        {mensagensErro.map((mensagem, index) => (
-                            <Text key={index} style={styles.textErro}>{mensagem.mensagem}</Text>
-                        ))}
-                    </View>
+                    <View style={styles.modalContent}>
+                        <Text style={styles.modalTitle}>Erro ao processar os dados:</Text>
+                        <View style={styles.containerErro}>
+                            {mensagensErro.map((mensagem, index) => (
+                                <Text key={index} style={styles.textErro}>{mensagem.mensagem}</Text>
+                            ))}
+                        </View>
                     </View>
                     <TouchableHighlight style={styles.closeButton} onPress={() => setShowErrorModal(false)}>
-                    <Text style={styles.closeButtonText}>Fechar</Text>
+                        <Text style={styles.closeButtonText}>Fechar</Text>
                     </TouchableHighlight>
                 </View>
             </Modal>
