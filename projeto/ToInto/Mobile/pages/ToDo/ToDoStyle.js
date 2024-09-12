@@ -40,7 +40,8 @@ export default styles = StyleSheet.create({
         color: 'white',
         fontSize: 20,
         paddingLeft: 0,
-        marginLeft: 15
+        marginLeft: 15,
+       
     },
     content: {
         display: 'flex',
@@ -48,31 +49,35 @@ export default styles = StyleSheet.create({
         width: '90%',
         top: 25,
     },
-    componentesTarefas: {
+    check_tarefa: {
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        alignItems: 'center',
+        margin: -10,
     },
     containerComp: {
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
+        justifyContent: 'space-between',
     },
     containerEditExcluir: {
         display: 'flex',
         flexDirection: 'row',
+
     },
     fotoEdit: {
-        width: 24,
-        height: 24,
-        marginLeft: 10
+        width: 30,
+        height: 30,
+        marginRight: 10,
     },
     fotoEdit2: {
-        width: 18,
-        height: 18,
+        width: 25,
+        height: 25,
     },
     descricao: {
-        paddingLeft: 15,
+        padding: 9,
+
     },
     textDesc: {
         color: 'white',
@@ -85,11 +90,11 @@ export default styles = StyleSheet.create({
         backgroundColor: '#AE80D6',
         padding: 0,
         justifyContent: 'center',
-        alignItems:'center',
+        alignItems: 'center',
         display: 'flex',
         borderRadius: 80,
         height: 60,
-        width:60
+        width: 60
     },
     botaoMais: {
         color: 'white',
@@ -109,29 +114,11 @@ export default styles = StyleSheet.create({
         paddingRight: 20,
         paddingLeft: 20
     },
-    perfil: {
-        width: 55,
-        height: 55,
-        borderRadius: 50,
-        top: 10,
-    },
-    menu: {
-        width: 48,
-        height: 48,
-        top: 12
-    },
-    iconeCalen: {
-        width: 50,
-        height: 50,
-        top: 12
-    },
     componentesTarefas: {
-        marginBottom: 6, // Adiciona espaço entre as tarefas
-        padding: 6,
+        marginBottom: 15, // Adiciona espaço entre as tarefas
+        padding: 7,
         backgroundColor: '#AE80D6', // Cor de fundo para destacar cada tarefa
         borderRadius: 5,
-        borderColor: '#fff',
-        borderWidth: 1,
         //display: 'flex',
         //flexDirection: 'row'
     },
