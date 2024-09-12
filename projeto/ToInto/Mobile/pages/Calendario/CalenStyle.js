@@ -61,7 +61,7 @@ export default styles = StyleSheet.create({
         paddingRight: 10,
         borderTopWidth: 0.8,
         borderTopColor: '#fff',
-        top: 50,
+        top: 30,
         paddingRight: 20,
         paddingLeft: 20,
         position: 'relative'

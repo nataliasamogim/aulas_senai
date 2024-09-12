@@ -1,7 +1,8 @@
-import styles from "./CalenStyle";
-import { View, TouchableOpacity, StyleSheet, Image, KeyboardAvoidingView } from "react-native";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { View, TouchableOpacity, Image, KeyboardAvoidingView } from "react-native";
 import { Calendar, LocaleConfig } from 'react-native-calendars';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import styles from "./CalenStyle";
 
 LocaleConfig.locales['pt'] = {
   monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
@@ -15,6 +16,81 @@ LocaleConfig.defaultLocale = 'pt';
 const Calendario = ({ navigation }) => {
   const [tasks, setTasks] = useState({});
 
+  // Função para converter a data para o formato YYYY-MM-DD
+  // Função para converter a data para o formato YYYY-MM-DD usando UTC
+  const formatDateToYYYYMMDD = (dateString) => {
+    const date = new Date(dateString);
+    const year = date.getUTCFullYear();
+    const month = (`0${date.getUTCMonth() + 1}`).slice(-2); // Adiciona zero à esquerda, se necessário
+    const day = (`0${date.getUTCDate()}`).slice(-2);
+    return `${year}-${month}-${day}`; // Retorna no formato YYYY-MM-DD
+  };
+
+
+  useEffect(() => {
+    const fetchTasks = async () => {
+      try {
+        const userId = await AsyncStorage.getItem('ID');
+        console.log('ID--- envio', userId);
+        if (userId) {
+          const response = await fetch('http://10.135.60.20:8085/receber-dados', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              user_id: userId,
+              acao: 'consulta_data' // Enviando a ação 'consulta_data'
+            }),
+          });
+
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+
+          const data = await response.json();
+          console.log('data--:', data);
+
+          if (!data.erro) {
+            const tarefas = data.dados || [];  // Alterado para acessar "dados"
+            console.log('tarefas--:', tarefas);
+
+            // Verificação adicional de tarefas não vazias
+            if (tarefas.length > 0) {
+              // Converta as datas para o formato YYYY-MM-DD
+              const newMarkedDates = tarefas.reduce((acc, taskDate) => {
+                // Tente converter a string da data para Date
+                try {
+                  const formattedDate = formatDateToYYYYMMDD(taskDate); // Converte a data para o formato correto
+                  acc[formattedDate] = { marked: true, dotColor: 'yellow' };
+                } catch (error) {
+                  console.error(`Erro ao converter a data ${taskDate}:`, error);
+                }
+                return acc;
+              }, {});
+
+              setTasks(newMarkedDates); // Atualiza o estado com as datas marcadas
+            } else {
+              console.log('Nenhuma tarefa retornada.');
+            }
+          } else {
+            console.error('Erro na resposta da API:', data.mensagem);
+          }
+        }
+      } catch (error) {
+        console.error('Erro ao buscar tarefas:', error);
+      }
+    };
+
+    const unsubscribe = navigation.addListener('focus', () => {
+      // Executa o fetchTasks quando a tela volta a ficar visível
+      fetchTasks();
+    });
+    return unsubscribe;
+  }, [navigation]);
+
+
+
   const handleDayPress = (day) => {
     navigation.navigate('ToDoList', { selectedDate: day.dateString });
   };
@@ -22,14 +98,10 @@ const Calendario = ({ navigation }) => {
   return (
     <KeyboardAvoidingView style={styles.background}>
       <View style={styles.container}>
-        <Calendar showSixWeeks={true}
+        <Calendar
+          showSixWeeks={true}
           onDayPress={handleDayPress}
-          markedDates={{
-            ...Object.keys(tasks).reduce((acc, date) => {
-              acc[date] = { marked: true, dotColor: 'yellow' };
-              return acc;
-            }, {})
-          }}
+          markedDates={tasks} // Use o estado "tasks" para as datas marcadas
           theme={{
             todayTextColor: '#fff',
             selectedDayBackgroundColor: '#852FCF',
