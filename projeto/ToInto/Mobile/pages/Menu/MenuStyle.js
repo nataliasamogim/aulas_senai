@@ -9,7 +9,7 @@ export default styles = StyleSheet.create({
         display: 'flex',
         flexDirection:'row',
         justifyContent: 'space-around',
-        paddingTop: 8,
+        paddingTop: 10,
         paddingBottom: 16,
         alignItems: 'center',
         backgroundColor: '#AE80D6'
@@ -61,6 +61,7 @@ export default styles = StyleSheet.create({
     },
     componentes: {
         flexDirection:'row',
+        justifyContent: 'space-around',
         alignItems:'center',
     },
     containerComp: {
@@ -76,12 +77,13 @@ export default styles = StyleSheet.create({
     titulo: {
         color:'white',
         fontSize:17,
+        marginLeft: -15
     },
     titulo2: {
         color:'white',
         fontSize:17,
         paddingLeft: 8,
-        paddingRight:58,
+        paddingRight:20,
     },
     fotoEdit: {
         width:30,
@@ -102,7 +104,7 @@ export default styles = StyleSheet.create({
     },
     containerLogos: {
         backgroundColor: '#E0',
-        height: 94,
+        height: 75,
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',

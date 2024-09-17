@@ -49,7 +49,7 @@ const AdicionarDadosCartao = () => {
       };
       console.log(formAdicionarCart)
       try {
-        const response = await fetch('http://10.135.60.17:8085/receber-dados', {
+        const response = await fetch('http://192.168.137.1:8085/receber-dados', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

@@ -30,6 +30,8 @@ export default styles = StyleSheet.create({
     containerHoraTitle: {
         display: "flex",
         flexDirection: 'row',
+        marginLeft: -15,
+        marginTop: -4
     },
     horario: {
         color: 'white',
@@ -40,7 +42,7 @@ export default styles = StyleSheet.create({
         color: 'white',
         fontSize: 20,
         paddingLeft: 0,
-        marginLeft: 15,
+        marginLeft: 10,
        
     },
     content: {
@@ -48,12 +50,14 @@ export default styles = StyleSheet.create({
         flexDirection: 'column',
         width: '90%',
         top: 25,
+        marginBottom: 25
     },
     check_tarefa: {
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
         margin: -10,
+        marginRight: -20,
     },
     containerComp: {
         display: 'flex',
@@ -69,7 +73,7 @@ export default styles = StyleSheet.create({
     fotoEdit: {
         width: 30,
         height: 30,
-        marginRight: 10,
+        marginRight: 0,
     },
     fotoEdit2: {
         width: 25,
@@ -85,9 +89,9 @@ export default styles = StyleSheet.create({
     },
     adicionar: {
         position: 'absolute',
-        bottom: 40,
+        bottom: 30,
         right: 20,
-        backgroundColor: '#AE80D6',
+        backgroundColor: '#6B39A9',
         padding: 0,
         justifyContent: 'center',
         alignItems: 'center',
@@ -99,23 +103,12 @@ export default styles = StyleSheet.create({
     botaoMais: {
         color: 'white',
         fontSize: 35,
+        textAlign: 'center',
 
     },
 
-    containerLogos: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        paddingLeft: 10,
-        paddingRight: 10,
-        borderTopWidth: 0.8,
-        borderTopColor: '#fff',
-        top: 375,
-        paddingRight: 20,
-        paddingLeft: 20
-    },
     componentesTarefas: {
-        marginBottom: 15, // Adiciona espaço entre as tarefas
+        marginBottom: 10, // Adiciona espaço entre as tarefas
         padding: 7,
         backgroundColor: '#AE80D6', // Cor de fundo para destacar cada tarefa
         borderRadius: 5,
@@ -125,7 +118,10 @@ export default styles = StyleSheet.create({
     noTaskMessage: {
         color: 'white',
         fontSize: 16,
-        marginLeft: 130
+        textAlign: 'center'
+    },
+    check: {
+        marginLeft: 111
     }
 });
 

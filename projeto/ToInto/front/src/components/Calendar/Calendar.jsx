@@ -32,7 +32,7 @@ const Calendar = () => {
 
   const receberTarefas = async () => {
     try {
-      const resposta = await fetch('http://10.135.60.20:8085/receber-dados', {
+      const resposta = await fetch('http://10.135.60.29:8085/receber-dados', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -133,7 +133,7 @@ const Calendar = () => {
 
     try {
       console.log("tarefaData ", idComp)
-      const response = await fetch('http://10.135.60.20:8085/receber-dados', {
+      const response = await fetch('http://10.135.60.29:8085/receber-dados', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -33,7 +33,7 @@ const ModificarDadosCartao = ({ navigation }) => {
       const id_cad = await AsyncStorage.getItem('ID')
       try {
         // Faz uma requisição para receber os dados do usuário do servidor
-        const resposta = await fetch('http://10.135.60.20:8085/receber-dados', {
+        const resposta = await fetch('http://192.168.137.1:8085/receber-dados', {
           method: 'POST', // Método da requisição
           headers: {
             'Content-Type': 'application/json', // Tipo de conteúdo da requisição
@@ -70,7 +70,7 @@ const ModificarDadosCartao = ({ navigation }) => {
     const id_cad = await AsyncStorage.getItem('ID');
     try {
       // Faz uma requisição para enviar os dados do formulário para o servidor
-      const resposta = await fetch('http://10.135.60.20:8085/receber-dados', {
+      const resposta = await fetch('http://192.168.137.1:8085/receber-dados', {
         method: 'POST', // Método da requisição
         headers: {
           'Content-Type': 'application/json', // Tipo de conteúdo da requisição

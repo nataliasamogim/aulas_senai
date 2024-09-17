@@ -26,4 +26,4 @@ def receber_dados():
 
 if __name__ == '__main__':
     #app.run(debug=True)
-    app.run(port=8085, host='10.135.60.20', debug=True, threaded=True)
+    app.run(port=8085, host='0.0.0.0', debug=True, threaded=True)

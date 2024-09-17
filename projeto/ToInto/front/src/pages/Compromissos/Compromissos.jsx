@@ -51,7 +51,7 @@ const Compromissos = ({ isOpen, onRequestClose, tarefasData, receberTarefas, dat
       let response;
       if (tarefasData) {
         // Atualizar tarefa existente
-        response = await fetch('http://10.135.60.20:8085/receber-dados', {
+        response = await fetch('http://10.135.60.29:8085/receber-dados', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

@@ -53,7 +53,7 @@ const ModificarCompromissos = ({ route, navigation }) => {
       console.log('Dados enviados:', formCompromisso);
 
       try {
-        const response = await fetch('http://10.135.60.20:8085/receber-dados', {
+        const response = await fetch('http://192.168.137.1:8085/receber-dados', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -171,6 +171,10 @@ const ModificarCompromissos = ({ route, navigation }) => {
               <Picker.Item key={option.value} label={option.label} value={option.value} />
             ))}
           </Picker>
+
+          <TouchableOpacity onPress={handleCheckBox}>
+            <View style={[styles.checkbox, { backgroundColor: checked ? 'purple' : 'white' }]} />
+          </TouchableOpacity>
         </View>
 
         <View style={styles.botao}>

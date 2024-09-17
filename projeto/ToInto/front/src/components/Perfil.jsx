@@ -48,7 +48,7 @@ function Perfil(props) {
     const excluirConta = () => {
         const id_cad = localStorage.getItem('ID');
 
-        fetch('http://localhost:5000/receber-dados', {
+        fetch('http://10.135.60.29:8085/receber-dados', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

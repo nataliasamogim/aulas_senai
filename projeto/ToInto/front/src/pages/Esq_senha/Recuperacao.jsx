@@ -18,7 +18,7 @@ function Recuperacao() {
         e.preventDefault();
 
         try {
-            const resposta = await fetch('http://localhost:5000/receber-dados', {
+            const resposta = await fetch('http://10.135.60.29:8085/receber-dados', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formValues),

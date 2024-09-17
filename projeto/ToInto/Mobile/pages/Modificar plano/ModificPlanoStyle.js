@@ -6,7 +6,7 @@ export default styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#6B29A4',
-        width:450,
+        width:400,
         height:800,
     },
     btnSubmit: {
@@ -35,7 +35,7 @@ export default styles = StyleSheet.create({
         top: 30,
     },
     box: {
-        width: 400,
+        width: 352,
         height: 180,
         backgroundColor: '#AC72BF',
         borderWidth: 2,

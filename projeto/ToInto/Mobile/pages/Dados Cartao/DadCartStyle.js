@@ -6,7 +6,7 @@ export default styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#6B29A4',
-        width:450,
+        width: 395,
         height:800,
     },
     containerTitulo: {
@@ -26,7 +26,7 @@ export default styles = StyleSheet.create({
     },
     inputs: {
         backgroundColor: '#fff',
-        width: 400,
+        width: 355,
         color: '#222',
         marginBottom: 15,
         fontSize: 17,

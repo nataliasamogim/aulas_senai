@@ -7,7 +7,7 @@ export default styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#6B29A4',
-        width: 450,
+        width: 395,
     },
 
     logo: {
@@ -26,7 +26,7 @@ export default styles = StyleSheet.create({
 
     title: {
         marginBottom: 20,
-        marginTop: '60%'
+        marginTop: '70%'
     },
 
     titleText: {
@@ -75,7 +75,7 @@ export default styles = StyleSheet.create({
     boxTextC: {
         color: '#fff',
         fontSize: 20,
-        marginTop: 9
+        marginTop: 6
     },
 
     selectedText: {

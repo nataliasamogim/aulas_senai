@@ -6,7 +6,7 @@ export default styles = StyleSheet.create({
       color: '#AC72BF',
       alignItems: 'center',
       justifyContent: 'center',
-      width: 450,
+      width: 395,
       height: 720,
     },
     containerLogoLogin:{

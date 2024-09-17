@@ -38,7 +38,7 @@ const Compromissos = ({ route, navigation }) => {
         lembrete: lembrete, 
       };
       try {
-        const response = await fetch('http://10.135.60.29:8085/receber-dados', {
+        const response = await fetch('http://192.168.137.1:8085/receber-dados', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -127,7 +127,7 @@ const Compromissos = ({ route, navigation }) => {
 
         <Text style={styles.titleInput}>Descrição</Text>
         <TextInput
-          style={[styles.input]}
+          style={[styles.input_descr]}
           placeholder="Digite uma descrição"
           value={descricao}
           onChangeText={setDescricao}

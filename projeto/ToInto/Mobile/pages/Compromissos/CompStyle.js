@@ -8,17 +8,11 @@ export default styles = StyleSheet.create({
     },
     container: {
         backgroundColor: '#AE80D6',
-        height: 550,
+        height: 557,
         width: 350,
         borderRadius: 15,
         alignItems: 'center',
-        marginLeft: 50
-    },
-    containerTitle: {
-        borderRadius: 15,
-        backgroundColor: '#6B29A4',
-        margin: 15,
-        width: '90%',
+        marginLeft: 22
     },
 
     containerData: {
@@ -49,6 +43,17 @@ export default styles = StyleSheet.create({
         marginLeft: 20,
 
     },
+    input_descr: {
+        backgroundColor: '#fff',
+        width: '90%',
+        height: 40,
+        color: '#222',
+        marginBottom: 7,
+        fontSize: 15,
+        borderRadius: 5,
+        padding: 10,
+
+    },
 
     input: {
         backgroundColor: '#fff',
@@ -66,7 +71,8 @@ export default styles = StyleSheet.create({
         flexDirection: 'row', // alinha os itens horizontalmente
         alignItems: 'center',
         alignSelf: 'flex-start',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        marginBottom: 6
     },
     containerTexto: {
         alignItems: 'center',
@@ -75,12 +81,15 @@ export default styles = StyleSheet.create({
     impText: {
         fontSize: 18,
         color: '#fff',
+        marginLeft: -12,
+        marginTop: -2,
     },
 
     dropdown: {
         display: 'flex',
         flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
+        marginBottom: 10
     },
     label: {
         padding: 5,
@@ -117,7 +126,7 @@ export default styles = StyleSheet.create({
         paddingRight: 10,
         borderTopWidth: 0.8,
         borderTopColor: '#fff',
-        top: 30,
+        top: 55,
         paddingRight: 20,
         paddingLeft: 20
     },
@@ -130,7 +139,7 @@ export default styles = StyleSheet.create({
     menu: {
         width: 48,
         height: 48, 
-        top: 12
+        top: 14
     },
     iconeCalen: {
         width: 50,

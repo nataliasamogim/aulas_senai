@@ -21,7 +21,7 @@ const FormMani = () => { // Declaração do componente FormMani como uma funçã
         const showDados = async () => {
             try {
                 // Faz uma requisição para receber os dados do usuário do servidor
-                const resposta = await fetch('http://localhost:5000/receber-dados', {
+                const resposta = await fetch('http://10.135.60.29:8085/receber-dados', {
                     method: 'POST', // Método da requisição
                     headers: {
                         'Content-Type': 'application/json', // Tipo de conteúdo da requisição
@@ -82,7 +82,7 @@ const FormMani = () => { // Declaração do componente FormMani como uma funçã
         e.preventDefault(); // Previne o comportamento padrão de envio do formulário
         try {
             // Faz uma requisição para enviar os dados do formulário para o servidor
-            const resposta = await fetch('http://localhost:5000/receber-dados', {
+            const resposta = await fetch('http://10.135.60.29:8085/receber-dados', {
                 method: 'POST', // Método da requisição
                 headers: {
                     'Content-Type': 'application/json', // Tipo de conteúdo da requisição

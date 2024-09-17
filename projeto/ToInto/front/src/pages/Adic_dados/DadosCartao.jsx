@@ -31,7 +31,7 @@ Ele atualiza o estado formValues com os novos valores do campo.*/}
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const resposta = await fetch('http://10.135.60.20:8085/receber-dados', {
+            const resposta = await fetch('http://10.135.60.29:8085/receber-dados', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

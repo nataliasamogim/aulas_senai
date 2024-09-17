@@ -20,7 +20,7 @@ const ToDo = ({ route, navigation }) => {
             }
 
             // Configura o corpo da requisição
-            const response = await fetch('http://10.135.60.20:8085/receber-dados', {
+            const response = await fetch('http://192.168.137.1:8085/receber-dados', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -65,7 +65,7 @@ const ToDo = ({ route, navigation }) => {
         id_cad = await AsyncStorage.getItem("ID")
         try {
             console.log('Tentando deletar compromisso com ID:', tarefas[0].id_comp, 'e ID de cadastro:', id_cad); // Adicione um log para depuração
-            const response = await fetch('http://10.135.60.20:8085/receber-dados', {
+            const response = await fetch('http://192.168.137.1:8085/receber-dados', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -154,23 +154,10 @@ const ToDo = ({ route, navigation }) => {
                                 </View>
                             ))
                         ) : (
-                            <Text style={styles.noTaskMessage} >Não possui tarefas</Text>
+                            <Text style={styles.noTaskMessage}>Não possui tarefas</Text>
                         )}
 
-
                     </View>
-                </View>
-
-                <View style={styles.containerLogos}>
-                    <TouchableOpacity style={styles.containerMenu} onPress={() => navigation.navigate('MenuHSI')}>
-                        <Image style={styles.menu} resizeMode="contain" source={require('../../assets/images/menu.png')} />
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.containerCalen} onPress={() => navigation.navigate('Calendario')}>
-                        <Image style={styles.iconeCalen} resizeMode="contain" source={require('../../assets/images/iconeCalen.png')} />
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.containericonePerfil} onPress={() => navigation.navigate('Perfil')}>
-                        <Image style={styles.perfil} resizeMode="contain" source={require('../../assets/images/foto_perfil.jpg')} />
-                    </TouchableOpacity>
                 </View>
 
             </ScrollView>

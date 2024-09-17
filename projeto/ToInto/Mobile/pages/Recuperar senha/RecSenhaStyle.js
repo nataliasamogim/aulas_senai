@@ -7,7 +7,7 @@ export default styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#6B29A4',
-        width: 450,
+        width: 395,
     },
 
     logoRec: {
@@ -56,7 +56,7 @@ export default styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         width: 110,
-        height: 40,
+        padding: 10,
         borderRadius: 3, 
         marginBottom: '48%'
     },
