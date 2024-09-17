@@ -172,21 +172,21 @@ const Compromissos = ({ isOpen, onRequestClose, tarefasData, receberTarefas, dat
         </div>
 
         {/* Campo Importante */}
-        <div className="form-group">
-          <label>Importante</label>
+        <div className="form-group-imp">
           <input
             type="checkbox"
             className="form-check-input"
             checked={importante}
             onChange={(e) => setImportante(e.target.checked)}
           />
+          <label className='label'>Importante</label>
         </div>
 
         {/* Campo Lembre-me */}
-        <div className="form-group">
-          <label>Lembre-me</label>
+        <div className="form-group-lembrete">
+          <label className='label-lembrete'>Lembre-me</label>
           <select
-            className="form-control"
+            className="form-control-lembrete"
             value={lembrete}
             onChange={(e) => setLembrete(e.target.value)}
           >
@@ -200,7 +200,7 @@ const Compromissos = ({ isOpen, onRequestClose, tarefasData, receberTarefas, dat
         </div>
 
         <div className="button-salvar">
-          <button type="submit" className="btn">
+          <button type="submit" className="btn-criar-task">
             {tarefasData ? 'Atualizar' : 'Criar'}
           </button>
         </div>

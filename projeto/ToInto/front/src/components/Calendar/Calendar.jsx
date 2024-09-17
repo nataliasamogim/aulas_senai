@@ -199,7 +199,7 @@ const Calendar = () => {
         <ul>
           {tarefaData.length > 0 ? (
             tarefaData.map((tarefa) => (
-              <li key={tarefa.id_comp}>
+              <li className='licalendar' key={tarefa.id_comp}>
                 <div className='tarefa_edit_lixo'>
                   <div className='check_tarefa'>
                     <div className='container-check'>

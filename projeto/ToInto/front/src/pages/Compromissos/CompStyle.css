@@ -1,125 +1,169 @@
 /*-----Início dos Compromissos-----*/
 .ReactModal__Overlay {
-    background: rgba(0, 0, 0, 0.7) !important; /* Escurecimento do fundo */
-  }
-  
-  .ReactModal__Content {
+    background: rgba(0, 0, 0, 0.7) !important;
+    /* Escurecimento do fundo */
+}
+
+.ReactModal__Content {
     width: 28%;
     height: 80%;
-    max-width: 600px; /* Tamanho máximo para o modal */
-    margin: auto; /* Opcional, mas pode ajudar na centralização */
-    position: relative; /* Certifique-se de que o modal está posicionado relativamente */
+    max-width: 600px;
+    /* Tamanho máximo para o modal */
+    margin: auto;
+    /* Opcional, mas pode ajudar na centralização */
+    position: relative;
+    /* Certifique-se de que o modal está posicionado relativamente */
     background-color: #915d9b !important;
     color: white;
     border-radius: 15px !important;
-  }
-  
-  .modal-close-button {
-    position: absolute; /* Posiciona o botão em relação ao modal */
-    top: 10px; /* Distância do topo */
-    right: 10px; /* Distância da direita */
-    background: transparent; /* Sem fundo */
-    border: none; /* Remove a borda */
-    font-size: 23px; /* Tamanho do "xis" */
-    color: #fff; /* Cor branca do "xis" */
-    cursor: pointer; /* Cursor pointer para indicar que é clicável */
-  }
-  
-  .button-salvar{
+}
+
+.modal-close-button {
+    position: absolute;
+    /* Posiciona o botão em relação ao modal */
+    top: 10px;
+    /* Distância do topo */
+    right: 10px;
+    /* Distância da direita */
+    background: transparent;
+    /* Sem fundo */
+    border: none;
+    /* Remove a borda */
+    font-size: 23px;
+    /* Tamanho do "xis" */
+    color: #fff;
+    /* Cor branca do "xis" */
+    cursor: pointer;
+    /* Cursor pointer para indicar que é clicável */
+}
+
+.button-salvar {
     width: 65px;
     height: 32px;
+    align-items: center;
+}
+
+.btn-criar-task {
+    background-color: #bb80c7;
+    color: white;
+    border: 1px solid transparent;
     border-radius: 7px;
-    margin-top: 20px; /* Espaço acima do botão, ajuste conforme necessário */
-  }
-  
-  .form-group{
-  height: 86px;
-  }
-  
-  #descricaotext{
-  height: 65px;
-  }
-  
-  .form-control{
+    padding: 5px 9px;
+    transition: border-color 0.2s;
+    margin-left: 173px;
+    margin-top: 20px;
+}
+
+.btn-criar-task:active {
+    border-color: white;
+}
+
+.form-group {
+    height: 86px;
+}
+
+.form-group-imp {
+    padding-top: 20px;
+
+}
+
+.form-check-input {
+    margin-right: 10px;
+}
+
+.form-group-lembrete {
+    display: flex;
+    margin-top: 10px;
+}
+
+#descricaotext {
+    height: 65px;
+}
+
+.form-control {
     height: 38px;
     padding: 0 !important;
-  }
-  
-  .comph2div{
-   /* border-bottom: 2px solid white !important; --- não modificou o código.*/
-    height:100%;
+}
+
+.label-lembrete {
+    margin-top: 7px;
+}
+
+.form-control-lembrete {
+    margin-left: 15px;
+    width: 70%;
+    padding: 10px;
+}
+
+.comph2div {
+    /* border-bottom: 2px solid white !important; --- não modificou o código.*/
+    height: 5%;
     margin: 12px !important;
-  }
-  
-  #compromissosh2{
+}
+
+#compromissosh2 {
     text-align: center;
-  }
-  
-  .datadiv{
-  text-align: center;
-  margin-top: 15px;
-  height: 50px;
-  margin-bottom: 10px !important;
-  }
-  
-  #datacentral{
+}
+
+.datadiv {
+    text-align: center;
+    margin-top: 15px;
+    height: 50px;
+    margin-bottom: 10px !important;
+}
+
+#datacentral {
     font-size: 28px;
     background-color: #bb80c7;
     padding: 7px;
     border-radius: 9px;
-  }
-  
-  .formulariocomp{
+}
+
+.formulariocomp {
     margin-top: 17px !important;
     border-top: 1px solid white;
-  }
-  
-  .mb-3,
-  .import {
+}
+
+.mb-3,
+.import {
     margin-right: 25px;
-  }
-  
-  .modal-header,
-  .modal-body,
-  .modal-footer {
+}
+
+.modal-header,
+.modal-body,
+.modal-footer {
     background-color: #915d9b !important;
     color: white;
-  }
-  
-  .form-control.form-control:focus,
-  button.btn-close:focus {
+}
+
+.form-control.form-control:focus,
+button.btn-close:focus {
     border-color: #cccccc;
     outline: 0;
     box-shadow: none;
-  }
-  
-  .dropdown-menu {
+}
+
+.dropdown-menu {
     --bs-dropdown-link-active-bg: #bb80c7 !important;
-  }
-  
-  .btn {
-    background-color: transparent !important; 
-    color: white !important; 
-    
-  }
-  
-  /* Botão ao passar o mouse (hover) */
-  .btn:hover {
+}
+
+/* Botão ao passar o mouse (hover) */
+/* .btn:hover {
     background-color: #915d9b !important; 
     color: white !important; 
     border: 1px solid #ffffff !important
-  }
-  
-  /* Define a cor de fundo dos links ativos em um menu
+  }*/
+
+/* Define a cor de fundo dos links ativos em um menu
   suspenso utilizando uma variável Bootstrap para roxo. */
-  
-  .dropdown-item {
+
+.dropdown-item {
     width: 218px !important;
     color: rgb(46, 16, 68) !important;
-  }
-  
-  .dropdown.btn-group {
+}
+
+.dropdown.btn-group {
     width: 30%;
-  }
-  
-  /*-----Fim dos compromissos-----*/
+}
+
+/*-----Fim dos compromissos-----*/

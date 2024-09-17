@@ -181,9 +181,6 @@ svg.bi.bi-justify {
   color: white;
 }
 
-svg.bi.bi-justify:hover {
-  color: #915d9b;
-}
 
 
 .offcanvas-body,
@@ -199,9 +196,6 @@ svg.bi.bi-justify:hover {
 
 
 /*-----Início do Perfil-----*/
-#dropdown-basic:hover {
-  background-color: aqua;
-}
 
 #dropdown-basic::after {
   content: none;
