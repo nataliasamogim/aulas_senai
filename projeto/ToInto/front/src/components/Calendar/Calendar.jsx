@@ -32,7 +32,7 @@ const Calendar = () => {
 
   const receberTarefas = async () => {
     try {
-      const resposta = await fetch('http://10.135.60.20:8085/receber-dados', {
+      const resposta = await fetch('http://10.135.60.17:8085/receber-dados', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -133,7 +133,7 @@ const Calendar = () => {
 
     try {
       console.log("tarefaData ", idComp)
-      const response = await fetch('http://10.135.60.20:8085/receber-dados', {
+      const response = await fetch('http://10.135.60.17:8085/receber-dados', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -199,7 +199,7 @@ const Calendar = () => {
         <ul>
           {tarefaData.length > 0 ? (
             tarefaData.map((tarefa) => (
-              <li key={tarefa.id_comp}>
+              <li className='licalendar' key={tarefa.id_comp}>
                 <div className='tarefa_edit_lixo'>
                   <div className='check_tarefa'>
                     <div className='container-check'>
