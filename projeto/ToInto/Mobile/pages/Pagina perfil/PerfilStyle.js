@@ -121,7 +121,7 @@ export default styles = StyleSheet.create({
         paddingRight: 10,
         borderTopWidth: 0.8,
         borderTopColor: '#fff',
-        top: 106,
+        top: 70,
         paddingRight: 20,
         paddingLeft: 20
     },
