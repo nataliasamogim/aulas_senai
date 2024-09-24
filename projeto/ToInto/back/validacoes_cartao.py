@@ -12,14 +12,9 @@ def validar_cpf(cpf):
   #Retira apenas os dígitos do CPF, ignorando os caracteres especiais
   numeros = [int(digito) for digito in cpf if digito.isdigit()]
   
-  formatacao = False
   quant_digitos = False
   validacao1 = False
   validacao2 = False
-
-  #Verifica a estrutura do CPF (111.222.333-44)
-  if re.match(r'^\d{3}\.\d{3}\.\d{3}-\d{2}$', cpf):
-      formatacao = True
 
   if len(numeros) == 11:
       quant_digitos = True
@@ -28,7 +23,7 @@ def validar_cpf(cpf):
       if numeros == numeros[::-1]:  # Todos iguais
         return {'erro': True, 'mensagem': 'CPF inválido, todos os dígitos são iguais.'}
   
-      soma_produtos = sum(a*b for a, b in zip (numeros[0:9], range (10, 1, -1)))
+      soma_produtos = sum(a*b for a, b in zip(numeros [0:9], range (10, 1, -1)))
       digito_esperado = (soma_produtos *10 % 11) % 10
       if numeros[9] == digito_esperado:
           validacao1 = True
@@ -38,13 +33,13 @@ def validar_cpf(cpf):
       if numeros[10] == digito_esperado1:
           validacao2 = True
 
-      if quant_digitos == True and formatacao == True and validacao1 == True and validacao2 == True:
+      if quant_digitos == True and validacao1 == True and validacao2 == True:
           return {'erro': False, 'mensagem': ''}
       else:
           return {'erro': True, 'mensagem': 'CPF inválido'}
 
   else:
-      return {'erro': True, 'mensagem': 'O CPF precisa ter 11 digitos, pontos e traço'}
+      return {'erro': True, 'mensagem': 'O CPF precisa ter 11 digitos'}
   
  
 def validar_num_cartao(num_cartao):

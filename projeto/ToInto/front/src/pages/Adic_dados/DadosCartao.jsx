@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; //recuperar a rota 
-import './DadosCartao.css'
+import { useNavigate } from 'react-router-dom';
+import './DadosCartao.css';
 
-{/*Utiliza o useState para a criação de um estado local chamado formValues(vai armazenar as informações do campo de email e senha) */ }
 const DadosCartao = () => {
     const navigate = useNavigate();
     const [formCartao, setFormCartao] = useState({
@@ -12,12 +11,46 @@ const DadosCartao = () => {
         cod_seguranca: '',
         datavenc: '',
         nome_titular: '',
-        escolha_pag: '2'
+        escolha_pag: '2',
+        plano_esc: localStorage.getItem('plano_esc')
     });
 
+    // Função para formatar o CPF
+    const formatarCpf = (valor) => {
+        const apenasNumeros = valor.replace(/\D/g, ''); // Remove caracteres não numéricos
+        if (apenasNumeros.length <= 11) {
+            return apenasNumeros.replace(/(\d{3})(\d)/, '$1.$2') // Adiciona o primeiro ponto
+                .replace(/(\d{3})(\d)/, '$1.$2') // Adiciona o segundo ponto
+                .replace(/(\d{3})(\d{1,2})$/, '$1-$2'); // Adiciona o traço
+        }
+        return valor; // Retorna o valor original se exceder 11 caracteres
+    };
 
-    {/* O método handleChange é chamado sempre que um dos campos do formulário é alterado. 
-Ele atualiza o estado formValues com os novos valores do campo.*/}
+    // Função para formatar o número do cartão
+    const formatarNumeroCartao = (valor) => {
+        const apenasNumeros = valor.replace(/\D/g, ''); // Remove caracteres não numéricos
+        return apenasNumeros.replace(/(.{4})/g, '$1 ').trim(); // Adiciona um espaço a cada quatro dígitos
+    };
+
+    // Função para lidar com a mudança no campo CPF
+    const handleChangeCpf = (e) => {
+        const valor = e.target.value;
+        setFormCartao((prevValues) => ({
+            ...prevValues,
+            cpf: formatarCpf(valor) // Atualiza o estado com o CPF formatado
+        }));
+    };
+
+    // Função para lidar com a mudança no campo Número do Cartão
+    const handleChangeNumCartao = (e) => {
+        const valor = e.target.value;
+        const valorFormatado = formatarNumeroCartao(valor);
+        setFormCartao((prevValues) => ({
+            ...prevValues,
+            num_cartao: valorFormatado // Atualiza o estado com o número do cartão formatado
+        }));
+    };
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormCartao((prevValues) => ({
@@ -31,7 +64,7 @@ Ele atualiza o estado formValues com os novos valores do campo.*/}
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const resposta = await fetch('http://10.135.60.29:8085/receber-dados', {
+            const resposta = await fetch('http://10.135.60.11:8085/receber-dados', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -42,17 +75,20 @@ Ele atualiza o estado formValues com os novos valores do campo.*/}
             const resultado = await resposta.json();
 
             if (resultado.erro) {
-                // Exibe mensagens de erro no console.log ou em algum local visível
                 console.error('Erro no servidor:', resultado.mensagens);
-
-                // Atualiza o estado com as mensagens de erro para exibição no formulário
                 setMensagensErro(resultado.mensagens);
             } else {
-                // Dados foram processados com sucesso
                 console.log('Dados processados do cartão com sucesso!', resposta);
-                setFormCartao('')
-                //Navega para a tela do Cadastro concluído
-                navigate('/concluido')
+                setFormCartao({
+                    id: localStorage.getItem("ID"),
+                    cpf: '',
+                    num_cartao: '',
+                    cod_seguranca: '',
+                    datavenc: '',
+                    nome_titular: '',
+                    escolha_pag: '2'
+                }); // Resetando o formulário
+                navigate('/concluido');
             }
         } catch (error) {
             console.error('Erro ao enviar dados:', error);
@@ -60,9 +96,7 @@ Ele atualiza o estado formValues com os novos valores do campo.*/}
     };
 
     return (
-
         <div className="form-container">
-
             {mensagensErro.length > 0 && (
                 <div style={{ color: 'white' }}>
                     <p>Erro ao processar os dados:</p>
@@ -75,46 +109,43 @@ Ele atualiza o estado formValues com os novos valores do campo.*/}
             )}
 
             <section className="form_adiccartao">
-                <form className="adic_cartao" id="adicionarcart" action="" onSubmit={handleSubmit} /*O método handleSubmit é chamado quando o formulário é enviado.*/> {/*form do cadastro*/}
+                <form className="adic_cartao" id="adicionarcart" onSubmit={handleSubmit}>
                     <h1 className="h1_cartao">Adicionar dados do cartão</h1>
 
-                    <div className="form_grupo"> {/*div para parte do nome*/}
+                    <div className="form_grupo">
                         <label className="nome_titular">Nome completo do titular</label>
-                        <input className="input_1" type="text" name="nome_titular" id="nome_titular" value={formCartao.nome_titular} onChange={handleChange} placeholder="Digite o nome do titular" data-min-length="3" data-max-length="100" data-only-letters />
+                        <input className="input_1" type="text" name="nome_titular" id="nome_titular" value={formCartao.nome_titular} onChange={handleChange} placeholder="Digite o nome do titular" data-min-length="3" data-max-length="100" />
                     </div>
 
-                    <div className="form_grupo"> {/*div para parte do nome*/}
+                    <div className="form_grupo">
                         <label className="cpf">CPF</label>
-                        <input className="input_2" type="text" name="cpf" id="cpf" value={formCartao.cpf} onChange={handleChange} placeholder="___.___.___-__" data-min-length="3" data-max-length="100" data-only-letters />
+                        <input className="input_2" type="text" name="cpf" id="cpf" value={formCartao.cpf} onChange={handleChangeCpf} placeholder="___.___.___-__" data-min-length="3" data-max-length="100" maxLength={14} />
                     </div>
 
-                    <div className="form_grupo"> {/*div para parte do e-mail*/}
+                    <div className="form_grupo">
                         <label className="num_cartao">Número do cartão</label>
-                        <input className="input_3" type="number" name="num_cartao" id="num_cartao" value={formCartao.num_cartao} onChange={handleChange} placeholder="Digite o número do cartão" data-min-length="16" data-max-length="40" />
+                        <input className="input_3" type="text" name="num_cartao" id="num_cartao" value={formCartao.num_cartao} onChange={handleChangeNumCartao} placeholder="Digite o número do cartão" maxLength={19} />
                     </div>
 
-                    <div className="form_grupo"> {/*div para parte da senha*/}
+                    <div className="form_grupo">
                         <label className="datavenc">Data de vencimento</label>
-                        <input className="input_4" type="date" name="datavenc" id="datavenc" value={formCartao.datavenc} onChange={handleChange} placeholder="Digite a data de vencimento" data-min-length="8" data-max-length="15" />
+                        <input className="input_4" type="date" name="datavenc" id="datavenc" value={formCartao.datavenc} onChange={handleChange} />
                     </div>
 
-                    <div className="form_grupo"> {/*div para a parte de confirmar senha*/}
+                    <div className="form_grupo">
                         <label className="codigo_seg">Código de segurança </label>
-                        <input className="input_5" type="number" name="cod_seguranca" id="cod_seguranca" value={formCartao.cod_seguranca} onChange={handleChange} placeholder="Digite o código de segurança" data-min-length="3" />
+                        <input className="input_5" type="text" name="cod_seguranca" id="cod_seguranca" value={formCartao.cod_seguranca} onChange={handleChange} placeholder="Digite o código de segurança" maxLength={4} />
                     </div>
 
                     <div className="buttons_cartao">
-                        <div className="salvar_cartao"> {/*botão cadastrar do footer */}
+                        <div className="salvar_cartao">
                             <input type='submit' className="btn_cartao" id="btn_salvarcart" value="Salvar" />
                         </div>
-                        <div className="can_cartao"> {/*botão cancelar do footer */}
-                            <input type='submit' className="btn_cartao" id="btn_can_cart" value="Cancelar" />
+                        <div className="can_cartao"> 
+                            <input type='button' className="btn_cartao" id="btn_can_cart" value="Cancelar" onClick={() => navigate('/caminho-do-cancelamento')} />
                         </div>
                     </div>
                 </form>
-
-                <p className="error-validation template"></p> {/*implementação do java script */}
-                <script src="JavaScript/validar.js"></script>
             </section>
         </div>
     );
