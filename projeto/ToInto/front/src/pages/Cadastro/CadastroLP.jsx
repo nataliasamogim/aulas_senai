@@ -19,7 +19,7 @@ const CadastroLP = () => {
         email: '',
         senha: '',
         confirmsenha: '',
-        plano: ''
+        planos: planoSelecionado
     });
 
     const [mensagensErro, setMensagensErro] = useState([]);
@@ -42,10 +42,10 @@ const CadastroLP = () => {
     };
 
     const handleSubmit = async () => {
-        formValues.plano = planoSelecionado
+        formValues.planos = planoSelecionado
         console.log('submit',formValues);
         try {
-            const resposta = await fetch('http://10.135.60.29:8085/receber-dados', {
+            const resposta = await fetch('http://10.135.60.16:8085/receber-dados', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -62,9 +62,11 @@ const CadastroLP = () => {
                 // Atualiza o estado com as mensagens de erro para exibição no formulário
                 setMensagensErro(resultado.mensagens);
             } else {
-                localStorage.setItem("ID", resultado.mensagens.mensagem)
+                localStorage.setItem("ID", resultado.mensagens.mensagem[0])
                 localStorage.setItem("nome_usuario", formValues.nome)
                 localStorage.setItem("email", formValues.email)
+                localStorage.setItem("plano_esc", formValues.planos)
+                console.log("plano_esc", formValues.planos)
                 // Dados foram processados com sucesso
                 console.log('Dados processados com sucesso!', resposta);
                 // É direcionado para a página de acordo com o plano escolhido
