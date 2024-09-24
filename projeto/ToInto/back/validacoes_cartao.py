@@ -18,14 +18,18 @@ def validar_cpf(cpf):
   validacao2 = False
 
   #Verifica a estrutura do CPF (111.222.333-44)
-  if re.match(r'\d{3}\.\d{3}\.\d{3}-\d{2}', cpf):
+  if re.match(r'^\d{3}\.\d{3}\.\d{3}-\d{2}$', cpf):
       formatacao = True
 
   if len(numeros) == 11:
       quant_digitos = True
+
+      # Verifica se todos os números são iguais, como "111.111.111-11"
+      if numeros == numeros[::-1]:  # Todos iguais
+        return {'erro': True, 'mensagem': 'CPF inválido, todos os dígitos são iguais.'}
   
       soma_produtos = sum(a*b for a, b in zip (numeros[0:9], range (10, 1, -1)))
-      digito_esperado = (soma_produtos * 10 % 11) % 10
+      digito_esperado = (soma_produtos *10 % 11) % 10
       if numeros[9] == digito_esperado:
           validacao1 = True
 
@@ -42,7 +46,7 @@ def validar_cpf(cpf):
   else:
       return {'erro': True, 'mensagem': 'O CPF precisa ter 11 digitos, pontos e traço'}
   
-  
+ 
 def validar_num_cartao(num_cartao):
         # Remove espaços em branco
         num_cartao = num_cartao.strip()
