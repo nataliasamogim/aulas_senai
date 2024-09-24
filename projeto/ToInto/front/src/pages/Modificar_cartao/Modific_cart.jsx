@@ -25,7 +25,7 @@ const Modific_cart = () => {
             const id_cad = localStorage.getItem('ID')
             try {
                 // Faz uma requisição para receber os dados do usuário do servidor
-                const resposta = await fetch('http://10.135.60.29:8085/receber-dados', {
+                const resposta = await fetch('http://10.135.60.11:8085/receber-dados', {
                     method: 'POST', // Método da requisição
                     headers: {
                         'Content-Type': 'application/json', // Tipo de conteúdo da requisição
@@ -56,13 +56,43 @@ const Modific_cart = () => {
         showDados(); // Chama a função para buscar os dados do usuário quando o componente é montado
     }, []); // Array de dependências vazio, indica que este efeito deve ser executado apenas uma vez
 
+    // Função para formatar o CPF
+    const formatarCpf = (valor) => {
+        const apenasNumeros = valor.replace(/\D/g, ''); // Remove caracteres não numéricos
+        if (apenasNumeros.length <= 11) {
+            return apenasNumeros.replace(/(\d{3})(\d)/, '$1.$2') // Adiciona o primeiro ponto
+                .replace(/(\d{3})(\d)/, '$1.$2') // Adiciona o segundo ponto
+                .replace(/(\d{3})(\d{1,2})$/, '$1-$2'); // Adiciona o traço
+        }
+        return valor; // Retorna o valor original se exceder 11 caracteres
+    };
+
+    // Função para formatar o número do cartão
+    const formatarNumeroCartao = (valor) => {
+        const apenasNumeros = valor.replace(/\D/g, ''); // Remove caracteres não numéricos
+        return apenasNumeros.replace(/(.{4})/g, '$1 ').trim(); // Adiciona um espaço a cada quatro dígitos
+    };
+
+    // Função para lidar com a mudança no campo CPF
+    const handleChangeCpf = (e) => {
+        const valor = e.target.value;
+        setCpf(formatarCpf(valor)); // Atualiza o estado com o CPF formatado
+    };
+
+    // Função para lidar com a mudança no campo Número do Cartão
+    const handleChangeNumCartao = (e) => {
+        const valor = e.target.value;
+        const valorFormatado = formatarNumeroCartao(valor);
+        setNumCartao(valorFormatado); // Atualiza o estado com o número do cartão formatado
+    };
+
     const [mensagensErro, setMensagensErro] = useState([]);
     const handleAtualizarCart = async (e) => {
         e.preventDefault(); // Prevenir o envio padrão do formulário
         const id_cad = localStorage.getItem('ID');
         try {
             // Faz uma requisição para enviar os dados do formulário para o servidor
-            const resposta = await fetch('http://10.135.60.29:8085/receber-dados', {
+            const resposta = await fetch('http://10.135.60.11:8085/receber-dados', {
                 method: 'POST', // Método da requisição
                 headers: {
                     'Content-Type': 'application/json', // Tipo de conteúdo da requisição
@@ -70,8 +100,8 @@ const Modific_cart = () => {
                 body: JSON.stringify({
                     acao: 'atualizar_cart',
                     id: id_cad,
-                    novo_Cpf: cpf,
-                    novo_numCartao: numCartao,
+                    novo_Cpf: cpf.replace(/\D/g, ''), // Envia apenas números para o servidor,
+                    novo_numCartao: numCartao.replace(/\s/g, ''), //Remove os espaços para enviar,
                     novo_cvv: codSeguranca,
                     nova_dataVenc: dataVenc,
                     novo_nomeTitular: nomeTitular,
@@ -126,12 +156,12 @@ const Modific_cart = () => {
 
                     <div className="form_grupo"> {/*div para parte do cpf*/}
                         <label className="cpf">CPF</label>
-                        <input className="input_2" type="text" name="cpf" id="cpf" value={cpf} onChange={(e) => setCpf(e.target.value)} placeholder="Digite o CPF" data-min-length="3" data-max-length="100" data-only-letters />
+                        <input className="input_2" type="text" name="cpf" id="cpf" value={cpf} onChange={handleChangeCpf} placeholder="Digite o CPF" data-min-length="3" data-max-length="100" data-only-letters />
                     </div>
 
                     <div className="form_grupo"> {/*div para parte do numero do cartao*/}
                         <label className="num_cartao">Número do cartão</label>
-                        <input className="input_3" type="number" name="num_cartao" id="num_cartao" value={numCartao} onChange={(e) => setNumCartao(e.target.value)} placeholder="Digite o número do cartão" data-min-length="16" data-max-length="40" />
+                        <input className="input_3" type="number" name="num_cartao" id="num_cartao" value={numCartao} onChange={handleChangeNumCartao} placeholder="Digite o número do cartão" data-min-length="16" data-max-length="40" />
                     </div>
 
                     <div className="form_grupo"> {/*div para parte da data de vencimento*/}
