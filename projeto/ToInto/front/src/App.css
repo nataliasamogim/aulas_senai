@@ -217,6 +217,10 @@ button.btn.btn-outline {
   color: white !important;
 }
 
+.nome-perfil{
+  word-break: break-all;
+}
+
 .email-perfil,
 .btn-sair {
   border-bottom: 1px solid lightgrey;
