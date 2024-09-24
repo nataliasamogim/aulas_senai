@@ -51,7 +51,7 @@ const Compromissos = ({ isOpen, onRequestClose, tarefasData, receberTarefas, dat
       let response;
       if (tarefasData) {
         // Atualizar tarefa existente
-        response = await fetch('http://10.135.60.29:8085/receber-dados', {
+        response = await fetch('http://10.135.60.16:8085/receber-dados', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -70,7 +70,7 @@ const Compromissos = ({ isOpen, onRequestClose, tarefasData, receberTarefas, dat
         });
       } else {
         // Criar nova tarefa
-        response = await fetch('http://10.135.60.20:8085/receber-dados', {
+        response = await fetch('http://10.135.60.16:8085/receber-dados', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -83,11 +83,12 @@ const Compromissos = ({ isOpen, onRequestClose, tarefasData, receberTarefas, dat
             importante,
             lembrete,
             id_cad: localStorage.getItem("ID"),
-            acao: 'salvar_compromisso'
+            acao: 'salvar_compromisso',
+            plano_esc: localStorage.getItem("plano_esc")
           }),
         });
       }
-
+      console.log('plano que esta chegando no compromissos', localStorage.getItem("plano_esc"))
       if (response) {
         const resultado = await response.json();
         if (resultado.erro) {
@@ -100,9 +101,10 @@ const Compromissos = ({ isOpen, onRequestClose, tarefasData, receberTarefas, dat
           setTime('');
           setImportante(false);
           setLembrete('0 minutos');
+          onRequestClose();
+          receberTarefas(); // Atualiza a lista de tarefas
         }
-        onRequestClose();
-        receberTarefas(); // Atualiza a lista de tarefas
+
       } else {
         console.error('Nenhuma resposta recebida.');
       }
