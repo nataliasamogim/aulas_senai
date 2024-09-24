@@ -309,6 +309,7 @@ def processar_dados_compromisso(dados):
     dados_gravacao.append(dados_processados.get('descricao'))
     dados_gravacao.append(dados_processados.get('importante'))
     dados_gravacao.append(dados_processados.get('lembrete'))
+    dados_gravacao.append(dados_processados.get('plano_esc'))
 
     mensagens_erro = []  # Cria uma lista vazia para armazenar mensagens de erro
 
@@ -326,11 +327,9 @@ def processar_dados_compromisso(dados):
     if mensagens_erro:
         return {'erro': True, 'mensagens': mensagens_erro}
     else:
-        # Chama a função para gravar os dados em um arquivo, caso não tenha mensagens de erro
-        #gravar_em_arquivo(dados_processados)
+        # Chama a função para gravar os dados, caso não tenha mensagens de erro
         gravar_dados_compromisso(dados_gravacao)
-        print(dados_gravacao)
-        # Retorna os dados processados
+        print('dados de gravação', dados_gravacao)
         return {'erro': False, 'mensagem': 'Dados do compromissos criados com sucesso'}
     
 def processar_alterar_comp(dados):
