@@ -36,7 +36,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const resposta = await fetch('http://10.135.60.29:8085/receber-dados', {
+      const resposta = await fetch('http://10.135.60.16:8085/receber-dados', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -55,10 +55,11 @@ const Login = () => {
         setMensagensErro(resultado.mensagens);
       } else {
         // Dados foram processados com sucesso
-        console.log('Dados processados com sucesso!', resposta);
+        console.log('Dados processados com sucesso!', resultado);
         localStorage.setItem('ID', resultado.mensagem[0]);
         localStorage.setItem('nome_usuario', resultado.mensagem[1]);
         localStorage.setItem('email', resultado.mensagem[2]);
+        localStorage.setItem('plano_escolhido', resultado.mensagem[3]);
         //onLogin(resultado.username); // Chama a função onLogin com o nome de usuário retornado
         //Navega para a tela de calendario
         navigate('/calendario')
