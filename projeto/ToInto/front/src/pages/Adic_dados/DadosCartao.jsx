@@ -129,7 +129,7 @@ const DadosCartao = () => {
 
                     <div className="form_grupo">
                         <label className="datavenc">Data de vencimento</label>
-                        <input className="input_4" type="date" name="datavenc" id="datavenc" value={formCartao.datavenc} onChange={handleChange} />
+                        <input className="input_4" type="date" name="datavenc" id="datavenc" value={formCartao.datavenc} onChange={handleChange} placeholder="MM/AA" data-min-length="4" data-max-length="5" />
                     </div>
 
                     <div className="form_grupo">

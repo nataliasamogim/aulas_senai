@@ -57,11 +57,17 @@ def validar_datavenc(datavenc):
     if not datavenc:  # Verifica se datavenc é uma string vazia
         return {'erro': True, 'mensagem': 'Data de vencimento não fornecida!'}
 
-    # Formato esperado: DD/MM/AA
-    data = datetime.strptime(datavenc, '%Y-%m-%d')
+    # Formato esperado: MM/AA
+    try:
+        data = datetime.strptime(datavenc, '%m/%y')
+    except ValueError:
+        return {'erro': True, 'mensagem': 'Formato de data inválido. Use MM/AA.'}
+
+    # Adiciona o dia primeiro para facilitar a comparação
+    data = data.replace(day=1)
 
     # Verifica se a data é futura
-    hoje = datetime.today()
+    hoje = datetime.today().replace(day=1)
     if data < hoje:
         return {'erro': True, 'mensagem': 'A data está vencida!'}
     else:
