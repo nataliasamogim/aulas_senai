@@ -20,6 +20,7 @@ const Calendar = () => {
   const [selecionarTarefa, setSelecionarTarefa] = useState(null);
   const [currentDate, setCurrentDate] = useState(selectedDate || new Date().toISOString().split('T')[0]);
   const [checkedTarefas, setCheckedTarefas] = useState({});
+  const [tarefasPorData, setTarefasPorData] = useState({});
 
   const formatodata = !isNaN(date.getTime())
     ? new Intl.DateTimeFormat('pt-BR', { dateStyle: 'short' }).format(date)
@@ -54,6 +55,14 @@ const Calendar = () => {
         }));
         setTarefas(trat_tarefas);
         setTarefaData(trat_tarefas);
+
+        const datasComTarefas = trat_tarefas.reduce((acc, tarefa) => {
+          const data = new Date(tarefa.data_comp).toISOString().split('T')[0]; // Formata como YYYY-MM-DD
+          acc[data] = true; // A chave deve estar no formato YYYY-MM-DD
+          return acc;
+        }, {});
+        
+        setTarefasPorData(prev => ({ ...prev, ...datasComTarefas })); // Mantenha as tarefas anteriores
       }
       else {
         setTarefas([]);
@@ -124,7 +133,7 @@ const Calendar = () => {
   const handleCheckBox = (idComp) => {
     setCheckedTarefas(prevState => ({
       ...prevState,
-      [idComp]: !prevState[idComp] //Atualiza apenas a tarefa específica com o id_comp
+      [idComp]: !prevState[idComp] // Atualiza apenas a tarefa específica com o id_comp
     }))
   }
 
@@ -143,12 +152,10 @@ const Calendar = () => {
           id_comp: idComp
         })
       });
-      console.log('id de compromisso:', tarefaData[0].id_comp)
 
       if (!response.ok) {
         throw new Error('Erro ao deletar tarefa');
-      }
-      else {
+      } else {
         console.log('Tarefa deletada com sucesso')
         receberTarefas();
       }
@@ -186,11 +193,19 @@ const Calendar = () => {
           {[...Array(firstDayOfMonth).fill(null)].map((_, index) => (
             <div key={`empty-${index}`} className="empty-day"></div>
           ))}
-          {[...Array(daysInMonth).keys()].map((day) => (
-            <div key={day} className="day" onClick={() => handleDateClick(day)}>
-              <span className="day-number">{day + 1}</span>
-            </div>
-          ))}
+
+          {[...Array(daysInMonth).keys()].map((day) => {
+            const formattedDate = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(day + 1).padStart(2, '0')}`;
+            const isToday = formattedDate === new Date().toISOString().split('T')[0];
+
+            return (
+              <div key={day} className={`day ${isToday ? 'day-today' : ''}`}onClick={() => handleDateClick(day)}>
+                <span className="day-number">{day + 1}</span>
+                {/* Verifica se a data formatada está presente em tarefasPorData */}
+                {tarefasPorData[formattedDate] && <span className="bolinha"></span>}
+              </div>
+            );
+          })}
         </div>
       </div>
 
@@ -214,11 +229,9 @@ const Calendar = () => {
                       <span className='horario_tarefa'>{tarefa.horario} - </span>
                       <span className='titulo_tarefa'>{tarefa.titulo}</span>
                     </div>
-
                   </div>
 
                   <div id='botoes'>
-
                     <button className='buttonEditar' onClick={() => handleEditTarefa(tarefa)}>
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pencil" viewBox="0 0 16 16" color="white">
                         <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
@@ -238,7 +251,6 @@ const Calendar = () => {
                   </div>
                 </div>
                 <span className='descricaoTarefa'>{tarefa.descricao || 'Nenhuma descrição disponível'}</span>
-
               </li>
             ))
           ) : (
@@ -248,15 +260,16 @@ const Calendar = () => {
         <button className='butTodo' onClick={handleAddTarefas}>
           +
         </button>
-
       </div>
-      <Compromissos
-        isOpen={modal}
-        onRequestClose={handleCloseModal}
-        tarefasData={selecionarTarefa}
-        receberTarefas={receberTarefas}
-        dataEscolhida={currentDate} // A data fixa que você quer passar
-      />
+      {modal && (
+        <Compromissos
+          isOpen={modal}
+          onRequestClose={handleCloseModal}
+          tarefasData={selecionarTarefa}
+          receberTarefas={receberTarefas}
+          dataEscolhida={currentDate} // A data fixa que você quer passar
+        />
+      )}
     </div>
   );
 };
