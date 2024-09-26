@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import { CheckBox } from "react-native-elements";
+import { transpose } from "date-fns";
 
 export default styles = StyleSheet.create({
     background: {
@@ -122,6 +123,10 @@ export default styles = StyleSheet.create({
     },
     check: {
         marginLeft: 111
+    },
+    tarefaImportante: {
+        backgroundColor: '#628cbd', /* Azul para destaque */
+        color: 'white', /* Texto branco para contraste */
     }
 });
 

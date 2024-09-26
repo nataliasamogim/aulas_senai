@@ -122,7 +122,7 @@ const ToDo = ({ route, navigation }) => {
                     <View style={styles.content}>
                         {tarefas.length > 0 ? (
                             tarefas.map((tarefa) => (
-                                <View key={tarefa.id_comp} style={styles.componentesTarefas}>
+                                <View key={tarefa.id_comp} style={[styles.componentesTarefas, tarefa.importante ? styles.tarefaImportante : null]}>
                                     <View style={styles.containerComp}>
                                         <View style={styles.check_tarefa}>
                                             <CheckBox
