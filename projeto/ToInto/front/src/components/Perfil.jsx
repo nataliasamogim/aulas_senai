@@ -53,7 +53,7 @@ function Perfil(props) {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ 'funcao': 'del', 'id_cad': id_cad })
+            body: JSON.stringify({ 'acao': 'deletar_cad', 'id_cad': id_cad })
         })
             .then(response => {
                 if (!response.ok) {
