@@ -42,10 +42,15 @@ const CadastroLP = () => {
     };
 
     const handleSubmit = async () => {
+        if (!planoSelecionado) {
+            // Exibe uma mensagem de erro se nenhum plano foi selecionado
+            setMensagensErro([{ mensagem: 'Por favor, selecione um plano antes de continuar.' }]);
+            return; // Impede o envio do formulário
+        }
         formValues.planos = planoSelecionado
         console.log('submit',formValues);
         try {
-            const resposta = await fetch('http://10.135.60.16:8085/receber-dados', {
+            const resposta = await fetch('http://10.135.60.14:8085/receber-dados', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
