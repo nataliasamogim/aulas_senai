@@ -16,6 +16,7 @@ const formatarData = (valor) => {
 const DadosCartao = () => {
     const navigate = useNavigate();
     const [formCartao, setFormCartao] = useState({
+        acao: 'salvar_cart',
         id: localStorage.getItem("ID"),
         cpf: '',
         num_cartao: '',
