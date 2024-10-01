@@ -9,6 +9,17 @@ import React, { useState, useEffect } from 'react';
 import './Modific_cart.css';
 import { useNavigate } from 'react-router-dom'; //recuperar a rota 
 
+// Função para formatar a data como MM/AA 
+const formatarData = (valor) => { 
+    // Remove todos os caracteres não numéricos 
+    const apenasNumeros = valor.replace(/\D/g, ''); 
+    // Adiciona a barra após dois dígitos 
+    if (apenasNumeros.length > 2) { 
+        return `${apenasNumeros.slice(0, 2)}/${apenasNumeros.slice(2, 4)}`; 
+    } 
+    return apenasNumeros; 
+};
+
 {/*Utiliza o useState para a criação de um estado local chamado formValues(vai armazenar as informações do campo de nome_titular
 cpf, num_cartao, datavenc, cod_segurança) */ }
 const Modific_cart = () => {
@@ -25,7 +36,7 @@ const Modific_cart = () => {
             const id_cad = localStorage.getItem('ID')
             try {
                 // Faz uma requisição para receber os dados do usuário do servidor
-                const resposta = await fetch('http://10.135.60.11:8085/receber-dados', {
+                const resposta = await fetch('http://10.135.60.14:8085/receber-dados', {
                     method: 'POST', // Método da requisição
                     headers: {
                         'Content-Type': 'application/json', // Tipo de conteúdo da requisição
@@ -86,13 +97,25 @@ const Modific_cart = () => {
         setNumCartao(valorFormatado); // Atualiza o estado com o número do cartão formatado
     };
 
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        // Formata a data de vencimento         
+        if (name === 'datavenc') {
+            // Formata a data e limita a 5 caracteres             
+            setDataVenc(formatarData(value).slice(0, 5));
+        } else {
+            // Formata o número do cartão
+            setNumCartao(formatarNumeroCartao(value));
+        }
+    };
+
     const [mensagensErro, setMensagensErro] = useState([]);
     const handleAtualizarCart = async (e) => {
         e.preventDefault(); // Prevenir o envio padrão do formulário
         const id_cad = localStorage.getItem('ID');
         try {
             // Faz uma requisição para enviar os dados do formulário para o servidor
-            const resposta = await fetch('http://10.135.60.11:8085/receber-dados', {
+            const resposta = await fetch('http://10.135.60.14:8085/receber-dados', {
                 method: 'POST', // Método da requisição
                 headers: {
                     'Content-Type': 'application/json', // Tipo de conteúdo da requisição
@@ -100,8 +123,8 @@ const Modific_cart = () => {
                 body: JSON.stringify({
                     acao: 'atualizar_cart',
                     id: id_cad,
-                    novo_Cpf: cpf.replace(/\D/g, ''), // Envia apenas números para o servidor,
-                    novo_numCartao: numCartao.replace(/\s/g, ''), //Remove os espaços para enviar,
+                    novo_Cpf: cpf,
+                    novo_numCartao: numCartao,
                     novo_cvv: codSeguranca,
                     nova_dataVenc: dataVenc,
                     novo_nomeTitular: nomeTitular,
@@ -161,12 +184,12 @@ const Modific_cart = () => {
 
                     <div className="form_grupo"> {/*div para parte do numero do cartao*/}
                         <label className="num_cartao">Número do cartão</label>
-                        <input className="input_3" type="number" name="num_cartao" id="num_cartao" value={numCartao} onChange={handleChangeNumCartao} placeholder="Digite o número do cartão" data-min-length="16" data-max-length="40" />
+                        <input className="input_3" type="text" name="num_cartao" id="num_cartao" value={numCartao} onChange={handleChangeNumCartao} placeholder="Digite o número do cartão" data-min-length="16" data-max-length="40" />
                     </div>
 
                     <div className="form_grupo"> {/*div para parte da data de vencimento*/}
                         <label className="datavenc">Data de vencimento</label>
-                        <input className="input_4" type="date" name="datavenc" id="datavenc" value={dataVenc} onChange={(e) => setDataVenc(e.target.value)} placeholder="Digite a data de vencimento" data-min-length="8" data-max-length="15" />
+                        <input className="input_4" type="text" name="datavenc" id="datavenc" value={dataVenc} onChange={handleChange} placeholder="Digite a data de vencimento" data-min-length="8" data-max-length="15" />
                     </div>
 
                     <div className="form_grupo"> {/*div para a parte de codigo de segurança*/}
