@@ -15,4 +15,4 @@ def recuperar_inf_cart(id_cad):
         return {'erro': False, 'mensagem': cartao}
 
     else:
-        return {'erro': True, 'mensagens':{'erro': True, 'mensagem': 'Compra não encontrada'}}    
+        return {'erro': True, 'mensagens':{'erro': True, 'mensagem': 'Dados do cartão não encontrado'}}    
