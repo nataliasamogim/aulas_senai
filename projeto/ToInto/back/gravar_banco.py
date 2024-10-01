@@ -59,7 +59,7 @@ def gravar_dados_cartao(dados_gravacao):
     plano = dados_gravacao[1]
     print('plano que esta chegando no cartão', plano)
     dados_receb = dados_gravacao[0], dados_gravacao[2], dados_gravacao[3], dados_gravacao[4], dados_gravacao[5], dados_gravacao[6], dados_gravacao[7], dados_gravacao[8]
-
+    print('ABCD:', dados_gravacao[3], dados_gravacao[5], dados_gravacao[7])
     if escolha_pag == '2':
         sql = "INSERT INTO dados_pag (TIPO_PAG, ID_CAD, CPF, DATA_PAG, NUM_CARTAO, CVV, DATA_VENC, NOME_CARTAO) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
         cursor.execute(sql, dados_receb)
@@ -94,7 +94,6 @@ def gravar_dados_cartao(dados_gravacao):
         val_dados_pag = (dados_gravacao[3], dados_gravacao[5])  # Preenchendo com os valores corretos
         cursor.execute(sql, val_dados_pag)
         id_dados_pag = cursor.fetchone()
-        print(id_dados_pag)
 
         sql = "INSERT INTO compras (ID_PLANO, ID_DADOS_PAG, ID_CAD, DESC_COMPRA, VALOR_COMPRA) VALUES ('1', %s , %s, 'Comprou o Plano Anual', 109.90)"
         val_insert = (id_dados_pag[0], dados_gravacao[2])  # Passando os IDs corretos
