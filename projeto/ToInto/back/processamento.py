@@ -8,7 +8,7 @@ from recuperar_cad import verificar_informacao_log
 from recuperar_cad import recuperar_inf_formani
 from recuperar_cart import recuperar_inf_cart
 from recuperar_comp import recuperar_inf_comp
-from update_banco import atualizar_cad, atualizar_compromisso
+from update_banco import atualizar_cad, atualizar_compromisso, atualizar_estado_checkbox
 from update_banco import atualizar_cart
 from delete_banco import deletar_cad
 from delete_banco import deletar_compromisso
@@ -85,6 +85,8 @@ def processar_dados(dados):
     elif dados.get('acao') == 'selecionar_cad':
         #print('processar select', dados)
         retorno = recuperar_inf_formani(dados.get('id', ''))
+    elif dados.get('acao') == 'atualizar_checkbox':
+        retorno = atualizar_estado_checkbox(dados.get('id_comp', ''), dados.get('estado_checkbox', ''))
     elif dados.get('acao') == 'consulta_data':
         retorno = consultar_data(dados)
     else:
@@ -206,6 +208,8 @@ def processar_alterar_cad(dados):
         return {'erro': True, 'mensagens': mensagens_erro}
     else:
         alterar_cad = atualizar_cad(update_dados)
+        if alterar_cad.get('erro') == True:
+           return {'erro': True, 'mensagens': alterar_cad}
         print('teste', alterar_cad)
         return {'erro': False, 'mensagem': alterar_cad}
         # Chamar a função para recuperar os dados do usuário do banco de dados
