@@ -44,7 +44,7 @@ def validar_cpf(cpf):
  
 def validar_num_cartao(num_cartao):
         # Remove espaços em branco
-        num_cartao = num_cartao.strip()
+        num_cartao = num_cartao.replace(" ", "")
 
         # Verifica se a numero do cartão contém apenas dígitos
         if len(num_cartao) == 16 and num_cartao.isdigit():
