@@ -44,14 +44,16 @@ const Calendar = () => {
       console.log('Tarefas recuperadas:', dados);
 
       if (dados && Array.isArray(dados.mensagem)) {
-        const trat_tarefas = dados.mensagem.map(([id_comp, titulo_comp, horario_comp, descricao, importante, lembrete]) => ({
+        const trat_tarefas = dados.mensagem.map(([id_comp, checkbox, titulo_comp, horario_comp, descricao, importante, lembrete]) => ({
           id_comp,
+          checkbox,
           titulo: titulo_comp,
           horario: horario_comp,
           descricao,
           importante,
           lembrete,
-          data_comp: currentDate // Adiciona a data da tarefa
+          data_comp: currentDate, // Adiciona a data da tarefa
+          
         }));
         setTarefas(trat_tarefas);
         setTarefaData(trat_tarefas);
@@ -130,12 +132,38 @@ const Calendar = () => {
     }
   };
 
-  const handleCheckBox = (idComp) => {
-    setCheckedTarefas(prevState => ({
-      ...prevState,
-      [idComp]: !prevState[idComp] // Atualiza apenas a tarefa específica com o id_comp
-    }))
-  }
+  const handleCheckBox = async (idComp) => {
+    try {
+      const novoEstadoCheckbox = !checkedTarefas[idComp]; // Novo estado (inverte o atual)
+  
+      const response = await fetch('http://10.135.60.14:8085/receber-dados', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          acao: 'atualizar_checkbox',
+          id_comp: idComp,
+          estado_checkbox: novoEstadoCheckbox // Envia o estado do checkbox
+        })
+      });
+  
+      if (!response.ok) {
+        throw new Error('Erro ao atualizar checkbox');
+      } else {
+        // Atualiza o estado local dos checkboxes
+        setCheckedTarefas(prevState => ({
+          ...prevState,
+          [idComp]: novoEstadoCheckbox // Atualiza o checkbox no estado local
+        }));
+        console.log('Checkbox atualizado com sucesso no banco de dados.');
+      }
+  
+    } catch (error) {
+      console.error('Erro:', error);
+    }
+  };
+  
 
   const handleDelete = async (idComp) => {
     if (!tarefaData) return;
@@ -219,7 +247,7 @@ const Calendar = () => {
                   <div className='check_tarefa'>
                     <div className='container-check'>
                       <input
-                        checked={checkedTarefas[tarefa.id_comp] || false}
+                        checked={checkedTarefas[tarefa.id_comp] || tarefa.checkbox}
                         onClick={() => handleCheckBox(tarefa.id_comp)}
                         type="checkbox"
                         name="check"
