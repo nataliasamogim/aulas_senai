@@ -2,6 +2,17 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './DadosCartao.css';
 
+// Função para formatar a data como MM/AA 
+const formatarData = (valor) => { 
+    // Remove todos os caracteres não numéricos 
+    const apenasNumeros = valor.replace(/\D/g, ''); 
+    // Adiciona a barra após dois dígitos 
+    if (apenasNumeros.length > 2) { 
+        return `${apenasNumeros.slice(0, 2)}/${apenasNumeros.slice(2, 4)}`; 
+    } 
+    return apenasNumeros; 
+};
+
 const DadosCartao = () => {
     const navigate = useNavigate();
     const [formCartao, setFormCartao] = useState({
@@ -53,10 +64,19 @@ const DadosCartao = () => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormCartao((prevValues) => ({
-            ...prevValues,
-            [name]: value,
-        }));
+        // Formata a data de vencimento         
+        if (name === 'datavenc') {
+            // Formata a data e limita a 5 caracteres             
+            setFormCartao((prevValues) => ({
+                ...prevValues,
+                [name]: formatarData(value).slice(0, 5),
+            }));
+        } else {
+            setFormCartao((prevValues) => ({
+                ...prevValues,
+                [name]: value,
+            }));
+        }
     };
 
     const [mensagensErro, setMensagensErro] = useState([]);
@@ -64,7 +84,7 @@ const DadosCartao = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const resposta = await fetch('http://10.135.60.11:8085/receber-dados', {
+            const resposta = await fetch('http://10.135.60.14:8085/receber-dados', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -129,7 +149,7 @@ const DadosCartao = () => {
 
                     <div className="form_grupo">
                         <label className="datavenc">Data de vencimento</label>
-                        <input className="input_4" type="date" name="datavenc" id="datavenc" value={formCartao.datavenc} onChange={handleChange} placeholder="MM/AA" data-min-length="4" data-max-length="5" />
+                        <input className="input_4" type="text" name="datavenc" id="datavenc" value={formCartao.datavenc} onChange={handleChange} placeholder="MM/AA" data-min-length="4" data-max-length="5" />
                     </div>
 
                     <div className="form_grupo">
@@ -141,7 +161,7 @@ const DadosCartao = () => {
                         <div className="salvar_cartao">
                             <input type='submit' className="btn_cartao" id="btn_salvarcart" value="Salvar" />
                         </div>
-                        <div className="can_cartao"> 
+                        <div className="can_cartao">
                             <input type='button' className="btn_cartao" id="btn_can_cart" value="Cancelar" onClick={() => navigate('/caminho-do-cancelamento')} />
                         </div>
                     </div>
