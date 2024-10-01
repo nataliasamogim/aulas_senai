@@ -14,6 +14,50 @@ const ModificarDadosCartao = ({ navigation }) => {
   const [codSeguranca, setCodSeguranca] = useState('');
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
+  // Função para formatar o CPF
+  const formatarCpf = (valor) => {
+    const apenasNumeros = valor.replace(/\D/g, ''); // Remove caracteres não numéricos
+    if (apenasNumeros.length <= 11) {
+      return apenasNumeros.replace(/(\d{3})(\d)/, '$1.$2') // Adiciona o primeiro ponto
+        .replace(/(\d{3})(\d)/, '$1.$2') // Adiciona o segundo ponto
+        .replace(/(\d{3})(\d{1,2})$/, '$1-$2'); // Adiciona o traço
+    }
+    return valor; // Retorna o valor original se exceder 11 caracteres
+  };
+
+  // Função para formatar o número do cartão
+  const formatarNumeroCartao = (valor) => {
+    const apenasNumeros = valor.replace(/\D/g, ''); // Remove caracteres não numéricos
+    return apenasNumeros.replace(/(.{4})/g, '$1 ').trim(); // Adiciona um espaço a cada quatro dígitos
+  };
+
+  // Função para formatar a data de vencimento como MM/AA
+  const formatarData = (valor) => {
+    const apenasNumeros = valor.replace(/\D/g, ''); // Remove caracteres não numéricos
+    if (apenasNumeros.length > 2) {
+      return `${apenasNumeros.slice(0, 2)}/${apenasNumeros.slice(2, 4)}`;
+    }
+    return apenasNumeros;
+  };
+
+  // Função para lidar com a mudança no campo CPF
+  const handleChangeCpf = (valor) => {
+    const valorFormatado = formatarCpf(valor);
+    setCpf(valorFormatado); // Atualiza o estado com o CPF formatado
+  };
+
+  // Função para lidar com a mudança no campo Número do Cartão
+  const handleChangeNumCartao = (valor) => {
+    const valorFormatado = formatarNumeroCartao(valor);
+    setNumCartao(valorFormatado); // Atualiza o estado com o número do cartão formatado
+  };
+
+  // Função para lidar com a mudança no campo Data de Vencimento
+  const handleChangeDataVenc = (valor) => {
+    const valorFormatado = formatarData(valor);
+    setDataVenc(valorFormatado); // Atualiza o estado com a data formatada
+  };
+
   const showDatePicker = () => {
     setDatePickerVisibility(true);
   };
@@ -33,7 +77,7 @@ const ModificarDadosCartao = ({ navigation }) => {
       const id_cad = await AsyncStorage.getItem('ID')
       try {
         // Faz uma requisição para receber os dados do usuário do servidor
-        const resposta = await fetch('http://10.135.60.20:8085/receber-dados', {
+        const resposta = await fetch('http://10.135.60.14:8085/receber-dados', {
           method: 'POST', // Método da requisição
           headers: {
             'Content-Type': 'application/json', // Tipo de conteúdo da requisição
@@ -70,7 +114,7 @@ const ModificarDadosCartao = ({ navigation }) => {
     const id_cad = await AsyncStorage.getItem('ID');
     try {
       // Faz uma requisição para enviar os dados do formulário para o servidor
-      const resposta = await fetch('http://10.135.60.20:8085/receber-dados', {
+      const resposta = await fetch('http://10.135.60.14:8085/receber-dados', {
         method: 'POST', // Método da requisição
         headers: {
           'Content-Type': 'application/json', // Tipo de conteúdo da requisição
@@ -117,29 +161,21 @@ const ModificarDadosCartao = ({ navigation }) => {
         <View style={styles.containerTitulo}>
           <Text style={styles.titulo}>Modificar dados do cartão</Text>
         </View>
-        <View keyboardShouldPersistTaps="handled" style={styles.container}>
+        <View style={styles.container}>
           <Text style={styles.label}>Nome Completo do Titular</Text>
           <TextInput style={styles.inputs} value={nomeTitular} onChangeText={setNomeTitular} placeholder="Digite o nome do titular" />
           <Text style={styles.label}>CPF</Text>
-          <TextInput style={styles.inputs} value={cpf} onChangeText={setCpf} placeholder="___.___.___-__" />
+          <TextInput style={styles.inputs} value={cpf} onChangeText={handleChangeCpf} placeholder="___.___.___-__" />
           <Text style={styles.label}>Número do cartão</Text>
-          <TextInput style={styles.inputs} value={numCartao} onChangeText={setNumCartao} placeholder="Digite o número do cartão" />
+          <TextInput style={styles.inputs} value={numCartao} onChangeText={handleChangeNumCartao} placeholder="Digite o número do cartão" />
           <Text style={styles.label}>Data de vencimento</Text>
-          <TouchableOpacity onPress={showDatePicker}>
-            <TextInput style={styles.inputs} value={dataVenc} placeholder="Selecione a data de vencimento" editable={false} />
-          </TouchableOpacity>
-          <DateTimePickerModal
-            isVisible={isDatePickerVisible}
-            mode="date"
-            onConfirm={handleConfirm}
-            onCancel={hideDatePicker}
-          />
+          <TextInput style={styles.inputs} value={dataVenc} onChangeText={handleChangeDataVenc} placeholder="MM/AA" maxLength={5} />
           <Text style={styles.label}>Código de segurança</Text>
-          <TextInput style={styles.inputs} value={codSeguranca} onChangeText={setCodSeguranca} placeholder="Digite o código de segurança" />
+          <TextInput style={styles.inputs} value={codSeguranca} onChangeText={setCodSeguranca} placeholder="Digite o código de segurança" maxLength={4} />
 
           <View style={styles.buttons}>
             <TouchableOpacity style={styles.btnSubmit} onPress={handleAtualizarCart}>
-              <Text style={styles.submitTxt} >Salvar</Text>
+              <Text style={styles.submitTxt}>Salvar</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.btnSubmit}>
               <Text style={styles.submitTxt}>Cancelar</Text>
@@ -148,7 +184,6 @@ const ModificarDadosCartao = ({ navigation }) => {
         </View>
       </LinearGradient>
 
-      {/* Modal de Erro */}
       <Modal visible={showErrorModal} animationType="slide" transparent={true} onRequestClose={() => setShowErrorModal(false)}>
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
