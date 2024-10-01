@@ -74,17 +74,28 @@ def processar_dados(dados):
         retorno = processar_alterar_cart(dados)
     elif dados.get('acao') == 'atualizar_plano':
         retorno = processar_dados_cartao(dados)
+    elif dados.get('acao') == 'selecionar_cart':
+        retorno = recuperar_inf_cart(dados.get('id_cadastro', ''))
     elif dados.get('acao') == 'atualizar_comp':
         retorno = processar_alterar_comp(dados)
     elif dados.get('acao') == 'deletar_comp':
         retorno = deletar_compromisso(dados.get('id_comp', ''))
+    elif dados.get('acao') == 'deletar_cad':
+        retorno = excluir_todas_informacoes_usuario(dados.get('id_cad'))
+    elif dados.get('acao') == 'selecionar_cad':
+        #print('processar select', dados)
+        retorno = recuperar_inf_formani(dados.get('id', ''))
     elif dados.get('acao') == 'consulta_data':
         retorno = consultar_data(dados)
     else:
+        retorno = processar_dados_log(dados)
+    
+    return (retorno)
         
 #-------------------------------------------------------------------------
 
 # Processamento do Desktop -----------------------------------------------------
+'''
         if dados.get('nome') != None:
             retorno = processar_dados_cad(dados)
         elif dados.get('nome_titular') != None:
@@ -100,13 +111,9 @@ def processar_dados(dados):
             retorno = processar_alterar_cad(dados)
         elif dados.get('titulo') != None:
             retorno = processar_dados_compromisso(dados)
-        elif dados.get('acao') == 'selecionar_cart':
-            retorno = recuperar_inf_cart(dados.get('id_cadastro', ''))
-        else:
-            #print('processar', dados)
-            retorno = processar_dados_log(dados)
+'''
 
-    return (retorno)
+    
 
 
 #-------------------------------------------------------------------------------
