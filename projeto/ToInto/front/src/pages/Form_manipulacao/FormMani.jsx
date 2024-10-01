@@ -7,7 +7,6 @@ const defaultPhoto = 'image/foto_perfil.jpg'; // Substitua 'url_da_imagem_padrao
 const FormMani = () => { // Declaração do componente FormMani como uma função
     // Definição do estado inicial do formulário usando o hook useState
     const [formAlter, setFormAlter] = useState({
-        funcao: 'update', // Valor padrão para a chave 'funcao'
         id: localStorage.getItem("ID"), // Valor obtido do localStorage para a chave 'ID'
         foto: '', // Valor padrão para a chave 'foto'
         nome_novo: '', // Valor padrão para a chave 'nome_novo'
@@ -21,12 +20,12 @@ const FormMani = () => { // Declaração do componente FormMani como uma funçã
         const showDados = async () => {
             try {
                 // Faz uma requisição para receber os dados do usuário do servidor
-                const resposta = await fetch('http://10.135.60.29:8085/receber-dados', {
+                const resposta = await fetch('http://10.135.60.14:8085/receber-dados', {
                     method: 'POST', // Método da requisição
                     headers: {
                         'Content-Type': 'application/json', // Tipo de conteúdo da requisição
                     },
-                    body: JSON.stringify({id: localStorage.getItem("ID")}), // Corpo da requisição contendo os dados do formulário
+                    body: JSON.stringify({acao: 'selecionar_cad', id: localStorage.getItem("ID")}), // Corpo da requisição contendo os dados do formulário
                 });
 
                 // Verifica se a requisição foi bem-sucedida
@@ -82,7 +81,7 @@ const FormMani = () => { // Declaração do componente FormMani como uma funçã
         e.preventDefault(); // Previne o comportamento padrão de envio do formulário
         try {
             // Faz uma requisição para enviar os dados do formulário para o servidor
-            const resposta = await fetch('http://10.135.60.29:8085/receber-dados', {
+            const resposta = await fetch('http://10.135.60.14:8085/receber-dados', {
                 method: 'POST', // Método da requisição
                 headers: {
                     'Content-Type': 'application/json', // Tipo de conteúdo da requisição
