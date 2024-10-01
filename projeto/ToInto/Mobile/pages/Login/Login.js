@@ -19,7 +19,7 @@ export default function Login({ navigation }) {
         senha_log: senha,
       };
       try {
-        const response = await fetch('http://10.135.60.17:8085/receber-dados', {
+        const response = await fetch('http://10.135.60.14:8085/receber-dados', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -70,7 +70,8 @@ export default function Login({ navigation }) {
     Animated.spring(offset.y, {
       toValue: 0,
       speed: 4,
-      bounciness: 20
+      bounciness: 20,
+      useNativeDriver: true, // Adicione isso para especificar o uso do driver nativo
     }).start();
   }, []);
 
