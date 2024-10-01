@@ -6,12 +6,19 @@ def atualizar_cad(novos_dados):
     print('teste dados:', novos_dados)
     conex = conexao.conectar()
     cursor = conex.cursor()
-    sql = "UPDATE cadastro SET NOME_USUARIO = %s, EMAIL = %s, SENHA = %s, FOTO_PERFIL = %s WHERE ID_CAD = %s"
-    val = (novos_dados)
+    sql = 'SELECT count(*) FROM CADASTRO WHERE EMAIL = %s'
+    val = (novos_dados[1],)
     cursor.execute(sql, val)
-    conex.commit()
-    conex.close()
-    return {'erro': False, 'mensagem': 'Alteração realizada com sucesso'}
+    quantidade_email = cursor.fetchone()
+    if quantidade_email[0] > 0:
+        return {'erro': True, 'mensagem': 'Email já existente'}
+    else:
+        sql = "UPDATE cadastro SET NOME_USUARIO = %s, EMAIL = %s, SENHA = %s, FOTO_PERFIL = %s WHERE ID_CAD = %s"
+        val = (novos_dados)
+        cursor.execute(sql, val)
+        conex.commit()
+        conex.close()
+        return {'erro': False, 'mensagem': 'Alteração realizada com sucesso'}
 
 def atualizar_cart(novos_dados):
     print('teste dados:', novos_dados)
@@ -59,4 +66,14 @@ def atualizar_compromisso(novos_dados):
     
     return {'erro': False, 'mensagem': 'Alteração dos dados do compromisso realizada com sucesso'}
 
+def atualizar_estado_checkbox(idComp, novo_estado):
+    print('teste dados:', idComp, novo_estado)
+    conex = conexao.conectar()
+    cursor = conex.cursor()
+    sql = "UPDATE compromissos SET CHECKBOX = %s WHERE ID_COMP = %s"
+    val = ( novo_estado, idComp)
+    cursor.execute(sql, val)
+    conex.commit()
+    conex.close()
+    return {'erro': False, 'mensagem': 'Alteração do estado do checkbox realizada com sucesso'}
 
