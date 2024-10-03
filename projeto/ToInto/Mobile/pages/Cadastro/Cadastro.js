@@ -4,6 +4,7 @@ import styles from './CadStyle.js';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const CadastroForm = ({ handleSaibaMais }) => {
   const [nome, setNome] = useState('');
@@ -13,8 +14,10 @@ const CadastroForm = ({ handleSaibaMais }) => {
   const [selectedBox, setSelectedBox] = useState(null);
   const navigation = useNavigation();
 
-  const [mensagensErro, setMensagensErro] = useState([]);
+  const [senhaVisivel, setSenhaVisivel] = useState(false);
+  const [confirmaSenhaVisivel, setConfirmaSenhaVisivel] = useState(false);
 
+  const [mensagensErro, setMensagensErro] = useState([]);
   const [showErrorModal, setShowErrorModal] = useState(false);
 
   const handleCadastrar = async (selectedBox) => {
@@ -88,10 +91,20 @@ const CadastroForm = ({ handleSaibaMais }) => {
           <TextInput style={styles.inputs} value={email} onChangeText={setEmail} placeholder="Digite seu e-mail" />
 
           <Text style={styles.label}>Senha</Text>
-          <TextInput secureTextEntry={true} style={styles.inputs} value={senha} onChangeText={setSenha} placeholder="Digite sua senha" />
+          <View style={styles.containerInput}>
+            <TextInput secureTextEntry={!senhaVisivel} style={styles.inputs} value={senha} onChangeText={setSenha} placeholder="Digite sua senha" />
+            <TouchableOpacity onPress={() => setSenhaVisivel(!senhaVisivel)} style={styles.eyeIcon}>
+              <Icon name={senhaVisivel ? "eye" : "eye-slash"} size={20} color="#222" />
+            </TouchableOpacity>
+          </View>
 
           <Text style={styles.label}>Confirmar Senha</Text>
-          <TextInput secureTextEntry={true} style={styles.inputs} value={confirmsenha} onChangeText={setConfirmSenha} placeholder="Digite novamente sua senha" />
+          <View style={styles.containerInput}>
+            <TextInput secureTextEntry={!confirmaSenhaVisivelSenhaVisivel} style={styles.inputs} value={confirmsenha} onChangeText={setConfirmSenha} placeholder="Digite novamente sua senha" />
+            <TouchableOpacity onPress={() => setConfirmaSenhaVisivel(!confirmaSenhaVisivel)} style={styles.eyeIcon}>
+              <Icon name={confirmaSenhaVisivel ? "eye" : "eye-slash"} size={20} color="#222" />
+            </TouchableOpacity>
+          </View>
 
           <View style={styles.selectableBoxes}>
             <TouchableOpacity style={[styles.box, selectedBox === 1 && styles.selected]} onPress={() => handleBoxPress(1)}>

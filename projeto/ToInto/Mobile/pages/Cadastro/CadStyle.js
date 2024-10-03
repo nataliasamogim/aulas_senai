@@ -31,6 +31,17 @@ export default styles = StyleSheet.create({
     borderRadius: 5,
     padding: 7,
   },
+
+  // Exemplo de estilo para o ícone de olho
+  eyeIcon: {
+    position: 'absolute',
+    right: 10,
+    height: 40,
+    width: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
   btnSubmit: {
     backgroundColor: '#570D70',
     justifyContent: 'center',
@@ -135,8 +146,8 @@ export default styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
   },
-  titleNoCampo:{
-    color: '#fff', 
+  titleNoCampo: {
+    color: '#fff',
     fontSize: 16,
     marginRight: 5,
   },
@@ -161,7 +172,7 @@ export default styles = StyleSheet.create({
     marginBottom: 20,
   },
   textErro: {
-    textAlign: 'center', 
+    textAlign: 'center',
     marginBottom: 10,
     fontSize: 18,
     color: '#fff',

@@ -9,6 +9,7 @@ import React, { useState } from 'react';
 import './CadastroLP.css';
 import { useNavigate } from 'react-router-dom';
 import { Modal, Button } from 'react-bootstrap';
+import { FaEye, FaEyeSlash, FaArrowRight } from 'react-icons/fa';
 
 {/*Utiliza o useState para a criação de um estado local chamado formValues(vai armazenar as informações do campo de email e senha) */ }
 const CadastroLP = () => {
@@ -25,7 +26,9 @@ const CadastroLP = () => {
 
     const [mensagensErro, setMensagensErro] = useState([]);
     const [modalIsOpen, setIsOpen] = useState(false); // Alterado: 'modalIsOpen' controla a exibição do modal.
-
+    const [senhaVisivel, setSenhaVisivel] = useState(false);
+    const [confirmaSenhaVisivel, setConfirmaSenhaVisivel] = useState(false);
+    
     {/* O método handleChange é chamado sempre que um dos campos do formulário é alterado. 
     Ele atualiza o estado formValues com os novos valores do campo.*/}
     const handleChange = (e) => {
@@ -177,7 +180,9 @@ const CadastroLP = () => {
 
                         <div className="form_grupo">
                             <label className="senha">Senha</label> {/*div para parte da senha*/}
-                            <input className="input_3" type="password" name="senha" id="senha" value={formValues.senha} onChange={handleChange} placeholder="Digite sua senha" data-password-validate data-min-length="8" data-max-length="15" />
+                            <div className='senha-container'>
+                                <input className="input_3" type={senhaVisivel ? 'text' : 'password'} name="senha" id="senha" value={formValues.senha} onChange={handleChange} placeholder="Digite sua senha" data-password-validate data-min-length="8" data-max-length="15" />
+                            </div>
                         </div>
 
                         <div className="form_grupo"> {/*div para a parte de confirmar senha*/}

@@ -4,12 +4,14 @@ import styles from './LogStyle.js';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default function Login({ navigation }) {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [mensagensErro, setMensagensErro] = useState([]); // Estado para armazenar mensagens de erro
   const [showErrorModal, setShowErrorModal] = useState(false); // Estado para controlar a exibição do modal de erro
+  const [senhaVisivel, setSenhaVisivel] = useState(false);
 
   const handleEntrar = async () => {
     if (email.trim() !== '' && senha.trim() !== '') {
@@ -79,6 +81,10 @@ export default function Login({ navigation }) {
     navigation.navigate('RecuperarSenha');
   };
 
+  const toggleSenhaVisivel = () => {
+    setSenhaVisivel(!senhaVisivel);
+  };
+
   return (
     <KeyboardAvoidingView style={styles.background}>
       <LinearGradient colors={['#AC72BF', '#6B29A4', '#570D70']} style={styles.background}>
@@ -99,11 +105,19 @@ export default function Login({ navigation }) {
           <Text style={styles.titleCampo}>Senha</Text>
           <View style={styles.containerInput}>
             <TextInput style={styles.inputs}
-              secureTextEntry={true}
+              secureTextEntry={!senhaVisivel}
               placeholder='Digite sua senha'
               autoCorrect={false}
               value={senha}
               onChangeText={setSenha} />
+            <TouchableOpacity onPress={toggleSenhaVisivel}>
+              <Icon
+                name={senhaVisivel ? 'eye' : 'eye-slash'}
+                size={24}
+                color="#000"
+                style={styles.eyeIcon}
+              />
+            </TouchableOpacity>
           </View>
 
           <View>

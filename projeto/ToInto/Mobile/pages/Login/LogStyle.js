@@ -1,27 +1,27 @@
-import { StyleSheet} from "react-native";
+import { StyleSheet } from "react-native";
 
 export default styles = StyleSheet.create({
     background: {
-      flex: 1,
-      color: '#AC72BF',
-      alignItems: 'center',
-      justifyContent: 'center',
-      width: 395,
-      height: 720,
+        flex: 1,
+        color: '#AC72BF',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 395,
+        height: 720,
     },
-    containerLogoLogin:{
+    containerLogoLogin: {
         flex: 0.8,
         justifyContent: 'center',
     },
-    logoLogin:{
+    logoLogin: {
         width: 500,
         height: 200,
-    }, 
-    container:{
+    },
+    container: {
         flex: 1.2,
         width: '90%',
     },
-    inputs:{
+    inputs: {
         backgroundColor: '#fff',
         width: '92%',
         color: '#222',
@@ -29,20 +29,21 @@ export default styles = StyleSheet.create({
         fontSize: 17,
         borderRadius: 5,
         padding: 10,
+        paddingRight: 40, // Deixe espaço suficiente para o ícone
     },
-    containerInput:{
-        alignItems: 'center',
+    containerInput: {
+        alignItems: 'flex-start', // Para alinhar o conteúdo à esquerda
+        position: 'relative', // Para que o ícone possa ser posicionado em relação a este container
     },
-    titleCampo:{
+    titleCampo: {
         color: '#fff',
         fontSize: 18,
-        paddingLeft: 15
-
+        paddingLeft: 15,
     },
-    buttons:{
+    buttons: {
         alignItems: 'center',
     },
-    btnSubmit:{
+    btnSubmit: {
         backgroundColor: '#AE80D6',
         justifyContent: 'center',
         marginBottom: 15,
@@ -51,41 +52,47 @@ export default styles = StyleSheet.create({
         height: 45,
         borderRadius: 5,
     },
-    btnRegistrar:{
+    btnRegistrar: {
         justifyContent: 'center',
         marginBottom: 15,
         alignItems: 'center',
         width: '90%',
         height: 45,
     },
-    titleNoCampo:{
-        color: '#fff', 
+    titleNoCampo: {
+        color: '#fff',
         fontSize: 16,
     },
-    textNoConta:{
+    textNoConta: {
         justifyContent: 'center',
         marginBottom: 15,
         alignItems: 'center',
         width: '90%',
         height: 45,
     },
-    submitTxt:{
+    submitTxt: {
         color: '#fff',
         fontSize: 20,
     },
     socialIcon: {
         width: 50,
-        height:50,
+        height: 50,
     },
     socialContainer: {
-        display: 'flex', 
+        display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-around',
         marginTop: 20,
     },
+    eyeIcon: {
+        marginTop: -50, // Ajuste fino para alinhar
+        marginLeft: 300,
+        height: 25, // Defina a altura do ícone
+        width: 25, // Defina a largura do ícone
+    },
     recSenha: {
-        color: 'white', 
-        textAlign: 'center', 
+        color: 'white',
+        textAlign: 'center',
         marginTop: 8,
         fontSize: 17,
         marginBottom: 10,
@@ -95,72 +102,71 @@ export default styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
-      },
-      modalContent: {
+    },
+    modalContent: {
         backgroundColor: '#AC72BF',
         borderRadius: 20,
         width: '80%',
         padding: 20,
         shadowColor: "#fff",
         shadowOffset: {
-          width: 0,
-          height: 2,
+            width: 0,
+            height: 2,
         },
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
         elevation: 5,
         alignItems: 'center',
-      },
-      modalTitle: {
+    },
+    modalTitle: {
         fontSize: 24,
         marginBottom: 10,
         textAlign: 'center',
         color: '#fff',
         marginTop: 20, // Espaçamento acima do título
-      },
-      modalText: {
+    },
+    modalText: {
         marginBottom: 10, // Espaçamento entre as mensagens de erro
         fontSize: 18,
         textAlign: 'left', // Alinhamento do texto para a esquerda
         color: '#fff',
-      },
-      containerConta: {
+    },
+    containerConta: {
         alignItems: 'center',
         marginTop: 20,
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'center',
-      },
-      titleNoCampo:{
-        color: '#fff', 
+    },
+    titleNoCampo: {
+        color: '#fff',
         fontSize: 16,
         marginRight: 5,
-      },
-      Txtentrar: {
+    },
+    Txtentrar: {
         color: '#fff',
         fontSize: 18,
-      },
-      closeButton: {
+    },
+    closeButton: {
         backgroundColor: '#570D70',
         paddingVertical: 10,
         borderRadius: 15,
         width: 150,
         marginTop: 20, // Espaçamento acima do botão Fechar
-      },
-      closeButtonText: {
+    },
+    closeButtonText: {
         color: '#fff',
         fontWeight: 'bold',
         fontSize: 18,
         textAlign: 'center',
-      },
-      containerErro: {
+    },
+    containerErro: {
         marginBottom: 20,
-      },
-      textErro: {
-        textAlign: 'center', 
+    },
+    textErro: {
+        textAlign: 'center',
         marginBottom: 10,
         fontSize: 18,
         color: '#fff',
-      },
-    
-  });
+    },
+});

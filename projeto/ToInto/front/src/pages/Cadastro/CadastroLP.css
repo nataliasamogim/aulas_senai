@@ -44,6 +44,7 @@ para os usuários.*/
 
 .form_grupo input{
     border: none;
+    width: 95%;
 }
 
 .input_1, .input_2, .input_3, .input_4 {
@@ -73,13 +74,11 @@ para os usuários.*/
 .btn_free  .submit_btn{
     background-color: rgb(124,101,147);
     color: white;
-    
 }
 
 .btn_mensal  .submit_btn{
     background-color: rgb(124,101,147);
     color: white;
-    
 }
 
 .btn_anual  .submit_btn{
@@ -143,7 +142,24 @@ para os usuários.*/
     font-size: 1.1em;
     padding-left: 5px;
     padding-right: 5px;
+    width: 100%;
 }
+.senha-container {
+    position: relative;
+}
+
+.senha-container button {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: white; /* ou outra cor que combine */
+    font-size: 1.2em; /* Ajuste o tamanho conforme necessário */
+}
+
 
 /*---Início buttons---*/
 
@@ -186,16 +202,11 @@ para os usuários.*/
 .btn_can_cad{
     flex-direction: row;
 }
-/*---Fim buttons---*/
 
-.error-validation { /*java script*/
-    color: rgb(107, 236, 221);
-    font-size: 15px;
-    margin: 0;
+.olho svg{
+    color: black;
+    margin-top: -20px;
 }
-  
-.template { 
-    display: none;
-}
+/*---Fim buttons---*/
 
 /*--Fim Formulário--*/
