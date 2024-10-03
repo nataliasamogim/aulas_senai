@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'; // Importa React, useState e useEffect do pacote 'react'
 import { useNavigate } from 'react-router-dom'; // Importa useNavigate do pacote 'react-router-dom'
 import './FormMani.css'; // Importa o arquivo CSS de estilos para este componente
+import { Modal, Button } from 'react-bootstrap';
 
 const defaultPhoto = 'image/foto_perfil.jpg'; // Substitua 'url_da_imagem_padrao.jpg' pela URL da sua imagem padrão
 
@@ -20,12 +21,12 @@ const FormMani = () => { // Declaração do componente FormMani como uma funçã
         const showDados = async () => {
             try {
                 // Faz uma requisição para receber os dados do usuário do servidor
-                const resposta = await fetch('http://10.135.60.14:8085/receber-dados', {
+                const resposta = await fetch('http://10.135.60.57:8085/receber-dados', {
                     method: 'POST', // Método da requisição
                     headers: {
                         'Content-Type': 'application/json', // Tipo de conteúdo da requisição
                     },
-                    body: JSON.stringify({acao: 'selecionar_cad', id: localStorage.getItem("ID")}), // Corpo da requisição contendo os dados do formulário
+                    body: JSON.stringify({ acao: 'selecionar_cad', id: localStorage.getItem("ID") }), // Corpo da requisição contendo os dados do formulário
                 });
 
                 // Verifica se a requisição foi bem-sucedida
@@ -46,7 +47,7 @@ const FormMani = () => { // Declaração do componente FormMani como uma funçã
             } catch (error) {
                 console.error('Erro ao buscar dados do usuário:', error); // Captura e exibe qualquer erro ocorrido durante a busca dos dados do usuário
             }
-            
+
         };
 
         showDados(); // Chama a função para buscar os dados do usuário quando o componente é montado
@@ -73,15 +74,38 @@ const FormMani = () => { // Declaração do componente FormMani como uma funçã
     // Estado para armazenar mensagens de erro
     const [mensagensErro, setMensagensErro] = useState([]);
 
+    const [modalIsOpen, setIsOpen] = useState(false);
+
     // Hook useNavigate para navegação entre rotas
     const navigate = useNavigate();
+
+    //transforma a mensagem das validações de senha em tópicos
+    function transformarMensagens(response) {
+        const novasMensagens = [];
+
+        // Itera sobre as mensagens do JSON original
+        response.mensagens.forEach((item) => {
+            if (Array.isArray(item.mensagem)) {
+                // Se 'mensagem' for um array, adiciona cada mensagem como um novo objeto
+                item.mensagem.forEach((msg) => {
+                    novasMensagens.push({ erro: item.erro, mensagem: msg });
+                });
+            } else {
+                // Caso contrário, mantém o objeto original
+                novasMensagens.push(item);
+            }
+        });
+
+        // Retorna um novo objeto com o array de mensagens atualizado
+        return { erro: response.erro, mensagens: novasMensagens };
+    }
 
     // Função para lidar com o envio do formulário
     const handleSubmit = async (e) => {
         e.preventDefault(); // Previne o comportamento padrão de envio do formulário
         try {
             // Faz uma requisição para enviar os dados do formulário para o servidor
-            const resposta = await fetch('http://10.135.60.14:8085/receber-dados', {
+            const resposta = await fetch('http://10.135.60.57:8085/receber-dados', {
                 method: 'POST', // Método da requisição
                 headers: {
                     'Content-Type': 'application/json', // Tipo de conteúdo da requisição
@@ -91,9 +115,10 @@ const FormMani = () => { // Declaração do componente FormMani como uma funçã
                     id: formAlter.id,
                     nome_novo: formAlter.nome_novo,
                     email_novo: formAlter.email_novo,
-                    senha_nova: formAlter.senha_nova,}), // Corpo da requisição contendo os dados do formulário em formato JSON
+                    senha_nova: formAlter.senha_nova,
+                }), // Corpo da requisição contendo os dados do formulário em formato JSON
             });
-            console.log('teste envio',formAlter)
+            console.log('teste envio', formAlter)
             // Extrai o resultado da resposta e o converte para JSON
             const resultado = await resposta.json();
             console.log('teste retorno', resultado);
@@ -104,7 +129,13 @@ const FormMani = () => { // Declaração do componente FormMani como uma funçã
                 console.error('Erro no servidor:', resultado.mensagens);
 
                 // Atualiza o estado com as mensagens de erro para exibição no formulário
-                setMensagensErro(resultado.mensagens);
+                const novoResponse = transformarMensagens(resultado);
+                console.log(novoResponse);
+
+                // Atualiza o estado com as mensagens de erro para exibição no formulário
+                setMensagensErro(novoResponse.mensagens);
+                setIsOpen(true);
+
             } else {
                 localStorage.setItem('ID', formAlter.id);
                 localStorage.setItem('nome_usuario', formAlter.nome_novo);
@@ -115,6 +146,11 @@ const FormMani = () => { // Declaração do componente FormMani como uma funçã
         } catch (error) {
             console.error('Erro ao enviar dados:', error); // Captura e exibe qualquer erro ocorrido durante o envio dos dados do formulário
         }
+    };
+
+    const closeModal = () => {
+        setIsOpen(false); // Alterado: Função para fechar o modal
+        setMensagensErro([]); // Limpa as mensagens de erro
     };
 
     // Função para limpar o formulário
@@ -132,16 +168,36 @@ const FormMani = () => { // Declaração do componente FormMani como uma funçã
         <div className="form-container">
 
             {/* Exibe mensagens de erro, se houver */}
-            {mensagensErro.length > 0 && (
-                <div style={{ color: 'white' }}>
-                    <p>Erro ao processar os dados:</p>
-                    <ul>
-                        {mensagensErro.map((mensagem, index) => (
-                            <li key={index}>{mensagem.mensagem}</li>
-                        ))}
-                    </ul>
-                </div>
-            )}
+            <div className='modalformani-erro'>
+                <Modal show={modalIsOpen} onHide={closeModal} centered className="modcad">
+                    <Modal.Header>
+                        <button
+                            onClick={closeModal} // Chama a função para fechar o modal
+                            className="modal-close-button"
+                            aria-label="Fechar"
+                        >
+                            &times;
+                        </button>
+                        <Modal.Title>Erro ao processar os dados</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        {mensagensErro.length > 0 && (
+                            <div style={{ color: 'white' }}>
+                                <ul>
+                                    {mensagensErro.map((mensagem, index) => (
+                                        <li key={index}>{mensagem.mensagem}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
+                    </Modal.Body>
+                    <Modal.Footer className='footererromodal'>
+                        <Button style={{ backgroundColor: '#570D70', border: 'none' }} className='errofechar' onClick={closeModal}>
+                            Fechar
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+            </div>
 
             {/* Formulário */}
             <form className="cadastro" onSubmit={handleSubmit}>
@@ -155,7 +211,7 @@ const FormMani = () => { // Declaração do componente FormMani como uma funçã
                         <input type="text" id="upload-input" onChange={handleImageChange} style={{ display: 'none' }} accept="image/*" />
                     </label>
                 </div>
-                <input className="id" type="hidden" name="id" id='id' value={formAlter.id}/>
+                <input className="id" type="hidden" name="id" id='id' value={formAlter.id} />
                 <div className="form_grupo">
                     <label className="nome">Nome</label>
                     <input className="input_2" type="text" name="nome_novo" id='nome_novo' value={formAlter.nome_novo} onChange={handleChange} placeholder="Digite seu nome" />
