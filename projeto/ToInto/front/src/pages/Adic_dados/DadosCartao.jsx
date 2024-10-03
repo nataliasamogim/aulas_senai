@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './DadosCartao.css';
+import { Modal, Button } from 'react-bootstrap';
 
 // Função para formatar a data como MM/AA 
-const formatarData = (valor) => { 
+const formatarData = (valor) => {
     // Remove todos os caracteres não numéricos 
-    const apenasNumeros = valor.replace(/\D/g, ''); 
+    const apenasNumeros = valor.replace(/\D/g, '');
     // Adiciona a barra após dois dígitos 
-    if (apenasNumeros.length > 2) { 
-        return `${apenasNumeros.slice(0, 2)}/${apenasNumeros.slice(2, 4)}`; 
-    } 
-    return apenasNumeros; 
+    if (apenasNumeros.length > 2) {
+        return `${apenasNumeros.slice(0, 2)}/${apenasNumeros.slice(2, 4)}`;
+    }
+    return apenasNumeros;
 };
 
 const DadosCartao = () => {
@@ -81,11 +82,12 @@ const DadosCartao = () => {
     };
 
     const [mensagensErro, setMensagensErro] = useState([]);
+    const [modalIsOpen, setIsOpen] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const resposta = await fetch('http://10.135.60.14:8085/receber-dados', {
+            const resposta = await fetch('http://10.135.60.57:8085/receber-dados', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -96,8 +98,12 @@ const DadosCartao = () => {
             const resultado = await resposta.json();
 
             if (resultado.erro) {
+                // Exibe mensagens de erro no console.log ou em algum local visível
                 console.error('Erro no servidor:', resultado.mensagens);
+
+                // Atualiza o estado com as mensagens de erro para exibição no formulário
                 setMensagensErro(resultado.mensagens);
+                setIsOpen(true);
             } else {
                 console.log('Dados processados do cartão com sucesso!', resposta);
                 setFormCartao({
@@ -116,18 +122,45 @@ const DadosCartao = () => {
         }
     };
 
+    const closeModal = () => {
+        setIsOpen(false); // Alterado: Função para fechar o modal
+        setMensagensErro([]); // Limpa as mensagens de erro
+    };
+
     return (
         <div className="form-container">
-            {mensagensErro.length > 0 && (
-                <div style={{ color: 'white' }}>
-                    <p>Erro ao processar os dados:</p>
-                    <ul>
-                        {mensagensErro.map((mensagem, index) => (
-                            <li key={index}>{mensagem.mensagem}</li>
-                        ))}
-                    </ul>
-                </div>
-            )}
+            <div className='modal-erro-adccartao'>
+                <Modal show={modalIsOpen} onHide={closeModal} centered className="modcad">
+                    <Modal.Header>
+                        <button
+                            onClick={closeModal} // Chama a função para fechar o modal
+                            className="modal-close-button"
+                            aria-label="Fechar"
+                        >
+                            &times;
+                        </button>
+                        <Modal.Title>Erro ao processar os dados</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        {mensagensErro.length > 0 && (
+                            <div style={{ color: 'white' }}>
+                                <p>Erro ao processar os dados:</p>
+                                <ul>
+                                    {mensagensErro.map((mensagem, index) => (
+                                        <li key={index}>{mensagem.mensagem}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
+                    </Modal.Body>
+                    <Modal.Footer className='footererromodal'>
+                        <Button style={{ backgroundColor: '#570D70', border: 'none' }} className='errofechar' onClick={closeModal}>
+                            Fechar
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+
+            </div>
 
             <section className="form_adiccartao">
                 <form className="adic_cartao" id="adicionarcart" onSubmit={handleSubmit}>
