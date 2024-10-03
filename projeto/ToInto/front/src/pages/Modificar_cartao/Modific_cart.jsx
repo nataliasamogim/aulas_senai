@@ -1,6 +1,6 @@
 {/* Nome do componente: Modifc_cart*/ }
 {/* Autor: Júlia Dias Lara e Natália Ap. Samogim*/ }
-{/* Data de criação: 14/03/2024*/ }
+{/* Data de criação: 01/10/2024*/ }
 {/* Descrição detalhada: Nesse componente, o código lida com a manipulação de dados do formulário, realiza validações no 
 lado do cliente, e envia esses dados para um servidor, para ser processado e gravado em um documento txt. O componente é 
 configurado para fornecer feedback visual aos usuários sobre o sucesso ou falha no processamento do formulário.*/}
@@ -8,16 +8,17 @@ configurado para fornecer feedback visual aos usuários sobre o sucesso ou falha
 import React, { useState, useEffect } from 'react';
 import './Modific_cart.css';
 import { useNavigate } from 'react-router-dom'; //recuperar a rota 
+import { Modal, Button } from 'react-bootstrap';
 
 // Função para formatar a data como MM/AA 
-const formatarData = (valor) => { 
+const formatarData = (valor) => {
     // Remove todos os caracteres não numéricos 
-    const apenasNumeros = valor.replace(/\D/g, ''); 
+    const apenasNumeros = valor.replace(/\D/g, '');
     // Adiciona a barra após dois dígitos 
-    if (apenasNumeros.length > 2) { 
-        return `${apenasNumeros.slice(0, 2)}/${apenasNumeros.slice(2, 4)}`; 
-    } 
-    return apenasNumeros; 
+    if (apenasNumeros.length > 2) {
+        return `${apenasNumeros.slice(0, 2)}/${apenasNumeros.slice(2, 4)}`;
+    }
+    return apenasNumeros;
 };
 
 {/*Utiliza o useState para a criação de um estado local chamado formValues(vai armazenar as informações do campo de nome_titular
@@ -36,7 +37,7 @@ const Modific_cart = () => {
             const id_cad = localStorage.getItem('ID')
             try {
                 // Faz uma requisição para receber os dados do usuário do servidor
-                const resposta = await fetch('http://10.135.60.14:8085/receber-dados', {
+                const resposta = await fetch('http://10.135.60.57:8085/receber-dados', {
                     method: 'POST', // Método da requisição
                     headers: {
                         'Content-Type': 'application/json', // Tipo de conteúdo da requisição
@@ -110,12 +111,14 @@ const Modific_cart = () => {
     };
 
     const [mensagensErro, setMensagensErro] = useState([]);
+    const [modalIsOpen, setIsOpen] = useState(false);
+
     const handleAtualizarCart = async (e) => {
         e.preventDefault(); // Prevenir o envio padrão do formulário
         const id_cad = localStorage.getItem('ID');
         try {
             // Faz uma requisição para enviar os dados do formulário para o servidor
-            const resposta = await fetch('http://10.135.60.14:8085/receber-dados', {
+            const resposta = await fetch('http://10.135.60.57:8085/receber-dados', {
                 method: 'POST', // Método da requisição
                 headers: {
                     'Content-Type': 'application/json', // Tipo de conteúdo da requisição
@@ -139,6 +142,7 @@ const Modific_cart = () => {
                 console.error('Erro no servidor:', resultado.mensagens);
                 // Atualiza o estado com as mensagens de erro para exibição no formulário
                 setMensagensErro(resultado.mensagens);
+                setIsOpen(true);
             } else {
                 console.log('Dados de cartão atualizados com sucesso!', resultado);
                 setNomeTitular('');
@@ -153,20 +157,45 @@ const Modific_cart = () => {
         }
     };
 
+    const closeModal = () => {
+        setIsOpen(false); // Alterado: Função para fechar o modal
+        setMensagensErro([]); // Limpa as mensagens de erro
+    };
+    
     return (
 
         <div className="form-container">
-
-            {mensagensErro.length > 0 && (
-                <div style={{ color: 'white' }}>
-                    <p>Erro ao processar os dados:</p>
-                    <ul>
-                        {mensagensErro.map((mensagem, index) => (
-                            <li key={index}>{mensagem.mensagem}</li>
-                        ))}
-                    </ul>
-                </div>
-            )}
+            <div className='erro-mdfcCartao'>
+                <Modal show={modalIsOpen} onHide={closeModal} centered className="modcad">
+                    <Modal.Header>
+                        <button
+                            onClick={closeModal} // Chama a função para fechar o modal
+                            className="modal-close-button"
+                            aria-label="Fechar"
+                        >
+                            &times;
+                        </button>
+                        <Modal.Title>Erro ao processar os dados</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        {mensagensErro.length > 0 && (
+                            <div style={{ color: 'white' }}>
+                                <p>Erro ao processar os dados:</p>
+                                <ul>
+                                    {mensagensErro.map((mensagem, index) => (
+                                        <li key={index}>{mensagem.mensagem}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
+                    </Modal.Body>
+                    <Modal.Footer className='footererromodal'>
+                        <Button style={{ backgroundColor: '#570D70', border: 'none' }} className='errofechar' onClick={closeModal}>
+                            Fechar
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+            </div>
 
             <section className="form_modifcartao">
                 <form className="modificar_cartao" id="modificarcart" action="" onSubmit={handleAtualizarCart}/*O método handleSubmit é chamado quando o formulário é enviado.*/> {/*form do cartão*/}
