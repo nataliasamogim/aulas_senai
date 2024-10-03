@@ -15,7 +15,7 @@ const Compromissos = ({ isOpen, onRequestClose, tarefasData, receberTarefas, dat
   const [descricao, setDescricao] = useState('');
   const [importante, setImportante] = useState(false);
   const [lembrete, setLembrete] = useState('');
-  const [mensagensErro, setMensagensErro] = useState([]);
+  const [mensagensErro, setMensagensErro] = useState({});
 
   // Função para formatar a data
   const formatDate = (dateString) => {
@@ -51,7 +51,7 @@ const Compromissos = ({ isOpen, onRequestClose, tarefasData, receberTarefas, dat
       let response;
       if (tarefasData) {
         // Atualizar tarefa existente
-        response = await fetch('http://10.135.60.16:8085/receber-dados', {
+        response = await fetch('http://10.135.60.57:8085/receber-dados', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -70,7 +70,7 @@ const Compromissos = ({ isOpen, onRequestClose, tarefasData, receberTarefas, dat
         });
       } else {
         // Criar nova tarefa
-        response = await fetch('http://10.135.60.16:8085/receber-dados', {
+        response = await fetch('http://10.135.60.57:8085/receber-dados', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -88,12 +88,22 @@ const Compromissos = ({ isOpen, onRequestClose, tarefasData, receberTarefas, dat
           }),
         });
       }
+
       console.log('plano que esta chegando no compromissos', localStorage.getItem("plano_esc"))
+      
       if (response) {
         const resultado = await response.json();
         if (resultado.erro) {
           console.error('Erro no servidor:', resultado.mensagens);
-          setMensagensErro(resultado.mensagens);
+          // Resetando mensagens de erro
+          setMensagensErro({});
+
+          // Extraindo mensagens do formato que vem do backend
+          resultado.mensagens.forEach(mensagem => {
+            const campo = Object.keys(mensagem.mensagem)[0]; // pega o nome do campo
+            const mensagemErro = mensagem.mensagem[campo]; // pega a mensagem do campo
+            setMensagensErro(prev => ({ ...prev, [campo]: mensagemErro })); // associa a mensagem ao campo correto
+          });
         } else {
           setTitulo('');
           setDescricao('');
@@ -120,19 +130,9 @@ const Compromissos = ({ isOpen, onRequestClose, tarefasData, receberTarefas, dat
         className="modal-close-button"
         aria-label="Fechar"
       >
-        &times; {/* Xis para fechar */}
+        &times; {/* X para fechar */}
       </button>
-
-      {mensagensErro.length > 0 && (
-        <div style={{ color: 'white' }}>
-          <p>Erro ao processar os dados:</p>
-          <ul>
-            {mensagensErro.map((mensagem, index) => (
-              <li key={index}>{mensagem.mensagem}</li>
-            ))}
-          </ul>
-        </div>
-      )}
+      
       <div className='comph2div'>
         <h2 id='compromissosh2'>{tarefasData ? 'Atualizar tarefas' : 'Compromissos'}</h2>
       </div>
@@ -150,6 +150,7 @@ const Compromissos = ({ isOpen, onRequestClose, tarefasData, receberTarefas, dat
             onChange={(e) => setTitulo(e.target.value)}
             required
           />
+          {mensagensErro.titulo && <div className="error-message">{mensagensErro.titulo}</div>}
         </div>
 
         <div className="form-group">
@@ -161,6 +162,7 @@ const Compromissos = ({ isOpen, onRequestClose, tarefasData, receberTarefas, dat
             onChange={(e) => setTime(e.target.value)}
             required
           />
+          {mensagensErro.horario && <div className="error-message">{mensagensErro.horario}</div>}
         </div>
 
         <div className="form-group">
@@ -171,6 +173,7 @@ const Compromissos = ({ isOpen, onRequestClose, tarefasData, receberTarefas, dat
             value={descricao}
             onChange={(e) => setDescricao(e.target.value)}
           ></textarea>
+          {mensagensErro.descricao && <div className="error-message">{mensagensErro.descricao}</div>}
         </div>
 
         {/* Campo Importante */}
