@@ -32,7 +32,7 @@ const CadastroForm = ({ handleSaibaMais }) => {
       };
 
       try {
-        const response = await fetch('http://192.168.137.1:8085/receber-dados', {
+        const response = await fetch('http://10.135.60.15:8085/receber-dados', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -100,7 +100,7 @@ const CadastroForm = ({ handleSaibaMais }) => {
 
           <Text style={styles.label}>Confirmar Senha</Text>
           <View style={styles.containerInput}>
-            <TextInput secureTextEntry={!confirmaSenhaVisivelSenhaVisivel} style={styles.inputs} value={confirmsenha} onChangeText={setConfirmSenha} placeholder="Digite novamente sua senha" />
+            <TextInput secureTextEntry={!confirmaSenhaVisivel} style={styles.inputs} value={confirmsenha} onChangeText={setConfirmSenha} placeholder="Digite novamente sua senha" />
             <TouchableOpacity onPress={() => setConfirmaSenhaVisivel(!confirmaSenhaVisivel)} style={styles.eyeIcon}>
               <Icon name={confirmaSenhaVisivel ? "eye" : "eye-slash"} size={20} color="#222" />
             </TouchableOpacity>

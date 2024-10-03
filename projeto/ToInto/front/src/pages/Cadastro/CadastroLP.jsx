@@ -181,13 +181,31 @@ const CadastroLP = () => {
                         <div className="form_grupo">
                             <label className="senha">Senha</label> {/*div para parte da senha*/}
                             <div className='senha-container'>
-                                <input className="input_3" type={senhaVisivel ? 'text' : 'password'} name="senha" id="senha" value={formValues.senha} onChange={handleChange} placeholder="Digite sua senha" data-password-validate data-min-length="8" data-max-length="15" />
+                                <input 
+                                    className="input_3" 
+                                    type={senhaVisivel ? 'text' : 'password'}
+                                    name="senha" 
+                                    id="senha" 
+                                    value={formValues.senha} 
+                                    onChange={handleChange} 
+                                    placeholder="Digite sua senha" 
+                                    data-password-validate 
+                                    data-min-length="8" 
+                                    data-max-length="15" />
+                                <button type="button" className='olho' onClick={() => setSenhaVisivel(!senhaVisivel)}>
+                                    {senhaVisivel ? <FaEye /> : <FaEyeSlash /> }
+                                </button>
                             </div>
                         </div>
 
                         <div className="form_grupo"> {/*div para a parte de confirmar senha*/}
                             <label className="confirmar">Confirmar senha </label>
-                            <input className="input_4" type="password" name="confirmsenha" id="password" value={formValues.confirmsenha} onChange={handleChange} placeholder="Digite novamente sua senha" data-equal="senha" />
+                            <div className='senha-container'>
+                                <input className="input_4" type={confirmaSenhaVisivel ? 'text' : 'password'} name="confirmsenha" id="password" value={formValues.confirmsenha} onChange={handleChange} placeholder="Digite novamente sua senha" data-equal="senha" />
+                                <button type="button" className='olho' onClick={() => setConfirmaSenhaVisivel(!confirmaSenhaVisivel)}>
+                                    {confirmaSenhaVisivel ? <FaEye /> :<FaEyeSlash />}
+                                </button>
+                            </div>
                         </div>
 
                         <div className="buttons">
