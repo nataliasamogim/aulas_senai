@@ -37,6 +37,11 @@
     /* Cursor pointer para indicar que é clicável */
 }
 
+
+.error-message {
+    color: #6ff5ff;
+}
+
 .button-salvar {
     width: 65px;
     height: 32px;
@@ -60,10 +65,11 @@
 
 .form-group {
     height: 86px;
+    margin-top: 5px;
 }
 
 .form-group-imp {
-    padding-top: 20px;
+    padding-top: 35px;
 
 }
 
