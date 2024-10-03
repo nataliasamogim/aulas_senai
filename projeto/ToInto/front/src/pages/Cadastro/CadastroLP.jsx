@@ -1,6 +1,6 @@
 {/* Nome do componente: CadastroLP*/ }
 {/* Autor: Júlia */ }
-{/* Data de criação: /alteração: 20-08-2024*/ }
+{/* Data de criação: /alteração: 01-10-2024*/ }
 {/* Descrição detalhada: Nesse componente, o código lida com a manipulação de dados do formulário, realiza validações no 
 lado do cliente, e envia esses dados para um servidor, para ser processado e gravado em um documento txt. O componente é 
 configurado para fornecer feedback visual aos usuários sobre o sucesso ou falha no processamento do formulário.*/}
@@ -8,6 +8,7 @@ configurado para fornecer feedback visual aos usuários sobre o sucesso ou falha
 import React, { useState } from 'react';
 import './CadastroLP.css';
 import { useNavigate } from 'react-router-dom';
+import { Modal, Button } from 'react-bootstrap';
 
 {/*Utiliza o useState para a criação de um estado local chamado formValues(vai armazenar as informações do campo de email e senha) */ }
 const CadastroLP = () => {
@@ -23,7 +24,7 @@ const CadastroLP = () => {
     });
 
     const [mensagensErro, setMensagensErro] = useState([]);
-    
+    const [modalIsOpen, setIsOpen] = useState(false); // Alterado: 'modalIsOpen' controla a exibição do modal.
 
     {/* O método handleChange é chamado sempre que um dos campos do formulário é alterado. 
     Ele atualiza o estado formValues com os novos valores do campo.*/}
@@ -36,10 +37,30 @@ const CadastroLP = () => {
     };
 
     const handlePlanoSelecionado = (plano) => {
-        console.log('plano',plano);
+        console.log('plano', plano);
         setPlanoSelecionado(plano);
         //console.log('plano',planoSelecionado);
     };
+
+    function transformarMensagens(response) {
+        const novasMensagens = [];
+
+        // Itera sobre as mensagens do JSON original
+        response.mensagens.forEach((item) => {
+            if (Array.isArray(item.mensagem)) {
+                // Se 'mensagem' for um array, adiciona cada mensagem como um novo objeto
+                item.mensagem.forEach((msg) => {
+                    novasMensagens.push({ erro: item.erro, mensagem: msg });
+                });
+            } else {
+                // Caso contrário, mantém o objeto original
+                novasMensagens.push(item);
+            }
+        });
+
+        // Retorna um novo objeto com o array de mensagens atualizado
+        return { erro: response.erro, mensagens: novasMensagens };
+    }
 
     const handleSubmit = async () => {
         if (!planoSelecionado) {
@@ -48,9 +69,9 @@ const CadastroLP = () => {
             return; // Impede o envio do formulário
         }
         formValues.planos = planoSelecionado
-        console.log('submit',formValues);
+        console.log('submit', formValues);
         try {
-            const resposta = await fetch('http://10.135.60.14:8085/receber-dados', {
+            const resposta = await fetch('http://10.135.60.57:8085/receber-dados', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -65,7 +86,10 @@ const CadastroLP = () => {
                 console.error('Erro no servidor:', resultado.mensagens);
 
                 // Atualiza o estado com as mensagens de erro para exibição no formulário
-                setMensagensErro(resultado.mensagens);
+                const novoResponse = transformarMensagens(resultado);
+                console.log(novoResponse);
+                setMensagensErro(novoResponse.mensagens);
+                setIsOpen(true);
             } else {
                 localStorage.setItem("ID", resultado.mensagens.mensagem[0])
                 localStorage.setItem("nome_usuario", formValues.nome)
@@ -86,6 +110,11 @@ const CadastroLP = () => {
         }
     };
 
+    const closeModal = () => {
+        setIsOpen(false); // Alterado: Função para fechar o modal
+        setMensagensErro([]); // Limpa as mensagens de erro
+    };
+
     const limpaForm = () => {
         setFormValues({
             nome: '',
@@ -99,16 +128,38 @@ const CadastroLP = () => {
     return (
         <>
             <div className="form-container">
-                {mensagensErro.length > 0 && (
-                    <div style={{ color: 'white' }}>
-                        <p>Erro ao processar os dados:</p>
-                        <ul>
-                            {mensagensErro.map((mensagem, index) => (
-                                <li key={index}>{mensagem.mensagem}</li>
-                            ))}
-                        </ul>
-                    </div>
-                )}
+                <div className='modalerroscad'>
+                    <Modal show={modalIsOpen} onHide={closeModal} centered className="modcad">
+                        <Modal.Header>
+                            <button
+                                onClick={closeModal} // Chama a função para fechar o modal
+                                className="modal-close-button"
+                                aria-label="Fechar"
+                            >
+                                &times;
+                            </button>
+                            <Modal.Title>Erro ao processar os dados</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            {mensagensErro.length > 0 && (
+                                <div style={{ color: 'white' }}>
+                                    <p>Erro ao processar os dados:</p>
+                                    <ul>
+                                        {mensagensErro.map((mensagem, index) => (
+                                            <li key={index}>{mensagem.mensagem}</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            )}
+
+                        </Modal.Body>
+                        <Modal.Footer className='footererromodal'>
+                            <Button style={{ backgroundColor: '#570D70', border: 'none' }} className='errofechar' onClick={closeModal}>
+                                Fechar
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
+                </div>
 
                 <section className="form_cadastro">
                     <form className="cadastro" id="cadastrar" action="" onSubmit={(e) => e.preventDefault()}>
