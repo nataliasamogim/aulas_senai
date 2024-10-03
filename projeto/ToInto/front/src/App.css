@@ -299,6 +299,28 @@ button.btn.btn-outline {
   width: 60px !important;
 }
 
+/*--------- Modal de erro - validações --------*/
+
 .modal-footer{
   border-top: none !important;
+}
+
+.overlay-modcad {
+  background-color: rgba(0, 0, 0, 0.75) !important; /* Cor do fundo do overlay */
+}
+
+.modcad {
+  width: 300px;
+}
+
+.errofechar{
+  border-color:transparent;
+}
+
+.errofechar:hover{
+  border-color: #ddd !important;
+}
+
+.footererromodal{
+  border-top: 0.5px solid white !important;
 }
