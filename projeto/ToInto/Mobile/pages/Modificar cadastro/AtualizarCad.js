@@ -19,12 +19,12 @@ const AtualizarCad = ({ navigation }) => {
         const showDados = async () => {
             try {
                 // Faz uma requisição para receber os dados do usuário do servidor
-                const resposta = await fetch('http://10.135.60.20:8085/receber-dados', {
+                const resposta = await fetch('http://10.135.60.19:8085/receber-dados', {
                     method: 'POST', // Método da requisição
                     headers: {
                         'Content-Type': 'application/json', // Tipo de conteúdo da requisição
                     },
-                    body: JSON.stringify({ id: await AsyncStorage.getItem("ID") }), // Corpo da requisição contendo os dados do formulário
+                    body: JSON.stringify({ acao: 'selecionar_cad', id: await AsyncStorage.getItem("ID") }), // Corpo da requisição contendo os dados do formulário
                 });
 
                 // Verifica se a requisição foi bem-sucedida
@@ -34,7 +34,7 @@ const AtualizarCad = ({ navigation }) => {
 
                 // Extrai os dados da resposta e os converte para JSON
                 const userData = await resposta.json();
-                //console.log('Dados do usuário:', userData);
+                console.log('Dados do usuário:', userData);
 
                 // Atualiza o estado do formulário com os dados do usuário recebidos
                 setNome(userData.mensagem[1]); // Define o novo valor para 'nome'
@@ -52,7 +52,7 @@ const AtualizarCad = ({ navigation }) => {
         const nome_str = nome;
         try {
             // Faz uma requisição para enviar os dados do formulário para o servidor
-            const resposta = await fetch('http://10.135.60.17:8085/receber-dados', {
+            const resposta = await fetch('http://10.135.60.19:8085/receber-dados', {
                 method: 'POST', // Método da requisição
                 headers: {
                     'Content-Type': 'application/json', // Tipo de conteúdo da requisição
