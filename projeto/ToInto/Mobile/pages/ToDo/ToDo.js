@@ -20,7 +20,7 @@ const ToDo = ({ route, navigation }) => {
             }
 
             // Configura o corpo da requisição
-            const response = await fetch('http://192.168.137.1:8085/receber-dados', {
+            const response = await fetch('http://10.135.60.19:8085/receber-dados', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -42,8 +42,9 @@ const ToDo = ({ route, navigation }) => {
             console.log('Dados recebidos:', data.mensagem);
 
             if (data && Array.isArray(data.mensagem)) {
-                const trat_tarefas = data.mensagem.map(([id_comp, titulo_comp, horario_comp, descricao, importante, lembrete]) => ({
+                const trat_tarefas = data.mensagem.map(([id_comp, checkbox, titulo_comp, horario_comp, descricao, importante, lembrete]) => ({
                     id_comp, // Inclui o ID da tarefa
+                    checkbox,
                     titulo: titulo_comp,
                     horario: horario_comp,
                     descricao,
@@ -65,7 +66,7 @@ const ToDo = ({ route, navigation }) => {
         id_cad = await AsyncStorage.getItem("ID")
         try {
             console.log('Tentando deletar compromisso com ID:', tarefas[0].id_comp, 'e ID de cadastro:', id_cad); // Adicione um log para depuração
-            const response = await fetch('http://192.168.137.1:8085/receber-dados', {
+            const response = await fetch('http://10.135.60.19:8085/receber-dados', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -100,12 +101,37 @@ const ToDo = ({ route, navigation }) => {
         }, [selectedDate, route.params?.refresh]) // Adiciona route.params?.refresh como dependência
     );
 
-    const handleCheckBox = (id_comp) => {
-        setCheckedTasks(prevState => ({
-            ...prevState,
-            [id_comp]: !prevState[id_comp] // Atualiza apenas a tarefa específica com o id_comp
-        }));
-    };
+    const handleCheckBox = async (idComp) => {
+        try {
+          const novoEstadoCheckbox = !checkedTasks[idComp]; // Novo estado (inverte o atual)
+      
+          const response = await fetch('http://10.135.60.19:8085/receber-dados', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              acao: 'atualizar_checkbox',
+              id_comp: idComp,
+              estado_checkbox: novoEstadoCheckbox // Envia o estado do checkbox
+            })
+          });
+      
+          if (!response.ok) {
+            throw new Error('Erro ao atualizar checkbox');
+          } else {
+            // Atualiza o estado local dos checkboxes
+            setCheckedTasks(prevState => ({
+                ...prevState,
+                [idComp]: novoEstadoCheckbox // Atualiza apenas a tarefa específica com o id_comp
+            }));
+            console.log('Checkbox atualizado com sucesso no banco de dados.');
+          }
+      
+        } catch (error) {
+          console.error('Erro:', error);
+        }
+      };
 
     const formattedDate = format(parseISO(selectedDate), 'dd/MM', { locale: ptBR });
     const dayOfWeek = format(parseISO(selectedDate), 'EEEE', { locale: ptBR });
@@ -127,7 +153,7 @@ const ToDo = ({ route, navigation }) => {
                                         <View style={styles.check_tarefa}>
                                             <CheckBox
                                                 style={styles.check}
-                                                checked={checkedTasks[tarefa.id_comp] || false}
+                                                checked={checkedTasks[tarefa.id_comp] || tarefa.checkbox}
                                                 onPress={() => handleCheckBox(tarefa.id_comp)}
                                                 checkedColor="white"
                                                 uncheckedColor="white"
