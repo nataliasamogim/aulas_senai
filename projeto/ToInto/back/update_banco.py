@@ -6,8 +6,8 @@ def atualizar_cad(novos_dados):
     print('teste dados:', novos_dados)
     conex = conexao.conectar()
     cursor = conex.cursor()
-    sql = 'SELECT count(*) FROM CADASTRO WHERE EMAIL = %s'
-    val = (novos_dados[1],)
+    sql = 'SELECT count(*) FROM CADASTRO WHERE EMAIL = %s and ID_CAD <> %s '
+    val = (novos_dados[1], novos_dados[4])
     cursor.execute(sql, val)
     quantidade_email = cursor.fetchone()
     if quantidade_email[0] > 0:
