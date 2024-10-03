@@ -1,13 +1,14 @@
 {/*Utiliza o useState para a criação de um estado local chamado formValues(vai armazenar as informações do campo de email e senha) */ }
 {/* Nome do componente: Login*/ }
 {/* Autor(a): Maria Luiza, Laura e Marília */ }
-{/* Data de criação:25/10/2023 e data de alteração: 21/03/2024*/ }
+{/* Data de criação:25/10/2023 e data de alteração: 01/10/2024*/ }
 {/*Representa os campos de email e senha, além do recuperação de senha e botão de cadastrar e entrar do formulário do login*/ }
 {/*Observação pertinente: o estado local armazena as informações recebida do formulário e os handle cuidam da sua interação */ }
 
 import React, { useState } from 'react';
 import './Login.css'
 import { useNavigate } from 'react-router-dom'; //recuperar a rota 
+import { Modal, Button } from 'react-bootstrap';
 
 
 {/*Utiliza o useState para a criação de um estado local chamado formValues(vai armazenar as informações do campo de email e senha) */ }
@@ -28,6 +29,7 @@ const Login = () => {
   };
 
   const [mensagensErro, setMensagensErro] = useState([]);
+  const [modalIsOpen, setIsOpen] = useState(false);
 
   {/*handleSubmit é chamada quando o formulário é enviado, ou seja, ela envia as informações do formulário para um endpoint 
   usando o fetch(é como uma porta de entrada para uma parte específica do sistema, na qual é utilizada para acessar uma funcionalidade
@@ -35,8 +37,15 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Validação do campo vazio
+    if (!formValues.email_log || !formValues.senha_log) {
+      setMensagensErro([{ mensagem: 'Por favor, preencha os campos' }]);
+      setIsOpen(true);
+      return; // Impede o envio do formulário se o campo estiver vazio
+    }
+
     try {
-      const resposta = await fetch('http://10.135.60.16:8085/receber-dados', {
+      const resposta = await fetch('http://10.135.60.57:8085/receber-dados', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -47,12 +56,12 @@ const Login = () => {
       const resultado = await resposta.json(); //mostra as mensagens de erro
 
       if (resultado.erro) {
-        // Exibe mensagens de erro no console.log ou em algum local visível
-        console.error('Erro no servidor:', resultado.mensagens);
+        console.error('Erro no servidor:', resultado.mensagens.mensagem); // Acessa a mensagem de erro corretamente
 
+        // Atualiza o estado com a mensagem de erro para exibição no formulário
+        setMensagensErro([{ mensagem: resultado.mensagens.mensagem }]);
+        setIsOpen(true); // Alterado: Abre o modal se houver erro
 
-        // Atualiza o estado com as mensagens de erro para exibição no formulário
-        setMensagensErro(resultado.mensagens);
       } else {
         // Dados foram processados com sucesso
         console.log('Dados processados com sucesso!', resultado);
@@ -67,6 +76,11 @@ const Login = () => {
     } catch (error) {
       console.error('Erro ao enviar dados:', error);
     }
+  };
+
+  const closeModal = () => {
+    setIsOpen(false); // Alterado: Função para fechar o modal
+    setMensagensErro([]); // Limpa as mensagens de erro
   };
 
   const limpaForm = () => {
@@ -84,16 +98,37 @@ const Login = () => {
 
     <div className="form-container">
 
-      {mensagensErro.length > 0 && (
-        <div style={{ color: 'white' }}>
-          <p>Erro ao processar os dados:</p>
-          <ul>
-            {mensagensErro.map((mensagem, index) => (
-              <li key={index}>{mensagem.mensagem}</li>
-            ))}
-          </ul>
-        </div>
-      )}
+      <div className='modalerros-log'>
+
+        <Modal show={modalIsOpen} onHide={closeModal} centered className="modcad">
+          <Modal.Header>
+            <button
+              onClick={closeModal} // Chama a função para fechar o modal
+              className="modal-close-button"
+              aria-label="Fechar"
+            >
+              &times;
+            </button>
+            <Modal.Title>Erro ao processar os dados</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {mensagensErro.length > 0 && (
+              <div style={{ color: 'white' }}>
+                <ul>
+                  {mensagensErro.map((mensagem, index) => (
+                    <li key={index}>{mensagem.mensagem}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </Modal.Body>
+          <Modal.Footer className='footererromodal'>
+            <Button style={{ backgroundColor: '#570D70', border: 'none' }} className='errofechar' onClick={closeModal}>
+              Fechar
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </div>
 
       <div className='body_log'>
         <form id="login" onSubmit={handleSubmit}> {/*Logir que possui o email e senha do usuario */}
