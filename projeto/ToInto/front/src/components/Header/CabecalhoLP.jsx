@@ -41,8 +41,8 @@ function CabecalhoLP() {
                     </ul>
 
                     <ul className="menu_2"> {/*rotas do botão entrar para o login e do botão cadastrar para o cadastro*/}
-                        <Link to="/Login" className="entrar">Entrar</Link> {/*Direciona à página de Login*/}
-                        <Link to="/cadastro" className='cadastrar'>Cadastre-se</Link> {/*Direciona à página de Cadastro*/}
+                        <Link to="/Login" className="entrar" id='btn_entrar_log'>Entrar</Link> {/*Direciona à página de Login*/}
+                        <Link to="/cadastro" className='cadastrar' id='btn_cad_header'>Cadastre-se</Link> {/*Direciona à página de Cadastro*/}
                     </ul>
                 </nav>
             </header>
