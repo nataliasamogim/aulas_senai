@@ -62,15 +62,15 @@ function Recuperacao() {
                     <h1 className="h1_rec_senha">Recuperação de senha:</h1>
                     <div className="form_grupo">
                         <p>Digite o e-mail para enviarmos o código:</p>
-                        <input className="input_email" type="email" name="email" placeholder="E-mail" value={formValues.rec_email} onChange={handleChange} data-email-validate data-required/>
+                        <input className="input_email" id="rec_senha_email" type="email" name="email" placeholder="E-mail" value={formValues.rec_email} onChange={handleChange} data-email-validate data-required/>
                     </div>
 
                     <div className="btn_rec_senha">
                         <div className="salvar_rec_senha">
-                            <input type='submit' className="btn_recsenha" value="Salvar" />
+                            <input type='submit' className="btn_recsenha" id="salvar_rec_senha" value="Salvar" />
                         </div>
                         <div className="can_rec_senha">
-                            <input type='button' className="btn_recsenha" onClick={limpaForm} value="Cancelar" />
+                            <input type='button' className="btn_recsenha" id="cancel_rec_senha" onClick={limpaForm} value="Cancelar" />
                         </div>
                     </div>
                 </form>
