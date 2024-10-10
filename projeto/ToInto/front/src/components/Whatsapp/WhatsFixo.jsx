@@ -24,7 +24,7 @@ function WhatsFixo() {
     return (
         <>
             <div className="fixed"> {/*div da imagem do whatsapp que fica fixed na tela*/}
-                <a href="https://www.whatsapp.com/?lang=pt_br">
+                <a href="https://www.whatsapp.com/?lang=pt_br" id="btn_whats_fixo">
                     <img className="whatsapp_fixed" src="image/whatsapp.png" alt="whatsapp" />
                 </a>
             </div>

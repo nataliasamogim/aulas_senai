@@ -30,19 +30,19 @@ function CabecalhoLP() {
                     {/*nav com a class menu que contém o home, recursos e planos que o site possui, ele está no header*/}
                     <ul className="menu_1">
                         <a href="#home">
-                            <li className="topico">Home</li>
+                            <li className="topico" id="btn_home">Home</li>
                         </a> {/*li home com o link da parte da descrição do site (Bem vindo ao Tointo)*/}
                         <a href="#utilizacao">
-                            <li className="topico">Recursos</li>
+                            <li className="topico" id="btn_recursos">Recursos</li>
                         </a> {/*li recursos com o link da parte com os recurso do site (id utilização)*/}
                         <a href="#plano">
-                            <li className="topico">Planos</li>
+                            <li className="topico" id="btn_planos">Planos</li>
                         </a> {/*li plano com o link da parte de plano do site, que mostrarar os planos que possui*/}
                     </ul>
 
                     <ul className="menu_2"> {/*rotas do botão entrar para o login e do botão cadastrar para o cadastro*/}
-                        <Link to="/Login" className="entrar">Entrar</Link> {/*Direciona à página de Login*/}
-                        <Link to="/cadastro" className='cadastrar'>Cadastre-se</Link> {/*Direciona à página de Cadastro*/}
+                        <Link to="/Login" className="entrar" id='btn_entrar_log'>Entrar</Link> {/*Direciona à página de Login*/}
+                        <Link to="/cadastro" className='cadastrar' id='btn_cad_header'>Cadastre-se</Link> {/*Direciona à página de Cadastro*/}
                     </ul>
                 </nav>
             </header>

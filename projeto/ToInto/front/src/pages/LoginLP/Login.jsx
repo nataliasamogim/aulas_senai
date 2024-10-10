@@ -145,7 +145,7 @@ const Login = () => {
           </div>
 
           {/* Botão "Esqueceu a senha?" com navegação usando useNavigate */}
-          <p className="paragrafo" onClick={handleForgotPassword}>
+          <p className="paragrafo" id='btn_esq_senha' onClick={handleForgotPassword}>
             Esqueceu a senha
           </p>
 

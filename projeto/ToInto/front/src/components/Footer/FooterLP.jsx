@@ -41,11 +41,11 @@ function FooterLP() {
                                 <nav className="redes"> {/*nav que contem as redes sociais do Instagram, Facebook e Whatsapp da empresa*/}
                                     <h2 className="titulo">Redes Sociais</h2>
                                     <ul className="sociais">
-                                        <li><a href="https://www.instagram.com/tointoapp/?next=%2F"><img className="instagram" src="image/instagram.png"
+                                        <li><a href="https://www.instagram.com/tointoapp/?next=%2F" id='btn_instagram'><img className="instagram" src="image/instagram.png"
                                             alt="instagram" /></a></li>
-                                        <li><a href="https://pt-br.facebook.com/"><img className="facebook" src="image/facebook.png"
+                                        <li><a href="https://pt-br.facebook.com/" id='btn_facebook'><img className="facebook" src="image/facebook.png"
                                             alt="facebook" /></a></li>
-                                        <li><a href="https://www.whatsapp.com/?lang=pt_br"><img className="whatsapp" src="image/whatsapp.png"
+                                        <li><a href="https://www.whatsapp.com/?lang=pt_br" id='btn_whatsapp'><img className="whatsapp" src="image/whatsapp.png"
                                             alt="whatsapp" /></a></li>
                                     </ul>
                                 </nav>
