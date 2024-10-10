@@ -51,7 +51,7 @@ const Compromissos = ({ isOpen, onRequestClose, tarefasData, receberTarefas, dat
       let response;
       if (tarefasData) {
         // Atualizar tarefa existente
-        response = await fetch('http://10.135.60.57:8085/receber-dados', {
+        response = await fetch('http://10.135.60.19:8085/receber-dados', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -70,7 +70,7 @@ const Compromissos = ({ isOpen, onRequestClose, tarefasData, receberTarefas, dat
         });
       } else {
         // Criar nova tarefa
-        response = await fetch('http://10.135.60.57:8085/receber-dados', {
+        response = await fetch('http://10.135.60.19:8085/receber-dados', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -146,6 +146,7 @@ const Compromissos = ({ isOpen, onRequestClose, tarefasData, receberTarefas, dat
           <input
             type="text"
             className="form-control"
+            id='titulo_tarefa'
             value={titulo}
             onChange={(e) => setTitulo(e.target.value)}
             required
@@ -158,6 +159,7 @@ const Compromissos = ({ isOpen, onRequestClose, tarefasData, receberTarefas, dat
           <input
             type="time"
             className="form-control"
+            id='hora_tarefa'
             value={time}
             onChange={(e) => setTime(e.target.value)}
             required
@@ -181,6 +183,7 @@ const Compromissos = ({ isOpen, onRequestClose, tarefasData, receberTarefas, dat
           <input
             type="checkbox"
             className="form-check-input"
+            id='importante_tarefa'
             checked={importante}
             onChange={(e) => setImportante(e.target.checked)}
           />
@@ -192,20 +195,21 @@ const Compromissos = ({ isOpen, onRequestClose, tarefasData, receberTarefas, dat
           <label className='label-lembrete'>Lembre-me</label>
           <select
             className="form-control-lembrete"
+            id='lembrete_tarefa'
             value={lembrete}
             onChange={(e) => setLembrete(e.target.value)}
           >
-            <option value="0">0 minutos</option>
-            <option value="15">15 minutos</option>
-            <option value="30">30 minutos</option>
-            <option value="60">1 hora</option>
-            <option value="720">12 horas</option>
-            <option value="1440">1 dia</option>
+            <option id='opc_1' value="0">0 minutos</option>
+            <option id='opc_2' value="15">15 minutos</option>
+            <option id='opc_3' value="30">30 minutos</option>
+            <option id='opc_4' value="60">1 hora</option>
+            <option id='opc_5' value="720">12 horas</option>
+            <option id='opc_6' value="1440">1 dia</option>
           </select>
         </div>
 
         <div className="button-salvar">
-          <button type="submit" className="btn-criar-task">
+          <button type="submit" className="btn-criar-task" id='button_criar_task'>
             {tarefasData ? 'Atualizar' : 'Criar'}
           </button>
         </div>
