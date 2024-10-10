@@ -90,20 +90,20 @@ function Perfil(props) {
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu className='page-perfil'>
-                    <Dropdown.ItemText className='nome-perfil'>{nomeUsuario}</Dropdown.ItemText>
-                    <Dropdown.ItemText className='email-perfil'>{Email}</Dropdown.ItemText>
-                    <Link to="/modificar" className='btn-sair'>Modificar cadastro</Link>
+                    <Dropdown.ItemText className='nome-perfil' id="nome-perfil">{nomeUsuario}</Dropdown.ItemText>
+                    <Dropdown.ItemText className='email-perfil' id="email-perfil">{Email}</Dropdown.ItemText>
+                    <Link to="/modificar" className='btn-sair' id="btn-Modfc-cad">Modificar cadastro</Link>
                     <DropdownButton
                         as={ButtonGroup}
                         title="Modificar pagamento"
                         id="bg-vertical-dropdown-1"
                     >
-                        <Link to="/modificarpag" className='btn-pagamento'>Modificar forma de pagamento</Link>
-                        <Link to="/modificart" className='btn-pagamento'>Modificar dados do cartão</Link>
+                        <Link to="/modificarpag" className='btn-pagamento' id="btn-mdfc-tipopag">Modificar forma de pagamento</Link>
+                        <Link to="/modificart" className='btn-pagamento' id="btn-mdfc-cartao">Modificar dados do cartão</Link>
                     </DropdownButton>
-                    <Link to="/modificplano" className='btn-sair'>Modificar Plano</Link>
-                    <button onClick={() => setShowModal(true)} className='btn-excluir'>Excluir conta</button>
-                    <Link to="/" className='btn-sair'>Sair</Link>
+                    <Link to="/modificplano" className='btn-sair' id="btn-mdfc-plano">Modificar Plano</Link>
+                    <button onClick={() => setShowModal(true)} className='btn-excluir' id="btn-excluir-conta" >Excluir conta</button>
+                    <Link to="/" className='btn-sair' id="btn-sair-conta">Sair</Link>
                 </Dropdown.Menu>
             </Dropdown>
 
@@ -114,10 +114,10 @@ function Perfil(props) {
                 </Modal.Header>
             <Modal.Body>Você realmente deseja excluir a conta?</Modal.Body>
                 <Modal.Footer className='botaoexcluir'>
-                    <Button className='botaocancelarModal' onClick={() => setShowModal(false)}>
+                    <Button className='botaocancelarModal' id="canc_excluirconta" onClick={() => setShowModal(false)}>
                         Cancelar
                     </Button>
-                    <Button className='botaoexcluirModal' onClick={excluirConta}>
+                    <Button className='botaoexcluirModal' id="excluir_conta" onClick={excluirConta}>
                         Excluir
                     </Button>
                 </Modal.Footer>
