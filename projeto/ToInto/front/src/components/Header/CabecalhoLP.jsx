@@ -30,13 +30,13 @@ function CabecalhoLP() {
                     {/*nav com a class menu que contém o home, recursos e planos que o site possui, ele está no header*/}
                     <ul className="menu_1">
                         <a href="#home">
-                            <li className="topico">Home</li>
+                            <li className="topico" id="btn_home">Home</li>
                         </a> {/*li home com o link da parte da descrição do site (Bem vindo ao Tointo)*/}
                         <a href="#utilizacao">
-                            <li className="topico">Recursos</li>
+                            <li className="topico" id="btn_recursos">Recursos</li>
                         </a> {/*li recursos com o link da parte com os recurso do site (id utilização)*/}
                         <a href="#plano">
-                            <li className="topico">Planos</li>
+                            <li className="topico" id="btn_planos">Planos</li>
                         </a> {/*li plano com o link da parte de plano do site, que mostrarar os planos que possui*/}
                     </ul>
 
