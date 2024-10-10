@@ -21,7 +21,7 @@ export default function Login({ navigation }) {
         senha_log: senha,
       };
       try {
-        const response = await fetch('http://10.135.60.14:8085/receber-dados', {
+        const response = await fetch('http://10.135.60.57:8085/receber-dados', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -32,16 +32,11 @@ export default function Login({ navigation }) {
         const resultado = await response.json();
 
         if (resultado.erro) {
-          console.error('Erro no servidor:', resultado.mensagens);
-
-          // Corrigido para garantir que as mensagens de erro sejam exibidas corretamente
-          if (Array.isArray(resultado.mensagens)) {
-            setMensagensErro(resultado.mensagens);
-          } else {
-            setMensagensErro([{ mensagem: 'Erro desconhecido' }]); // Mensagem de erro padrão
-          }
-
-          setShowErrorModal(true); // Exibir modal de erro
+          // Corrigindo o acesso à mensagem de erro
+          const mensagemErro = resultado.mensagens?.mensagem || 'Erro desconhecido.';
+          console.error('Erro no servidor:', mensagemErro);
+          setMensagensErro([{ mensagem: mensagemErro }]);
+          setShowErrorModal(true);
         } else {
           console.log('Dados do Login:', resultado.mensagem);
           await AsyncStorage.setItem('ID', JSON.stringify(resultado.mensagem[0])); // Salva o ID no AsyncStorage
