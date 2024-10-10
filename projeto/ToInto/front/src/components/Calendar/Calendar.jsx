@@ -197,7 +197,7 @@ const Calendar = () => {
     <div className="calendar">
       <div className="calendarioTotal">
         <div className="calendar-header">
-          <button onClick={handlePrevMonth}>
+          <button onClick={handlePrevMonth} id='btnMesesEsquerdo'>
             <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" className="bi bi-caret-left" viewBox="0 0 16 16" color="white">
               <path d="M10 12.796V3.204L4.519 8 10 12.796zm-.659.753-5.48-4.796a1 1 0 0 1 0-1.506l5.48-4.796A1 1 0 0 1 11 3.204v9.592a1 1 0 0 1-1.659.753z" />
             </svg>
@@ -206,7 +206,7 @@ const Calendar = () => {
             <h2>{months[currentMonth]}</h2>
             <h4>{currentYear}</h4>
           </div>
-          <button onClick={handleNextMonth}>
+          <button onClick={handleNextMonth} id='btnMesesDireito'>
             <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" className="bi bi-caret-right" viewBox="0 0 16 16" color="white">
               <path d="M6 12.796V3.204L11.481 8 6 12.796zm.659.753 5.48-4.796a1 1 0 0 0 0-1.506L6.66 2.451C6.011 1.885 5 2.345 5 3.204v9.592a1 1 0 0 0 1.659.753z" />
             </svg>
@@ -227,7 +227,7 @@ const Calendar = () => {
             const isToday = formattedDate === new Date().toISOString().split('T')[0];
 
             return (
-              <div key={day} className={`day ${isToday ? 'day-today' : ''}`}onClick={() => handleDateClick(day)}>
+              <div key={day} className={`day ${isToday ? 'day-today' : ''}`} id='dias' onClick={() => handleDateClick(day)}>
                 <span className="day-number">{day + 1}</span>
                 {/* Verifica se a data formatada está presente em tarefasPorData */}
                 {tarefasPorData[formattedDate] && <span className="bolinha"></span>}
@@ -285,7 +285,7 @@ const Calendar = () => {
             <li id='nenhuma-task'>Nenhuma tarefa para este dia</li>
           )}
         </ul>
-        <button className='butTodo' onClick={handleAddTarefas}>
+        <button className='butTodo' id='AddTarefa' onClick={handleAddTarefas}>
           +
         </button>
       </div>

@@ -21,7 +21,7 @@ const FormMani = () => { // Declaração do componente FormMani como uma funçã
         const showDados = async () => {
             try {
                 // Faz uma requisição para receber os dados do usuário do servidor
-                const resposta = await fetch('http://10.135.60.57:8085/receber-dados', {
+                const resposta = await fetch('http://10.135.60.15:8085/receber-dados', {
                     method: 'POST', // Método da requisição
                     headers: {
                         'Content-Type': 'application/json', // Tipo de conteúdo da requisição
@@ -105,7 +105,7 @@ const FormMani = () => { // Declaração do componente FormMani como uma funçã
         e.preventDefault(); // Previne o comportamento padrão de envio do formulário
         try {
             // Faz uma requisição para enviar os dados do formulário para o servidor
-            const resposta = await fetch('http://10.135.60.57:8085/receber-dados', {
+            const resposta = await fetch('http://10.135.60.15:8085/receber-dados', {
                 method: 'POST', // Método da requisição
                 headers: {
                     'Content-Type': 'application/json', // Tipo de conteúdo da requisição
@@ -226,10 +226,10 @@ const FormMani = () => { // Declaração do componente FormMani como uma funçã
                 </div>
                 <div className="buttons">
                     <div className="salvar">
-                        <input type="submit" className="submit_btn" value="Salvar" />
+                        <input type="submit" id='btnSalvarAtuali' className="submit_btn" value="Salvar" />
                     </div>
                     <div className="can">
-                        <input type="button" className="submit_btn" value="Cancelar" onClick={limpaForm} />
+                        <input type="button" id='btnCancelarAtuali' className="submit_btn" value="Cancelar" onClick={limpaForm} />
                     </div>
                 </div>
             </form>
