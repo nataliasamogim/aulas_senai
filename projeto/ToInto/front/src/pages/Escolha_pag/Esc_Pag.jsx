@@ -54,8 +54,8 @@ function Esc_Pag() {
                         </div>
 
                         <div className="btn_pag">
-                            <Link to={formaPagamento === 'cartao' ? "/dadoscart" : formaPagamento === 'pix' ? "/dadospix" : "/escpag"} className="button_btn">Continuar</Link>
-                            <Link to="/" className="button_btn_voltar">Voltar</Link>
+                            <Link to={formaPagamento === 'cartao' ? "/dadoscart" : formaPagamento === 'pix' ? "/dadospix" : "/escpag"} className="button_btn" id='cont_esc'>Continuar</Link>
+                            <Link to="/" className="button_btn_voltar" id='voltar_esc'>Voltar</Link>
                         </div>
                     </div>
                 </form>
