@@ -36,9 +36,10 @@ const Compromissos = ({ route, navigation }) => {
         descricao: descricao,
         importante: checked,
         lembrete: lembrete, 
+        plano_esc: await AsyncStorage.getItem('plano_escolhido')
       };
       try {
-        const response = await fetch('http://192.168.137.1:8085/receber-dados', {
+        const response = await fetch('http://10.135.60.34:8085/receber-dados', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
