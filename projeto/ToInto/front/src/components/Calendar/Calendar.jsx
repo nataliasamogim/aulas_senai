@@ -33,7 +33,7 @@ const Calendar = () => {
 
   const receberTarefas = async () => {
     try {
-      const resposta = await fetch('http://10.135.60.17:8085/receber-dados', {
+      const resposta = await fetch('http://10.135.60.14:8085/receber-dados', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -53,7 +53,7 @@ const Calendar = () => {
           importante,
           lembrete,
           data_comp: currentDate, // Adiciona a data da tarefa
-          
+
         }));
         setTarefas(trat_tarefas);
         setTarefaData(trat_tarefas);
@@ -63,7 +63,7 @@ const Calendar = () => {
           acc[data] = true; // A chave deve estar no formato YYYY-MM-DD
           return acc;
         }, {});
-        
+
         setTarefasPorData(prev => ({ ...prev, ...datasComTarefas })); // Mantenha as tarefas anteriores
       }
       else {
@@ -78,6 +78,45 @@ const Calendar = () => {
   useEffect(() => {
     receberTarefas();
   }, [currentDate]);
+
+  useEffect(() => {
+    const consultaData = async () => {
+      try {
+        const resposta = await fetch('http://10.135.60.14:8085/receber-dados', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ acao: 'consulta_data', user_id: localStorage.getItem("ID") })
+        });
+
+        const dados = await resposta.json();
+        console.log('Datas das tarefas:', dados);
+
+        if (dados && !dados.erro) {
+          const tarefas = dados.dados || [];
+
+          // Formata as datas para 'YYYY-MM-DD' e armazena no estado
+          const newMarkedDates = tarefas.reduce((acc, taskDate) => {
+            try {
+              const formattedDate = new Date(taskDate).toISOString().split('T')[0]; // Converte datetime.date para 'YYYY-MM-DD'
+              acc[formattedDate] = true; // Marca a data como true
+            } catch (error) {
+              console.error(`Erro ao converter a data ${taskDate}:`, error);
+            }
+            return acc;
+          }, {});
+
+          setTarefasPorData(newMarkedDates); // Agora usa o novo conjunto de datas marcadas
+        }
+      } catch (error) {
+        console.error('Erro ao buscar datas das tarefas:', error);
+      }
+    };
+
+    consultaData();  // Chama ao montar o componente
+
+  }, []);
 
   const handleDateClick = (day) => {
     const clickedDate = new Date(currentYear, currentMonth, day + 1);
@@ -135,8 +174,8 @@ const Calendar = () => {
   const handleCheckBox = async (idComp) => {
     try {
       const novoEstadoCheckbox = !checkedTarefas[idComp]; // Novo estado (inverte o atual)
-  
-      const response = await fetch('http://10.135.60.17:8085/receber-dados', {
+
+      const response = await fetch('http://10.135.60.14:8085/receber-dados', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -147,7 +186,7 @@ const Calendar = () => {
           estado_checkbox: novoEstadoCheckbox // Envia o estado do checkbox
         })
       });
-  
+
       if (!response.ok) {
         throw new Error('Erro ao atualizar checkbox');
       } else {
@@ -158,12 +197,12 @@ const Calendar = () => {
         }));
         console.log('Checkbox atualizado com sucesso no banco de dados.');
       }
-  
+
     } catch (error) {
       console.error('Erro:', error);
     }
   };
-  
+
 
   const handleDelete = async (idComp) => {
     if (!tarefaData) return;
