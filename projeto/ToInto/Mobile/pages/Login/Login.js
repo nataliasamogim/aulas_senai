@@ -21,7 +21,7 @@ export default function Login({ navigation }) {
         senha_log: senha,
       };
       try {
-        const response = await fetch('http://10.135.60.57:8085/receber-dados', {
+        const response = await fetch('http://10.135.60.34:8085/receber-dados', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -42,6 +42,7 @@ export default function Login({ navigation }) {
           await AsyncStorage.setItem('ID', JSON.stringify(resultado.mensagem[0])); // Salva o ID no AsyncStorage
           await AsyncStorage.setItem('nome_usuario', resultado.mensagem[1]);
           await AsyncStorage.setItem('email', resultado.mensagem[2]);
+          await AsyncStorage.setItem('plano_escolhido', JSON.stringify(resultado.mensagem[3]));
           setEmail('');
           setSenha('');
           setMensagensErro([]); // Limpa as mensagens de erro ao fazer login com sucesso
