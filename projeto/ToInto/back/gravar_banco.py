@@ -113,7 +113,7 @@ def gravar_dados_compromisso(dados_gravacao):
     print('PLANO ESCOLHIDO NO CADASTRO', type(plano_esc))
     
     # Anual
-    if plano_esc == '1': 
+    if plano_esc == '3': 
         sql = "INSERT INTO compromissos (ID_CAD, TITULO_COMP, DATA_COMP, HORARIO_COMP, DESCRICAO, IMPORTANTE, LEMBRETE) VALUES (%s, %s, %s, %s, %s, %s, %s)"
         cursor.execute(sql, tuple(dados_gravacao[:7]))  # Passando os valores como uma tupla
         conex.commit()
@@ -147,7 +147,7 @@ def gravar_dados_compromisso(dados_gravacao):
         tarefas = cursor.fetchone()
         print('DADOS DA TAREFA', tarefas)
         # Grátis
-        if (tarefas[0] < 8):
+        if (tarefas[0] < 7):
             sql = "INSERT INTO compromissos (ID_CAD, TITULO_COMP, DATA_COMP, HORARIO_COMP, DESCRICAO, IMPORTANTE, LEMBRETE) VALUES (%s, %s, %s, %s, %s, %s, %s)"
             cursor.execute(sql, tuple(dados_gravacao[:7]))  # Passando os valores como uma tupla
             conex.commit()
