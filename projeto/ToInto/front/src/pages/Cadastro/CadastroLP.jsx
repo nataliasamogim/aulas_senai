@@ -9,7 +9,6 @@ import React, { useState } from 'react';
 import './CadastroLP.css';
 import { useNavigate } from 'react-router-dom';
 import { Modal, Button } from 'react-bootstrap';
-import { FaEye, FaEyeSlash, FaArrowRight } from 'react-icons/fa';
 
 {/*Utiliza o useState para a criação de um estado local chamado formValues(vai armazenar as informações do campo de email e senha) */ }
 const CadastroLP = () => {
@@ -26,8 +25,6 @@ const CadastroLP = () => {
 
     const [mensagensErro, setMensagensErro] = useState([]);
     const [modalIsOpen, setIsOpen] = useState(false); // Alterado: 'modalIsOpen' controla a exibição do modal.
-    const [senhaVisivel, setSenhaVisivel] = useState(false);
-    const [confirmaSenhaVisivel, setConfirmaSenhaVisivel] = useState(false);
     
     {/* O método handleChange é chamado sempre que um dos campos do formulário é alterado. 
     Ele atualiza o estado formValues com os novos valores do campo.*/}
@@ -74,7 +71,7 @@ const CadastroLP = () => {
         formValues.planos = planoSelecionado
         console.log('submit', formValues);
         try {
-            const resposta = await fetch('http://10.135.60.57:8085/receber-dados', {
+            const resposta = await fetch('http://10.135.60.17:8085/receber-dados', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -180,32 +177,12 @@ const CadastroLP = () => {
 
                         <div className="form_grupo">
                             <label className="senha">Senha</label> {/*div para parte da senha*/}
-                            <div className='senha-container'>
-                                <input 
-                                    className="input_3" 
-                                    type={senhaVisivel ? 'text' : 'password'}
-                                    name="senha" 
-                                    id="senha" 
-                                    value={formValues.senha} 
-                                    onChange={handleChange} 
-                                    placeholder="Digite sua senha" 
-                                    data-password-validate 
-                                    data-min-length="8" 
-                                    data-max-length="15" />
-                                <button type="button" className='olho' onClick={() => setSenhaVisivel(!senhaVisivel)}>
-                                    {senhaVisivel ? <FaEye /> : <FaEyeSlash /> }
-                                </button>
-                            </div>
+                            <input className="input_3" type="password" name="senha" id="senha" value={formValues.senha} onChange={handleChange} placeholder="Digite sua senha" data-password-validate data-min-length="8" data-max-length="15" />
                         </div>
 
                         <div className="form_grupo"> {/*div para a parte de confirmar senha*/}
                             <label className="confirmar">Confirmar senha </label>
-                            <div className='senha-container'>
-                                <input className="input_4" type={confirmaSenhaVisivel ? 'text' : 'password'} name="confirmsenha" id="password" value={formValues.confirmsenha} onChange={handleChange} placeholder="Digite novamente sua senha" data-equal="senha" />
-                                <button type="button" className='olho' onClick={() => setConfirmaSenhaVisivel(!confirmaSenhaVisivel)}>
-                                    {confirmaSenhaVisivel ? <FaEye /> :<FaEyeSlash />}
-                                </button>
-                            </div>
+                            <input className="input_4" type="password" name="confirmsenha" id="password" value={formValues.confirmsenha} onChange={handleChange} placeholder="Digite novamente sua senha" data-equal="senha" />
                         </div>
 
                         <div className="buttons">
