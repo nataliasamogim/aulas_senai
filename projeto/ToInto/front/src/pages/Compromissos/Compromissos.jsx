@@ -51,7 +51,7 @@ const Compromissos = ({ isOpen, onRequestClose, tarefasData, receberTarefas, dat
       let response;
       if (tarefasData) {
         // Atualizar tarefa existente
-        response = await fetch('http://10.135.60.19:8085/receber-dados', {
+        response = await fetch('http://10.135.60.34:8085/receber-dados', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -70,7 +70,7 @@ const Compromissos = ({ isOpen, onRequestClose, tarefasData, receberTarefas, dat
         });
       } else {
         // Criar nova tarefa
-        response = await fetch('http://10.135.60.19:8085/receber-dados', {
+        response = await fetch('http://10.135.60.34:8085/receber-dados', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -84,7 +84,7 @@ const Compromissos = ({ isOpen, onRequestClose, tarefasData, receberTarefas, dat
             lembrete,
             id_cad: localStorage.getItem("ID"),
             acao: 'salvar_compromisso',
-            plano_esc: localStorage.getItem("plano_esc")
+            plano_esc: localStorage.getItem("plano_escolhido")
           }),
         });
       }
