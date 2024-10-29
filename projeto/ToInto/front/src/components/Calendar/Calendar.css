@@ -26,9 +26,9 @@
 .calendarioTotal{
   width: 80%;
   height: 70%;
+  margin-left: 50px;
   
 }
-
 
 /*Início do bloco header do calendario*/
 .calendar-header {
@@ -38,7 +38,7 @@
   color: white;
   align-items: center;
   margin-bottom: 16px;
-  width: 88.1%;
+  width: 88.5%;
 }
 
 .calendar-header button {
@@ -67,7 +67,7 @@
   padding: 40px;
   height: 540px;
   border-radius: 4px;
-  width: 78%;
+  width: 80%;
 }
 
 /* Fim do bloco calendar grid*/
@@ -301,9 +301,6 @@ li .descricao {
   background-color: #628cbd; /* Azul para destaque */
   color: white; /* Texto branco para contraste */
 }
-
-
-
 
 
 /*Fim do Calendar*/
