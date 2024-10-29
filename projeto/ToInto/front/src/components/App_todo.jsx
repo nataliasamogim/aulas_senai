@@ -6,14 +6,12 @@ Observação Pertinentes: Responsavel por juntar todos componentes do To Do*/}
 
 import '../App.css'
 import Todolist_2 from './Todolist2';
-import MenuLateral from './MenuLateral';
 import Perfil from './Perfil';
 
 function App_todo(){
     return(
         <> {/*Chama o menu, o to do liste e o perfil*/}
             <div className="menu-todo-per">
-                <MenuLateral/>
                 <Todolist_2/>
                 <Perfil/>
             </div>
