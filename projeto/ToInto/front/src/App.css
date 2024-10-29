@@ -203,7 +203,7 @@ svg.bi.bi-justify {
 
 .perfil {
   margin-top: 12px;
-  margin-right: 15px;
+  margin-right: 40px;
   border: none;
 }
 
@@ -282,8 +282,17 @@ button.btn.btn-outline {
   }
 
 /*-----Fim do Perfil-----*/
+.dropdown, .dropdown-center, .dropend, .dropstart, .dropup, .dropup-center {
+  position: relative;
+  margin-left: 5px;
+}
 .dropdown {
   width: 10%;
+}
+
+button.btn.btn-outline {
+  border: none;
+  margin-left: 40px;
 }
 
 .dropdown.btn-group{
