@@ -49,6 +49,11 @@ function FooterLP() {
                                             alt="whatsapp" /></a></li>
                                     </ul>
                                 </nav>
+
+                                <div className='ajuda'>
+                        <a href="https://youtube.com/@tointooficial?si=IW3WzCOpVBdPnj_O" id='btn_ajuda'><img className="ajuda" src="image/interrogacao.png"
+                            alt="ajuda" /></a>
+                    </div>
                 </div>
 
             </footer>

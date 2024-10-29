@@ -15,7 +15,7 @@ e também tem a intenção de facilitar o uso da aplicação para os usuários.*
 /*---Fim bloco(footer)---*/
 
 
-/*Início do sobre nós e redes sociais*/
+/*Início do sobre nós, redes sociais e ajuda*/
 
 .footer_element{ /*div footer element, que contém as redes sociais e sobre nós*/
     display: flex;
@@ -30,7 +30,7 @@ e também tem a intenção de facilitar o uso da aplicação para os usuários.*
 .titulo{ /*class do título "Redes Sociais"*/
     color: #fff;
     display: flex;
-    padding-left: 40px;
+    padding-left: 90px;
     margin-top: 20px;
     font-weight: bold;
     font-size: 25px;
@@ -50,14 +50,19 @@ e também tem a intenção de facilitar o uso da aplicação para os usuários.*
 .sociais { /*Ul que contem o li dos icones das redes sociais*/
     list-style-type: none;
     display: flex;
-    margin-left: 20px;
+    margin-left: 100px;
 }
 
 .sociais li img{ /*Aqui está modificando os imgs (icones das redes sociais)*/
     max-width: 38px;
     margin-right: 16px;
 }
-/*Fim do sobre nós e redes sociais*/
+
+.ajuda{
+    padding: 5px;
+    }
+    
+/*Fim do sobre nós, redes sociais e ajuda*/
 
 /*Fim do Footer*/
 
