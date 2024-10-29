@@ -164,10 +164,36 @@ background-color: transparent;
     transform: translateX(-50%);
   }
 
+  a.menu_hoje {
+    color: white;
+    text-decoration: none;
+    padding-right: 10px;
+    padding-left: 35px;
+  }
+  
+  a.menu_sem{
+    color: white;
+    text-decoration: none;
+    padding-right: 10px;
+  }
+  
+  a.menu_imp{
+    color:white;
+    text-decoration: none;
+  }
+  
+  .menu_todo{
+    margin-top: 55px;
+  }
+
+  .menu a {
+    font-weight: bold;
+    font-size: 18px;
+  }
 
 .toDoList {
   background-color: #9e80b3;
-  width: 40%;
+  width: 100%;
   height: 580px; /* Altura fixa para corresponder à altura do calendário */
   border-radius: 5px;
   padding: 20px;
