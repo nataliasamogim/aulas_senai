@@ -6,7 +6,6 @@
 import Perfil from "../components/Perfil"
 import Calendario from "../components/Calendario";
 import "../App.css"
-import MenuLateral from "../components/MenuLateral";
 import React, { useEffect, useState } from 'react';
 
 
@@ -28,7 +27,6 @@ function App_calen() {
     return (
         <>
             <div className="menu-cal-per"> {/*chama os componentes*/}
-                <MenuLateral /> {/*Contém os botões de Hoje, Semana e Importantes */}
                 <Calendario /> {/*Contém o componente Calendar(ele é a estrutura do Calendário) */}
                 <Perfil parametro={username} /> {/*Contém a estrutura do ícone de perfil de usuário */}
             </div>
