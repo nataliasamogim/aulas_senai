@@ -48,7 +48,7 @@ function Perfil(props) {
     const excluirConta = () => {
         const id_cad = localStorage.getItem('ID');
 
-        fetch('http://10.135.60.29:8085/receber-dados', {
+        fetch('http://10.135.60.27:8085/receber-dados', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -102,6 +102,7 @@ function Perfil(props) {
                         <Link to="/modificart" className='btn-pagamento' id="btn-mdfc-cartao">Modificar dados do cartão</Link>
                     </DropdownButton>
                     <Link to="/modificplano" className='btn-sair' id="btn-mdfc-plano">Modificar Plano</Link>
+                    <a href='' className='btn-sair' id="btn-mdfc-plano">Ajuda</a>
                     <button onClick={() => setShowModal(true)} className='btn-excluir' id="btn-excluir-conta" >Excluir conta</button>
                     <Link to="/" className='btn-sair' id="btn-sair-conta">Sair</Link>
                 </Dropdown.Menu>
