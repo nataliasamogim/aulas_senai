@@ -8,12 +8,15 @@ from recuperar_cad import verificar_informacao_log
 from recuperar_cad import recuperar_inf_formani
 from recuperar_cart import recuperar_inf_cart
 from recuperar_comp import recuperar_inf_comp
+from recuperar_comp import recuperar_inf_semana
+from recuperar_comp import recuperar_inf_importante
 from update_banco import atualizar_cad, atualizar_compromisso, atualizar_estado_checkbox
 from update_banco import atualizar_cart
 from delete_banco import deletar_cad
 from delete_banco import deletar_compromisso
 from tratar_hora import data
 from consulta_data import consultar_tarefas_por_usuario
+from select_dados_cartao import select_dados_cartao
 
 from validacoes import (
     validar_nome,
@@ -69,6 +72,10 @@ def processar_dados(dados):
         retorno = recuperar_inf_cart(dados.get('id_cadastro', ''))
     elif dados.get('acao') == 'recuperar_comp':
         retorno = recuperar_inf_comp(dados.get('id_cad', ''), dados.get('data_comp', ''))
+    elif dados.get('acao') == 'recuperar_semana':
+            retorno = recuperar_inf_semana(dados.get('id_cad', ''), dados.get('data_in', ''), dados.get('data_fim', ''))
+    elif dados.get('acao') == 'recuperar_importante':
+        retorno = recuperar_inf_importante(dados.get('id_cad', ''))
     elif dados.get('acao') == 'atualizar_cart':
         print ('Atualizar dados do cartão')
         retorno = processar_alterar_cart(dados)
@@ -89,6 +96,8 @@ def processar_dados(dados):
         retorno = atualizar_estado_checkbox(dados.get('id_comp', ''), dados.get('estado_checkbox', ''))
     elif dados.get('acao') == 'consulta_data':
         retorno = consultar_data(dados)
+    elif dados.get('acao') == 'atualizar_plano_mean':
+        retorno = select_dados_cartao(dados.get('id_cad', ''))
     else:
         retorno = processar_dados_log(dados)
     
