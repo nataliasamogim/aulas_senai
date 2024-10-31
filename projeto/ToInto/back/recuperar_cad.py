@@ -23,12 +23,7 @@ def verificar_informacao_log(email, senha):
     conex = conexao.conectar()
     cursor = conex.cursor()
 
-    sql = """
-    SELECT cadastro.ID_CAD, NOME_USUARIO, EMAIL, max(compras.ID_PLANO) as plano 
-    FROM CADASTRO 
-    JOIN compras ON cadastro.id_cad = compras.id_cad 
-    WHERE cadastro.EMAIL = %s AND cadastro.SENHA = %s
-    """
+    sql = """SELECT compras.id_compra, cadastro.ID_CAD, NOME_USUARIO, EMAIL, compras.ID_PLANO as plano FROM CADASTRO JOIN compras ON cadastro.id_cad = compras.id_cad WHERE cadastro.EMAIL = %s AND cadastro.SENHA = %s order by compras.id_compra DESC limit 1;"""
     val = (email, senha)
     cursor.execute(sql, val)
     login = cursor.fetchone()
