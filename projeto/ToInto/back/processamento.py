@@ -17,6 +17,7 @@ from delete_banco import deletar_compromisso
 from tratar_hora import data
 from consulta_data import consultar_tarefas_por_usuario
 from select_dados_cartao import select_dados_cartao
+from modificar_plano import gravar_dados_compra
 
 from validacoes import (
     validar_nome,
@@ -98,6 +99,8 @@ def processar_dados(dados):
         retorno = consultar_data(dados)
     elif dados.get('acao') == 'atualizar_plano_mean':
         retorno = select_dados_cartao(dados.get('id_cad', ''))
+    elif dados.get('acao') == 'atualizar_plano_insert':
+        retorno = gravar_dados_compra(dados.get('id_cad', ''), dados.get('id_dados_pag', ''), dados.get('plano_esc', ''))
     else:
         retorno = processar_dados_log(dados)
     
