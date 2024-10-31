@@ -45,7 +45,7 @@ const Login = () => {
     }
 
     try {
-      const resposta = await fetch('http://10.135.60.57:8085/receber-dados', {
+      const resposta = await fetch('http://10.135.60.34:8085/receber-dados', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -65,10 +65,10 @@ const Login = () => {
       } else {
         // Dados foram processados com sucesso
         console.log('Dados processados com sucesso!', resultado);
-        localStorage.setItem('ID', resultado.mensagem[0]);
-        localStorage.setItem('nome_usuario', resultado.mensagem[1]);
-        localStorage.setItem('email', resultado.mensagem[2]);
-        localStorage.setItem('plano_escolhido', resultado.mensagem[3]);
+        localStorage.setItem('ID', resultado.mensagem[1]);
+        localStorage.setItem('nome_usuario', resultado.mensagem[2]);
+        localStorage.setItem('email', resultado.mensagem[3]);
+        localStorage.setItem('plano_escolhido', resultado.mensagem[4]);
         //onLogin(resultado.username); // Chama a função onLogin com o nome de usuário retornado
         //Navega para a tela de calendario
         navigate('/calendario')
