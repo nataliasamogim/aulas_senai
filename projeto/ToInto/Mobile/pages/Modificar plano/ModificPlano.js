@@ -9,37 +9,59 @@ const ModificarPlano = ({ navigation, handleSaibaMais }) => {
 
   const [selectedBox, setSelectedBox] = useState(null);
 
-  const handleModifPlano = async (selectedBox) => {
+  const handleVerifiqPlano = async (selectedBox) => {
     try {
       // Faz uma requisição para receber os dados do usuário do servidor
       const resposta = await fetch('http://10.135.60.34:8085/receber-dados', {
-          method: 'POST', // Método da requisição
-          headers: {
-              'Content-Type': 'application/json', // Tipo de conteúdo da requisição
-          },
-          body: JSON.stringify({ acao: 'atualizar_plano_insert', id_cad: await AsyncStorage.getItem("ID"), plano_esc: selectedBox }), // Corpo da requisição contendo os dados do formulário
+        method: 'POST', // Método da requisição
+        headers: {
+          'Content-Type': 'application/json', // Tipo de conteúdo da requisição
+        },
+        body: JSON.stringify({ acao: 'atualizar_plano_mean', id_cad: await AsyncStorage.getItem("ID"), plano_esc: selectedBox }), // Corpo da requisição contendo os dados do formulário
       });
       const resultado = await resposta.json();
-      // Verifica se a requisição foi bem-sucedida
-      if (selectedBox == '') {
+      console.log('Tem id ou não:', resultado.erro)
+      if (resultado.erro === false || selectedBox === 1) {
+        console.log('erro')
+        handleModifPlano(selectedBox, resultado.mensagem[0])
+        navigation.navigate('Login')
+      } else {
+        // Verifica se a requisição foi bem-sucedida
+        if (selectedBox == '') {
           throw new Error('Precisa selecionar o plano que deseja'); // Lança um erro se a requisição falhar
-      }
-      else {
-        await AsyncStorage.setItem('opc', JSON.stringify(selectedBox));
-        if (selectedBox === 2) {
-          navigation.navigate('Planos');
-        } else if (selectedBox === 3) {
-          navigation.navigate('Planos');
-        } else if (selectedBox === 1) {
-          navigation.navigate('Login');
-        } else {
-          navigation.navigate('Modificar escolha Plano')
+        }
+        else {
+          await AsyncStorage.setItem('opc', JSON.stringify(selectedBox));
+          if (selectedBox === 2) {
+            navigation.navigate('Planos');
+          } else if (selectedBox === 3) {
+            navigation.navigate('Planos');
+          } else {
+            navigation.navigate('Modificar escolha Plano')
+          }
         }
       }
     } catch (error) {
       console.error('Erro ao enviar dados:', error); // Captura e exibe qualquer erro ocorrido durante o envio dos dados do formulário
     }
-  };  
+  };
+
+  const handleModifPlano = async (selectedBox, dadospag) => {
+    try {
+      // Faz uma requisição para receber os dados do usuário do servidor
+      const resposta = await fetch('http://10.135.60.34:8085/receber-dados', {
+        method: 'POST', // Método da requisição
+        headers: {
+          'Content-Type': 'application/json', // Tipo de conteúdo da requisição
+        },
+        body: JSON.stringify({ acao: 'atualizar_plano_insert', id_cad: await AsyncStorage.getItem("ID"), plano_esc: selectedBox, id_dados_pag: dadospag[0] }), // Corpo da requisição contendo os dados do formulário
+      });
+      const resultado = await resposta.json();
+      console.log('Retorno do insert na tabela compras pelo modificar plano:', resultado)
+    } catch (error) {
+      console.error('Erro ao enviar dados:', error); // Captura e exibe qualquer erro ocorrido durante o envio dos dados do formulário
+    }
+  };
 
   const handleBoxPress = (boxNumber) => {
     setSelectedBox(boxNumber === selectedBox ? null : boxNumber);
@@ -75,7 +97,7 @@ const ModificarPlano = ({ navigation, handleSaibaMais }) => {
           </View>
 
           <View style={styles.buttons}>
-            <TouchableOpacity style={styles.btnSubmit} onPress={() => handleModifPlano(selectedBox)}>
+            <TouchableOpacity style={styles.btnSubmit} onPress={() => handleVerifiqPlano(selectedBox)}>
               <Text style={styles.submitTxt} >Salvar</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.btnSubmit}>
@@ -83,7 +105,7 @@ const ModificarPlano = ({ navigation, handleSaibaMais }) => {
             </TouchableOpacity>
           </View>
         </View>
-        
+
       </LinearGradient>
     </KeyboardAvoidingView>
   );
