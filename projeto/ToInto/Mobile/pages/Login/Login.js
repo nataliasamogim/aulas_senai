@@ -39,10 +39,10 @@ export default function Login({ navigation }) {
           setShowErrorModal(true);
         } else {
           console.log('Dados do Login:', resultado.mensagem);
-          await AsyncStorage.setItem('ID', JSON.stringify(resultado.mensagem[0])); // Salva o ID no AsyncStorage
-          await AsyncStorage.setItem('nome_usuario', resultado.mensagem[1]);
-          await AsyncStorage.setItem('email', resultado.mensagem[2]);
-          await AsyncStorage.setItem('plano_escolhido', JSON.stringify(resultado.mensagem[3]));
+          await AsyncStorage.setItem('ID', JSON.stringify(resultado.mensagem[1])); // Salva o ID no AsyncStorage
+          await AsyncStorage.setItem('nome_usuario', resultado.mensagem[2]);
+          await AsyncStorage.setItem('email', resultado.mensagem[3]);
+          await AsyncStorage.setItem('plano_escolhido', JSON.stringify(resultado.mensagem[4]));
           setEmail('');
           setSenha('');
           setMensagensErro([]); // Limpa as mensagens de erro ao fazer login com sucesso
