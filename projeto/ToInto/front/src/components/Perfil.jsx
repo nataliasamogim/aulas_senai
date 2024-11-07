@@ -48,7 +48,7 @@ function Perfil(props) {
     const excluirConta = () => {
         const id_cad = localStorage.getItem('ID');
 
-        fetch('http://10.135.60.27:8085/receber-dados', {
+        fetch('http://10.135.60.47:8085/receber-dados', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -98,7 +98,7 @@ function Perfil(props) {
                         title="Modificar pagamento"
                         id="bg-vertical-dropdown-1"
                     >
-                        <Link to="/modificarpag" className='btn-pagamento' id="btn-mdfc-tipopag">Modificar forma de pagamento</Link>
+                        <Link to="/modific_pag" className='btn-pagamento' id="btn-mdfc-tipopag">Modificar forma de pagamento</Link>
                         <Link to="/modificart" className='btn-pagamento' id="btn-mdfc-cartao">Modificar dados do cartão</Link>
                     </DropdownButton>
                     <Link to="/modificplano" className='btn-sair' id="btn-mdfc-plano">Modificar Plano</Link>
