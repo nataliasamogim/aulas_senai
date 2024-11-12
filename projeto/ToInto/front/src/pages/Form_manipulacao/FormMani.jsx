@@ -1,59 +1,81 @@
-import React, { useState, useEffect } from 'react'; // Importa React, useState e useEffect do pacote 'react'
-import { useNavigate } from 'react-router-dom'; // Importa useNavigate do pacote 'react-router-dom'
-import './FormMani.css'; // Importa o arquivo CSS de estilos para este componente
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import './FormMani.css';
 import { Modal, Button } from 'react-bootstrap';
 
-const defaultPhoto = 'image/foto_perfil.jpg'; // Substitua 'url_da_imagem_padrao.jpg' pela URL da sua imagem padrão
+const defaultPhoto = 'image/foto_perfil.jpg'; // Imagem padrão
 
-const FormMani = () => { // Declaração do componente FormMani como uma função
-    // Definição do estado inicial do formulário usando o hook useState
+// Adicionando um array de fotos fixas
+const fixedPhotos = [
+    'image/perfil_2.jpg',
+    'image/perfil_3.jpg',
+    'image/perfil_4.jpg',
+    'image/toy_story.jpg',
+    'image/gru.png',
+    'image/minions.jpg',
+    'image/jabuti.webp',
+    'image/papagaio.jpg',
+    'image/rato.webp',
+    'image/cachorro.jpg',
+    'image/girassol.avif',
+    'image/lirios.webp',
+    'image/peonia.avif',
+    'image/tigre_foto.png',
+    'image/calopsita.jpg',
+    'image/pintinho.jpg'
+
+];
+
+const FormMani = () => {
+    const navigate = useNavigate();
     const [formAlter, setFormAlter] = useState({
-        id: localStorage.getItem("ID"), // Valor obtido do localStorage para a chave 'ID'
-        foto: '', // Valor padrão para a chave 'foto'
-        nome_novo: '', // Valor padrão para a chave 'nome_novo'
-        email_novo: '', // Valor padrão para a chave 'email_novo'
-        senha_nova: '', // Valor padrão para a chave 'senha_nova'
+        id: localStorage.getItem("ID"),
+        foto: localStorage.getItem('foto') || defaultPhoto, // Carrega a foto do localStorage ou usa a padrão
+        nome_novo: '',
+        email_novo: '',
+        senha_nova: '',
     });
 
-    // Efeito que é executado quando o componente é montado
+    const [showPhotoModal, setShowPhotoModal] = useState(false);
+
+    const togglePhotoModal = () => setShowPhotoModal(!showPhotoModal);
+
+    const handleFixedPhotoSelect = (photo) => {
+        setFormAlter(prevAlter => ({
+            ...prevAlter,
+            foto: photo,
+        }));
+        localStorage.setItem('foto', photo); // Salva a foto no localStorage
+        togglePhotoModal();
+    };
+
     useEffect(() => {
-        // Função assíncrona para buscar dados do usuário
         const showDados = async () => {
             try {
-                // Faz uma requisição para receber os dados do usuário do servidor
-                const resposta = await fetch('http://10.135.60.15:8085/receber-dados', {
-                    method: 'POST', // Método da requisição
+                const resposta = await fetch('http://10.135.60.34:8085/receber-dados', {
+                    method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json', // Tipo de conteúdo da requisição
+                        'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ acao: 'selecionar_cad', id: localStorage.getItem("ID") }), // Corpo da requisição contendo os dados do formulário
+                    body: JSON.stringify({ acao: 'selecionar_cad', id: localStorage.getItem("ID") }),
                 });
 
-                // Verifica se a requisição foi bem-sucedida
-                if (!resposta.ok) {
-                    throw new Error('Erro ao obter dados do usuário'); // Lança um erro se a requisição falhar
-                }
+                if (!resposta.ok) throw new Error('Erro ao obter dados do usuário');
 
-                // Extrai os dados da resposta e os converte para JSON
                 const userData = await resposta.json();
-                //console.log('Dados do usuário:', userData);
-
-                // Atualiza o estado do formulário com os dados do usuário recebidos
                 setFormAlter({
-                    nome_novo: userData.mensagem[1], // Define o novo valor para 'nome_novo'
-                    email_novo: userData.mensagem[2], // Define o novo valor para 'email_novo'
-                    id: localStorage.getItem("ID") // Mantém o valor atual para 'id'
+                    nome_novo: userData.mensagem[1],
+                    email_novo: userData.mensagem[2],
+                    id: localStorage.getItem("ID"),
+                    foto: localStorage.getItem('foto') || userData.mensagem[3] || defaultPhoto
                 });
             } catch (error) {
-                console.error('Erro ao buscar dados do usuário:', error); // Captura e exibe qualquer erro ocorrido durante a busca dos dados do usuário
+                console.error('Erro ao buscar dados do usuário:', error);
             }
-
         };
+        showDados();
+    }, []);
 
-        showDados(); // Chama a função para buscar os dados do usuário quando o componente é montado
-    }, []); // Array de dependências vazio, indica que este efeito deve ser executado apenas uma vez
-
-    // Função para lidar com a mudança nos inputs do formulário
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormAlter(prevAlter => ({
@@ -62,22 +84,8 @@ const FormMani = () => { // Declaração do componente FormMani como uma funçã
         }));
     };
 
-    // Função para lidar com a mudança na imagem do perfil
-    const handleImageChange = (e) => {
-        const file = e.target.files[0];
-        setFormAlter(prevAlter => ({
-            ...prevAlter,
-            foto: URL.createObjectURL(file),
-        }));
-    };
-
-    // Estado para armazenar mensagens de erro
-    const [mensagensErro, setMensagensErro] = useState([]);
-
     const [modalIsOpen, setIsOpen] = useState(false);
-
-    // Hook useNavigate para navegação entre rotas
-    const navigate = useNavigate();
+    const [mensagensErro, setMensagensErro] = useState([]);
 
     //transforma a mensagem das validações de senha em tópicos
     function transformarMensagens(response) {
@@ -100,15 +108,13 @@ const FormMani = () => { // Declaração do componente FormMani como uma funçã
         return { erro: response.erro, mensagens: novasMensagens };
     }
 
-    // Função para lidar com o envio do formulário
     const handleSubmit = async (e) => {
-        e.preventDefault(); // Previne o comportamento padrão de envio do formulário
+        e.preventDefault();
         try {
-            // Faz uma requisição para enviar os dados do formulário para o servidor
-            const resposta = await fetch('http://10.135.60.15:8085/receber-dados', {
-                method: 'POST', // Método da requisição
+            const resposta = await fetch('http://10.135.60.34:8085/receber-dados', {
+                method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json', // Tipo de conteúdo da requisição
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
                     acao: 'atualizar_cad',
@@ -116,58 +122,43 @@ const FormMani = () => { // Declaração do componente FormMani como uma funçã
                     nome_novo: formAlter.nome_novo,
                     email_novo: formAlter.email_novo,
                     senha_nova: formAlter.senha_nova,
-                }), // Corpo da requisição contendo os dados do formulário em formato JSON
+                    foto: formAlter.foto, // Inclui a foto ao enviar os dados
+                }),
             });
-            console.log('teste envio', formAlter)
-            // Extrai o resultado da resposta e o converte para JSON
             const resultado = await resposta.json();
-            console.log('teste retorno', resultado);
 
-            // Verifica se ocorreu algum erro no servidor
             if (resultado.erro) {
-                // Exibe mensagens de erro no console ou em algum local visível
                 console.error('Erro no servidor:', resultado.mensagens);
+                const novoResponse = transformarMensagens(resultado)
+                console.log(novoResponse)
 
-                // Atualiza o estado com as mensagens de erro para exibição no formulário
-                const novoResponse = transformarMensagens(resultado);
-                console.log(novoResponse);
-
-                // Atualiza o estado com as mensagens de erro para exibição no formulário
                 setMensagensErro(novoResponse.mensagens);
-                setIsOpen(true);
 
+                setMensagensErro(novoResponse.mensagens);
+
+                // Abre o modal de erro somente se houver mensagens
+                if (novoResponse.mensagens.length > 0) {
+                    setIsOpen(true);
+                }
             } else {
                 localStorage.setItem('ID', formAlter.id);
                 localStorage.setItem('nome_usuario', formAlter.nome_novo);
                 localStorage.setItem('email', formAlter.email_novo);
-                console.log('Dados atualizados com sucesso!', formAlter);
-                navigate('/cadatualizado'); // Navega para outra rota
+                localStorage.setItem('foto', formAlter.foto); // Salva a foto no localStorage
+                navigate('/cadatualizado');
             }
         } catch (error) {
-            console.error('Erro ao enviar dados:', error); // Captura e exibe qualquer erro ocorrido durante o envio dos dados do formulário
+            console.error('Erro ao enviar dados:', error);
         }
     };
 
     const closeModal = () => {
-        setIsOpen(false); // Alterado: Função para fechar o modal
-        setMensagensErro([]); // Limpa as mensagens de erro
-    };
+        setIsOpen(false);
+        setMensagensErro([]);
+    }
 
-    // Função para limpar o formulário
-    const limpaForm = () => {
-        setFormAlter({
-            foto: '', // Limpa o valor da foto
-            nome_novo: '', // Limpa o valor do nome
-            email_novo: '', // Limpa o valor do email
-            senha_nova: '', // Limpa o valor da senha
-        });
-    };
-
-    // Renderiza o componente
     return (
         <div className="form-container">
-
-            {/* Exibe mensagens de erro, se houver */}
             <div className='modalformani-erro'>
                 <Modal show={modalIsOpen} onHide={closeModal} centered className="modcad">
                     <Modal.Header>
@@ -199,37 +190,63 @@ const FormMani = () => { // Declaração do componente FormMani como uma funçã
                 </Modal>
             </div>
 
-            {/* Formulário */}
             <form className="cadastro" onSubmit={handleSubmit}>
                 <h1 className="h1_cadastro">Atualizar Cadastro</h1>
                 <div className="form_grupo_foto">
-                    {/* Exibe a foto selecionada ou a imagem padrão */}
                     <img src={formAlter.foto || defaultPhoto} alt="Profile" className="profile-photo" style={{ width: '85px', height: '85px', borderRadius: '50%' }} />
-                    {/* Input para escolher a foto */}
-                    <label htmlFor="upload-input">
-                        <span>Escolher Foto</span>
-                        <input type="text" id="upload-input" onChange={handleImageChange} style={{ display: 'none' }} accept="image/*" />
-                    </label>
+                    <button type="button" onClick={togglePhotoModal} className="choose-photo-button">
+                        Escolha uma foto
+                    </button>
                 </div>
-                <input className="id" type="hidden" name="id" id='id' value={formAlter.id} />
+
+                <Modal show={showPhotoModal} onHide={togglePhotoModal} centered>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Escolha uma Foto</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <div className="fixed-photo-options">
+                            {fixedPhotos.map((photo, index) => (
+                                <img
+                                    key={index}
+                                    src={photo}
+                                    alt={`Profile option ${index + 1}`}
+                                    className="fixed-photo-option"
+                                    onClick={() => {
+                                        handleFixedPhotoSelect(photo);
+                                        togglePhotoModal(); // Fecha o modal ao selecionar uma foto
+                                    }}
+                                    style={{
+                                        width: '50px',
+                                        height: '50px',
+                                        cursor: 'pointer',
+                                        borderRadius: '50%',
+                                        margin: '5px'
+                                    }}
+                                />
+                            ))}
+                        </div>
+                    </Modal.Body>
+                </Modal>
+
+
                 <div className="form_grupo">
                     <label className="nome">Nome</label>
-                    <input className="input_2" type="text" name="nome_novo" id='nome_novo' value={formAlter.nome_novo} onChange={handleChange} placeholder="Digite seu nome" />
+                    <input className="input_2" type="text" name="nome_novo" value={formAlter.nome_novo} onChange={handleChange} placeholder="Digite seu nome" />
                 </div>
                 <div className="form_grupo">
                     <label className="email">Email</label>
-                    <input className="input_3" type="email" name="email_novo" id='email_novo' value={formAlter.email_novo} onChange={handleChange} placeholder="Digite seu E-mail" />
+                    <input className="input_3" type="email" name="email_novo" value={formAlter.email_novo} onChange={handleChange} placeholder="Digite seu E-mail" />
                 </div>
                 <div className="form_grupo">
                     <label className="senha">Senha</label>
-                    <input className="input_4" type="password" name="senha_nova" id='senha_nova' value={formAlter.senha_nova} onChange={handleChange} placeholder="Digite sua senha" />
+                    <input className="input_4" type="password" name="senha_nova" value={formAlter.senha_nova} onChange={handleChange} placeholder="Digite sua senha" />
                 </div>
                 <div className="buttons">
                     <div className="salvar">
-                        <input type="submit" id='btnSalvarAtuali' className="submit_btn" value="Salvar" />
+                        <input type="submit" className="submit_btn" value="Salvar" />
                     </div>
                     <div className="can">
-                        <input type="button" id='btnCancelarAtuali' className="submit_btn" value="Cancelar" onClick={limpaForm} />
+                        <input type="button" className="submit_btn" value="Cancelar" onClick={() => setFormAlter({ ...formAlter, foto: '', nome_novo: '', email_novo: '', senha_nova: '' })} />
                     </div>
                 </div>
             </form>
@@ -237,6 +254,4 @@ const FormMani = () => { // Declaração do componente FormMani como uma funçã
     );
 };
 
-export default FormMani; // Exporta o componente FormMani como padrão
-
-
+export default FormMani;

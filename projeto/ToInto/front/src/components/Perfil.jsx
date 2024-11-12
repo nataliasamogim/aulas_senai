@@ -27,28 +27,25 @@ import '../App.css'
 {/*Retorno: retorna o perfil de usuário*/ }
 function Perfil(props) {
     const navigate = useNavigate();
-    const [nomeUsuario, setNomeUsuario] = useState('');
-    const [Email, setEmail] = useState('');
+    const [userData, setUserData] = useState({
+        nomeUsuario: '',
+        email: '',
+        foto: 'image/foto_perfil.jpg' // Defina uma foto padrão aqui
+    });
     const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
-        const storedNome = localStorage.getItem('nome_usuario');
-        if (storedNome) {
-            setNomeUsuario(storedNome);
-        }
-    }, []); //Adicione o array de dependências vazio aqui
-
-    useEffect(() => {
-        const storedEmail = localStorage.getItem('email');
-        if (storedEmail) {
-            setEmail(storedEmail);
-        }
-    }, []); //Adicione o array de dependências vazio aqui
+        setUserData({
+            nomeUsuario: localStorage.getItem('nome_usuario') || '',
+            email: localStorage.getItem('email') || '',
+            foto: localStorage.getItem('foto') || 'image/foto_perfil.jpg'
+        });
+    }, []);
 
     const excluirConta = () => {
         const id_cad = localStorage.getItem('ID');
 
-        fetch('http://10.135.60.47:8085/receber-dados', {
+        fetch('http://10.135.60.27:8085/receber-dados', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -64,7 +61,6 @@ function Perfil(props) {
             .then(data => {
                 console.log(data);
                 // Aqui você pode fazer algo após excluir as informações do usuário, como redirecionar para a página de login
-
             })
             .catch(error => {
                 console.error('Erro ao excluir conta:', error);
@@ -82,16 +78,20 @@ function Perfil(props) {
     return (
         <>
             <Dropdown>
-                <Dropdown.Toggle className='perfil' variant='outline' id="dropdown-basic">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" className="bi bi-person-circle" viewBox="0 0 16 16" color="white">
-                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-                        <path fillRule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
-                    </svg>
+            <Dropdown.Toggle className='perfil' variant='outline' id="dropdown-basic">
+                    <img 
+                        src={userData.foto} 
+                        alt="Foto de perfil" 
+                        width="60" 
+                        height="60" 
+                        className="profile-picture" 
+                        style={{ borderRadius: '50%' }}
+                    />
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu className='page-perfil'>
-                    <Dropdown.ItemText className='nome-perfil' id="nome-perfil">{nomeUsuario}</Dropdown.ItemText>
-                    <Dropdown.ItemText className='email-perfil' id="email-perfil">{Email}</Dropdown.ItemText>
+                    <Dropdown.ItemText className='nome-perfil' id="nome-perfil">{userData.nomeUsuario}</Dropdown.ItemText>
+                    <Dropdown.ItemText className='email-perfil' id="email-perfil">{userData.email}</Dropdown.ItemText>
                     <Link to="/modificar" className='btn-sair' id="btn-Modfc-cad">Modificar cadastro</Link>
                     <DropdownButton
                         as={ButtonGroup}

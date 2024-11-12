@@ -32,7 +32,7 @@ para os usuários.*/
     margin-top: 110px;
     box-shadow: 20px 20px 50px #2D0651;
     width: 530px;
-    height: 530px;
+    height: 550px;
     margin-left: auto;
     margin-right: auto;
    
@@ -57,13 +57,6 @@ para os usuários.*/
     padding: 3px 10px 10px 10px;
 }
 
-.form_grupo_foto {
-    flex-direction: column;
-    display: flex;
-    align-items: center;
-    color: white;
-    margin-top: 30px;
-}
 
 .form_grupo input{
     border: none;
@@ -149,5 +142,43 @@ para os usuários.*/
 .template { 
     display: none;
 }
+
+.fixed-photo-options {
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+
+.fixed-photo-options.show {
+    display: flex; /* Exibe as fotos quando a classe 'show' é adicionada */
+}
+
+.form_grupo_foto {
+    flex-direction: column;
+    display: flex;
+    align-items: center; /* Centraliza horizontalmente */
+    color: white;
+    margin-top: 30px;
+}
+
+.choose-photo-button {
+    background: none; /* Remove o fundo do botão */
+    border: none; /* Remove a borda do botão */
+    color: white; /* Altera a cor do texto do botão para branco */
+    cursor: pointer; /* Cursor de ponteiro ao passar o mouse */
+    margin-top: 10px; /* Adiciona um espaço entre a foto e o botão */
+    font-size: 1em; /* Define o tamanho da fonte do botão */
+}
+
+.choose-photo-button:hover {
+    color: #AFA4CF;
+}
+
+
+
+
+
+
+
 
 /*--Fim Formulário--*/
