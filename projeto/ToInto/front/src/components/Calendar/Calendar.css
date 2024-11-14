@@ -148,7 +148,7 @@ background-color: transparent;
 }
   */
   .day-today {
-    background-color: #BE60F8; /* Cor para o dia de hoje */
+    background-color: #9764b7; /* Cor para o dia de hoje */
     color: #fff; /* Cor do texto */
     
   }
@@ -202,14 +202,11 @@ background-color: transparent;
   overflow-y: auto; /* Habilita a rolagem se as tarefas ultrapassarem a altura */
   flex-direction: column;
   display: flex;
- 
-
 }
-
 
 #DataTodo {
   color: white;
-  font-size: 33px;
+  font-size: 28px;
   margin-bottom: 20px;
   text-align: center;
 }
@@ -241,10 +238,18 @@ ul {
   align-items: flex-start;
 }
 
+.data_tarefa {
+  margin-left: -238px !important;  /* Coloca o contêiner no início da linha (à esquerda) */
+  margin-right: 0; /* Remove qualquer margem à direita, se necessário */
+  /* Se você quiser ainda deixar algum espaçamento, pode ajustar a margem da esquerda */
+  margin-left: 20px; /* Ajuste o valor conforme necessário */
+}
+
 .descricaoTarefa {
   display: block;
   text-align: start;
   word-break: break-all;
+  margin-top: -12px;
 }
 
 .hora_titulo{

@@ -432,12 +432,26 @@ const Calendar = () => {
                 ? formatodata
                 : visualizarDia
                   ? selecionada
-                  : 'IMPORTANTE'}
+                  : 'Importante'}
           </p>
           <ul>
             {tarefaData.length > 0 ? (
               tarefaData.map((tarefa) => (
                 <li className={`licalendar ${tarefa.importante ? 'tarefa-importante' : ''}`} key={tarefa.id_comp}>
+                  <div className='container_datacomp'>
+                      <div className='data_comp'>
+                              {/* Verifica se é semana ou importante para mostrar a data */}
+                              {isSemanaOuImportante && (
+                                <span className='data_tarefa'>
+                                  {new Date(tarefa.data_comp + 'T00:00:00').toLocaleDateString('pt-BR', {
+                                    day: '2-digit',
+                                    month: '2-digit',
+                                    year: 'numeric'
+                                  })}
+                                </span>
+                              )}
+                      </div>
+                  </div>
                   <div className='tarefa_edit_lixo'>
                     <div className='check_tarefa'>
                       <div className='container-check'>
@@ -449,19 +463,6 @@ const Calendar = () => {
                           id="check" />
                       </div>
                       <div className='quebra_div'>
-                        <div className='data_comp'>
-                          {/* Verifica se é semana ou importante para mostrar a data */}
-                          {isSemanaOuImportante && (
-                            <span className='data_tarefa'>
-                              {new Date(tarefa.data_comp + 'T00:00:00').toLocaleDateString('pt-BR', {
-                                day: '2-digit',
-                                month: '2-digit',
-                                year: 'numeric'
-                              })}
-                            </span>
-                          )}
-
-                        </div>
                         <div className='hora-titulo'>
                           <span className='horario_tarefa'>{tarefa.horario} - </span>
                           <span className='titulo_tarefa'>{tarefa.titulo}</span>
