@@ -89,23 +89,10 @@ const FormMani = () => {
 
     //transforma a mensagem das validações de senha em tópicos
     function transformarMensagens(response) {
-        const novasMensagens = [];
-
-        // Itera sobre as mensagens do JSON original
-        response.mensagens.forEach((item) => {
-            if (Array.isArray(item.mensagem)) {
-                // Se 'mensagem' for um array, adiciona cada mensagem como um novo objeto
-                item.mensagem.forEach((msg) => {
-                    novasMensagens.push({ erro: item.erro, mensagem: msg });
-                });
-            } else {
-                // Caso contrário, mantém o objeto original
-                novasMensagens.push(item);
-            }
-        });
-
-        // Retorna um novo objeto com o array de mensagens atualizado
-        return { erro: response.erro, mensagens: novasMensagens };
+        if (response.erro && response.mensagens) {
+            return { erro: response.erro, mensagens: response.mensagens };
+        }
+        return { erro: false, mensagens: [] };
     }
 
     const handleSubmit = async (e) => {
@@ -128,18 +115,11 @@ const FormMani = () => {
             const resultado = await resposta.json();
 
             if (resultado.erro) {
-                console.error('Erro no servidor:', resultado.mensagens);
-                const novoResponse = transformarMensagens(resultado)
-                console.log(novoResponse)
-
-                setMensagensErro(novoResponse.mensagens);
-
-                setMensagensErro(novoResponse.mensagens);
-
-                // Abre o modal de erro somente se houver mensagens
-                if (novoResponse.mensagens.length > 0) {
-                    setIsOpen(true);
-                }
+                // Converte e exibe mensagens de erro no modal
+                const mensagensFormatadas = transformarMensagens(resultado);
+                console.error('Erro no servidor:', mensagensFormatadas.mensagens);
+                setMensagensErro(mensagensFormatadas.mensagens);  // Atualizando o estado com as mensagens de erro
+                setIsOpen(true);  // Abre o modal se houver mensagens
             } else {
                 localStorage.setItem('ID', formAlter.id);
                 localStorage.setItem('nome_usuario', formAlter.nome_novo);
@@ -172,7 +152,7 @@ const FormMani = () => {
                         <Modal.Title>Erro ao processar os dados</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        {mensagensErro.length > 0 && (
+                        {mensagensErro && mensagensErro.length > 0 ? (
                             <div style={{ color: 'white' }}>
                                 <ul>
                                     {mensagensErro.map((mensagem, index) => (
@@ -180,6 +160,8 @@ const FormMani = () => {
                                     ))}
                                 </ul>
                             </div>
+                        ) : (
+                            <div style={{ color: 'white' }}>Não há erros a exibir.</div> // Opcional: exibe uma mensagem de fallback
                         )}
                     </Modal.Body>
                     <Modal.Footer className='footererromodal'>

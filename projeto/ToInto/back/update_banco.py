@@ -11,7 +11,7 @@ def atualizar_cad(novos_dados):
     cursor.execute(sql, val)
     quantidade_email = cursor.fetchone()
     if quantidade_email[0] > 0:
-        return {'erro': True, 'mensagem': 'Email já existente'}
+        return {'erro': True, 'mensagens': [{'erro': True, 'mensagem': 'Email já existente'}]}
     else:
         sql = "UPDATE cadastro SET NOME_USUARIO = %s, EMAIL = %s, SENHA = %s, FOTO_PERFIL = %s WHERE ID_CAD = %s"
         val = (novos_dados)

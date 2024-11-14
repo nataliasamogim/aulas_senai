@@ -18,6 +18,7 @@ from tratar_hora import data
 from consulta_data import consultar_tarefas_por_usuario
 from select_dados_cartao import select_dados_cartao
 from modificar_plano import gravar_dados_compra
+from update_banco import atualizar_cad
 
 from validacoes import (
     validar_nome,
@@ -196,7 +197,7 @@ def processar_alterar_cad(dados):
     # Adicione o ID do usuário
     update_dados.append(dados_processados.get('id'))
 
-    print(update_dados)
+    print("Dados para atualização:", update_dados)
 
     mensagens_erro = []  # Cria uma lista vazia para armazenar mensagens de erro
 
@@ -219,13 +220,17 @@ def processar_alterar_cad(dados):
     if mensagens_erro:
         return {'erro': True, 'mensagens': mensagens_erro}
     else:
+        # Se não houver erros nas validações, chama atualizar_cad
         alterar_cad = atualizar_cad(update_dados)
-        if alterar_cad.get('erro') == True:
-           return {'erro': True, 'mensagens': alterar_cad}
-        print('teste', alterar_cad)
-        return {'erro': False, 'mensagem': alterar_cad}
-        # Chamar a função para recuperar os dados do usuário do banco de dados
-        # return {'erro': False, 'mensagem': dados_usuario}
+        
+        # Verifica se atualizar_cad retornou algum erro
+        if alterar_cad.get('erro'):
+            # Retorna as mensagens de erro vindas de atualizar_cad
+            return {'erro': True, 'mensagens': alterar_cad['mensagens']}
+        
+        # Caso contrário, operação bem-sucedida
+        print("Atualização bem-sucedida:", alterar_cad)
+        return {'erro': False, 'mensagem': "Cadastro atualizado com sucesso"}
         
 
 def processar_dados_cartao(dados):
