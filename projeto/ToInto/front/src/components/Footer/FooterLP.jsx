@@ -51,7 +51,7 @@ function FooterLP() {
                                 </nav>
 
                                 <div className='ajuda'>
-                        <a href="https://youtube.com/@tointooficial?si=IW3WzCOpVBdPnj_O" id='btn_ajuda'><img className="ajuda" src="image/interrogacao.png"
+                        <a href="https://youtu.be/A7NvR5JrT8Y" id='btn_ajuda'><img className="ajuda" src="image/interrogacao.png"
                             alt="ajuda" /></a>
                     </div>
                 </div>
