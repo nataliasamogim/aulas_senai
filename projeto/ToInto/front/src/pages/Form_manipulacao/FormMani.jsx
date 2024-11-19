@@ -3,26 +3,27 @@ import { useNavigate } from 'react-router-dom';
 import './FormMani.css';
 import { Modal, Button } from 'react-bootstrap';
 
-const defaultPhoto = 'image/foto_perfil.jpg'; // Imagem padrão
+const defaultPhoto = 'images_perfil/foto_perfil.jpg'; // Imagem padrão
 
 // Adicionando um array de fotos fixas
 const fixedPhotos = [
-    'image/perfil_2.jpg',
-    'image/perfil_3.jpg',
-    'image/perfil_4.jpg',
-    'image/toy_story.jpg',
-    'image/gru.png',
-    'image/minions.jpg',
-    'image/jabuti.webp',
-    'image/papagaio.jpg',
-    'image/rato.webp',
-    'image/cachorro.jpg',
-    'image/girassol.avif',
-    'image/lirios.webp',
-    'image/peonia.avif',
-    'image/tigre_foto.png',
-    'image/calopsita.jpg',
-    'image/pintinho.jpg'
+    'images_perfil/perfil_2.jpg',
+    'images_perfil/perfil_3.jpg',
+    'images_perfil/perfil_4.jpg',
+    'images_perfil/toy_story.jpg',
+    'images_perfil/gru.png',
+    'images_perfil/minions.jpg',
+    'images_perfil/jabuti.webp',
+    'images_perfil/papagaio.jpg',
+    'images_perfil/rato.webp',
+    'images_perfil/dog1.jpg',
+    'images_perfil/dog2.jpg',
+    'images_perfil/girassol.avif',
+    'images_perfil/lirios.webp',
+    'images_perfil/peonia.avif',
+    'images_perfil/tigre_foto.png',
+    'images_perfil/calopsita.jpg',
+    'images_perfil/pintinho.jpg'
 
 ];
 
