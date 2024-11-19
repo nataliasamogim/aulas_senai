@@ -20,7 +20,7 @@ const ToDo = ({ route, navigation }) => {
             }
 
             // Configura o corpo da requisição
-            const response = await fetch('http://10.135.60.19:8085/receber-dados', {
+            const response = await fetch('http://10.135.60.34:8085/receber-dados', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -65,8 +65,8 @@ const ToDo = ({ route, navigation }) => {
         if (!tarefas) return;
         id_cad = await AsyncStorage.getItem("ID")
         try {
-            console.log('Tentando deletar compromisso com ID:', tarefas[0].id_comp, 'e ID de cadastro:', id_cad); // Adicione um log para depuração
-            const response = await fetch('http://10.135.60.19:8085/receber-dados', {
+            console.log('Tentando deletar compromisso com ID:', id_comp, 'e ID de cadastro:', id_cad); // Adicione um log para depuração
+            const response = await fetch('http://10.135.60.34:8085/receber-dados', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -74,7 +74,7 @@ const ToDo = ({ route, navigation }) => {
                 body: JSON.stringify({
                     acao: 'deletar_comp',
                     id_cad: id_cad,
-                    id_comp: tarefas[0].id_comp,
+                    id_comp: id_comp,
                     data_comp: tarefas[0].data_comp
                 }),
             });
@@ -105,7 +105,7 @@ const ToDo = ({ route, navigation }) => {
         try {
           const novoEstadoCheckbox = !checkedTasks[idComp]; // Novo estado (inverte o atual)
       
-          const response = await fetch('http://10.135.60.19:8085/receber-dados', {
+          const response = await fetch('http://10.135.60.34:8085/receber-dados', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -168,7 +168,7 @@ const ToDo = ({ route, navigation }) => {
                                             <TouchableOpacity onPress={() => navigation.navigate('Modificar Compromissos', { selectedDate, tarefa })}>
                                                 <Image style={styles.fotoEdit} resizeMode="contain" source={require('../../assets/images/lapisbranco.png')} />
                                             </TouchableOpacity>
-                                            <TouchableOpacity onPress={() => deletarCompromisso(tarefa.id_cad, tarefa.id_comp)}>
+                                            <TouchableOpacity onPress={() => deletarCompromisso(tarefa.id_comp)}>
                                                 <Image style={styles.fotoEdit2} resizeMode="contain" source={require('../../assets/images/lixobrancodois.png')} />
                                             </TouchableOpacity>
                                         </View>
