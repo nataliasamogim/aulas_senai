@@ -1,3 +1,4 @@
+
 import { View, Image, Text, TouchableOpacity, KeyboardAvoidingView, Modal } from 'react-native';
 import styles from './PerfilStyle.js';
 import React, { useState, useEffect } from 'react';
@@ -8,6 +9,7 @@ const Perfil = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [nomeUsuario, setNomeUsuario] = useState('');
   const [Email, setEmail] = useState('');
+  const [fotoPerfil, setFotoPerfil] = useState('')
 
   useEffect(() => {
     const fetchNomeUsuario = async () => {
@@ -29,15 +31,29 @@ const Perfil = ({ navigation }) => {
     fetchEmail();
   }, []);
 
+  useEffect(() => {
+    const fetchPerfil = async () => {
+      const storedPerfil = await AsyncStorage.getItem('foto_perfil');
+      if (storedPerfil) {
+        setFotoPerfil(storedPerfil);
+      }
+    };
+    fetchPerfil();
+  }, []);
+
   // Função para buscar os dados do perfil
   const fetchPerfilData = async () => {
     const storedNome = await AsyncStorage.getItem('nome_usuario');
     const storedEmail = await AsyncStorage.getItem('email');
+    const storedPerfil = await AsyncStorage.getItem('foto_perfil');
     if (storedNome) {
       setNomeUsuario(storedNome);
     }
     if (storedEmail) {
       setEmail(storedEmail);
+    }
+    if (storedPerfil) {
+      setFotoPerfil(storedPerfil)
     }
   };
 
@@ -95,7 +111,7 @@ const Perfil = ({ navigation }) => {
     <KeyboardAvoidingView style={styles.container}>
 
       <View style={styles.containerPerfil}>
-        <Image style={styles.foto} resizeMode='contain' source={require('../../assets/images/foto_perfil.jpg')} />
+        <Image style={styles.foto} resizeMode='contain' source={require('../../images_perfil/foto_perfil.jpg')} />
         <Text style={styles.text}>{nomeUsuario}</Text>
         <Text style={styles.text2}>{Email}</Text>
       </View>
@@ -155,7 +171,7 @@ const Perfil = ({ navigation }) => {
           <Image style={styles.iconeCalen} resizeMode='contain' source={require('../../assets/images/iconeCalen.png')} />
         </TouchableOpacity>
         <TouchableOpacity style={styles.containericonePerfil} onPress={() => navigation.navigate('Perfil')}>
-          <Image style={styles.perfil} resizeMode='contain' source={require('../../assets/images/foto_perfil.jpg')} />
+          <Image style={styles.perfil} resizeMode='contain' source={require('../../images_perfil/foto_perfil.jpg')} />
         </TouchableOpacity>
       </View>
 
