@@ -33,7 +33,7 @@ const Calendario = ({ navigation }) => {
         const userId = await AsyncStorage.getItem('ID');
         console.log('ID--- envio', userId);
         if (userId) {
-          const response = await fetch('http://10.135.60.20:8085/receber-dados', {
+          const response = await fetch('http://10.135.60.34:8085/receber-dados', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -155,7 +155,7 @@ const Calendario = ({ navigation }) => {
           <Image style={styles.iconeCalen} resizeMode='contain' source={require('../../assets/images/iconeCalen.png')} />
         </TouchableOpacity>
         <TouchableOpacity style={styles.containerPerfil} onPress={() => navigation.navigate('Perfil')}>
-          <Image style={styles.perfil} resizeMode='contain' source={require('../../assets/images/foto_perfil.jpg')} />
+          <Image style={styles.perfil} resizeMode='contain' source={require('../../images_perfil/foto_perfil.jpg')} />
         </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>

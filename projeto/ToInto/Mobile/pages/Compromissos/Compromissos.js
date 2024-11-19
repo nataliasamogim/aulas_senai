@@ -175,7 +175,7 @@ const Compromissos = ({ route, navigation }) => {
           <Image style={styles.iconeCalen} resizeMode='contain' source={require('../../assets/images/iconeCalen.png')} />
         </TouchableOpacity>
         <TouchableOpacity style={styles.containericonePerfil} onPress={() => navigation.navigate('Perfil')}>
-          <Image style={styles.perfil} resizeMode='contain' source={require('../../assets/images/foto_perfil.jpg')} />
+          <Image style={styles.perfil} resizeMode='contain' source={require('../../images_perfil/foto_perfil.jpg')} />
         </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>
