@@ -1,61 +1,89 @@
 import React, { useState, useEffect } from "react";
-import { View, TextInput, Image, KeyboardAvoidingView, TouchableOpacity, Text, Alert, Modal, TouchableHighlight } from "react-native";
+import { View, TextInput, Image, KeyboardAvoidingView, TouchableOpacity, Text, Modal, TouchableHighlight, FlatList } from "react-native";
 import styles from './AtualizarCadStyle.js';
 import { LinearGradient } from 'expo-linear-gradient';
-import * as ImagePicker from 'expo-image-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const AtualizarCad = ({ navigation }) => {
-    const PlaceholderImage = require('../../assets/images/foto_perfil.jpg');
-    const [selectedImage, setSelectedImage] = useState(null);
+    const PlaceholderImage = require('../../images_perfil/foto_perfil.jpg');
+    const [selectedImage, setSelectedImage] = useState(PlaceholderImage);  // Inicializa com a imagem padrão
     const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
     const [mensagensErro, setMensagensErro] = useState([]);
     const [showErrorModal, setShowErrorModal] = useState(false);
+    const [showProfileOptionsModal, setShowProfileOptionsModal] = useState(false);
+    const [selectedImagePath, setSelectedImagePath] = useState('images_perfil/foto_perfil.jpg'); // Caminho padrão
+
+
+    // No array fotoOpcoes, adicione o caminho de cada imagem como string junto ao objeto
+    const fotoOpcoes = [
+        { img: require('../../images_perfil/perfil_2.jpg'), path: 'images_perfil/perfil_2.jpg' },
+        { img: require('../../images_perfil/perfil_3.jpg'), path: 'images_perfil/perfil_3.jpg' },
+        { img: require('../../images_perfil/perfil_4.jpg'), path: 'images_perfil/perfil_4.jpg' },
+        { img: require('../../images_perfil/Gru.png'), path: 'images_perfil/Gru.png' },
+        // Adicione os outros da mesma forma
+    ];
+    // Opções de fotos de perfil com require estático
+    const fotoOpcoes2 = [
+        require('../../images_perfil/perfil_2.jpg'),
+        require('../../images_perfil/perfil_3.jpg'),
+        require('../../images_perfil/perfil_4.jpg'),
+        require('../../images_perfil/Gru.png'),
+        require('../../images_perfil/minions.jpg'),
+        require('../../images_perfil/toy_story.jpg'),
+        require('../../images_perfil/papagaio.jpg'),
+        require('../../images_perfil/dog1.jpg'),
+        require('../../images_perfil/dog2.jpg'),
+        require('../../images_perfil/rato.webp'),
+        require('../../images_perfil/lirios.webp'),
+        require('../../images_perfil/tigre_foto.png'),
+        require('../../images_perfil/calopsita.jpg'),
+        require('../../images_perfil/pintinho.jpg'),
+        require('../../images_perfil/jabuti.webp'),
+        require('../../images_perfil/lirios.webp'),
+    ];
 
     useEffect(() => {
-        // Função assíncrona para buscar dados do usuário
         const showDados = async () => {
             try {
-                // Faz uma requisição para receber os dados do usuário do servidor
-                const resposta = await fetch('http://10.135.60.19:8085/receber-dados', {
-                    method: 'POST', // Método da requisição
+                const resposta = await fetch('http://10.135.60.34:8085/receber-dados', {
+                    method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json', // Tipo de conteúdo da requisição
+                        'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ acao: 'selecionar_cad', id: await AsyncStorage.getItem("ID") }), // Corpo da requisição contendo os dados do formulário
+                    body: JSON.stringify({ acao: 'selecionar_cad', id: await AsyncStorage.getItem("ID") }),
                 });
 
-                // Verifica se a requisição foi bem-sucedida
                 if (!resposta.ok) {
-                    throw new Error('Erro ao obter dados do usuário'); // Lança um erro se a requisição falhar
+                    throw new Error('Erro ao obter dados do usuário');
                 }
 
-                // Extrai os dados da resposta e os converte para JSON
                 const userData = await resposta.json();
                 console.log('Dados do usuário:', userData);
+                setNome(userData.mensagem[1]);
+                setEmail(userData.mensagem[2]);
 
-                // Atualiza o estado do formulário com os dados do usuário recebidos
-                setNome(userData.mensagem[1]); // Define o novo valor para 'nome'
-                setEmail(userData.mensagem[2]); // Define o novo valor para 'email'
+                const savedImagePath = await AsyncStorage.getItem('foto_perfil');
+                if (savedImagePath) {
+                    const selected = fotoOpcoes.find((img) => img.uri === savedImagePath) || PlaceholderImage;
+                    setSelectedImage(selected);
+                }
             } catch (error) {
-                console.error('Erro ao buscar dados do usuário:', error); // Captura e exibe qualquer erro ocorrido durante a busca dos dados do usuário
+                console.error('Erro ao buscar dados do usuário:', error);
             }
         };
 
-        showDados(); // Chama a função para buscar os dados do usuário quando o componente é montado
-    }, []); // Array de dependências vazio, indica que este efeito deve ser executado apenas uma vez
+        showDados();
+    }, []);
 
     const handleAtualizar = async () => {
         const id_str = await AsyncStorage.getItem('ID');
-        const nome_str = nome;
         try {
-            // Faz uma requisição para enviar os dados do formulário para o servidor
-            const resposta = await fetch('http://10.135.60.19:8085/receber-dados', {
-                method: 'POST', // Método da requisição
+            const resposta = await fetch('http://10.135.60.34:8085/receber-dados', {
+                method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json', // Tipo de conteúdo da requisição
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
                     acao: 'atualizar_cad',
@@ -63,53 +91,38 @@ const AtualizarCad = ({ navigation }) => {
                     nome_novo: nome,
                     email_novo: email,
                     senha_nova: senha,
-                    foto: selectedImage,
-                }), // Corpo da requisição contendo os dados do formulário em formato JSON
+                    foto: selectedImagePath,  // Salva a imagem selecionada
+                }),
             });
-            // Extrai o resultado da resposta e o converte para JSON
+
             const resultado = await resposta.json();
             console.log('teste retorno', resultado);
 
-            // Verifica se ocorreu algum erro no servidor
             if (resultado.erro) {
-                // Exibe mensagens de erro no console ou em algum local visível
                 console.error('Erro no servidor:', resultado.mensagens);
-
-                // Atualiza o estado com as mensagens de erro para exibição no formulário
                 setMensagensErro(resultado.mensagens);
-                setShowErrorModal(true); // Exibir modal de erro
+                setShowErrorModal(true);
             } else {
                 console.log('Dados atualizados com sucesso upd!', resultado);
                 navigation.goBack();
-                await AsyncStorage.setItem('ID', id_str); // Salva o ID no AsyncStorage
-                await AsyncStorage.setItem('nome_usuario', nome_str);
+                await AsyncStorage.setItem('ID', id_str);
+                await AsyncStorage.setItem('nome_usuario', nome);
                 await AsyncStorage.setItem('email', email);
             }
         } catch (error) {
-            console.error('Erro ao enviar dados:', error); // Captura e exibe qualquer erro ocorrido durante o envio dos dados do formulário
+            console.error('Erro ao enviar dados:', error);
         }
     };
 
-    const pickImageAsync = async () => {
-        const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    const openProfileOptionsModal = () => {
+        setShowProfileOptionsModal(true);
+    };
 
-        if (permissionResult.granted === false) {
-            Alert.alert('Permissão para acessar a galeria é necessária!');
-            return;
-        }
-
-        let result = await ImagePicker.launchImageLibraryAsync({
-            allowsEditing: true,
-            quality: 1,
-        });
-
-        // Adicione este console.log para depurar a resposta
-        console.log(result.assets[0].uri);
-        if (!result.cancelled) {
-            setSelectedImage(result.assets[0].uri); // Definir a imagem selecionada
-        } else {
-            Alert.alert("Você não selecionou nenhuma imagem.");
-        }
+    const selectProfileImage = async (image, imagePath) => {
+        setSelectedImage(image); // Mantenha o visual da imagem
+        setSelectedImagePath(imagePath); // Salve o caminho da imagem como string
+        setShowProfileOptionsModal(false);
+        await AsyncStorage.setItem('foto_perfil', imagePath);
     };
 
     return (
@@ -118,8 +131,8 @@ const AtualizarCad = ({ navigation }) => {
                 <View style={styles.containercad}>
                     <Text style={styles.tittle}>Modificar Cadastro</Text>
                     <View style={styles.containerfoto}>
-                        <TouchableOpacity style={styles.formGrupoFoto} onPress={pickImageAsync}>
-                            <Image source={selectedImage ? { uri: selectedImage } : PlaceholderImage} style={styles.FotoPerfil} />
+                        <TouchableOpacity style={styles.formGrupoFoto} onPress={openProfileOptionsModal}>
+                            <Image source={selectedImage} style={styles.FotoPerfil} />
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -141,6 +154,28 @@ const AtualizarCad = ({ navigation }) => {
                 </View>
             </LinearGradient>
 
+            {/* Modal de Seleção de Foto */}
+            <Modal visible={showProfileOptionsModal} animationType="slide" transparent={true} onRequestClose={() => setShowProfileOptionsModal(false)}>
+                <View style={styles.modalContainer}>
+                    <View style={styles.modalContent}>
+                        <Text style={styles.modalTitle}>Escolha uma foto de perfil</Text>
+                        <FlatList
+                            data={fotoOpcoes}
+                            horizontal
+                            keyExtractor={(item, index) => index.toString()}
+                            renderItem={({ item }) => (
+                                <TouchableOpacity onPress={() => selectProfileImage(item.img, item.path)}>
+                                    <Image source={item.img} style={[styles.opcaoFotoPerfil, selectedImage === item.img ? styles.selectedFoto : null]} />
+                                </TouchableOpacity>
+                            )}
+                        />
+                    </View>
+                    <TouchableHighlight style={styles.closeButton} onPress={() => setShowProfileOptionsModal(false)}>
+                        <Text style={styles.closeButtonText}>Fechar</Text>
+                    </TouchableHighlight>
+                </View>
+            </Modal>
+
             {/* Modal de Erro */}
             <Modal visible={showErrorModal} animationType="slide" transparent={true} onRequestClose={() => setShowErrorModal(false)}>
                 <View style={styles.modalContainer}>
@@ -159,6 +194,6 @@ const AtualizarCad = ({ navigation }) => {
             </Modal>
         </KeyboardAvoidingView>
     );
-}
+};
 
 export default AtualizarCad;
