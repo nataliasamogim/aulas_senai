@@ -160,6 +160,92 @@ export default styles = StyleSheet.create({
     btnHorarioText: {
         fontSize: 15,
     },
-
+       // ** NOVO: Estilos para exibir mensagens de erro diárias em compromissos **
+       modalContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    },
+    modalContent: {
+        backgroundColor: '#AC72BF', // Cor de fundo semelhante ao estilo principal
+        borderRadius: 20,
+        width: '80%',
+        padding: 20,
+        shadowColor: "#fff",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
+        alignItems: 'center',
+    },
+    modalTitle: {
+        fontSize: 24,
+        marginBottom: 10,
+        textAlign: 'center',
+        color: '#fff',
+    },
+    modalText: {
+        marginBottom: 10, // Espaçamento entre as mensagens de erro
+        fontSize: 18,
+        textAlign: 'left', // Alinhamento do texto para a esquerda
+        color: '#fff',
+    },
+    containerErro: {
+        marginBottom: 20,
+    },
+    textErro: {
+        textAlign: 'center',
+        marginBottom: 10,
+        fontSize: 18,
+        color: '#fff',
+    },
+    // ** NOVO: Estilo para a parte de compromissos com mensagens de erro**
+    compromissoContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 20,
+        width: '90%',
+    },
+    compromissoText: {
+        fontSize: 18,
+        color: '#fff',
+        textAlign: 'center',
+    },
+    compromissoBtnContainer: {
+        marginTop: 15,
+        width: '60%',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    compromissoBtn: {
+        backgroundColor: '#570D70', // Cor do botão para manter o tema
+        borderRadius: 5,
+        width: '100%',
+        height: 45,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    compromissoBtnText: {
+        color: '#fff',
+        fontSize: 18,
+    },
+    closeButton: {
+        backgroundColor: '#570D70',
+        paddingVertical: 10,
+        borderRadius: 15,
+        width: 150,
+        marginTop: 20, // Espaçamento acima do botão Fechar
+    },
+    closeButtonText: {
+        color: '#fff',
+        fontWeight: 'bold',
+        fontSize: 18,
+        textAlign: 'center',
+    },
 
 });
