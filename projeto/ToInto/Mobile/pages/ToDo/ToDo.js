@@ -11,6 +11,7 @@ const ToDo = ({ route, navigation }) => {
     const selectedDate = route?.params?.selectedDate || new Date().toISOString().split('T')[0];
     const [tarefas, setTarefas] = useState([]); // Lista de tarefas
     const [checkedTasks, setCheckedTasks] = useState({}); // Estado para rastrear quais tarefas estão marcadas
+    const [refresh, setRefresh] = useState(false); 
 
     const fetchTarefas = async () => {
         try {
@@ -20,7 +21,7 @@ const ToDo = ({ route, navigation }) => {
             }
 
             // Configura o corpo da requisição
-            const response = await fetch('http://10.135.60.34:8085/receber-dados', {
+            const response = await fetch('http://10.135.60.16:8085/receber-dados', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -51,7 +52,15 @@ const ToDo = ({ route, navigation }) => {
                     importante,
                     lembrete
                 }));
+
+                // Carregar o estado do checkbox
+                const novoCheckedTasks = {};
+                trat_tarefas.forEach(tarefa => {
+                    novoCheckedTasks[tarefa.id_comp] = tarefa.checkbox;
+                });
+
                 setTarefas(trat_tarefas);
+                setCheckedTasks(novoCheckedTasks); // Atualiza o estado dos checkboxes
             }
             else {
                 setTarefas([]);
@@ -65,8 +74,8 @@ const ToDo = ({ route, navigation }) => {
         if (!tarefas) return;
         id_cad = await AsyncStorage.getItem("ID")
         try {
-            console.log('Tentando deletar compromisso com ID:', id_comp, 'e ID de cadastro:', id_cad); // Adicione um log para depuração
-            const response = await fetch('http://10.135.60.34:8085/receber-dados', {
+            console.log('Tentando deletar compromisso com ID:', tarefas[0].id_comp, 'e ID de cadastro:', id_cad); 
+            const response = await fetch('http://10.135.60.16:8085/receber-dados', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -94,7 +103,6 @@ const ToDo = ({ route, navigation }) => {
         }
     };
 
-
     useFocusEffect(
         useCallback(() => {
             fetchTarefas(); // Atualiza as tarefas quando a tela ganha foco
@@ -102,36 +110,47 @@ const ToDo = ({ route, navigation }) => {
     );
 
     const handleCheckBox = async (idComp) => {
+        const novoEstadoCheckbox = !checkedTasks[idComp]; // Inverte o estado atual do checkbox
+        
+        // Atualiza o estado local imediatamente para refletir na UI
+        setCheckedTasks(prevState => ({
+            ...prevState,
+            [idComp]: novoEstadoCheckbox
+        }));
+    
         try {
-          const novoEstadoCheckbox = !checkedTasks[idComp]; // Novo estado (inverte o atual)
-      
-          const response = await fetch('http://10.135.60.34:8085/receber-dados', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              acao: 'atualizar_checkbox',
-              id_comp: idComp,
-              estado_checkbox: novoEstadoCheckbox // Envia o estado do checkbox
-            })
-          });
-      
-          if (!response.ok) {
-            throw new Error('Erro ao atualizar checkbox');
-          } else {
-            // Atualiza o estado local dos checkboxes
+            // Faz a requisição ao servidor para atualizar o estado do checkbox no banco de dados
+            const response = await fetch('http://10.135.60.16:8085/receber-dados', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    acao: 'atualizar_checkbox',
+                    id_comp: idComp,
+                    estado_checkbox: novoEstadoCheckbox
+                })
+            });
+    
+            if (!response.ok) {
+                throw new Error('Erro ao atualizar checkbox no servidor');
+            }
+    
+            console.log('Checkbox atualizado com sucesso no banco de dados.');
+    
+            // Após a requisição ser bem-sucedida, forçar o refresh (pode ser recarregando os dados ou algo do tipo)
+            setRefresh(prev => !prev); // Alterna o estado de refresh, por exemplo, recarregando os dados da página
+        } catch (error) {
+            console.error('Erro ao atualizar checkbox:', error);
+    
+            // Em caso de erro, reverte o estado local para o valor anterior
             setCheckedTasks(prevState => ({
                 ...prevState,
-                [idComp]: novoEstadoCheckbox // Atualiza apenas a tarefa específica com o id_comp
+                [idComp]: !novoEstadoCheckbox // Reverte a mudança local
             }));
-            console.log('Checkbox atualizado com sucesso no banco de dados.');
-          }
-      
-        } catch (error) {
-          console.error('Erro:', error);
         }
-      };
+        fetchTarefas();
+    };
 
     const formattedDate = format(parseISO(selectedDate), 'dd/MM', { locale: ptBR });
     const dayOfWeek = format(parseISO(selectedDate), 'EEEE', { locale: ptBR });
@@ -165,7 +184,7 @@ const ToDo = ({ route, navigation }) => {
                                         </View>
 
                                         <View style={styles.containerEditExcluir}>
-                                            <TouchableOpacity onPress={() => navigation.navigate('Modificar Compromissos', { selectedDate, tarefa })}>
+                                            <TouchableOpacity onPress={() => navigation.navigate('Modificar Compromissos', { selectedDate: selectedDate, tarefa: tarefa })}>
                                                 <Image style={styles.fotoEdit} resizeMode="contain" source={require('../../assets/images/lapisbranco.png')} />
                                             </TouchableOpacity>
                                             <TouchableOpacity onPress={() => deletarCompromisso(tarefa.id_comp)}>
