@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 //import Button from 'react-bootstrap/Button';
 //import Form from 'react-bootstrap/Form';
 import Modal from "react-modal";
+import { Modal as BootstrapModal, Button } from "react-bootstrap";
 import './CompStyle.css'
 
 // Define o elemento principal da aplicação (geralmente o root do DOM)
@@ -16,6 +17,10 @@ const Compromissos = ({ isOpen, onRequestClose, tarefasData, receberTarefas, dat
   const [importante, setImportante] = useState(false);
   const [lembrete, setLembrete] = useState('');
   const [mensagensErro, setMensagensErro] = useState({});
+  const [isSecondModalOpen, setIsSecondModalOpen] = useState(false); // Estado para o segundo modal
+  const closeSecondModal = () => {
+    setIsSecondModalOpen(false);
+  };
 
   // Função para formatar a data
   const formatDate = (dateString) => {
@@ -51,7 +56,7 @@ const Compromissos = ({ isOpen, onRequestClose, tarefasData, receberTarefas, dat
       let response;
       if (tarefasData) {
         // Atualizar tarefa existente
-        response = await fetch('http://10.135.60.34:8085/receber-dados', {
+        response = await fetch('http://10.135.60.42:8085/receber-dados', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -70,7 +75,7 @@ const Compromissos = ({ isOpen, onRequestClose, tarefasData, receberTarefas, dat
         });
       } else {
         // Criar nova tarefa
-        response = await fetch('http://10.135.60.34:8085/receber-dados', {
+        response = await fetch('http://10.135.60.42:8085/receber-dados', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -96,14 +101,34 @@ const Compromissos = ({ isOpen, onRequestClose, tarefasData, receberTarefas, dat
         if (resultado.erro) {
           console.error('Erro no servidor:', resultado.mensagens);
           // Resetando mensagens de erro
-          setMensagensErro({});
+          const errosFormatados = {};
+         // Verifica se o erro de limite existe diretamente dentro do array de mensagens
+         const limiteErro = resultado.mensagens.find(item => item.limite);  // Procura pelo erro de 'limite'
 
-          // Extraindo mensagens do formato que vem do backend
-          resultado.mensagens.forEach(mensagem => {
-            const campo = Object.keys(mensagem.mensagem)[0]; // pega o nome do campo
-            const mensagemErro = mensagem.mensagem[campo]; // pega a mensagem do campo
-            setMensagensErro(prev => ({ ...prev, [campo]: mensagemErro })); // associa a mensagem ao campo correto
-          });
+         if (limiteErro && limiteErro.limite) {
+           errosFormatados.limite = limiteErro.limite;  // Adiciona o erro de limite separadamente
+         }
+
+         if (Array.isArray(resultado.mensagens)) {
+           // Se for um array, percorre o array e trata os erros
+           resultado.mensagens.forEach((item) => {
+             if (item.mensagem) {
+               const campo = Object.keys(item.mensagem)[0];  // Pega a chave do erro (ex: 'titulo')
+               const msg = item.mensagem[campo];  // Pega a mensagem de erro
+               errosFormatados[campo] = msg;  // Adiciona o erro ao objeto
+             }
+           });
+         } else if (resultado.mensagens.limite) {
+           // Caso o erro seja de 'limite', diretamente na estrutura de 'mensagens'
+           errosFormatados.limite = resultado.mensagens.limite;
+         }
+
+         setMensagensErro(errosFormatados);  // Atualiza o estado com os erros formatados
+
+         if (errosFormatados.limite) {
+           setIsSecondModalOpen(true)
+         }
+
         } else {
           setTitulo('');
           setDescricao('');
@@ -124,6 +149,7 @@ const Compromissos = ({ isOpen, onRequestClose, tarefasData, receberTarefas, dat
   };
 
   return (
+    <>
     <Modal isOpen={isOpen} onRequestClose={onRequestClose} backdrop="static" keyboard={false}>
       <button
         onClick={onRequestClose} // Chama a função para fechar o modal
@@ -215,6 +241,29 @@ const Compromissos = ({ isOpen, onRequestClose, tarefasData, receberTarefas, dat
         </div>
       </form>
     </Modal>
+
+    <BootstrapModal show={isSecondModalOpen} onHide={closeSecondModal}>
+        <BootstrapModal.Header >
+          <button
+            onClick={closeSecondModal}
+            className="modal-close-button"
+            aria-label="Fechar"
+          >
+            &times;
+          </button>
+          <BootstrapModal.Title>Erro ao processar os dados</BootstrapModal.Title>
+        </BootstrapModal.Header>
+        <BootstrapModal.Body>
+          {mensagensErro.limite && <div style={{ color: 'white' }}>{mensagensErro.limite}</div>}
+        </BootstrapModal.Body>
+
+        <BootstrapModal.Footer>
+          <Button style={{ backgroundColor: '#570D70', border: 'none' }} className='errofechar' onClick={() => setIsSecondModalOpen(false)}>
+            Fechar
+          </Button>
+        </BootstrapModal.Footer>
+      </BootstrapModal>
+    </>
   );
 };
 

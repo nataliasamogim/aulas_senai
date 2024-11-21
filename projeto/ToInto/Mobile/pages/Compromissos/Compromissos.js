@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, KeyboardAvoidingView, Image, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, KeyboardAvoidingView, Image, TouchableOpacity, Modal, TouchableHighlight } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { CheckBox } from 'react-native-elements';
 import styles from './CompStyle.js';
@@ -16,6 +16,7 @@ const Compromissos = ({ route, navigation }) => {
   const [titulo, setTitulo] = useState('');
   const [descricao, setDescricao] = useState('');
   const [showTimePicker, setShowTimePicker] = useState(false);
+  const [showErrorModal, setShowErrorModal] = useState(false); // Estado para controlar a exibição do modal de erro
 
   useEffect(() => {
     if (new Date(selectedDate).toDateString() === new Date().toDateString()) {
@@ -39,17 +40,21 @@ const Compromissos = ({ route, navigation }) => {
         plano_esc: await AsyncStorage.getItem('plano_escolhido')
       };
       try {
-        const response = await fetch('http://10.135.60.34:8085/receber-dados', {
+        const response = await fetch('http://10.135.60.42:8085/receber-dados', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify(formCompromisso)
         });
+
         const resultado = await response.json();
+
         if (resultado.erro) {
           console.error('Erro no servidor:', resultado.mensagens);
           setMensagensErro(resultado.mensagens);
+          setShowErrorModal(true); // Abre o modal de erro
+
         } else {
           setTitulo('');
           setDescricao('');
@@ -82,7 +87,7 @@ const Compromissos = ({ route, navigation }) => {
 
   return (
     <KeyboardAvoidingView style={styles.background} behavior="padding">
-      {mensagensErro.length > 0 && (
+   {/*  {mensagensErro.length > 0 && (
         <View style={{ color: 'white' }}>
           <Text>Erro ao processar os dados:</Text>
           <View>
@@ -91,7 +96,7 @@ const Compromissos = ({ route, navigation }) => {
             ))}
           </View>
         </View>
-      )}
+      )}    */}
       <View style={styles.container}>
         <View style={styles.containerData}>
           <Text style={styles.data}>{formattedDate}</Text>
@@ -178,6 +183,36 @@ const Compromissos = ({ route, navigation }) => {
           <Image style={styles.perfil} resizeMode='contain' source={require('../../images_perfil/foto_perfil.jpg')} />
         </TouchableOpacity>
       </View>
+
+      {/* Modal de Erro */}
+      <Modal visible={showErrorModal} animationType="slide" transparent={true} onRequestClose={() => setShowErrorModal(false)}>
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalTitle}>Erro ao processar os dados:</Text>
+            <View style={styles.containerErro}>
+        {mensagensErro.map((mensagem, index) => {
+          // Verifique se 'mensagem' e 'mensagem.mensagem' existem
+          const mensagemTitulo = mensagem?.mensagem?.titulo;
+          const mensagemDescricao = mensagem?.mensagem?.descricao;
+          const mensagemLimite = mensagem?.limite;
+
+          // Exibe os erros, verificando a existência de cada chave
+          return (
+            <Text key={index} style={styles.textErro}>
+              {/* Exibe o erro com base na disponibilidade das chaves */}
+              {mensagemTitulo && <Text>{mensagemTitulo}</Text>}
+              {mensagemDescricao && <Text>{mensagemDescricao}</Text>}
+              {mensagemLimite && <Text>{mensagemLimite}</Text>}
+            </Text>
+          );
+        })}
+      </View>
+    </View>
+          <TouchableHighlight style={styles.closeButton} onPress={() => setShowErrorModal(false)}>
+            <Text style={styles.closeButtonText}>Fechar</Text>
+          </TouchableHighlight>
+        </View>
+      </Modal>
     </KeyboardAvoidingView>
   );
 };
