@@ -13,6 +13,7 @@ import ModificarCompromissos from './pages/Modificar comp/ModificComp';
 import MenuHSI from './pages/Menu/MenuHSI';
 import ModificPlano from './pages/Modificar plano/ModificPlano';
 import Pix from './pages/Pagina pix/Pix';
+import ConfPix from './pages/Conf_pix/ConfPix';
 import Perfil from './pages/Pagina perfil/Perfil';
 import AtualizarCad from './pages/Modificar cadastro/AtualizarCad';
 import ToDo from './pages/ToDo/ToDo';
@@ -168,6 +169,17 @@ function App() {
           }} />
 
         <Stack.Screen name="Pix" component={Pix}
+          options={{
+            headerStyle: {
+              backgroundColor: '#6B29A4', // Cor de fundo da barra de navegação
+            },
+            headerTintColor: '#fff', // Cor do texto do título
+            headerTitleStyle: {
+              fontWeight: 'bold', // Estilo do texto do título
+            },
+          }} />
+
+        <Stack.Screen name="ConfPix" component={ConfPix}
           options={{
             headerStyle: {
               backgroundColor: '#6B29A4', // Cor de fundo da barra de navegação
