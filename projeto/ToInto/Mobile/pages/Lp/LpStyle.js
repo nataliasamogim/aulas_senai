@@ -7,7 +7,7 @@ export default styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#6B29A4',
-        width: 395,
+        width: '100%',
     },
 
     logo: {
@@ -32,6 +32,7 @@ export default styles = StyleSheet.create({
     titleText: {
         color: '#fff',
         fontSize: 28,
+        width: '100%'
     },
 
     subtitleText: {

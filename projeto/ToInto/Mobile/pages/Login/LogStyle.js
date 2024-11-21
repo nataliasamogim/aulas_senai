@@ -6,7 +6,7 @@ export default styles = StyleSheet.create({
         color: '#AC72BF',
         alignItems: 'center',
         justifyContent: 'center',
-        width: 395,
+        width: '100%',
         height: 720,
     },
     containerLogoLogin: {
@@ -29,11 +29,11 @@ export default styles = StyleSheet.create({
         fontSize: 17,
         borderRadius: 5,
         padding: 10,
-        paddingRight: 40, // Deixe espaço suficiente para o ícone
+        paddingRight: 40, 
     },
     containerInput: {
-        alignItems: 'flex-start', // Para alinhar o conteúdo à esquerda
-        position: 'relative', // Para que o ícone possa ser posicionado em relação a este container
+        alignItems: 'center', 
+        position: 'relative', 
     },
     titleCampo: {
         color: '#fff',
