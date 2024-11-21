@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, KeyboardAvoidingView, Image, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, KeyboardAvoidingView, TouchableOpacity } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { CheckBox } from 'react-native-elements';
 import styles from './ModificCompStyle.js';
@@ -8,9 +8,9 @@ import { format, parseISO } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-
 const ModificarCompromissos = ({ route, navigation }) => {
-  const selectedDate = route?.params?.selectedDate || new Date().toISOString().split('T')[0];
+  const today = new Date().toISOString().split('T')[0];
+  const [selectedDate, setSelectedDate] = useState(route?.params?.selectedDate || today);
   const tarefa = route?.params?.tarefa || {}; // Recebe a tarefa
 
   const [horario, setHorario] = useState(new Date());
@@ -23,14 +23,22 @@ const ModificarCompromissos = ({ route, navigation }) => {
 
   useEffect(() => {
     if (tarefa) {
-      setTitulo(tarefa.titulo);
-      setDescricao(tarefa.descricao || '');
-      const [hora, minuto] = tarefa.horario.split(':');
-      const horarioComp = new Date();
-      horarioComp.setHours(parseInt(hora, 10));
-      horarioComp.setMinutes(parseInt(minuto, 10));
-      horarioComp.setSeconds(0);
-      setHorario(horarioComp);
+      console.log("Dados da tarefa recebidos:", tarefa);
+
+      setTitulo(tarefa.titulo ? String(tarefa.titulo) : ''); // Garantir que seja string
+      setDescricao(tarefa.descricao ? String(tarefa.descricao) : ''); // Garantir que seja string
+
+      if (tarefa.horario) {
+        const horarioComp = new Date();
+        const timeParts = tarefa.horario.match(/^(\d{2}):(\d{2})$/);
+        if (timeParts) {
+          horarioComp.setHours(parseInt(timeParts[1], 10));
+          horarioComp.setMinutes(parseInt(timeParts[2], 10));
+          horarioComp.setSeconds(0);
+          setHorario(horarioComp);
+        }
+      }
+
       setLembrete(tarefa.lembrete || 0);
       setChecked(tarefa.importante || false);
     }
@@ -43,9 +51,9 @@ const ModificarCompromissos = ({ route, navigation }) => {
         id_cad: await AsyncStorage.getItem('ID'), // Pega o ID do usuário
         id_tarefa: tarefa.id_comp, // Certifique-se de ter o ID da tarefa aqui
         date: selectedDate, // A data selecionada
-        titulo: titulo, // Título atualizado
+        titulo: String(titulo), // Garantir que seja string
         time: horario.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }), // Horário
-        descricao: descricao, // Descrição
+        descricao: String(descricao), // Garantir que seja string
         importante: checked ? 1 : 0, // Se a tarefa é importante ou não
         lembrete: lembrete, // Lembrete
       };
@@ -53,7 +61,7 @@ const ModificarCompromissos = ({ route, navigation }) => {
       console.log('Dados enviados:', formCompromisso);
 
       try {
-        const response = await fetch('http://10.135.60.20:8085/receber-dados', {
+        const response = await fetch('http://10.135.60.16:8085/receber-dados', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -72,14 +80,13 @@ const ModificarCompromissos = ({ route, navigation }) => {
           setHorario(new Date());
           setLembrete(0);
           setChecked(false);
-          navigation.navigate('ToDoList', { selectedDate, refresh: true }); // Atualiza a tela ToDo
+          navigation.navigate('Calendario');
         }
       } catch (error) {
         console.error('Erro ao adicionar tarefa:', error);
       }
     }
   };
-
 
   const handleCheckBox = () => {
     setChecked(!checked);
@@ -94,8 +101,8 @@ const ModificarCompromissos = ({ route, navigation }) => {
     { label: '24 horas', value: 1440 }
   ];
 
-  const formattedDate = format(parseISO(selectedDate), 'dd/MM', { locale: ptBR });
-  const dayOfWeek = format(parseISO(selectedDate), 'EEEE', { locale: ptBR });
+  const formattedDate = selectedDate ? format(parseISO(selectedDate), 'dd/MM', { locale: ptBR }) : '';
+  const dayOfWeek = selectedDate ? format(parseISO(selectedDate), 'EEEE', { locale: ptBR }) : '';
 
   return (
     <KeyboardAvoidingView style={styles.background} behavior="padding">
@@ -179,7 +186,6 @@ const ModificarCompromissos = ({ route, navigation }) => {
           </TouchableOpacity>
         </View>
       </View>
-
     </KeyboardAvoidingView>
   );
 };
