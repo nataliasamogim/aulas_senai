@@ -10,6 +10,7 @@ import Cad_concluido from "../pages/Concluido/Cad_concluido";
 import FormMani from "../pages/Form_manipulacao/FormMani";
 import DadosCartao from "../pages/Adic_dados/DadosCartao";
 import Dados_pix from "../pages/Adic_dados/Dados_pix";
+import ConfPix from "../pages/Conf_Pix/ConfPix";
 import Modific_cart from "../pages/Modificar_cartao/Modific_cart";
 import { ModificPlano } from "../pages/Modific_plano/Modific_plano";
 import Concluido_cadatualizado from "../pages/Concluido/Concluido_cadatualizado";
@@ -33,6 +34,7 @@ const Content = props => (
             <Route path="/cadatualizado" exact element={<Concluido_cadatualizado />} />
             <Route path="/dadoscart" exact element={<DadosCartao />} />
             <Route path="/dadospix" exact element={<Dados_pix />} />
+            <Route path="/ConfPix" exact element={<ConfPix />} />
             {/*<Route path="/modificarpag" exact element={<Esc_Pag />} />*/}
             <Route path="/modificart" exact element={<Modific_cart />} />
             <Route path="/modificplano" exact element={<ModificPlano />} />

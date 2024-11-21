@@ -1,4 +1,4 @@
-#container_cad {
+#container_conf {
     width: 100%;
     height: 745px !important;
     display: flex;
@@ -6,7 +6,7 @@
     justify-content: center;
 }
  
-.cad_concluido {
+.conf_Pix {
     background-color: rgb(64, 18, 97);
     width: 600px;
     height: 200px;
@@ -22,25 +22,21 @@
     text-align: center;
     padding: 18px;
     color: white;
-
+    align-items: center !important;
 }
 
-.subtitulo {
-    font-size: 1.4em;
+.subtitulo_conf {
+    font-size: 22px;
 }
 
-.entr_log {
-    font-size: 1.2em;
-}
-
-.link_log {
+.link_conf {
     color: rgb(175, 115, 221);
     font-size: 20px;
     text-decoration: none;
     margin-right: 23px;
 }
 
-.link_log:hover{
+.link_conf:hover {
     color: rgb(200, 150, 255); 
     text-decoration: underline;
 }
