@@ -112,49 +112,55 @@ def gravar_dados_compromisso(dados_gravacao):
     plano_esc = dados_gravacao[7]
     print('PLANO ESCOLHIDO NO CADASTRO', type(plano_esc))
     
-    # Anual
-    if plano_esc == '1': 
-        sql = "INSERT INTO compromissos (ID_CAD, TITULO_COMP, DATA_COMP, HORARIO_COMP, DESCRICAO, IMPORTANTE, LEMBRETE) VALUES (%s, %s, %s, %s, %s, %s, %s)"
-        cursor.execute(sql, tuple(dados_gravacao[:7]))  # Passando os valores como uma tupla
-        conex.commit()
-        print("Dados do compromisso inseridos com sucesso!")
-
-    elif plano_esc == '2':
-        data_atual = datetime.datetime.now()
-        data_formatada = data_atual.strftime("%Y/%m/%d")
-        sql = "SELECT count(*) FROM COMPROMISSOS WHERE ID_CAD = %s and DATA_CRIACAO = %s"
-        val = (dados_gravacao[0], data_formatada)
-        cursor.execute(sql, val)
-        tarefas = cursor.fetchone()
-        print('DADOS DA TAREFA DO MENSAL', tarefas)
-
-        # Mensal
-        if (tarefas[0] < 101):
+    try:
+        # Validação do plano (Anual)
+        if plano_esc == '1': 
             sql = "INSERT INTO compromissos (ID_CAD, TITULO_COMP, DATA_COMP, HORARIO_COMP, DESCRICAO, IMPORTANTE, LEMBRETE) VALUES (%s, %s, %s, %s, %s, %s, %s)"
             cursor.execute(sql, tuple(dados_gravacao[:7]))  # Passando os valores como uma tupla
             conex.commit()
-            print('Tarefas do plano mensal criadas')
-
-        else: 
-            return  {'erro': False, 'mensagem': 'Você chegou ao seu limite de tarefas diárias'}
-    
-    else:
-        data_atual = datetime.datetime.now()
-        data_formatada = data_atual.strftime("%Y/%m/%d")
-        sql = "SELECT count(*) FROM COMPROMISSOS WHERE ID_CAD = %s and DATA_CRIACAO = %s"
-        val = (dados_gravacao[0], data_formatada)
-        cursor.execute(sql, val)
-        tarefas = cursor.fetchone()
-        print('DADOS DA TAREFA', tarefas)
-        # Grátis
-        if (tarefas[0] < 7):
-            sql = "INSERT INTO compromissos (ID_CAD, TITULO_COMP, DATA_COMP, HORARIO_COMP, DESCRICAO, IMPORTANTE, LEMBRETE) VALUES (%s, %s, %s, %s, %s, %s, %s)"
-            cursor.execute(sql, tuple(dados_gravacao[:7]))  # Passando os valores como uma tupla
-            conex.commit()
-            print('Tarefas do plano grátis criadas')
+            print("Dados do compromisso inseridos com sucesso!")
         
-        else: 
-            return  {'erro': False, 'mensagem': 'Você chegou ao seu limite de tarefas diárias'}
+        # Validação do plano (Mensal)
+        elif plano_esc == '2':
+            data_atual = datetime.datetime.now()
+            data_formatada = data_atual.strftime("%Y/%m/%d")
+            sql = "SELECT count(*) FROM COMPROMISSOS WHERE ID_CAD = %s and DATA_CRIACAO = %s"
+            val = (dados_gravacao[0], data_formatada)
+            cursor.execute(sql, val)
+            tarefas = cursor.fetchone()
+            print('DADOS DA TAREFA DO MENSAL', tarefas)
 
-    conex.close()
-    return  {'erro': False, 'mensagem': 'Tarefas criadas com sucesso!'}
+            if tarefas[0] < 101:
+                sql = "INSERT INTO compromissos (ID_CAD, TITULO_COMP, DATA_COMP, HORARIO_COMP, DESCRICAO, IMPORTANTE, LEMBRETE) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+                cursor.execute(sql, tuple(dados_gravacao[:7]))  # Passando os valores como uma tupla
+                conex.commit()
+                print('Tarefas do plano mensal criadas')
+            else: 
+                return {'erro': True, 'mensagens': [{'limite': 'Você chegou ao seu limite de tarefas diárias para o plano mensal.'}]}
+            
+            # Validação do plano (Grátis)
+        else:
+            data_atual = datetime.datetime.now()
+            data_formatada = data_atual.strftime("%Y/%m/%d")
+            sql = "SELECT count(*) FROM COMPROMISSOS WHERE ID_CAD = %s and DATA_CRIACAO = %s"
+            val = (dados_gravacao[0], data_formatada)
+            cursor.execute(sql, val)
+            tarefas = cursor.fetchone()
+            total = tarefas[0]
+            print('DADOS DA TAREFA', total)
+
+            if total < 7:
+                sql = "INSERT INTO compromissos (ID_CAD, TITULO_COMP, DATA_COMP, HORARIO_COMP, DESCRICAO, IMPORTANTE, LEMBRETE) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+                cursor.execute(sql, tuple(dados_gravacao[:7]))  # Passando os valores como uma tupla
+                conex.commit()
+                print('Tarefas do plano grátis criadas')
+            else: 
+                return {'erro': True, 'mensagens': [{'limite': 'Você chegou ao seu limite de tarefas diárias para o plano grátis.'}]}
+
+    except Exception as e:
+        return {'erro': True, 'mensagens': [{'erro': str(e)}]}
+
+    finally:
+        conex.close()
+    
+    return {'erro': False, 'mensagem': 'Tarefas criadas com sucesso!'}

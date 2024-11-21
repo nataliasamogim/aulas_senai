@@ -329,36 +329,43 @@ def excluir_todas_informacoes_usuario(cad_id):
 
 def processar_dados_compromisso(dados):
     dados_processados = dados
-    dados_gravacao = []
-    dados_gravacao.append(dados_processados.get('id_cad'))
-    dados_gravacao.append(dados_processados.get('titulo'))
-    dados_gravacao.append(dados_processados.get('date'))
-    dados_gravacao.append(dados_processados.get('time'))
-    dados_gravacao.append(dados_processados.get('descricao'))
-    dados_gravacao.append(dados_processados.get('importante'))
-    dados_gravacao.append(dados_processados.get('lembrete'))
-    dados_gravacao.append(dados_processados.get('plano_esc'))
+    dados_gravacao = [
+        dados_processados.get('id_cad'),
+        dados_processados.get('titulo'),
+        dados_processados.get('date'),
+        dados_processados.get('time'),
+        dados_processados.get('descricao'),
+        dados_processados.get('importante'),
+        dados_processados.get('lembrete'),
+        dados_processados.get('plano_esc')
+    ]
 
-    mensagens_erro = []  # Cria uma lista vazia para armazenar mensagens de erro
+    mensagens_erro = []  # Lista para armazenar mensagens de erro
 
-    # Início do bloco (mensagens de erro)
-    # Os dados recebidos dos inputs serão validados pela função correspondente e caso haja erro será armazenado na variável mensagens_erro
+    # Validação dos dados recebidos
     mensagens_erro.append(validar_titulo(dados.get('titulo', '')))
     mensagens_erro.append(validar_descricao(dados.get('descricao', '')))
-    # Fim do bloco (mensagens de erro)
 
     # Remove mensagens de erro vazias
     mensagens_erro = [msg for msg in mensagens_erro if msg['erro']]
 
     print(mensagens_erro)
 
+    # Se houver erros de validação, retorna os erros ao frontend
     if mensagens_erro:
         return {'erro': True, 'mensagens': mensagens_erro}
-    else:
-        # Chama a função para gravar os dados, caso não tenha mensagens de erro
-        gravar_dados_compromisso(dados_gravacao)
-        print('dados de gravação', dados_gravacao)
-        return {'erro': False, 'mensagem': 'Dados do compromissos criados com sucesso'}
+
+    # Chama a função para gravar os dados e captura a resposta
+    resposta = gravar_dados_compromisso(dados_gravacao)
+
+    # Verifica se houve erro ao gravar os dados
+    if resposta['erro']:
+        # Retorna o erro diretamente ao frontend
+        return resposta
+
+    # Caso contrário, retorna sucesso
+    print('dados de gravação', dados_gravacao)
+    return {'erro': False, 'mensagem': 'Dados do compromissos criados com sucesso!'}
     
 def processar_alterar_comp(dados):
     print ('processamento', dados)
