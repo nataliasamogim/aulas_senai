@@ -1,9 +1,15 @@
 import { StyleSheet } from "react-native";
+import { CheckBox } from "react-native-elements";
+import { transpose } from "date-fns";
 
 export default styles = StyleSheet.create({
     background: {
+        flex: 1,
         backgroundColor: '#6B29A4',
-        height: 720,
+    },
+    containerTarefas: {
+        padding: 13,
+        marginTop: 20,
     },
     containerHSI: {
         display: 'flex',
@@ -14,122 +20,104 @@ export default styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#AE80D6'
     },
+    containerHoraTitle: {
+        flexDirection: 'row', 
+        alignItems: 'center', 
+    },
     textMenu: {
         color:'white',
         fontSize: 18,
         borderBottomWidth: 1,
         borderBottomColor:'white'
     },
-    textAtivHoje: {
+    tituloMenu: {
         color:'white',
-        fontSize: 20,
-        paddingTop: 20,
-        paddingLeft:15,
-    },
-    textAtivSemana: {
-        color:'white',
-        fontSize: 20,
-        paddingTop: 7,
-        paddingLeft:15,
-    },
-    textAtivImport: {
-        color:'white',
-        fontSize: 20,
-        paddingTop: 7,
-        paddingLeft:15,
-    },
-    containerTarefa: {
-        backgroundColor:'#AE80D6',
-        margin: 15,
-        borderRadius:5,
-        padding: 5,
-    },
-    containerTarefa3: {
-        backgroundColor:'#779ECB',
-        margin: 15,
-        borderRadius:5,
-        padding: 5,
-    },
-    containerData: {
-        flexDirection:'row',
-        paddingLeft: 15,
+        fontSize: 25,
+        textAlign: 'center',
         paddingTop: 10,
     },
-    data: {
-        color:'white',
-        fontSize:18,
+    textAtivHoje:{
+        color: 'white',
+        fontSize: 22,
+        paddingTop: 16,
+        paddingLeft: 12
     },
-    componentes: {
-        flexDirection:'row',
-        justifyContent: 'space-around',
-        alignItems:'center',
+    data1: {
+        color: 'white',
+        fontSize: 20,
+        display: 'flex',
+        paddingTop: 12,
     },
-    containerComp: {
-        flexDirection:'row',
+    dia: {
+        color: 'white',
+        fontSize: 19.6,
     },
-    containerEdit: {
-        flexDirection: 'row',
-    },
-    containerTitulo: {
-        flexDirection:'row',
-        alignItems:'center'
+    horario: {
+        color: 'white',
+        fontSize: 20,
+        paddingLeft: 0,
     },
     titulo: {
-        color:'white',
-        fontSize:17,
-        marginLeft: -15
+        color: 'white',
+        fontSize: 20,
+       
     },
-    titulo2: {
-        color:'white',
-        fontSize:17,
-        paddingLeft: 8,
-        paddingRight:20,
-    },
-    fotoEdit: {
-        width:30,
-        height: 30,
-    },
-    fotoEdit2: {
-        width:20,
-        height: 30,
-    },
-    desc: {
-        color:'white',
-        fontSize: 17,
-        paddingLeft:15,
-        paddingBottom:10,
-    },
-    editButton: {
-        marginRight: 10, 
-    },
-    containerLogos: {
-        backgroundColor: '#E0',
-        height: 75,
+    check_tarefa: {
         display: 'flex',
         flexDirection: 'row',
+        alignItems: 'center',
+        margin: -10,
+        marginRight: -20,
+    },
+    containerComp: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
         justifyContent: 'space-between',
-        paddingLeft: 10, 
-        paddingRight: 10,
-        borderTopWidth: 0.8,
-        borderTopColor: '#fff',
-        paddingRight: 20,
-        paddingLeft: 20
     },
-    perfil: {
-        width: 55,
-        height: 55, 
-        borderRadius: 50,
-        top: 10,
+    containerEditExcluir: {
+        display: 'flex',
+        flexDirection: 'row',
+        paddingTop: 32,
+        paddingRight: 12
     },
-    menu: {
-        width: 48,
-        height: 48, 
-        top: 12
+    fotoEdit: {
+        width: 30,
+        height: 30,
+        marginRight: 0,
     },
-    iconeCalen: {
-        width: 50,
-        height: 50, 
-        top: 12
+    fotoEdit2: {
+        width: 25,
+        height: 25,
     },
-    
+    descricao: {
+        padding: 9,
+
+    },
+    textDesc: {
+        color: 'white',
+        fontSize: 18
+    },
+
+    componentesTarefas: {
+        marginBottom: 10, // Adiciona espaço entre as tarefas
+        padding: 7,
+        backgroundColor: '#AE80D6', // Cor de fundo para destacar cada tarefa
+        borderRadius: 5,
+        //display: 'flex',
+        //flexDirection: 'row'
+    },
+    noTaskMessage: {
+        color: 'white',
+        fontSize: 16,
+        textAlign: 'center'
+    },
+    check: {
+        marginLeft: 111
+    },
+    tarefaImportante: {
+        backgroundColor: '#628cbd', /* Azul para destaque */
+        color: 'white', /* Texto branco para contraste */
+    }
 });
+
