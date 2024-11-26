@@ -5,18 +5,35 @@ def recuperar_inf_formani(id_cad):
     conex = conexao.conectar()
     cursor = conex.cursor()
 
-    sql = "SELECT ID_CAD, NOME_USUARIO, EMAIL FROM CADASTRO WHERE ID_CAD = %s"
+    sql = "SELECT ID_CAD, NOME_USUARIO, EMAIL, FOTO_PERFIL FROM CADASTRO WHERE ID_CAD = %s"
     val = (id_cad,)
     cursor.execute(sql, val)
     usuario = cursor.fetchone()
+    #print('select de usuário', usuario)
     conex.close()
-
+    
     if usuario:
-        print('teste de recebimento dos dados do usuário', usuario)
-        return {'erro': False, 'mensagem': usuario}
+        # Extrair os dados do usuário
+        id_cad, nome_usuario, email, foto_perfil = usuario
+        
+        # Converter a foto para Base64, se existir
+        foto_base64 = foto_perfil.decode('utf-8') if foto_perfil else None
+        #foto_base64 = foto_perfil
+        print('foto',foto_base64)
+
+        # Montar o dicionário de retorno
+        dados_usuario = {
+            'id': id_cad,
+            'nome': nome_usuario,
+            'email': email,
+            'foto_perfil': foto_base64
+        }
+
+        print('teste de recebimento dos dados do usuário', dados_usuario)
+        return {'erro': False, 'mensagem': dados_usuario}
 
     else:
-        return {'erro': True, 'mensagens':{'erro': True, 'mensagem': 'Usuário não encontrado'}}
+        return {'erro': True, 'mensagens': {'erro': True, 'mensagem': 'Usuário não encontrado'}}
 
 
 def verificar_informacao_log(email, senha):
