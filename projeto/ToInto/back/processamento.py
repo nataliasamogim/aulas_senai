@@ -92,7 +92,8 @@ def processar_dados(dados):
     elif dados.get('acao') == 'deletar_cad':
         retorno = excluir_todas_informacoes_usuario(dados.get('id_cad'))
     elif dados.get('acao') == 'selecionar_cad':
-        #print('processar select', dados)
+        retorno = recuperar_inf_formani(dados.get('id', ''))
+    elif dados.get('acao') == 'selecionar_perfil':
         retorno = recuperar_inf_formani(dados.get('id', ''))
     elif dados.get('acao') == 'atualizar_checkbox':
         retorno = atualizar_estado_checkbox(dados.get('id_comp', ''), dados.get('estado_checkbox', ''))
