@@ -19,9 +19,9 @@ const Calendar = () => {
   const [tarefaData, setTarefaData] = useState([]);
   const [selecionarTarefa, setSelecionarTarefa] = useState(null);
   const [currentDate, setCurrentDate] = useState(selectedDate || new Date().toISOString().split('T')[0]);
-  const [today, setToday] = useState(new Date()); 
+  const [today, setToday] = useState(new Date());
   const [selecionada, setSelecionada] = useState(selectedDate || new Date().toISOString().split('T')[0]);
-  const [nextSaturday, setNextSaturday] = useState(new Date()); 
+  const [nextSaturday, setNextSaturday] = useState(new Date());
   const [visualizarSemana, setVisualizarSemana] = useState(false);
   const [visualizarHoje, setVisualizarHoje] = useState(true);
   const [checkedTarefas, setCheckedTarefas] = useState({});
@@ -52,7 +52,7 @@ const Calendar = () => {
 
   const receberTarefas = async () => {
     try {
-      const resposta = await fetch('http://10.135.60.43:8085/receber-dados', {
+      const resposta = await fetch('http://10.135.60.16:8085/receber-dados', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -96,7 +96,7 @@ const Calendar = () => {
 
   const receberSemana = async (inicio, fim) => {
     try {
-      const resposta = await fetch('http://10.135.60.43:8085/receber-dados', {
+      const resposta = await fetch('http://10.135.60.16:8085/receber-dados', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -106,8 +106,9 @@ const Calendar = () => {
       const dados = await resposta.json();
 
       if (dados && Array.isArray(dados.mensagem)) {
-        const trat_semana = dados.mensagem.map(([id_comp, titulo_comp, horario_comp, data_comp, descricao, importante, lembrete]) => ({
+        const trat_semana = dados.mensagem.map(([id_comp, checkbox, titulo_comp, horario_comp, data_comp, descricao, importante, lembrete]) => ({
           id_comp,
+          checkbox,
           titulo: titulo_comp,
           horario: horario_comp,
           data_comp,
@@ -131,7 +132,7 @@ const Calendar = () => {
 
   const receberImportante = async () => {
     try {
-      const resposta = await fetch('http://10.135.60.43:8085/receber-dados', {
+      const resposta = await fetch('http://10.135.60.16:8085/receber-dados', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -141,8 +142,9 @@ const Calendar = () => {
       const dados = await resposta.json();
 
       if (dados && Array.isArray(dados.mensagem)) {
-        const trat_importante = dados.mensagem.map(([id_comp, titulo_comp, horario_comp, descricao, importante, lembrete, data_comp]) => ({
+        const trat_importante = dados.mensagem.map(([id_comp, checkbox, titulo_comp, horario_comp, descricao, importante, lembrete, data_comp]) => ({
           id_comp,
+          checkbox,
           titulo: titulo_comp,
           horario: horario_comp,
           descricao,
@@ -172,7 +174,7 @@ const Calendar = () => {
   useEffect(() => {
     const consultaData = async () => {
       try {
-        const resposta = await fetch('http://10.135.60.43:8085/receber-dados', {
+        const resposta = await fetch('http://10.135.60.16:8085/receber-dados', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -213,27 +215,26 @@ const Calendar = () => {
     setVisualizarHoje(false);
     setIsSemanaOuImportante(false);
     setVisualizarDia(true);
-    const clickedDate = new Date(currentYear, currentMonth, day + 1);
-
-    if (isNaN(clickedDate.getTime())) {
-      console.error("Data inválida:", clickedDate);
-      return;
-    }
-
+  
+    const clickedDate = new Date(date.getFullYear(), date.getMonth(), day + 1);
+    const formattedDate = clickedDate.toISOString().split('T')[0];
+  
     setDate(clickedDate);
-    const selectDate = clickedDate.toISOString().split('T')[0];
-    setCurrentDate(selectDate);
-    const clicada = new Intl.DateTimeFormat('pt-BR').format(clickedDate)
-    console.log('data clicada:', clicada)
-    setSelecionada(clicada)
-
-    const tarefasSelecionarData = tarefas.filter(
-      (tarefa) => tarefa.data_comp === selectDate
-    );
-
+    setCurrentDate(formattedDate);
+    setSelecionada(new Intl.DateTimeFormat('pt-BR').format(clickedDate));
+  
+    const tarefasSelecionarData = tarefas.filter(tarefa => tarefa.data_comp === formattedDate);
     setTarefaData(tarefasSelecionarData);
+  
+    // Atualize o estado de checkedTarefas para a data selecionada
+    const tarefasCheckboxState = tarefasSelecionarData.reduce((acc, tarefa) => {
+      acc[tarefa.id_comp] = tarefa.checkbox;
+      return acc;
+    }, {});
+    
+    setCheckedTarefas(tarefasCheckboxState);  // Atualiza o estado do checkbox para a data selecionada
   };
-
+  
   const handleTodayClick = () => {
     setVisualizarSemana(false);
     setIsSemanaOuImportante(false);
@@ -312,45 +313,40 @@ const Calendar = () => {
     }
   };
 
-  const handleCheckBox = async (idComp) => {
+  const handleCheckBox = async (idComp, trf) => {
+    const novoEstadoCheckbox = !Boolean(trf);
+    setCheckedTarefas((prevState) => ({ ...prevState, [idComp]: novoEstadoCheckbox }));
+  
     try {
-      const novoEstadoCheckbox = !checkedTarefas[idComp]; // Novo estado (inverte o atual)
-
-      const response = await fetch('http://10.135.60.43:8085/receber-dados', {
+      await fetch('http://10.135.60.16:8085/receber-dados', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          acao: 'atualizar_checkbox',
-          id_comp: idComp,
-          estado_checkbox: novoEstadoCheckbox // Envia o estado do checkbox
-        })
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ acao: 'atualizar_checkbox', id_comp: idComp, estado_checkbox: novoEstadoCheckbox }),
       });
-
-      if (!response.ok) {
-        throw new Error('Erro ao atualizar checkbox');
+  
+      if (visualizarHoje) {
+        await receberTarefas();
+      } else if (visualizarSemana) {
+        const hoje = new Date();
+        const proxSabado = calculoProximoSabado(hoje);
+        await receberSemana(hoje, proxSabado);
+      } else if (visualizarDia) {
+        await receberTarefas();  // Ou algo que só atualize as tarefas desse dia específico
       } else {
-        // Atualiza o estado local dos checkboxes
-        setCheckedTarefas(prevState => ({
-          ...prevState,
-          [idComp]: novoEstadoCheckbox // Atualiza o checkbox no estado local
-        }));
-        console.log('Checkbox atualizado com sucesso no banco de dados.');
+        await receberImportante();
       }
-
     } catch (error) {
-      console.error('Erro:', error);
+      console.error('Erro ao atualizar checkbox:', error);
+      setCheckedTarefas((prevState) => ({ ...prevState, [idComp]: !novoEstadoCheckbox }));  // Reverte o estado em caso de erro
     }
   };
-
-
+  
   const handleDelete = async (idComp) => {
     if (!tarefaData) return;
 
     try {
       console.log("tarefaData ", idComp)
-      const response = await fetch('http://10.135.60.43:8085/receber-dados', {
+      const response = await fetch('http://10.135.60.16:8085/receber-dados', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -439,25 +435,25 @@ const Calendar = () => {
               tarefaData.map((tarefa) => (
                 <li className={`licalendar ${tarefa.importante ? 'tarefa-importante' : ''}`} key={tarefa.id_comp}>
                   <div className='container_datacomp'>
-                      <div className='data_comp'>
-                              {/* Verifica se é semana ou importante para mostrar a data */}
-                              {isSemanaOuImportante && (
-                                <span className='data_tarefa'>
-                                  {new Date(tarefa.data_comp + 'T00:00:00').toLocaleDateString('pt-BR', {
-                                    day: '2-digit',
-                                    month: '2-digit',
-                                    year: 'numeric'
-                                  })}
-                                </span>
-                              )}
-                      </div>
+                    <div className='data_comp'>
+                      {/* Verifica se é semana ou importante para mostrar a data */}
+                      {isSemanaOuImportante && (
+                        <span className='data_tarefa'>
+                          {new Date(tarefa.data_comp + 'T00:00:00').toLocaleDateString('pt-BR', {
+                            day: '2-digit',
+                            month: '2-digit',
+                            year: 'numeric'
+                          })}
+                        </span>
+                      )}
+                    </div>
                   </div>
                   <div className='tarefa_edit_lixo'>
                     <div className='check_tarefa'>
                       <div className='container-check'>
                         <input
                           checked={checkedTarefas[tarefa.id_comp] || tarefa.checkbox}
-                          onClick={() => handleCheckBox(tarefa.id_comp)}
+                          onClick={() => handleCheckBox(tarefa.id_comp, tarefa.checkbox)}
                           type="checkbox"
                           name="check"
                           id="check" />
