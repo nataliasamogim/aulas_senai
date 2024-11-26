@@ -1,15 +1,3 @@
-{/*Nome componente: Perfil*/ }
-{/*Autor(a):Maria Luzia Goulart Poli*/ }
-{/*Data de criação: e data de alteração: 21/03/2024 }
-{/*Descrição: representa a página de perfil do usuário, contendo:
-- foto de perfil;
-- nome de perfil;
-- email do usuário;
-- botão de sair;
-*/}
-{/*Observações pertinentes:
-- O código importa o componente `Dropdown` do pacote 'react-bootstrap para a criação de um menu suspenso, representando um perfil de usuário*/}
-
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import { Link } from 'react-router-dom';
@@ -18,27 +6,64 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import '../App.css'
+import '../App.css';
 
-{/*Nome função: Perfil*/ }
-{/*Autor(a): Maria Luzia*/ }
-{/*Data de criação: e data de alteração: 01/12/2023*/ }
-{/*Parâmetros de entrada: Nulo*/ }
-{/*Retorno: retorna o perfil de usuário*/ }
+const defaultPhoto = 'images_perfil/foto_perfil.jpg'; // Caminho da imagem padrão
+
 function Perfil(props) {
     const navigate = useNavigate();
     const [userData, setUserData] = useState({
         nomeUsuario: '',
         email: '',
-        foto: 'image/foto_perfil.jpg' // Defina uma foto padrão aqui
+        foto: '' // A foto será carregada dinamicamente
     });
     const [showModal, setShowModal] = useState(false);
 
+    // Função para converter uma imagem para Base64
+    const convertToBase64 = (url, callback) => {
+        const xhr = new XMLHttpRequest();
+        xhr.onload = function () {
+            const reader = new FileReader();
+            reader.onloadend = function () {
+                callback(reader.result.split(',')[1]); // Apenas a parte Base64
+            };
+            reader.readAsDataURL(xhr.response);
+        };
+        xhr.open('GET', url);
+        xhr.responseType = 'blob';
+        xhr.send();
+    };
+
     useEffect(() => {
-        setUserData({
-            nomeUsuario: localStorage.getItem('nome_usuario') || '',
-            email: localStorage.getItem('email') || '',
-            foto: localStorage.getItem('foto') || 'image/foto_perfil.jpg'
+        // Converte a imagem padrão para Base64
+        convertToBase64(defaultPhoto, (base64Image) => {
+            // Função para buscar dados do usuário
+            const showDados = async () => {
+                try {
+                    const resposta = await fetch('http://10.135.60.34:8085/receber-dados', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ acao: 'selecionar_perfil', id: localStorage.getItem("ID") }),
+                    });
+
+                    if (!resposta.ok) throw new Error('Erro ao obter dados do usuário');
+
+                    const response = await resposta.json();
+                    setUserData({
+                        nomeUsuario: response.mensagem.nome,
+                        email: response.mensagem.email,
+                        foto: response.mensagem.foto_perfil || base64Image // Usa a foto padrão caso nenhuma esteja definida
+                    });
+                } catch (error) {
+                    console.error('Erro ao buscar dados do usuário:', error);
+                    // Define a foto padrão em caso de erro
+                    setUserData((prev) => ({ ...prev, foto: base64Image }));
+                }
+            };
+
+            showDados();
         });
     }, []);
 
@@ -60,27 +85,23 @@ function Perfil(props) {
             })
             .then(data => {
                 console.log(data);
-                // Aqui você pode fazer algo após excluir as informações do usuário, como redirecionar para a página de login
             })
             .catch(error => {
                 console.error('Erro ao excluir conta:', error);
             });
 
-        // Dados foram processados com sucesso
         localStorage.setItem('ID', '');
         localStorage.setItem('nome_usuario', '');
         localStorage.setItem('email', '');
-        //onLogin(resultado.username); // Chama a função onLogin com o nome de usuário retornado
-        //Navega para a tela de calendario
-        navigate('/')
+        navigate('/');
     };
 
     return (
         <>
             <Dropdown>
-            <Dropdown.Toggle className='perfil' variant='outline' id="dropdown-basic">
+                <Dropdown.Toggle className='perfil' variant='outline' id="dropdown-basic">
                     <img 
-                        src={userData.foto} 
+                        src={`data:image/png;base64,${userData.foto}`} 
                         alt="Foto de perfil" 
                         width="60" 
                         height="60" 
@@ -108,12 +129,11 @@ function Perfil(props) {
                 </Dropdown.Menu>
             </Dropdown>
 
-
             <Modal show={showModal} onHide={() => setShowModal(false)}>
                 <Modal.Header closeButton>
                     <Modal.Title>Excluir conta</Modal.Title>
                 </Modal.Header>
-            <Modal.Body>Você realmente deseja excluir a conta?</Modal.Body>
+                <Modal.Body>Você realmente deseja excluir a conta?</Modal.Body>
                 <Modal.Footer className='botaoexcluir'>
                     <Button className='botaocancelarModal' id="canc_excluirconta" onClick={() => setShowModal(false)}>
                         Cancelar
@@ -123,10 +143,8 @@ function Perfil(props) {
                     </Button>
                 </Modal.Footer>
             </Modal>
-
         </>
-);
-
+    );
 }
 
 export default Perfil;
