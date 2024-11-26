@@ -7,6 +7,7 @@ const defaultPhoto = 'images_perfil/foto_perfil.jpg'; // Imagem padrão
 
 // Adicionando um array de fotos fixas
 const fixedPhotos = [
+    'images_perfil/foto_perfil.jpg',
     'images_perfil/perfil_2.jpg',
     'images_perfil/perfil_3.jpg',
     'images_perfil/perfil_4.jpg',
@@ -20,61 +21,111 @@ const fixedPhotos = [
     'images_perfil/dog2.jpg',
     'images_perfil/girassol.avif',
     'images_perfil/lirios.webp',
-    'images_perfil/peonia.avif',
     'images_perfil/tigre_foto.png',
     'images_perfil/calopsita.jpg',
     'images_perfil/pintinho.jpg'
-
 ];
 
 const FormMani = () => {
     const navigate = useNavigate();
     const [formAlter, setFormAlter] = useState({
         id: localStorage.getItem("ID"),
-        foto: localStorage.getItem('foto') || defaultPhoto, // Carrega a foto do localStorage ou usa a padrão
+        foto: '',
         nome_novo: '',
         email_novo: '',
         senha_nova: '',
     });
 
     const [showPhotoModal, setShowPhotoModal] = useState(false);
+    const [base64Photos, setBase64Photos] = useState([]); // Estado para armazenar as fotos em Base64
 
     const togglePhotoModal = () => setShowPhotoModal(!showPhotoModal);
 
-    const handleFixedPhotoSelect = (photo) => {
-        setFormAlter(prevAlter => ({
+    // Função para converter uma imagem para Base64
+    const convertPadraoBase64 = (url, callback) => {
+        const xhr = new XMLHttpRequest();
+        xhr.onload = function () {
+            const reader = new FileReader();
+            reader.onloadend = function () {
+                callback(reader.result.split(',')[1]); // Apenas a parte Base64
+            };
+            reader.readAsDataURL(xhr.response);
+        };
+        xhr.open('GET', url);
+        xhr.responseType = 'blob';
+        xhr.send();
+    };
+
+    // Função para converter imagens em Base64
+    const convertToBase64 = (url) => {
+        return new Promise((resolve, reject) => {
+            fetch(url)
+                .then((response) => {
+                    if (!response.ok) throw new Error('Erro ao carregar a imagem');
+                    return response.blob();
+                })
+                .then((blob) => {
+                    const reader = new FileReader();
+                    reader.onloadend = () => resolve(reader.result.split(',')[1]); // Pega apenas a parte Base64
+                    reader.onerror = reject;
+                    reader.readAsDataURL(blob);
+                })
+                .catch(reject);
+        });
+    };
+
+    // Converte todas as fotos fixas em Base64 ao carregar o componente
+    useEffect(() => {
+        const convertAllPhotos = async () => {
+            try {
+                const promises = fixedPhotos.map((photo) => convertToBase64(photo));
+                const base64Results = await Promise.all(promises);
+                setBase64Photos(base64Results);
+            } catch (error) {
+                console.error('Erro ao converter imagens em Base64:', error);
+            }
+        };
+        convertAllPhotos();
+    }, []);
+
+    const handleFixedPhotoSelect = (base64Photo) => {
+        setFormAlter((prevAlter) => ({
             ...prevAlter,
-            foto: photo,
+            foto: base64Photo, // Define a foto selecionada como Base64
         }));
-        localStorage.setItem('foto', photo); // Salva a foto no localStorage
         togglePhotoModal();
     };
 
     useEffect(() => {
-        const showDados = async () => {
-            try {
-                const resposta = await fetch('http://10.135.60.34:8085/receber-dados', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ acao: 'selecionar_cad', id: localStorage.getItem("ID") }),
-                });
+        // Converte a imagem padrão para Base64
+        convertPadraoBase64(defaultPhoto, (base64Image) => {
+            const showDados = async () => {
+                try {
+                    const resposta = await fetch('http://10.135.60.34:8085/receber-dados', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ acao: 'selecionar_cad', id: localStorage.getItem("ID") }),
+                    });
 
-                if (!resposta.ok) throw new Error('Erro ao obter dados do usuário');
+                    if (!resposta.ok) throw new Error('Erro ao obter dados do usuário');
 
-                const userData = await resposta.json();
-                setFormAlter({
-                    nome_novo: userData.mensagem[1],
-                    email_novo: userData.mensagem[2],
-                    id: localStorage.getItem("ID"),
-                    foto: localStorage.getItem('foto') || userData.mensagem[3] || defaultPhoto
-                });
-            } catch (error) {
-                console.error('Erro ao buscar dados do usuário:', error);
-            }
-        };
-        showDados();
+                    const userData = await resposta.json();
+                    console.log("dados_back", userData)
+                    setFormAlter({
+                        nome_novo: userData.mensagem.nome,
+                        email_novo: userData.mensagem.email,
+                        id: userData.mensagem.id,
+                        foto: userData.mensagem.foto_perfil || base64Image// Foto recuperada do banco
+                    });
+                    console.log('dados back:', userData.mensagem.foto_perfil)
+                } catch (error) {
+                    console.error('Erro ao buscar dados do usuário:', error);
+                }
+            };
+            showDados();
+        });
     }, []);
 
     const handleChange = (e) => {
@@ -98,6 +149,7 @@ const FormMani = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log('imagem', formAlter.foto)
         try {
             const resposta = await fetch('http://10.135.60.34:8085/receber-dados', {
                 method: 'POST',
@@ -110,22 +162,21 @@ const FormMani = () => {
                     nome_novo: formAlter.nome_novo,
                     email_novo: formAlter.email_novo,
                     senha_nova: formAlter.senha_nova,
-                    foto: formAlter.foto, // Inclui a foto ao enviar os dados
+                    foto: formAlter.foto, // Envia o caminho da foto selecionada
                 }),
             });
             const resultado = await resposta.json();
 
             if (resultado.erro) {
-                // Converte e exibe mensagens de erro no modal
                 const mensagensFormatadas = transformarMensagens(resultado);
                 console.error('Erro no servidor:', mensagensFormatadas.mensagens);
-                setMensagensErro(mensagensFormatadas.mensagens);  // Atualizando o estado com as mensagens de erro
-                setIsOpen(true);  // Abre o modal se houver mensagens
+                setMensagensErro(mensagensFormatadas.mensagens);
+                setIsOpen(true);
             } else {
                 localStorage.setItem('ID', formAlter.id);
                 localStorage.setItem('nome_usuario', formAlter.nome_novo);
                 localStorage.setItem('email', formAlter.email_novo);
-                localStorage.setItem('foto', formAlter.foto); // Salva a foto no localStorage
+                localStorage.setItem('foto', formAlter.foto); // Salva o caminho da foto no localStorage
                 navigate('/cadatualizado');
             }
         } catch (error) {
@@ -176,7 +227,12 @@ const FormMani = () => {
             <form className="cadastro" onSubmit={handleSubmit}>
                 <h1 className="h1_cadastro">Atualizar Cadastro</h1>
                 <div className="form_grupo_foto">
-                    <img src={formAlter.foto || defaultPhoto} alt="Profile" className="profile-photo" style={{ width: '85px', height: '85px', borderRadius: '50%' }} />
+                    <img
+                        src={`data:image/png;base64,${formAlter.foto}`}
+                        alt="Profile"
+                        className="profile-photo"
+                        style={{ width: '85px', height: '85px', borderRadius: '50%' }}
+                    />
                     <button type="button" onClick={togglePhotoModal} className="choose-photo-button">
                         Escolha uma foto
                     </button>
@@ -188,22 +244,19 @@ const FormMani = () => {
                     </Modal.Header>
                     <Modal.Body>
                         <div className="fixed-photo-options">
-                            {fixedPhotos.map((photo, index) => (
+                            {base64Photos.map((base64Photo, index) => (
                                 <img
                                     key={index}
-                                    src={photo}
+                                    src={`data:image/jpeg;base64,${base64Photo}`}
                                     alt={`Profile option ${index + 1}`}
                                     className="fixed-photo-option"
-                                    onClick={() => {
-                                        handleFixedPhotoSelect(photo);
-                                        togglePhotoModal(); // Fecha o modal ao selecionar uma foto
-                                    }}
+                                    onClick={() => handleFixedPhotoSelect(base64Photo)}
                                     style={{
                                         width: '50px',
                                         height: '50px',
                                         cursor: 'pointer',
                                         borderRadius: '50%',
-                                        margin: '5px'
+                                        margin: '5px',
                                     }}
                                 />
                             ))}
@@ -211,25 +264,50 @@ const FormMani = () => {
                     </Modal.Body>
                 </Modal>
 
-
                 <div className="form_grupo">
                     <label className="nome">Nome</label>
-                    <input className="input_2" type="text" name="nome_novo" value={formAlter.nome_novo} onChange={handleChange} placeholder="Digite seu nome" />
+                    <input
+                        className="input_2"
+                        type="text"
+                        name="nome_novo"
+                        value={formAlter.nome_novo}
+                        onChange={handleChange}
+                        placeholder="Digite seu nome"
+                    />
                 </div>
                 <div className="form_grupo">
                     <label className="email">Email</label>
-                    <input className="input_3" type="email" name="email_novo" value={formAlter.email_novo} onChange={handleChange} placeholder="Digite seu E-mail" />
+                    <input
+                        className="input_3"
+                        type="email"
+                        name="email_novo"
+                        value={formAlter.email_novo}
+                        onChange={handleChange}
+                        placeholder="Digite seu E-mail"
+                    />
                 </div>
                 <div className="form_grupo">
                     <label className="senha">Senha</label>
-                    <input className="input_4" type="password" name="senha_nova" value={formAlter.senha_nova} onChange={handleChange} placeholder="Digite sua senha" />
+                    <input
+                        className="input_4"
+                        type="password"
+                        name="senha_nova"
+                        value={formAlter.senha_nova}
+                        onChange={handleChange}
+                        placeholder="Digite sua senha"
+                    />
                 </div>
                 <div className="buttons">
                     <div className="salvar">
                         <input type="submit" className="submit_btn" value="Salvar" />
                     </div>
                     <div className="can">
-                        <input type="button" className="submit_btn" value="Cancelar" onClick={() => setFormAlter({ ...formAlter, foto: '', nome_novo: '', email_novo: '', senha_nova: '' })} />
+                        <input
+                            type="button"
+                            className="submit_btn"
+                            value="Cancelar"
+                            onClick={() => setFormAlter({ ...formAlter, foto: '', nome_novo: '', email_novo: '', senha_nova: '' })}
+                        />
                     </div>
                 </div>
             </form>
