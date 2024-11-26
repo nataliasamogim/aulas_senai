@@ -3,6 +3,12 @@ import conexao
 # Função para atualizar os dados do usuário
 
 def atualizar_cad(novos_dados):
+    foto = novos_dados[3]
+
+   # Ler o conteúdo do arquivo em binário
+    #with open(foto, 'rb') as file:
+        #foto_data = file.read()
+
     print('teste dados:', novos_dados)
     conex = conexao.conectar()
     cursor = conex.cursor()
@@ -14,7 +20,8 @@ def atualizar_cad(novos_dados):
         return {'erro': True, 'mensagens': [{'erro': True, 'mensagem': 'Email já existente'}]}
     else:
         sql = "UPDATE cadastro SET NOME_USUARIO = %s, EMAIL = %s, SENHA = %s, FOTO_PERFIL = %s WHERE ID_CAD = %s"
-        val = (novos_dados)
+        val = (novos_dados[0], novos_dados[1],
+               novos_dados[2], foto, novos_dados[4])
         cursor.execute(sql, val)
         conex.commit()
         conex.close()
