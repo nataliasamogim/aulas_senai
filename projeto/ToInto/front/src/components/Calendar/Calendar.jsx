@@ -343,9 +343,9 @@ const Calendar = () => {
   
   const handleDelete = async (idComp) => {
     if (!tarefaData) return;
-
+  
     try {
-      console.log("tarefaData ", idComp)
+      console.log("Deletando tarefa: ", idComp);
       const response = await fetch('http://10.135.60.16:8085/receber-dados', {
         method: 'POST',
         headers: {
@@ -356,14 +356,24 @@ const Calendar = () => {
           id_comp: idComp
         })
       });
-
+  
       if (!response.ok) {
         throw new Error('Erro ao deletar tarefa');
       } else {
-        console.log('Tarefa deletada com sucesso')
-        receberTarefas();
+        console.log('Tarefa deletada com sucesso');
+        // Atualizar as tarefas com base na página atual
+        if (visualizarHoje) {
+          await receberTarefas();
+        } else if (visualizarSemana) {
+          const hoje = new Date();
+          const proxSabado = calculoProximoSabado(hoje);
+          await receberSemana(hoje, proxSabado);
+        } else if (visualizarDia) {
+          await receberTarefas();  // Atualiza as tarefas desse dia específico
+        } else {
+          await receberImportante();
+        }
       }
-
     } catch (error) {
       console.error('Erro:', error);
     }
