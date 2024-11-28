@@ -52,7 +52,7 @@ const Calendar = () => {
 
   const receberTarefas = async () => {
     try {
-      const resposta = await fetch('http://10.135.60.16:8085/receber-dados', {
+      const resposta = await fetch('http://10.135.60.43:8085/receber-dados', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -96,7 +96,7 @@ const Calendar = () => {
 
   const receberSemana = async (inicio, fim) => {
     try {
-      const resposta = await fetch('http://10.135.60.16:8085/receber-dados', {
+      const resposta = await fetch('http://10.135.60.43:8085/receber-dados', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -132,7 +132,7 @@ const Calendar = () => {
 
   const receberImportante = async () => {
     try {
-      const resposta = await fetch('http://10.135.60.16:8085/receber-dados', {
+      const resposta = await fetch('http://10.135.60.43:8085/receber-dados', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -174,7 +174,7 @@ const Calendar = () => {
   useEffect(() => {
     const consultaData = async () => {
       try {
-        const resposta = await fetch('http://10.135.60.16:8085/receber-dados', {
+        const resposta = await fetch('http://10.135.60.43:8085/receber-dados', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -215,24 +215,25 @@ const Calendar = () => {
     setVisualizarHoje(false);
     setIsSemanaOuImportante(false);
     setVisualizarDia(true);
-  
-    const clickedDate = new Date(date.getFullYear(), date.getMonth(), day + 1);
-    const formattedDate = clickedDate.toISOString().split('T')[0];
-  
+    const clickedDate = new Date(currentYear, currentMonth, day + 1);
+
+    if (isNaN(clickedDate.getTime())) {
+      console.error("Data inválida:", clickedDate);
+      return;
+    }
+
     setDate(clickedDate);
-    setCurrentDate(formattedDate);
-    setSelecionada(new Intl.DateTimeFormat('pt-BR').format(clickedDate));
-  
-    const tarefasSelecionarData = tarefas.filter(tarefa => tarefa.data_comp === formattedDate);
+    const selectDate = clickedDate.toISOString().split('T')[0];
+    setCurrentDate(selectDate);
+    const clicada = new Intl.DateTimeFormat('pt-BR').format(clickedDate)
+    console.log('data clicada:', clicada)
+    setSelecionada(clicada)
+
+    const tarefasSelecionarData = tarefas.filter(
+      (tarefa) => tarefa.data_comp === selectDate
+    );
+
     setTarefaData(tarefasSelecionarData);
-  
-    // Atualize o estado de checkedTarefas para a data selecionada
-    const tarefasCheckboxState = tarefasSelecionarData.reduce((acc, tarefa) => {
-      acc[tarefa.id_comp] = tarefa.checkbox;
-      return acc;
-    }, {});
-    
-    setCheckedTarefas(tarefasCheckboxState);  // Atualiza o estado do checkbox para a data selecionada
   };
   
   const handleTodayClick = () => {
@@ -318,7 +319,7 @@ const Calendar = () => {
     setCheckedTarefas((prevState) => ({ ...prevState, [idComp]: novoEstadoCheckbox }));
   
     try {
-      await fetch('http://10.135.60.16:8085/receber-dados', {
+      await fetch('http://10.135.60.43:8085/receber-dados', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ acao: 'atualizar_checkbox', id_comp: idComp, estado_checkbox: novoEstadoCheckbox }),
@@ -346,7 +347,7 @@ const Calendar = () => {
   
     try {
       console.log("Deletando tarefa: ", idComp);
-      const response = await fetch('http://10.135.60.16:8085/receber-dados', {
+      const response = await fetch('http://10.135.60.43:8085/receber-dados', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
