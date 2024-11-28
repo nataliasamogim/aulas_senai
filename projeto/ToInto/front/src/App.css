@@ -235,7 +235,7 @@ button.btn.btn-outline {
   color: white;
   display: flex;
   flex-direction: column;
-  width: 90%;
+  width: 92%;
   border: none;
   text-align: start;
   padding: 8px 15px 8px 15px;
@@ -268,7 +268,7 @@ button.btn.btn-outline {
   border: none;
   text-align: start;
   border-radius: 0 !important;
-  padding: 8px 15px 8px 15px;
+  width: 100%;
 }
 
 #bg-vertical-dropdown-1:hover{
@@ -278,13 +278,11 @@ button.btn.btn-outline {
 
 #bg-vertical-dropdown-1::after {
   border-top: 0em solid;
-  margin-left: 112px;
   }
 
 /*-----Fim do Perfil-----*/
 .dropdown, .dropdown-center, .dropend, .dropstart, .dropup, .dropup-center {
   position: relative;
-  margin-left: 5px;
 }
 .dropdown {
   width: 10%;
@@ -296,7 +294,8 @@ button.btn.btn-outline {
 }
 
 .dropdown.btn-group{
-  width: 100%;
+  width: 100% !important;
+  
 }
 
 /*---------Modal de confirmação do excluir conta--------*/
