@@ -1,46 +1,41 @@
-#container_cad {
+.container_pix {
     width: 100%;
-    height: 745px !important;
+    height: 730px !important;
     display: flex;
     align-items: center;
     justify-content: center;
-}
- 
-.cad_concluido {
-    background-color: rgb(64, 18, 97);
-    width: 600px;
-    height: 200px;
-    display: flex;
-    flex-direction: column; 
-    justify-content: center; 
-    align-items: center; 
-    border-radius: 10px;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-.conteudo {
+    flex-direction: column;
     text-align: center;
-    padding: 18px;
+}
+
+.qrcode {
+    width: 15%;
+    margin-top: 15px;
+    border-radius: 35px;
+}
+
+#titulo_pix {
     color: white;
-
 }
 
-.subtitulo {
-    font-size: 1.4em;
+.pCode {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 18px;
+    color: #fff;
 }
 
-.entr_log {
-    font-size: 1.2em;
+.codigoGerado {
+    font-size: 30px;
+    color: #ffcc00;
 }
 
-.link_log {
-    color: rgb(175, 115, 221);
+.btnContPix {
+    padding: 10px 38px 10px 38px;
+    background-color: rgb(64, 18, 97);
+    color: #fff;
     font-size: 20px;
+    border: none;
+    border-radius: 5px;
     text-decoration: none;
-    margin-right: 23px;
-}
-
-.link_log:hover{
-    color: rgb(200, 150, 255); 
-    text-decoration: underline;
 }
