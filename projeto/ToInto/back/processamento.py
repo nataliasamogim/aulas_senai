@@ -103,6 +103,8 @@ def processar_dados(dados):
         retorno = select_dados_cartao(dados.get('id_cad', ''))
     elif dados.get('acao') == 'atualizar_plano_insert':
         retorno = gravar_dados_compra(dados.get('id_cad', ''), dados.get('id_dados_pag', ''), dados.get('plano_esc', ''))
+    elif dados.get('acao') == 'salvar_pix':
+        retorno = gravar_dados_cartao(dados)
     else:
         retorno = processar_dados_log(dados)
     
@@ -250,6 +252,7 @@ def processar_dados_cartao(dados):
     dados_gravacao.append(dados_processados.get('cod_seguranca'))
     dados_gravacao.append(dados_processados.get('datavenc'))
     dados_gravacao.append(dados_processados.get('nome_titular'))
+    dados_gravacao.append(dados_processados.get('codigo'))
     
     mensagens_erro = []  # Cria uma lista vazia para armazenar mensagens de erro
 
