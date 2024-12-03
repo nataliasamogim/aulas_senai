@@ -3,9 +3,9 @@ import { View, KeyboardAvoidingView, Image, Text, TouchableOpacity } from 'react
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import styles from './PixStyle.js';
 
-const Pix = ({ route, navigation}) => {
-    // Recebe o código da navegação
-    const { code } = route.params;
+const Pix = ({ route, navigation }) => {
+    // Verifica se o parâmetro code foi passado, se não gera um automaticamente
+    const code = route.params?.code || Math.floor(1000 + Math.random() * 9000); // Gera número de 4 dígitos
 
     return (
         <KeyboardAvoidingView style={styles.background}>
@@ -20,7 +20,7 @@ const Pix = ({ route, navigation}) => {
 
             <View style={styles.btnContPix}>
                 <TouchableOpacity style={styles.btnSubSalPix} onPress={() => navigation.navigate('ConfPix')}>
-                <Text style={styles.subTxtSalvarPix}>Continuar</Text>
+                    <Text style={styles.subTxtSalvarPix}>Continuar</Text>
                 </TouchableOpacity>
             </View>
         </KeyboardAvoidingView>
