@@ -55,6 +55,15 @@ export default styles = StyleSheet.create({
         width: '90%',
         marginBottom: 15
     },
+
+    buttonAjuda: {
+        padding: 5,
+        borderRadius: 5,
+        backgroundColor: '#AE80D6',
+        width: '90%',
+        marginBottom: 15,
+    },
+    
     buttonExclui: {
         padding: 5,
         borderRadius: 5,

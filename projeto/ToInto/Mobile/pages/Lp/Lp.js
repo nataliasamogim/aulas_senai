@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Image, KeyboardAvoidingView, TouchableOpacity, Text, Modal } from "react-native";
+import { View, Image, KeyboardAvoidingView, TouchableOpacity, Text, Modal, Linking} from "react-native";
 import styles from './LpStyle.js';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from "@react-navigation/native";
@@ -19,6 +19,10 @@ const Lp = () => {
     }
   };
 
+  const handlePress = () => {
+    Linking.openURL('https://youtu.be/TKOBUaWbj1Q');
+  };
+
   return (
     <KeyboardAvoidingView style={styles.background} behavior="padding">
       <LinearGradient style={styles.background} colors={['#AC72BF', '#6B29A4', '#570D70']}>
@@ -26,6 +30,10 @@ const Lp = () => {
         <View style={styles.containerLogo}>
           <Image style={styles.logo} resizeMode='contain' source={require('../../assets/images/logo.png')} />
         </View>
+
+        <TouchableOpacity style={styles.buttonAjuda} onPress={handlePress}>
+          <Image source={require('../../assets/images/interrogacao.png')} style={styles.interrogacao} />
+        </TouchableOpacity>
 
         <View style={styles.title}>
             <Text style={styles.titleText}>Bem-vindos ao TOINTO</Text>

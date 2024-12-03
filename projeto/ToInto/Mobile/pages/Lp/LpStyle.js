@@ -12,9 +12,16 @@ export default styles = StyleSheet.create({
 
     logo: {
         position: 'absolute',
-        top: 60,
+        top: 160,
         width: 500,
         height: 200,
+    },
+
+    interrogacao: {
+        marginTop: 100,
+        marginLeft: 350,
+        width: 43,
+        height: 42,
     },
 
     containerLogo: {
@@ -26,7 +33,7 @@ export default styles = StyleSheet.create({
 
     title: {
         marginBottom: 20,
-        marginTop: '70%'
+        marginTop: '60%'
     },
 
     titleText: {

@@ -1,5 +1,5 @@
 
-import { View, Image, Text, TouchableOpacity, KeyboardAvoidingView, Modal } from 'react-native';
+import { View, Image, Text, TouchableOpacity, KeyboardAvoidingView, Modal, Linking  } from 'react-native';
 import styles from './PerfilStyle.js';
 import React, { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -10,6 +10,10 @@ const Perfil = ({ navigation }) => {
   const [nomeUsuario, setNomeUsuario] = useState('');
   const [Email, setEmail] = useState('');
   const [fotoPerfil, setFotoPerfil] = useState('')
+
+  const handlePress = () => {
+    Linking.openURL('https://youtu.be/M_2uMtru4Tg');
+  };
 
   useEffect(() => {
     const fetchNomeUsuario = async () => {
@@ -150,6 +154,10 @@ const Perfil = ({ navigation }) => {
 
         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Modificar escolha Plano')}>
           <Text style={styles.botao}>Modificar Plano</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.buttonAjuda} onPress={handlePress}>
+          <Text style={styles.botao}>Ajuda</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.buttonExclui} title="Excluir conta" onPress={() => handleOptionSelect('Excluir')}>
