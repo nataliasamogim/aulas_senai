@@ -15,8 +15,38 @@ function Dados_pix() {
         setCodigoPix(gerarCodigoPix());
     }, []);
 
-    const handleConfPix = () => {
-        navigate('/ConfPix')
+
+    const handleConfPix = async () => {
+        try {
+            const resposta = await fetch('http://10.135.60.34:8085/receber-dados', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({acao: 'salvar_pix', escolha_pag: '1', id: localStorage.getItem("ID"), codigo: codigoPix, plano_esc: localStorage.getItem("plano_esc")}),
+            });
+
+            const resultado = await resposta.json();
+
+            if (resultado.erro) {
+                // Exibe mensagens de erro no console.log ou em algum local visível
+                console.error('Erro no servidor:', resultado.mensagens);
+
+                // Atualiza o estado com as mensagens de erro para exibição no formulário
+                const novoResponse = transformarMensagens(resultado);
+                console.log(novoResponse);
+                setMensagensErro(novoResponse.mensagens);
+                setIsOpen(true);
+            } else {
+                // Dados foram processados com sucesso
+                console.log('Dados processados com sucesso!', resposta);
+                // É direcionado para a página de acordo com o plano escolhido
+                navigate('/ConfPix')
+
+            }
+        } catch (error) {
+            console.error('Erro ao enviar dados:', error);
+        }
     };
 
     return (
@@ -36,7 +66,7 @@ function Dados_pix() {
                 </div>
 
                 <div className="btnCont">
-                    <input type='button' className="btnContPix" value='Continuar' onClick={handleConfPix}/>
+                    <input type='button' className="btnContPix" value='Continuar' onClick={handleConfPix} />
                 </div>
             </div>
         </>
