@@ -8,11 +8,11 @@ return (
 
         <View style={styles.fundopix}>
             <View style={styles.titleRec}>
-                <Text style={styles.titleText1}>Pagamento realizado com sucesso!!!</Text>
+                <Text style={styles.titleText1}>Pagamento realizado com sucesso!</Text>
             </View>
 
             <View keyboardShouldPersistTaps="handled" style={styles.containerRec}>
-                <Text style={styles.titleText2}>Aproveie sua jornada no TOINTO</Text>
+                <Text style={styles.titleText2}>Aproveite sua experiência no TOINTO</Text>
             </View>
         </View>
 
