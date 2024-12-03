@@ -87,7 +87,7 @@ const DadosCartao = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const resposta = await fetch('http://10.135.60.57:8085/receber-dados', {
+            const resposta = await fetch('http://10.135.60.34:8085/receber-dados', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -115,7 +115,7 @@ const DadosCartao = () => {
                     nome_titular: '',
                     escolha_pag: '2'
                 }); // Resetando o formulário
-                navigate('/concluido');
+                navigate('/pag_concluido');
             }
         } catch (error) {
             console.error('Erro ao enviar dados:', error);
