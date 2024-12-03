@@ -15,7 +15,7 @@ const Compromissos = ({ isOpen, onRequestClose, tarefasData, receberTarefas, dat
   const [time, setTime] = useState('');
   const [descricao, setDescricao] = useState('');
   const [importante, setImportante] = useState(false);
-  const [lembrete, setLembrete] = useState('');
+  const [lembrete, setLembrete] = useState(0);
   const [mensagensErro, setMensagensErro] = useState({});
   const [isSecondModalOpen, setIsSecondModalOpen] = useState(false); // Estado para o segundo modal
   const closeSecondModal = () => {
@@ -36,16 +36,61 @@ const Compromissos = ({ isOpen, onRequestClose, tarefasData, receberTarefas, dat
       setDate(tarefasData.data_comp);
       setTime(tarefasData.horario);
       setImportante(tarefasData.importante || false);
-      setLembrete(tarefasData.lembrete || '0 minutos');
+      setLembrete(tarefasData.lembrete || 0);
     } else {
       setTitulo('');
       setDescricao('');
       setDate(dataEscolhida); // Define a data escolhida ao criar nova tarefa
       setTime('');
       setImportante(false);
-      setLembrete('0 minutos');
+      setLembrete(0);
     }
   }, [tarefasData, dataEscolhida]);
+
+    // Efeito para tratar lembretes
+  useEffect(() => {
+    if (!lembrete || lembrete === '0') return;
+
+    const currentDateTime = new Date();
+    const [taskHour, taskMinute] = time.split(':');
+    const taskDateTime = new Date(date);
+    taskDateTime.setHours(taskHour, taskMinute, 0);
+
+    const lembreteTime = new Date(taskDateTime.getTime() - lembrete * 60000);
+
+    const delay = lembreteTime.getTime() - currentDateTime.getTime();
+
+    if (delay > 0) {
+      const timer = setTimeout(() => {
+        // Ação de lembrete, ex. exibir notificação
+        if (Notification.permission === 'granted') {
+          new Notification(`Lembrete: ${titulo}`, {
+            body: `Hora: ${time}\nDescrição: ${descricao || 'Sem descrição.'}`,
+          });
+        } else {
+          alert(`Lembrete: ${titulo}\nHora: ${time}`);
+        }
+      }, delay);
+
+      return () => clearTimeout(timer);
+    }
+  }, [lembrete, date, time, titulo, descricao]);
+
+  const resetForm = () => {
+    setTitulo('');
+    setDescricao('');
+    setDate(dataEscolhida);
+    setTime('');
+    setImportante(false);
+    setLembrete('0');
+    setMensagensErro({});
+  };
+
+  const handleErrors = (resultado) => {
+    if (resultado.erro) {
+      setMensagensErro(resultado.erro);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -56,7 +101,7 @@ const Compromissos = ({ isOpen, onRequestClose, tarefasData, receberTarefas, dat
       let response;
       if (tarefasData) {
         // Atualizar tarefa existente
-        response = await fetch('http://10.135.60.42:8085/receber-dados', {
+        response = await fetch('http://10.135.60.47:8085/receber-dados', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -75,7 +120,7 @@ const Compromissos = ({ isOpen, onRequestClose, tarefasData, receberTarefas, dat
         });
       } else {
         // Criar nova tarefa
-        response = await fetch('http://10.135.60.42:8085/receber-dados', {
+        response = await fetch('http://10.135.60.47:8085/receber-dados', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -99,6 +144,8 @@ const Compromissos = ({ isOpen, onRequestClose, tarefasData, receberTarefas, dat
       if (response) {
         const resultado = await response.json();
         if (resultado.erro) {
+
+          handleErrors(resultado);
           console.error('Erro no servidor:', resultado.mensagens);
           // Resetando mensagens de erro
           const errosFormatados = {};
@@ -135,7 +182,8 @@ const Compromissos = ({ isOpen, onRequestClose, tarefasData, receberTarefas, dat
           setDate(dataEscolhida); // Mantém a data fixa após a tarefa ser criada
           setTime('');
           setImportante(false);
-          setLembrete('0 minutos');
+          setLembrete(0);
+          resetForm();
           onRequestClose();
           receberTarefas(); // Atualiza a lista de tarefas
         }
