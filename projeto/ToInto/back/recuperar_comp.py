@@ -1,7 +1,6 @@
 import conexao
 import mysql.connector
 from mysql.connector.errors import ProgrammingError
-import mysql.connector
 from datetime import datetime, timedelta
 
 def recuperar_inf_comp(id_cad, data_comp):
