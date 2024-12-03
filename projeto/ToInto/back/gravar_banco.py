@@ -51,6 +51,21 @@ def gravar_dados(dados_gravacao):
     return  {'erro': False, 'mensagem': [id, opc, nome, email]}
 
 def gravar_dados_cartao(dados_gravacao):
+        # Converta dicionário em lista, se necessário
+    if isinstance(dados_gravacao, dict):
+        dados_gravacao = [
+            dados_gravacao.get('escolha_pag'),
+            dados_gravacao.get('plano_esc'),  # Ajuste conforme necessário
+            dados_gravacao.get('id'),
+            None,
+            None,
+            None,
+            None,
+            None,
+            None,
+            dados_gravacao.get('codigo')
+        ]
+
     conex = conexao.conectar()
     cursor = conex.cursor()
     print(dados_gravacao)
@@ -58,50 +73,83 @@ def gravar_dados_cartao(dados_gravacao):
     escolha_pag = dados_gravacao[0]
     plano = dados_gravacao[1]
     print('plano que esta chegando no cartão', plano)
-    dados_receb = dados_gravacao[0], dados_gravacao[2], dados_gravacao[3], dados_gravacao[4], dados_gravacao[5], dados_gravacao[6], dados_gravacao[7], dados_gravacao[8]
+    dados_receb =  dados_gravacao[2], dados_gravacao[3], dados_gravacao[4], dados_gravacao[5], dados_gravacao[6], dados_gravacao[7], dados_gravacao[8]
+    print('Print teste atual', dados_receb)
     print('ABCD:', dados_gravacao[3], dados_gravacao[5], dados_gravacao[7])
     if escolha_pag == '2':
-        sql = "INSERT INTO dados_pag (TIPO_PAG, ID_CAD, CPF, DATA_PAG, NUM_CARTAO, CVV, DATA_VENC, NOME_CARTAO) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
+        sql = "INSERT INTO dados_pag (TIPO_PAG, ID_CAD, CPF, DATA_PAG, NUM_CARTAO, CVV, DATA_VENC, NOME_CARTAO) VALUES ('2', %s, %s, %s, %s, %s, %s, %s)"
         cursor.execute(sql, dados_receb)
         print("Dados do Cartão inseridos com sucesso!") 
         conex.commit()
     
     else: 
-        sql = "INSERT INTO dados_pag (TIPO_PAG, ID_CAD, CPF, DATA_PAG) VALUES ('1', %s, %s, %s)"
-        cursor.execute(sql, dados_gravacao)
+        data_atual = datetime.datetime.now()
+        data_formatada = data_atual.strftime("%Y/%m/%d")
+        sql = "INSERT INTO dados_pag (TIPO_PAG, ID_CAD, DATA_PAG, CHAVE_PIX) VALUES ('1', %s, %s, %s)"
+        val = (dados_gravacao[2], data_formatada, dados_gravacao[9])
+        cursor.execute(sql, val)
         conex.commit()
         print("Dados do Pix inseridos com sucesso!") 
     
     if plano == '2':  
+        if escolha_pag == '2':
+            sql = "SELECT ID_DADOS_PAG FROM DADOS_PAG WHERE CPF = %s AND NUM_CARTAO = %s order by ID_DADOS_PAG desc limit 1"
+            val_dados_pag = (dados_gravacao[3], dados_gravacao[5])  # Preenchendo com os valores corretos
+            cursor.execute(sql, val_dados_pag)
+            id_dados_pag = cursor.fetchone()
+            print(id_dados_pag) 
 
-        sql = "SELECT ID_DADOS_PAG FROM DADOS_PAG WHERE CPF = %s AND NUM_CARTAO = %s order by ID_DADOS_PAG desc limit 1"
-        val_dados_pag = (dados_gravacao[3], dados_gravacao[5])  # Preenchendo com os valores corretos
-        cursor.execute(sql, val_dados_pag)
-        id_dados_pag = cursor.fetchone()
-        print(id_dados_pag) 
+            sql = "INSERT INTO compras (ID_PLANO, ID_DADOS_PAG, ID_CAD, DESC_COMPRA, VALOR_COMPRA) VALUES ('2', %s , %s, 'Comprou o Plano Mensal', 7.90)"
+            val_insert = (id_dados_pag[0], dados_gravacao[2])  # Passando os IDs corretos
+            teste = cursor.execute(sql, val_insert)
 
-        sql = "INSERT INTO compras (ID_PLANO, ID_DADOS_PAG, ID_CAD, DESC_COMPRA, VALOR_COMPRA) VALUES ('2', %s , %s, 'Comprou o Plano Mensal', 7.90)"
-        val_insert = (id_dados_pag[0], dados_gravacao[2])  # Passando os IDs corretos
-        teste = cursor.execute(sql, val_insert)
+            print(teste)
+            print("Compra mensal inserida com sucesso")
+            conex.commit()
 
-        print(teste)
-        print("Compra mensal inserida com sucesso")
-        conex.commit()  
+        else:
+            sql = "SELECT ID_DADOS_PAG FROM DADOS_PAG WHERE CHAVE_PIX = %s order by ID_DADOS_PAG desc limit 1"
+            val_dados_pag = (dados_gravacao[9],)  # Preenchendo com os valores corretos
+            cursor.execute(sql, val_dados_pag)
+            id_dados_pag = cursor.fetchone()
+            print(id_dados_pag) 
+
+            sql = "INSERT INTO compras (ID_PLANO, ID_DADOS_PAG, ID_CAD, DESC_COMPRA, VALOR_COMPRA) VALUES ('2', %s , %s, 'Comprou o Plano Mensal', 7.90)"
+            val_insert = (id_dados_pag[0], dados_gravacao[2])  # Passando os IDs corretos
+            teste = cursor.execute(sql, val_insert)
+
+            print(teste)
+            print("Compra mensal inserida com sucesso")
+            conex.commit()
 
     else: 
+        if escolha_pag == "2":
+            sql = "SELECT ID_DADOS_PAG FROM DADOS_PAG WHERE CPF = %s AND NUM_CARTAO = %s order by ID_DADOS_PAG desc limit 1"
+            val_dados_pag = (dados_gravacao[3], dados_gravacao[5])  # Preenchendo com os valores corretos
+            cursor.execute(sql, val_dados_pag)
+            id_dados_pag = cursor.fetchone()
 
-        sql = "SELECT ID_DADOS_PAG FROM DADOS_PAG WHERE CPF = %s AND NUM_CARTAO = %s order by ID_DADOS_PAG desc limit 1"
-        val_dados_pag = (dados_gravacao[3], dados_gravacao[5])  # Preenchendo com os valores corretos
-        cursor.execute(sql, val_dados_pag)
-        id_dados_pag = cursor.fetchone()
+            sql = "INSERT INTO compras (ID_PLANO, ID_DADOS_PAG, ID_CAD, DESC_COMPRA, VALOR_COMPRA) VALUES ('1', %s , %s, 'Comprou o Plano Anual', 109.90)"
+            val_insert = (id_dados_pag[0], dados_gravacao[2])  # Passando os IDs corretos
+            teste = cursor.execute(sql, val_insert)
 
-        sql = "INSERT INTO compras (ID_PLANO, ID_DADOS_PAG, ID_CAD, DESC_COMPRA, VALOR_COMPRA) VALUES ('1', %s , %s, 'Comprou o Plano Anual', 109.90)"
-        val_insert = (id_dados_pag[0], dados_gravacao[2])  # Passando os IDs corretos
-        teste = cursor.execute(sql, val_insert)
+            print('tendando o teste', teste)
+            print("Compra do anual inserida com sucesso")
+            conex.commit() 
 
-        print('tendando o teste', teste)
-        print("Compra do anual inserida com sucesso")
-        conex.commit()  
+        else:
+            sql = "SELECT ID_DADOS_PAG FROM DADOS_PAG WHERE CHAVE_PIX = %s order by ID_DADOS_PAG desc limit 1"
+            val_dados_pag = (dados_gravacao[9],)  # Preenchendo com os valores corretos
+            cursor.execute(sql, val_dados_pag)
+            id_dados_pag = cursor.fetchone()
+
+            sql = "INSERT INTO compras (ID_PLANO, ID_DADOS_PAG, ID_CAD, DESC_COMPRA, VALOR_COMPRA) VALUES ('1', %s , %s, 'Comprou o Plano Anual', 109.90)"
+            val_insert = (id_dados_pag[0], dados_gravacao[2])  # Passando os IDs corretos
+            teste = cursor.execute(sql, val_insert)
+
+            print('tendando o teste', teste)
+            print("Compra do anual inserida com sucesso")
+            conex.commit()
 
     conex.close()
     return  {'erro': False, 'mensagem': 'Dados do cartão realizados com sucesso'}
