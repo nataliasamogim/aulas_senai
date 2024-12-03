@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import './Calendar.css';
 import Compromissos from './../../pages/Compromissos/Compromissos';
 import { useParams } from 'react-router-dom';
+import Alertas from '../Alertas/Alertas'
 
 const months = [
   'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
@@ -28,6 +29,7 @@ const Calendar = () => {
   const [isSemanaOuImportante, setIsSemanaOuImportante] = useState(false);
   const [tarefasPorData, setTarefasPorData] = useState({});
   const [visualizarDia, setVisualizarDia] = useState(false);
+  const [alertas, setAlertas] = useState([]);
 
   const formatodata = !isNaN(date.getTime())
     ? new Intl.DateTimeFormat('pt-BR', { dateStyle: 'short' }).format(date)
@@ -52,7 +54,7 @@ const Calendar = () => {
 
   const receberTarefas = async () => {
     try {
-      const resposta = await fetch('http://10.135.60.43:8085/receber-dados', {
+      const resposta = await fetch('http://10.135.60.47:8085/receber-dados', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -96,7 +98,7 @@ const Calendar = () => {
 
   const receberSemana = async (inicio, fim) => {
     try {
-      const resposta = await fetch('http://10.135.60.43:8085/receber-dados', {
+      const resposta = await fetch('http://10.135.60.47:8085/receber-dados', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -132,7 +134,7 @@ const Calendar = () => {
 
   const receberImportante = async () => {
     try {
-      const resposta = await fetch('http://10.135.60.43:8085/receber-dados', {
+      const resposta = await fetch('http://10.135.60.47:8085/receber-dados', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -174,7 +176,7 @@ const Calendar = () => {
   useEffect(() => {
     const consultaData = async () => {
       try {
-        const resposta = await fetch('http://10.135.60.43:8085/receber-dados', {
+        const resposta = await fetch('http://10.135.60.47:8085/receber-dados', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -319,7 +321,7 @@ const Calendar = () => {
     setCheckedTarefas((prevState) => ({ ...prevState, [idComp]: novoEstadoCheckbox }));
   
     try {
-      await fetch('http://10.135.60.43:8085/receber-dados', {
+      await fetch('http://10.135.60.47:8085/receber-dados', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ acao: 'atualizar_checkbox', id_comp: idComp, estado_checkbox: novoEstadoCheckbox }),
@@ -347,7 +349,7 @@ const Calendar = () => {
   
     try {
       console.log("Deletando tarefa: ", idComp);
-      const response = await fetch('http://10.135.60.43:8085/receber-dados', {
+      const response = await fetch('http://10.135.60.47:8085/receber-dados', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -379,6 +381,38 @@ const Calendar = () => {
       console.error('Erro:', error);
     }
   };
+
+  const buscarLembretes = async () => {
+    try {
+      const resposta = await fetch('http://10.135.60.47:8085/receber-dados', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          acao: 'recuperar_lembrete',
+          id_cad: localStorage.getItem("ID"),
+        }),
+      });
+      console.log('Front --------', resposta)
+      const dados = await resposta.json();
+      console.log('Front --------', dados)
+
+      if (!dados.erro && Array.isArray(dados.mensagem) && dados.mensagem.length > 0) {
+        setAlertas(dados.mensagem); // Atualiza o estado com os lembretes recebidos
+      } else {
+        setAlertas([]); // Zera os alertas caso nenhum lembrete seja retornado
+      }
+    } catch (error) {
+      console.error('Erro ao buscar dados do usuário:', error);
+    }
+  };
+
+  useEffect(() => {
+    buscarLembretes();
+    const interval = setInterval(buscarLembretes, 60000); // Executa a cada 60 segundos
+    return () => clearInterval(interval); // Limpa o intervalo quando o componente desmonta
+  }, []);
 
   return (
     <div className="calendar">
@@ -507,6 +541,7 @@ const Calendar = () => {
           <button className='butTodo' id='AddTarefa' onClick={handleAddTarefas}>
             +
           </button>
+          <Alertas alertas={alertas} />
         </div>
       </div>
       {modal && (
