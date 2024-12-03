@@ -10,6 +10,7 @@ from recuperar_cart import recuperar_inf_cart
 from recuperar_comp import recuperar_inf_comp
 from recuperar_comp import recuperar_inf_semana
 from recuperar_comp import recuperar_inf_importante
+from recuperar_comp import recuperar_lembrete
 from update_banco import atualizar_cad, atualizar_compromisso, atualizar_estado_checkbox
 from update_banco import atualizar_cart
 from delete_banco import deletar_cad
@@ -78,6 +79,8 @@ def processar_dados(dados):
             retorno = recuperar_inf_semana(dados.get('id_cad', ''), dados.get('data_in', ''), dados.get('data_fim', ''))
     elif dados.get('acao') == 'recuperar_importante':
         retorno = recuperar_inf_importante(dados.get('id_cad', ''))
+    elif dados.get('acao') == 'recuperar_lembrete':
+        retorno = recuperar_lembrete(dados.get('id_cad', ''))
     elif dados.get('acao') == 'atualizar_cart':
         print ('Atualizar dados do cartão')
         retorno = processar_alterar_cart(dados)
