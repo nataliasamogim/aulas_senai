@@ -17,6 +17,7 @@ import Concluido_cadatualizado from "../pages/Concluido/Concluido_cadatualizado"
 import { Esc_Pag } from "../pages/Escolha_pag/Esc_Pag";
 import Recuperacao from "../pages/Esq_senha/Recuperacao";
 import { Esc_Pag_Modific } from "../pages/Escolha_pag/Modific_pag";
+import Pag_cartao_realizado from "../pages/Concluido/pag_cartao_realizado";
 
 const Content = props => (
     <main className="Content">
@@ -28,6 +29,7 @@ const Content = props => (
             <Route path="/calendario" exact element={<App_calen />} />
             <Route path="/Todolist" exact element={<App_todo />} />
             <Route path="/concluido" exact element={<Cad_concluido />} />
+            <Route path="/pag_concluido" exact element={<Pag_cartao_realizado />} />
             <Route path="/escpag" exact element={<Esc_Pag />} />
             <Route path="/modific_pag" exact element={<Esc_Pag_Modific/>}/>
             <Route path="/modificar" exact element={<FormMani />} />
