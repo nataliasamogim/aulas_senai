@@ -83,7 +83,7 @@ const Perfil = ({ navigation }) => {
     }
 
     try {
-      const response = await fetch('http://10.135.60.20:8085/receber-dados', {
+      const response = await fetch('http://10.135.60.34:8085/receber-dados', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -101,7 +101,7 @@ const Perfil = ({ navigation }) => {
       // Dados foram processados com sucesso
       await AsyncStorage.multiRemove(['ID', 'nome_usuario', 'email']);
       // Navega para a tela de cadastro
-      navigation.navigate('Cadastro');
+      navigation.navigate('LandingPage');
     } catch (error) {
       console.error('Erro ao excluir conta:', error);
     }
