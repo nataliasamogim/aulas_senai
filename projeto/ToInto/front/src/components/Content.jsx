@@ -1,5 +1,11 @@
+{/*Nome componente: Content*/}
+{/*Autora: Júlia*/}
+{/*Data de criação:22/03/2023  e data de alteração: 05/12/2024*/}
+{/*Descrição: O componente Content importa as páginas necessárias para gerenciar as rotas no TOINTO */}
+
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+// Importação das páginas que serão utilizadas nas rotas
 import { Home } from "../pages/Home";
 import Login from "../pages/LoginLP/Login";
 import NotFound from "../pages/NotFound";
@@ -19,9 +25,11 @@ import Recuperacao from "../pages/Esq_senha/Recuperacao";
 import { Esc_Pag_Modific } from "../pages/Escolha_pag/Modific_pag";
 import Pag_cartao_realizado from "../pages/Concluido/pag_cartao_realizado";
 
+// Define o componente Content, que renderiza as rotas da aplicação
 const Content = props => (
     <main className="Content">
         <Routes>
+            {/* Definição das rotas, com a associação dos caminhos (path)*/}
             <Route path="/" exact element={<Home />} />
             <Route path="*" element={<NotFound />} />
             <Route path="/Login" exact element={<Login />} />
@@ -37,7 +45,6 @@ const Content = props => (
             <Route path="/dadoscart" exact element={<DadosCartao />} />
             <Route path="/dadospix" exact element={<Dados_pix />} />
             <Route path="/ConfPix" exact element={<ConfPix />} />
-            {/*<Route path="/modificarpag" exact element={<Esc_Pag />} />*/}
             <Route path="/modificart" exact element={<Modific_cart />} />
             <Route path="/modificplano" exact element={<ModificPlano />} />
             <Route path="/pagamento" exact element={<Esc_Pag />} />

@@ -1,22 +1,22 @@
-{/* Nome: Calendario
-    Autor(a): Luis Otávio
-    Data criação/alteração: 22/03/2023 - 01/12/2023
-    Descrição detalhada: Está importando o calendario e servindo para ser importado
+{/* Nome componente: Calendario
+    Autora: Júlia
+    Data criação/alteração: 22/03/2023 - 05/12/2024
+    Descrição detalhada: Está importando o componente Calendar
 */}
 
 import React from 'react';
 import Calendar from '../components/Calendar/Calendar';
 
 {/* Nome da função: Calendario
-    Autor(a): Luis Otávio
-    Data criação/alteração: 22/03/2023 - 01/12/2023
+    Autora: Júlia
+    Data criação/alteração: 22/03/2023 - 05/12/2024
     Parametros entrada: Nulo
-    Descrição: Está retornando o componente Calendar
+    Retorno: retorna o componente Calendar
 */}
 
 function Calendario(){
     return(
-        <>{/*Chama apenas o calendar*/}
+        <>{/*Chama o componente Calendar*/}
             <Calendar/>
         </>
     )

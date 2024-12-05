@@ -1,7 +1,7 @@
-{/*Nome componente: Componente HeaderLP*/ }
-{/*Autor(a):Natália Aparecida Samogim*/ }
-{/*Data de criação:22/03/2023 e data de alteração: 01/12/2023*/ }
-{/*representa o início do projeto, sendo menu lateral fixo contendo:
+{/*Nome componente: CabecalhoLP*/ }
+{/*Autora:Júlia*/ }
+{/*Data de criação:22/03/2023 e data de alteração: 05/12/2024*/ }
+{/*Descrição: Representa o início do projeto (na Landing Page), sendo menu lateral fixo contendo:
 -a logo do Tointo;
 -o 'Home';
 -o 'Recursos';
@@ -14,9 +14,9 @@
 import { Link } from 'react-router-dom';
 import './CabecalhoLP.css';
 
-{/*Nome função: HeaderLP*/ }
-{/*Autor(a): Natália Aparecida Samogim*/ }
-{/*Data de criação:22/03/2023  e data de alteração: 01/12/2023*/ }
+{/*Nome função: CabecalhoLP*/ }
+{/*Autora: Júlia*/ }
+{/*Data de criação:22/03/2023  e data de alteração: 05/12/2024*/ }
 {/*Parâmetros de entrada: Nulo*/ }
 {/*Retorno: retorna o header*/ }
 function CabecalhoLP() {
@@ -37,7 +37,7 @@ function CabecalhoLP() {
                         </a> {/*li recursos com o link da parte com os recurso do site (id utilização)*/}
                         <a href="#plano">
                             <li className="topico" id="btn_planos">Planos</li>
-                        </a> {/*li plano com o link da parte de plano do site, que mostrarar os planos que possui*/}
+                        </a> {/*li plano com o link da parte de plano do site, que mostrará os planos que possui*/}
                     </ul>
 
                     <ul className="menu_2"> {/*rotas do botão entrar para o login e do botão cadastrar para o cadastro*/}

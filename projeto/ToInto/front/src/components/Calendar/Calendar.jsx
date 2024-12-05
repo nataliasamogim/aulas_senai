@@ -1,3 +1,10 @@
+{/*Nome do componente: Calendar
+Autora: Júlia
+Data de alteração: 03/12/2024
+Descrição Detalhada: O componente Calendar é um calendário interativo construído com React, 
+que permite aos usuários gerenciar tarefas. Ele combina funcionalidades de exibição de
+calendário mensal, visualização de tarefas por dia, semana ou importante, além da exibição do todolist.*/}
+
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Calendar.css';
@@ -5,11 +12,13 @@ import Compromissos from './../../pages/Compromissos/Compromissos';
 import { useParams } from 'react-router-dom';
 import Alertas from '../Alertas/Alertas'
 
+// Lista de meses do ano, começando por Janeiro e terminando em Dezembro.
 const months = [
   'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
   'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
 ];
 
+// Lista dos dias da semana, começando por Domingo e terminando em Sábado.
 const daysOfWeek = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'];
 
 const Calendar = () => {
@@ -31,6 +40,8 @@ const Calendar = () => {
   const [visualizarDia, setVisualizarDia] = useState(false);
   const [alertas, setAlertas] = useState([]);
 
+  // Formata uma data válida no padrão (dd/MM/yyyy).
+  // Caso a data seja inválida, retorna 'Data inválida'.
   const formatodata = !isNaN(date.getTime())
     ? new Intl.DateTimeFormat('pt-BR', { dateStyle: 'short' }).format(date)
     : 'Data inválida';
@@ -40,21 +51,26 @@ const Calendar = () => {
   const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
   const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
 
+  // Função que formata um intervalo de datas (início e fim).
+  // Retorna uma string no formato "data inicial - data final".
   const formatarDataSemana = (inicio, fim) => {
     const inicioFormatado = new Intl.DateTimeFormat('pt-BR').format(inicio);
     const fimFormatado = new Intl.DateTimeFormat('pt-BR').format(fim);
     return `${inicioFormatado} - ${fimFormatado}`;
   };
 
+  // Função que calcula a data do próximo sábado com base em uma data fornecida.
+  // O cálculo considera a diferença entre o dia atual e o próximo sábado.
   const calculoProximoSabado = (data) => {
     const proximoSabado = new Date(data);
     proximoSabado.setDate(data.getDate() + (6 - data.getDay())); // Calcula o próximo sábado
     return proximoSabado;
   };
 
+  // Função que busca as tarefas do dia.
   const receberTarefas = async () => {
     try {
-      const resposta = await fetch('http://10.135.60.47:8085/receber-dados', {
+      const resposta = await fetch('http://10.135.60.43:8085/receber-dados', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -96,9 +112,10 @@ const Calendar = () => {
     }
   };
 
+  // Função que busca as tarefas da semana.
   const receberSemana = async (inicio, fim) => {
     try {
-      const resposta = await fetch('http://10.135.60.47:8085/receber-dados', {
+      const resposta = await fetch('http://10.135.60.43:8085/receber-dados', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -132,9 +149,10 @@ const Calendar = () => {
     }
   };
 
+  // Função que busca as tarefas importantes.
   const receberImportante = async () => {
     try {
-      const resposta = await fetch('http://10.135.60.47:8085/receber-dados', {
+      const resposta = await fetch('http://10.135.60.43:8085/receber-dados', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -176,7 +194,7 @@ const Calendar = () => {
   useEffect(() => {
     const consultaData = async () => {
       try {
-        const resposta = await fetch('http://10.135.60.47:8085/receber-dados', {
+        const resposta = await fetch('http://10.135.60.43:8085/receber-dados', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -212,6 +230,7 @@ const Calendar = () => {
 
   }, []);
 
+  // Função que trata quando clica em um dia específico no calendário.
   const handleDateClick = (day) => {
     setVisualizarSemana(false);
     setVisualizarHoje(false);
@@ -238,6 +257,7 @@ const Calendar = () => {
     setTarefaData(tarefasSelecionarData);
   };
   
+  // Função para tratar quando clica no botão "Hoje".
   const handleTodayClick = () => {
     setVisualizarSemana(false);
     setIsSemanaOuImportante(false);
@@ -254,6 +274,7 @@ const Calendar = () => {
     setTarefaData(tarefasHoje);
   };
 
+  // Função para tratar quando clica no botão "Semana".
   const handleWeekClick = () => {
     setVisualizarSemana(true);
     setIsSemanaOuImportante(true);
@@ -272,6 +293,7 @@ const Calendar = () => {
     receberSemana(today, nextSaturday);
   };
 
+  // Função para tratar quando clica no botão "Importante".
   const handleImportantClick = () => {
     setVisualizarSemana(false);  // Para garantir que não esteja em modo de visualização de semana
     setIsSemanaOuImportante(true);
@@ -282,22 +304,26 @@ const Calendar = () => {
     receberImportante()
   };
 
+  // Função para abrir o modal de adição de tarefas.
   const handleAddTarefas = () => {
     setSelecionarTarefa(null);
     setModal(true);
   };
 
+  // Função para abrir o modal de edição de uma tarefa específica.
   const handleEditTarefa = (tarefa) => {
     setSelecionarTarefa(tarefa);
     setModal(true);
   };
 
+  // Função para fechar o modal e atualizar a lista de tarefas.
   const handleCloseModal = () => {
     setModal(false);
     setSelecionarTarefa(null);
     receberTarefas();
   };
 
+  // Função para navegar para o mês anterior no calendário.
   const handlePrevMonth = () => {
     if (currentMonth === 0) {
       setCurrentMonth(11);
@@ -307,6 +333,7 @@ const Calendar = () => {
     }
   };
 
+  // Função para navegar para o próximo mês no calendário.
   const handleNextMonth = () => {
     if (currentMonth === 11) {
       setCurrentMonth(0);
@@ -316,12 +343,13 @@ const Calendar = () => {
     }
   };
 
+  // Função para tratar quando clica em um checkbox de tarefa.
   const handleCheckBox = async (idComp, trf) => {
     const novoEstadoCheckbox = !Boolean(trf);
     setCheckedTarefas((prevState) => ({ ...prevState, [idComp]: novoEstadoCheckbox }));
   
     try {
-      await fetch('http://10.135.60.47:8085/receber-dados', {
+      await fetch('http://10.135.60.43:8085/receber-dados', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ acao: 'atualizar_checkbox', id_comp: idComp, estado_checkbox: novoEstadoCheckbox }),
@@ -344,12 +372,13 @@ const Calendar = () => {
     }
   };
   
+  // Função para deletar uma tarefa.
   const handleDelete = async (idComp) => {
     if (!tarefaData) return;
   
     try {
       console.log("Deletando tarefa: ", idComp);
-      const response = await fetch('http://10.135.60.47:8085/receber-dados', {
+      const response = await fetch('http://10.135.60.43:8085/receber-dados', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -382,9 +411,10 @@ const Calendar = () => {
     }
   };
 
+  // Função para buscar lembretes.
   const buscarLembretes = async () => {
     try {
-      const resposta = await fetch('http://10.135.60.47:8085/receber-dados', {
+      const resposta = await fetch('http://10.135.60.43:8085/receber-dados', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -417,8 +447,10 @@ const Calendar = () => {
   return (
     <div className="calendar">
       <div className="calendarioTotal">
+        {/* Cabeçalho do calendário com botões para navegar entre os meses */}
         <div className="calendar-header">
           <button onClick={handlePrevMonth} id='btnMesesEsquerdo'>
+            {/* Ícone de seta para a esquerda para navegação no mês */}
             <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" className="bi bi-caret-left" viewBox="0 0 16 16" color="white">
               <path d="M10 12.796V3.204L4.519 8 10 12.796zm-.659.753-5.48-4.796a1 1 0 0 1 0-1.506l5.48-4.796A1 1 0 0 1 11 3.204v9.592a1 1 0 0 1-1.659.753z" />
             </svg>
@@ -428,6 +460,7 @@ const Calendar = () => {
             <h4>{currentYear}</h4>
           </div>
           <button onClick={handleNextMonth} id='btnMesesDireito'>
+            {/* Ícone de seta para a direita para navegação no mês */}
             <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" className="bi bi-caret-right" viewBox="0 0 16 16" color="white">
               <path d="M6 12.796V3.204L11.481 8 6 12.796zm.659.753 5.48-4.796a1 1 0 0 0 0-1.506L6.66 2.451C6.011 1.885 5 2.345 5 3.204v9.592a1 1 0 0 0 1.659.753z" />
             </svg>
@@ -458,6 +491,7 @@ const Calendar = () => {
         </div>
       </div>
 
+      {/* Menu no todolist com opções de visualização para hoje, semana ou importante */}
       <div className='menu_todo'>
         <div className='menu'>
           <a className='menu_hoje' href="#" onClick={(e) => { e.preventDefault(); handleTodayClick(); }}>Hoje</a>
@@ -511,8 +545,10 @@ const Calendar = () => {
                       </div>
                     </div>
 
+                    {/* Botões para editar ou excluir tarefas */}
                     <div id='botoes'>
                       <button className='buttonEditar' id='editarTarefa' onClick={() => handleEditTarefa(tarefa)}>
+                        {/* Ícone de editar tarefa */}
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pencil" viewBox="0 0 16 16" color="white">
                           <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
                         </svg>
@@ -524,6 +560,7 @@ const Calendar = () => {
                         onClick={() => handleDelete(tarefa.id_comp)}
                         id='excluirTarefa'
                       >
+                        {/* Ícone de excluir tarefa */}
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash" viewBox="0 0 16 16" color="white">
                           <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
                           <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />

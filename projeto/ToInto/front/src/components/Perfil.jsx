@@ -1,3 +1,9 @@
+{/*Nome componente: Perfil*/}
+{/*Autora: Júlia*/}
+{/*Data de alteração: 05/12/2024*/}
+{/*Descrição: O componente Perfil exibe informações do usuário autenticado, como nome, e-mail e foto de perfil, 
+além de fornecer acesso a ações relacionadas à conta e ao pagamento.*/}
+
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import { Link } from 'react-router-dom';
@@ -10,6 +16,11 @@ import '../App.css';
 
 const defaultPhoto = 'images_perfil/foto_perfil.jpg'; // Caminho da imagem padrão
 
+{/*Nome função: Perfil*/ }
+{/*Autora: Júlia*/ }
+{/*Data de alteração: 05/12/2024*/ }
+{/*Parâmetros de entrada: Nulo*/ }
+{/*Retorno: retorna o perfil*/ }
 function Perfil(props) {
     const navigate = useNavigate();
     const [userData, setUserData] = useState({
@@ -17,7 +28,7 @@ function Perfil(props) {
         email: '',
         foto: '' // A foto será carregada dinamicamente
     });
-    const [showModal, setShowModal] = useState(false);
+    const [showModal, setShowModal] = useState(false); // Estado para controlar a exibição do modal.
 
     // Função para converter uma imagem para Base64
     const convertToBase64 = (url, callback) => {
@@ -40,7 +51,7 @@ function Perfil(props) {
             // Função para buscar dados do usuário
             const showDados = async () => {
                 try {
-                    const resposta = await fetch('http://10.135.60.34:8085/receber-dados', {
+                    const resposta = await fetch('http://10.135.60.43:8085/receber-dados', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -52,8 +63,8 @@ function Perfil(props) {
 
                     const response = await resposta.json();
                     setUserData({
-                        nomeUsuario: response.mensagem.nome,
-                        email: response.mensagem.email,
+                        nomeUsuario: response.mensagem.nome, // Atualiza o estado com o nome do usuário.
+                        email: response.mensagem.email, // Atualiza o estado com o e-mail do usuário.
                         foto: response.mensagem.foto_perfil || base64Image // Usa a foto padrão caso nenhuma esteja definida
                     });
                 } catch (error) {
@@ -63,14 +74,15 @@ function Perfil(props) {
                 }
             };
 
-            showDados();
+            showDados(); // Chama a função para buscar dados.
         });
     }, []);
 
+    // Função para excluir a conta do usuário.
     const excluirConta = () => {
         const id_cad = localStorage.getItem('ID');
 
-        fetch('http://10.135.60.27:8085/receber-dados', {
+        fetch('http://10.135.60.43:8085/receber-dados', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -90,6 +102,7 @@ function Perfil(props) {
                 console.error('Erro ao excluir conta:', error);
             });
 
+        // Limpa os dados do usuário no localStorage e redireciona para a página inicial.
         localStorage.setItem('ID', '');
         localStorage.setItem('nome_usuario', '');
         localStorage.setItem('email', '');
@@ -98,8 +111,9 @@ function Perfil(props) {
 
     return (
         <>
-            <Dropdown>
+            <Dropdown> {/* Menu dropdown para o perfil do usuário. */}
                 <Dropdown.Toggle className='perfil' variant='outline' id="dropdown-basic">
+                    {/* Exibe a foto do perfil como um botão de dropdown. */}
                     <img 
                         src={`data:image/png;base64,${userData.foto}`} 
                         alt="Foto de perfil" 
@@ -110,7 +124,8 @@ function Perfil(props) {
                     />
                 </Dropdown.Toggle>
 
-                <Dropdown.Menu className='page-perfil'>
+                {/* Menu contendo as opções do perfil. */}
+                <Dropdown.Menu className='page-perfil'> 
                     <Dropdown.ItemText className='nome-perfil' id="nome-perfil">{userData.nomeUsuario}</Dropdown.ItemText>
                     <Dropdown.ItemText className='email-perfil' id="email-perfil">{userData.email}</Dropdown.ItemText>
                     <Link to="/modificar" className='btn-sair' id="btn-Modfc-cad">Modificar cadastro</Link>
@@ -129,7 +144,8 @@ function Perfil(props) {
                 </Dropdown.Menu>
             </Dropdown>
 
-            <Modal show={showModal} onHide={() => setShowModal(false)}>
+            {/* Modal de confirmação para excluir conta. */}
+            <Modal show={showModal} onHide={() => setShowModal(false)}> 
                 <Modal.Header closeButton>
                     <Modal.Title>Excluir conta</Modal.Title>
                 </Modal.Header>
