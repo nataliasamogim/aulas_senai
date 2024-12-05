@@ -1,15 +1,14 @@
+//Descrição: estilização da página de Menu (onde exibe s tarefas do usuário), como a cor e tamanho das imagens e text 
+
 import { StyleSheet } from "react-native";
 import { CheckBox } from "react-native-elements";
 import { transpose } from "date-fns";
 
 export default styles = StyleSheet.create({
+    //Início
     background: {
         flex: 1,
         backgroundColor: '#6B29A4',
-    },
-    containerTarefas: {
-        padding: 13,
-        marginTop: 20,
     },
     containerHSI: {
         display: 'flex',
@@ -20,9 +19,19 @@ export default styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#AE80D6'
     },
-    containerHoraTitle: {
-        flexDirection: 'row', 
-        alignItems: 'center', 
+    containerTarefas: {
+        padding: 13,
+        marginTop: 20,
+    },
+    textAtivHoje:{
+        color: 'white',
+        fontSize: 22,
+        paddingTop: 16,
+        paddingLeft: 12
+    },
+    dia: {
+        color: 'white',
+        fontSize: 19.6,
     },
     textMenu: {
         color:'white',
@@ -36,31 +45,21 @@ export default styles = StyleSheet.create({
         textAlign: 'center',
         paddingTop: 10,
     },
-    textAtivHoje:{
-        color: 'white',
-        fontSize: 22,
-        paddingTop: 16,
-        paddingLeft: 12
+    componentesTarefas: {
+        marginBottom: 10, 
+        padding: 7,
+        backgroundColor: '#AE80D6', // Cor de fundo para destacar cada tarefa
+        borderRadius: 5,
     },
-    data1: {
-        color: 'white',
-        fontSize: 20,
+    containerComp: {
         display: 'flex',
-        paddingTop: 12,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
     },
-    dia: {
-        color: 'white',
-        fontSize: 19.6,
-    },
-    horario: {
-        color: 'white',
-        fontSize: 20,
-        paddingLeft: 0,
-    },
-    titulo: {
-        color: 'white',
-        fontSize: 20,
-       
+    tarefaImportante: {
+        backgroundColor: '#628cbd', /* Azul para destaque */
+        color: 'white', 
     },
     check_tarefa: {
         display: 'flex',
@@ -69,11 +68,27 @@ export default styles = StyleSheet.create({
         margin: -10,
         marginRight: -20,
     },
-    containerComp: {
+    check: {
+        marginLeft: 111
+    },
+    data1: {
+        color: 'white',
+        fontSize: 20,
         display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
+        paddingTop: 12,
+    },
+    containerHoraTitle: {
+        flexDirection: 'row', 
+        alignItems: 'center', 
+    },
+    horario: {
+        color: 'white',
+        fontSize: 20,
+        paddingLeft: 0,
+    },
+    titulo: {
+        color: 'white',
+        fontSize: 20,  
     },
     containerEditExcluir: {
         display: 'flex',
@@ -92,32 +107,16 @@ export default styles = StyleSheet.create({
     },
     descricao: {
         padding: 9,
-
     },
     textDesc: {
         color: 'white',
         fontSize: 18
-    },
-
-    componentesTarefas: {
-        marginBottom: 10, // Adiciona espaço entre as tarefas
-        padding: 7,
-        backgroundColor: '#AE80D6', // Cor de fundo para destacar cada tarefa
-        borderRadius: 5,
-        //display: 'flex',
-        //flexDirection: 'row'
     },
     noTaskMessage: {
         color: 'white',
         fontSize: 16,
         textAlign: 'center'
     },
-    check: {
-        marginLeft: 111
-    },
-    tarefaImportante: {
-        backgroundColor: '#628cbd', /* Azul para destaque */
-        color: 'white', /* Texto branco para contraste */
-    }
+    //Fim
 });
 

@@ -1,6 +1,9 @@
+//Descrição: estilização da página de Compromissos (onde crias as tarefas), como a cor e tamanho dos textos 
+
 import { StyleSheet } from 'react-native';
 
 export default styles = StyleSheet.create({
+    //Início
     background: {
         flex: 1,
         backgroundColor: '#6B29A4',
@@ -41,7 +44,6 @@ export default styles = StyleSheet.create({
         color: '#fff',
         alignSelf: 'flex-start',
         marginLeft: 20,
-
     },
     input_descr: {
         backgroundColor: '#fff',
@@ -52,7 +54,6 @@ export default styles = StyleSheet.create({
         fontSize: 15,
         borderRadius: 5,
         padding: 10,
-
     },
 
     input: {
@@ -64,7 +65,6 @@ export default styles = StyleSheet.create({
         fontSize: 15,
         borderRadius: 5,
         padding: 10,
-
     },
 
     checkboxText: {
@@ -203,7 +203,7 @@ export default styles = StyleSheet.create({
         fontSize: 18,
         color: '#fff',
     },
-    // ** NOVO: Estilo para a parte de compromissos com mensagens de erro**
+    // Estilo para a parte de compromissos com mensagens de erro**
     compromissoContainer: {
         flex: 1,
         justifyContent: 'center',
@@ -247,5 +247,5 @@ export default styles = StyleSheet.create({
         fontSize: 18,
         textAlign: 'center',
     },
-
+    //Fim
 });

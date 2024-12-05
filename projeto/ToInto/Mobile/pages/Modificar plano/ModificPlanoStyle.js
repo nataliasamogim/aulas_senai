@@ -1,6 +1,9 @@
+//Descrição: estilização do Modificar Plano, como a cor e tamanho dos botões e dos textos, além do resto d página
+
 import { StyleSheet } from "react-native";
 
 export default styles = StyleSheet.create({
+    //Início
     background: {
         flex: 1,
         alignItems: 'center',
@@ -116,4 +119,5 @@ export default styles = StyleSheet.create({
         fontSize: 18,
         textAlign: 'center',
     },
+    //Fim
 });

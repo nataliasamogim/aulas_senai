@@ -1,6 +1,9 @@
+//Descrição: estilização da página de Atualizar o Cadastro, como cor e tamanho dos inputs e textos, além do resto da página 
+
 import { StyleSheet } from "react-native";
 
 export default styles = StyleSheet.create({
+  //início
   background: {
     flex: 1,
     alignItems: 'center',
@@ -22,13 +25,11 @@ export default styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 20,
   },
-
   FotoPerfil: {
     width: 150,
     height: 150,
     borderRadius: 100,
     top: 20
-
   },
   container: {
     flex: 0.8,
@@ -67,6 +68,50 @@ export default styles = StyleSheet.create({
     fontSize: 18,
     color: '#fff',
   },
+  modalText: {
+    marginBottom: 10, // Espaçamento entre as mensagens de erro
+    fontSize: 18,
+    textAlign: 'left', 
+    color: '#fff',
+  },
+  containerConta: {
+    alignItems: 'center',
+    marginTop: 20,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  titleNoCampo: {
+    color: '#fff',
+    fontSize: 16,
+    marginRight: 5,
+  },
+  Txtentrar: {
+    color: '#fff',
+    fontSize: 18,
+  },
+  photoOptionsContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap', // Permite que as fotos ocupem várias linhas
+    justifyContent: 'center',
+    marginBottom: 15,
+  },
+  opcaoFotoPerfil: {
+    width: 70, 
+    height: 70, 
+    margin: 10,
+    borderRadius: 50, 
+    borderWidth: 3,
+    borderColor: '#570D70',
+    overflow: 'hidden',
+    backgroundColor: '#fff',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  selectedFoto: {
+    borderWidth: 3,
+    borderColor: '#113D63', // Dourado para indicar a foto selecionada
+  },
   modalContainer: {
     flex: 1,
     justifyContent: 'center',
@@ -94,27 +139,14 @@ export default styles = StyleSheet.create({
     textAlign: 'center',
     color: '#fff',
   },
-  modalText: {
-    marginBottom: 10, // Espaçamento entre as mensagens de erro
+  containerErro: {
+    marginBottom: 20,
+  },
+  textErro: {
+    textAlign: 'center',
+    marginBottom: 10,
     fontSize: 18,
-    textAlign: 'left', // Alinhamento do texto para a esquerda
     color: '#fff',
-  },
-  containerConta: {
-    alignItems: 'center',
-    marginTop: 20,
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-  titleNoCampo: {
-    color: '#fff',
-    fontSize: 16,
-    marginRight: 5,
-  },
-  Txtentrar: {
-    color: '#fff',
-    fontSize: 18,
   },
   closeButton: {
     backgroundColor: '#570D70',
@@ -130,36 +162,5 @@ export default styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
   },
-  containerErro: {
-    marginBottom: 20,
-  },
-  textErro: {
-    textAlign: 'center',
-    marginBottom: 10,
-    fontSize: 18,
-    color: '#fff',
-  },
-  photoOptionsContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap', // Permite que as fotos ocupem várias linhas
-    justifyContent: 'center',
-    marginBottom: 15,
-  },
-  opcaoFotoPerfil: {
-    width: 70, // Tamanho aumentado para 60px
-    height: 70, // Tamanho aumentado para 60px
-    margin: 10,
-    borderRadius: 50, // Mantém o formato redondo
-    borderWidth: 3,
-    borderColor: '#570D70',
-    overflow: 'hidden',
-    backgroundColor: '#fff',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  selectedFoto: {
-    borderWidth: 3,
-    borderColor: '#113D63', // Dourado para indicar a foto selecionada
-  },
-
+  //Fim
 });

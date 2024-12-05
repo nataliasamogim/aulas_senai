@@ -1,6 +1,8 @@
+/*Descrição: estilização do resto da página do Calendário, já que algumas foram feitas direto na página do Calendário*/
 import { StyleSheet } from "react-native";
 
 export default styles = StyleSheet.create({
+    /*Início*/
     background: {
         flex: 1,
         backgroundColor: '#6B29A4'
@@ -66,5 +68,6 @@ export default styles = StyleSheet.create({
         paddingLeft: 20,
         position: 'relative'
     },
+    /*Fim*/
 
 });

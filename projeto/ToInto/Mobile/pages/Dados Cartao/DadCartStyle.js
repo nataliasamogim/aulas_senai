@@ -1,6 +1,10 @@
+//Descrição: estilização da página do Cartão (onde o usuário insere as informações), como a cor e tamanho dos textos e inputs, além do
+//resto da página
+
 import { StyleSheet } from "react-native";
 
 export default styles = StyleSheet.create({
+  //Início
     background: {
         flex: 1,
         alignItems: 'center',
@@ -89,7 +93,7 @@ export default styles = StyleSheet.create({
       modalText: {
         marginBottom: 10, // Espaçamento entre as mensagens de erro
         fontSize: 18,
-        textAlign: 'left', // Alinhamento do texto para a esquerda
+        textAlign: 'left', 
         color: '#fff',
       },
       containerConta: {
@@ -130,5 +134,5 @@ export default styles = StyleSheet.create({
         fontSize: 18,
         color: '#fff',
       },
-    
+    //Fim
 });

@@ -1,7 +1,9 @@
+//Descrição: Estilização da mensagem de confirmação do pagamento do Pix, como a cor e temanho dos textos, além do fundo o resto da página
+
 import { StyleSheet } from "react-native";
-import { color } from "react-native-elements/dist/helpers";
 
 export default styles = StyleSheet.create({
+    //Início
     background:{
         flex: 1,
         backgroundColor: '#6B29A4',
@@ -23,7 +25,7 @@ export default styles = StyleSheet.create({
         marginTop: 10,
         fontSize: 20,
         color: 'white',
-        fontWeight: 'bold'
+        fontWeight: 'bold'//para deixar em negrito
     },
     titleText2:{
         marginBottom: 10,
@@ -38,7 +40,8 @@ export default styles = StyleSheet.create({
         paddingRight: 30,
         padding: 13,
         borderRadius: 5,
-        borderWidth: 2,   // Define a largura da borda
-        borderColor: 'white',  // Define a cor da borda
+        borderWidth: 2,   
+        borderColor: 'white',  
     }
+    //Fim
 })

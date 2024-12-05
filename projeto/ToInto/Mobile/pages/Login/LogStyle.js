@@ -1,6 +1,10 @@
+//Descrição: estilização da página de login (onde os usuários insere suas informações), como o tamanho e cor dos inputs e do texto, além do
+//resto da página
+
 import { StyleSheet } from "react-native";
 
 export default styles = StyleSheet.create({
+    //Início
     background: {
         flex: 1,
         color: '#AC72BF',
@@ -87,8 +91,8 @@ export default styles = StyleSheet.create({
     eyeIcon: {
         marginTop: -50, // Ajuste fino para alinhar
         marginLeft: 300,
-        height: 25, // Defina a altura do ícone
-        width: 25, // Defina a largura do ícone
+        height: 25, 
+        width: 25, 
     },
     recSenha: {
         color: 'white',
@@ -123,12 +127,12 @@ export default styles = StyleSheet.create({
         marginBottom: 10,
         textAlign: 'center',
         color: '#fff',
-        marginTop: 20, // Espaçamento acima do título
+        marginTop: 20, 
     },
     modalText: {
         marginBottom: 10, // Espaçamento entre as mensagens de erro
         fontSize: 18,
-        textAlign: 'left', // Alinhamento do texto para a esquerda
+        textAlign: 'left',
         color: '#fff',
     },
     containerConta: {
@@ -169,4 +173,5 @@ export default styles = StyleSheet.create({
         fontSize: 18,
         color: '#fff',
     },
+    //Fim
 });
