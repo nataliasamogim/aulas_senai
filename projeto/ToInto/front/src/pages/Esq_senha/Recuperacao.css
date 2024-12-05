@@ -1,5 +1,6 @@
+/*Descrição detalhada: Esse código é responsável pela estilização do recuperar senha, responsável por ajustar os campos e os textos.*/
 
-
+/*Inicio do recuperar senha*/
 .esqueceu-container{
     margin-top: 55%;
     background-color: #8d7fb9;
@@ -32,3 +33,5 @@ input.input_email {
     height: 35px;
     border-radius: 3px;
 }
+
+/*Fim do recuperar senha*/

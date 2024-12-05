@@ -1,3 +1,7 @@
+/*Descrição detalhada: Esse código é responsável pela estilização da página do confirmar pix do Tointo, na qual define o estilo
+dos elementos responsaveis por fazer aparecer na tela, os textos e o botão de confirmar.*/
+
+/*Inicio do confirmar pix*/
 #container_conf {
     width: 100%;
     height: 745px !important;
@@ -40,3 +44,5 @@
     color: rgb(200, 150, 255); 
     text-decoration: underline;
 }
+
+/*Fim do confirmar pix */

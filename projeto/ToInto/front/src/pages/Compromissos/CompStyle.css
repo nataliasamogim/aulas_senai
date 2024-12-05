@@ -1,3 +1,5 @@
+/*Descrição detalhada: Esse código é responsável pela estilização do Compromissos do Tointo, como os modais, os campos, os botões.*/
+
 /*-----Início dos Compromissos-----*/
 .ReactModal__Overlay {
     background: rgba(0, 0, 0, 0.7) !important;
@@ -152,16 +154,6 @@ button.btn-close:focus {
 .dropdown-menu {
     --bs-dropdown-link-active-bg: #bb80c7 !important;
 }
-
-/* Botão ao passar o mouse (hover) */
-/* .btn:hover {
-    background-color: #915d9b !important; 
-    color: white !important; 
-    border: 1px solid #ffffff !important
-  }*/
-
-/* Define a cor de fundo dos links ativos em um menu
-  suspenso utilizando uma variável Bootstrap para roxo. */
 
 .dropdown-item {
     width: 218px !important;
