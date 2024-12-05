@@ -1,8 +1,11 @@
 # Nome do componente: processamento.py
 # Autor: Maria Luiza
-# Data de criação/alteração: 01-12-2023
-# Descrição detalhada: Nesse componente processamos os dados recebidos do formulário e printamos eles no terminal.
+# Data de alteração: 05-12-2024
+# Descrição detalhada: Nesse componente processamos os dados recebidos dos formulários, do calendário, do todolist e do perfil e printamos eles no terminal e retornamos a mensagem para o frontend.
 # Além de armazenar as mensagens de erro recebidas do componete validacoes em uma lista chamada mesagens_erro.
+
+# Importação de funções de módulos específicos
+# Cada módulo parece ser responsável por uma parte do sistema, como banco de dados, validações e recuperação de informações
 from gravar_banco import gravar_dados, gravar_dados_compromisso, gravar_dados_cartao
 from recuperar_cad import verificar_informacao_log
 from recuperar_cad import recuperar_inf_formani
@@ -15,11 +18,12 @@ from update_banco import atualizar_cad, atualizar_compromisso, atualizar_estado_
 from update_banco import atualizar_cart
 from delete_banco import deletar_cad
 from delete_banco import deletar_compromisso
-from tratar_hora import data
+from tratar_hora import data # Função para manipulação de datas
 from consulta_data import consultar_tarefas_por_usuario
 from select_dados_cartao import select_dados_cartao
 from modificar_plano import gravar_dados_compra
 from update_banco import atualizar_cad
+from recuperar_cad_mob import recuperar_inf_altercad
 
 from validacoes import (
     validar_nome,
@@ -45,112 +49,128 @@ from validar_compromissos import (
 
 # Nome da função: processar_dados
 # Autor: Maria Luiza
-# Data de criação/alteração: 01-12-2023
+# Data de alteração: 05-12-2024
 # Parâmetros entrada:
 # Nome: dados, tipo: string, finalidade: fornecer os dados para que eles sejam processados e printados no terminal.
 # 1° Retorno:
 # Nome: retorna uma das funções, tipo: boleano, finalidade: retornar qual dos formulários está sendo preenchido.
-# Descrição/observação: essa função analisa se o input nome não possui valor, caso não possua ele retorna a função do
-# login, significando que o que está sendo preenchido é o login, caso possua valor no input, ele retorna a função do cadastro,
-# que é ele que está sendo preenchido.
+# Descrição/observação: essa função analisa as ações recebidas do frontend e realiza a função/comando correspondente a ação
 
+# Função principal para processar os dados recebidos
+# Identifica a ação solicitada e delega o processamento para funções específicas
 def processar_dados(dados):
-# Processamento do Mobile -----------------------------------------------
-    if dados.get('acao') == 'salvar_cad': 
-        print('Cadastro')                                
+    # Ação de salvar cadastro
+    if dados.get('acao') == 'salvar_cad':                               
         retorno = processar_dados_cad(dados)
+
+     # Ação de salvar compromisso
     elif dados.get('acao') == 'salvar_compromisso':
-        print('Compromissos')
         retorno = processar_dados_compromisso(dados)
+
     elif dados.get('acao') == 'salvar_log':
-        print('Login')
         retorno = processar_dados_log(dados)
+
+     # Ação de atualizar cadastro
     elif dados.get('acao') == 'atualizar_cad':
-        print('atualizar')
         retorno = processar_alterar_cad(dados)
+
+    # Ação de salvar dados de cartão
     elif dados.get('acao') == 'salvar_cart':
-        print ('Dados Cartao')
         retorno = processar_dados_cartao(dados)
+
+    # Ação de recuperar dados de cartão
     elif dados.get('acao') == 'recuperar_cart':
         retorno = recuperar_inf_cart(dados.get('id_cadastro', ''))
+
+    # Recuperar compromissos de um usuário
     elif dados.get('acao') == 'recuperar_comp':
         retorno = recuperar_inf_comp(dados.get('id_cad', ''), dados.get('data_comp', ''))
+
+    # Recuperar compromissos de uma semana
     elif dados.get('acao') == 'recuperar_semana':
             retorno = recuperar_inf_semana(dados.get('id_cad', ''), dados.get('data_in', ''), dados.get('data_fim', ''))
+
+    # Recuperar compromissos marcados como importantes
     elif dados.get('acao') == 'recuperar_importante':
         retorno = recuperar_inf_importante(dados.get('id_cad', ''))
+
+    # Recuperar lembretes do usuário
     elif dados.get('acao') == 'recuperar_lembrete':
         retorno = recuperar_lembrete(dados.get('id_cad', ''))
+
+    # Atualizar informações do cartão
     elif dados.get('acao') == 'atualizar_cart':
-        print ('Atualizar dados do cartão')
         retorno = processar_alterar_cart(dados)
+
+    # Atualizar o plano do usuário
     elif dados.get('acao') == 'atualizar_plano':
         retorno = processar_dados_cartao(dados)
+
+    # Selecionar dados de um cartão
     elif dados.get('acao') == 'selecionar_cart':
         retorno = recuperar_inf_cart(dados.get('id_cadastro', ''))
+
+    # Atualizar compromissos
     elif dados.get('acao') == 'atualizar_comp':
         retorno = processar_alterar_comp(dados)
+
+     # Excluir compromisso
     elif dados.get('acao') == 'deletar_comp':
         retorno = deletar_compromisso(dados.get('id_comp', ''))
+
+    # Excluir todas as informações de um usuário
     elif dados.get('acao') == 'deletar_cad':
         retorno = excluir_todas_informacoes_usuario(dados.get('id_cad'))
+
+    # Selecionar informações de um usuário
     elif dados.get('acao') == 'selecionar_cad':
         retorno = recuperar_inf_formani(dados.get('id', ''))
+
+    # Selecionar perfil do usuário
     elif dados.get('acao') == 'selecionar_perfil':
         retorno = recuperar_inf_formani(dados.get('id', ''))
+
+    # Atualizar estado de um checkbox em um compromisso
     elif dados.get('acao') == 'atualizar_checkbox':
         retorno = atualizar_estado_checkbox(dados.get('id_comp', ''), dados.get('estado_checkbox', ''))
+
+    # Consultar dados por data
     elif dados.get('acao') == 'consulta_data':
         retorno = consultar_data(dados)
+
+    # Consultar dados do cartão antes de atualizar plano
     elif dados.get('acao') == 'atualizar_plano_mean':
         retorno = select_dados_cartao(dados.get('id_cad', ''))
+
+    # Inserir dados ao atualizar plano
     elif dados.get('acao') == 'atualizar_plano_insert':
         retorno = gravar_dados_compra(dados.get('id_cad', ''), dados.get('id_dados_pag', ''), dados.get('plano_esc', ''))
+
+     # Salvar dados de pagamento via PIX
     elif dados.get('acao') == 'salvar_pix':
         retorno = gravar_dados_cartao(dados)
+
+    elif dados.get('acao') == 'selecionar_cad_mob':
+        retorno = recuperar_inf_altercad(dados.get('id', ''))
+
+     # Caso nenhuma ação seja identificada, processa como login
     else:
         retorno = processar_dados_log(dados)
     
     return (retorno)
-        
-#-------------------------------------------------------------------------
-
-# Processamento do Desktop -----------------------------------------------------
-'''
-        if dados.get('nome') != None:
-            retorno = processar_dados_cad(dados)
-        elif dados.get('nome_titular') != None:
-            retorno = processar_dados_cartao(dados)
-        elif dados.get('id_cad') != None and dados.get('funcao') == 'del':
-            #print('processar', dados)
-            retorno = excluir_todas_informacoes_usuario(dados.get('id_cad'))
-            #retorno ='retorno delete'
-        elif dados.get('id') != None and dados.get('funcao') != 'del':
-            #print('processar select', dados)
-            retorno = recuperar_inf_formani(dados.get('id', ''))
-        elif dados.get('nome_novo') != None:
-            retorno = processar_alterar_cad(dados)
-        elif dados.get('titulo') != None:
-            retorno = processar_dados_compromisso(dados)
-'''
-
-    
-
 
 #-------------------------------------------------------------------------------
 
 # Nome da função: processar_dados_cad
-# Data de criação/alteração: 01-12-2023
+# Data de alteração: 05-12-2024
 # Parâmetros entrada:
-# Nome: dados, tipo: string, finalidade: fornecer os dados para que eles sejam processados e printados no terminal.
+# Nome: dados, tipo: string, finalidade: fornecer os dados para que eles sejam processados, validados, retornados como mensagens para o frontend e também printados no terminal.
 # 1° Retorno:
 # Nome: retorna mensagem de erro, tipo: boleano, finalidade: retornar ao usuário qual o erro.
 # 2° Retorno:
 # Nome: retorna a mensagem para o terminal e console, tipo: boleano, finalidade: permite que o usuário prossiga seu cadastro
 
 def processar_dados_cad(dados):
-    # Função para processar os dados recebidos do Flask
-    # Retorna os dados processados
     dados_processados = dados
     dados_gravacao = []
 
@@ -173,25 +193,26 @@ def processar_dados_cad(dados):
     # Remove mensagens de erro vazias
     mensagens_erro = [msg for msg in mensagens_erro if msg['erro']]
 
-    #print(mensagens_erro)
-
     if mensagens_erro:
         return {'erro': True, 'mensagens': mensagens_erro}
     else:
-        # Chama a função para gravar os dados em um arquivo, caso não tenha mensagens de erro
-        #gravar_em_arquivo(dados_processados)
         retorno=gravar_dados(dados_gravacao)
         if (retorno['erro']):
             print(retorno)
-        # Retorna os dados processados=
             mensagens_erro.append(retorno)
             return {'erro': True, 'mensagens': mensagens_erro}
         else:
             return {'erro': False, 'mensagens': retorno}
 
+# Nome da função: processar_alterar_cad
+# Data de alteração: 05-12-2024
+# Parâmetros entrada:
+# Nome: dados, tipo: string, finalidade: fornecer os dados para que eles sejam processados, validados, retornados como mensagens para o frontend e também printados no terminal.
+# 1° Retorno:
+# Nome: retorna mensagem de erro, tipo: boleano, finalidade: retornar ao usuário qual o erro.
+# 2° Retorno:
+# Nome: retorna a mensagem para o terminal e console, tipo: boleano, finalidade: permite que o usuário prossiga sua alteração de cadastro
 def processar_alterar_cad(dados):
-    # Função para processar os dados recebidos do Flask
-    # Retorna os dados processados
     dados_processados = dados
 
     update_dados = []
@@ -239,13 +260,17 @@ def processar_alterar_cad(dados):
         return {'erro': False, 'mensagem': "Cadastro atualizado com sucesso"}
         
 
+# Nome da função: processar_dados_cartao
+# Data de alteração: 05-12-2024
+# Parâmetros entrada:
+# Nome: dados, tipo: string, finalidade: fornecer os dados para que eles sejam processados, validados, retornados como mensagens para o frontend e também printados no terminal.
+# 1° Retorno:
+# Nome: retorna mensagem de erro, tipo: boleano, finalidade: retornar ao usuário qual o erro.
+# 2° Retorno:
+# Nome: retorna a mensagem para o terminal e console, tipo: boleano, finalidade: permite que o usuário prossiga seu formulário de cartão
 def processar_dados_cartao(dados):
-    # Função para processar os dados recebidos do Flask
-    # Retorna os dados processados
     dados_processados = dados
     dados_gravacao = []
-    #idcad = dados_processados.get('id')
-    #dados_gravacao.append(idcad[1:3])
     dados_gravacao.append(dados_processados.get('escolha_pag'))
     dados_gravacao.append(dados_processados.get('plano_esc'))
     dados_gravacao.append(dados_processados.get('id'))
@@ -277,19 +302,17 @@ def processar_dados_cartao(dados):
     if mensagens_erro:
         return {'erro': True, 'mensagens': mensagens_erro}
     else:
-        # Chama a função para gravar os dados em um arquivo, caso não tenha mensagens de erro
         retorno = gravar_dados_cartao(dados_gravacao)
-        # Retorna os dados processados
         return {'erro': False, 'mensagem': 'Dados Processados com Sucesso!'}
 
 # Nome da função: processar_dados_log
-# Data de criação/alteração: 01-12-2023
-# Parâmetros entrada:
-# Nome: dados, tipo: string, finalidade: fornecer os dados para que eles sejam processados e printados no terminal
+# Data de alteração: 05-12-2024
+# Parâmetros entrada: 
+# Nome: dados, tipo: string, finalidade: fornecer os dados para que eles sejam processados, comparados com as informações de cadastro que existe no banco de dados, retorna as mensagens para o frontend e printados no terminal
 # 1° Retorno:
 # Nome: retorna mensagem de erro, tipo: boleano, finalidade: retornar ao usuário qual o erro.
 # 2° Retorno:
-# Nome: retorna a mensagem para o terminal e console, tipo: boleano, finalidade: permite que o usuário prossiga seu cadastro
+# Nome: retorna a mensagem para o terminal e console, tipo: boleano, finalidade: permite que o usuário prossiga seu login
 def processar_dados_log(dados):
 
     dados_processados = dados
@@ -312,15 +335,19 @@ def processar_dados_log(dados):
     if mensagens_erro:
         return {'erro': True, 'mensagens': mensagens_erro}
     else:
-        # Chama a função para gravar os dados em um arquivo, caso não tenha mensagens de erro
-        # gravar_em_arquivo_log(dados_processados)
         select_inf_log = verificar_informacao_log(dados_processados.get(
             'email_log', ''), dados_processados.get('senha_log', ''))
         print(select_inf_log)
         return (select_inf_log)
-
-        # Retorna os dados processados
-        # return {'erro': False, 'mensagem': 'Dados Processados com Sucesso!'}
+    
+# Nome da função: excluir_todas_informacoes_usuario
+# Data de alteração: 05-12-2024
+# Parâmetros entrada: 
+# Nome: cad_id, tipo: string, finalidade: fornecer os dados para que eles sejam processados, deletados, e retorna as mensagens para o frontend e printa no terminal
+# 1° Retorno:
+# Nome: retorna a mensagem para o terminal e console, tipo: boleano, finalidade: permite que o usuário prossiga sua exclusão de conta
+# 2° Retorno:
+# Nome: retorna mensagem de erro, tipo: boleano, finalidade: retornar ao frontend o erro.
 
 def excluir_todas_informacoes_usuario(cad_id):
     try:
@@ -333,7 +360,14 @@ def excluir_todas_informacoes_usuario(cad_id):
         # Se ocorrer algum erro durante a exclusão, retorna uma mensagem de erro
         return {'erro': True, 'mensagem': 'Erro ao excluir todas as informações do usuário: {}'.format(str(e))}
     
-
+# Nome da função: processar_dados_compromisso
+# Data de alteração: 05-12-2024
+# Parâmetros entrada: 
+# Nome: dados, tipo: string, finalidade: fornecer os dados para que eles sejam processados, validados, e retorna as mensagens para o frontend e printa no terminal
+# 1° Retorno:
+# Nome: retorna mensagem de erro, tipo: boleano, finalidade: retornar ao frontend o erro.
+# 2° Retorno:
+# Nome: retorna a mensagem para o terminal e console, tipo: boleano, finalidade: permite que o usuário prossiga sua criação de tarefa 
 def processar_dados_compromisso(dados):
     dados_processados = dados
     dados_gravacao = [
@@ -374,6 +408,14 @@ def processar_dados_compromisso(dados):
     print('dados de gravação', dados_gravacao)
     return {'erro': False, 'mensagem': 'Dados do compromissos criados com sucesso!'}
     
+# Nome da função: processar_alterar_comp
+# Data de alteração: 05-12-2024
+# Parâmetros entrada: 
+# Nome: dados, tipo: string, finalidade: fornecer os dados para que eles sejam processados, validados, e retorna as mensagens para o frontend e printa no terminal
+# 1° Retorno:
+# Nome: retorna mensagem de erro, tipo: boleano, finalidade: retornar ao frontend o erro.
+# 2° Retorno:
+# Nome: retorna a mensagem para o terminal e console, tipo: boleano, finalidade: permite que o usuário prossiga sua alteração de tarefa
 def processar_alterar_comp(dados):
     print ('processamento', dados)
     dados_processados = dados
@@ -403,17 +445,20 @@ def processar_alterar_comp(dados):
     if mensagens_erro:
         return {'erro': True, 'mensagens': mensagens_erro}
     else:
-        # Chama a função para gravar os dados em um arquivo, caso não tenha mensagens de erro
-        #gravar_em_arquivo(dados_processados)
         atualizar_compromisso(dados_gravacao)
         print(dados_gravacao)
-        # Retorna os dados processados
         return {'erro': False, 'mensagem': 'Dados do compromissos criados com sucesso'}
     
 
+# Nome da função: processar_alterar_comp
+# Data de alteração: 05-12-2024
+# Parâmetros entrada: 
+# Nome: dados, tipo: string, finalidade: fornecer os dados para que eles sejam processados, validados, e retorna as mensagens para o frontend e printa no terminal
+# 1° Retorno:
+# Nome: retorna mensagem de erro, tipo: boleano, finalidade: retornar ao frontend o erro.
+# 2° Retorno:
+# Nome: retorna a mensagem para o terminal e console, tipo: boleano, finalidade: permite que o usuário prossiga sua alteração de dados do cartão
 def processar_alterar_cart(dados):
-    # Função para processar os dados recebidos do Flask
-    # Retorna os dados processados
     dados_processados = dados
 
     update_dadosCart = []
@@ -425,6 +470,7 @@ def processar_alterar_cart(dados):
     update_dadosCart.append(dados_processados.get('novo_nomeTitular'))
     # Adicione o ID do usuário
     update_dadosCart.append(dados_processados.get('id'))
+    update_dadosCart.append(dados_processados.get('escolha_pag'))
 
     print(update_dadosCart)
 
@@ -462,8 +508,15 @@ def processar_alterar_cart(dados):
         return {'erro': False, 'mensagem': alterar_cart}
     
 
+# Nome da função: consultar_data
+# Data de alteração: 05-12-2024
+# Parâmetros entrada: 
+# Nome: dados, tipo: string, finalidade: fornecer os dados para que eles sejam processados para buscar data e marcar a bolinha amarela no calendário e depois retorna uma mensagem para o frontend
+# 1° Retorno:
+# Nome: retorna a mensagem para o terminal e console, tipo: boleano, finalidade: permite que apareça a bolinha amarela no calendário
+# 2° Retorno:
+# Nome: retorna mensagem de erro, tipo: boleano, finalidade: retornar ao frontend o erro.
 
-#Função para buscar data e marcar a bolinha amarela no calendário
 def consultar_data(dados): 
     print('Dentro função consultar_data', dados)   
     user_id = dados.get('user_id')

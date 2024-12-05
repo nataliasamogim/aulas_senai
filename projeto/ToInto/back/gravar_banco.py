@@ -1,11 +1,19 @@
+# Nome do componente: gravar_banco.py
+# Autor: Maria Luiza 
+# Data alteração: 03/12/2024
+# Descrição detalhada: Este código realiza exclusões nas tabelas de cadastro e compromissos, deletando a conta do usuário e os compromissos criados por ele.
+
 import conexao
 import datetime
 
+# Função que grava os dados de cadastro no banco de dados.
 def gravar_dados(dados_gravacao):
     conex = conexao.conectar()
     cursor = conex.cursor()
-    vemail = [dados_gravacao[1]]
+    vemail = [dados_gravacao[1]] # Obtém o e-mail dos dados fornecidos.
     print('vemail: ', vemail)
+
+    # Verifica se o e-mail já está cadastrado.
     sql = "SELECT ID_CAD FROM CADASTRO WHERE EMAIL = %s limit 1"
      #val = (nome, email, senha)
     cursor.execute(sql, vemail)
@@ -13,7 +21,7 @@ def gravar_dados(dados_gravacao):
     print('valida gravado: ', check)
 
     if check == None:
-
+    # Caso o e-mail não esteja cadastrado, insere um novo registro na tabela de cadastro.
         sql = "INSERT INTO cadastro (NOME_USUARIO, EMAIL, SENHA) VALUES (%s, %s, %s)"
         nome, email, senha, opc = dados_gravacao
         val = (nome, email, senha)
@@ -21,8 +29,11 @@ def gravar_dados(dados_gravacao):
         conex.commit()
         
     else:
+        # Retorna erro se o e-mail já estiver cadastrado.
         return {'erro': True, 'mensagem': 'Usuário já cadastrado'}
     print("Dados criados no formulário de cadastro", dados_gravacao)
+
+    # Verifica se o plano é gratuito e grava os dados correspondentes.
     if opc == 1:
         #nome, email, senha = dados_gravacao
         sql = "SELECT ID_CAD FROM CADASTRO WHERE NOME_USUARIO = %s AND EMAIL = %s AND SENHA = %s"
@@ -40,6 +51,7 @@ def gravar_dados(dados_gravacao):
         id = id[0]
 
     else: 
+        # Obtém o ID do cadastro para ser usado posteriormente
         sql = "SELECT ID_CAD FROM CADASTRO WHERE NOME_USUARIO = %s AND EMAIL = %s AND SENHA = %s"
         val = (nome, email, senha)
         cursor.execute(sql, val)
@@ -50,8 +62,9 @@ def gravar_dados(dados_gravacao):
     conex.close()
     return  {'erro': False, 'mensagem': [id, opc, nome, email]}
 
+# Função que grava os dados de pagamento no banco de dados.
 def gravar_dados_cartao(dados_gravacao):
-        # Converta dicionário em lista, se necessário
+    # Converte dicionário em lista, se necessário
     if isinstance(dados_gravacao, dict):
         dados_gravacao = [
             dados_gravacao.get('escolha_pag'),
@@ -77,12 +90,14 @@ def gravar_dados_cartao(dados_gravacao):
     print('Print teste atual', dados_receb)
     print('ABCD:', dados_gravacao[3], dados_gravacao[5], dados_gravacao[7])
     if escolha_pag == '2':
+        # Insere os dados de pagamento para cartão de crédito.
         sql = "INSERT INTO dados_pag (TIPO_PAG, ID_CAD, CPF, DATA_PAG, NUM_CARTAO, CVV, DATA_VENC, NOME_CARTAO) VALUES ('2', %s, %s, %s, %s, %s, %s, %s)"
         cursor.execute(sql, dados_receb)
         print("Dados do Cartão inseridos com sucesso!") 
         conex.commit()
     
     else: 
+        # Insere os dados de pagamento para PIX.
         data_atual = datetime.datetime.now()
         data_formatada = data_atual.strftime("%Y/%m/%d")
         sql = "INSERT INTO dados_pag (TIPO_PAG, ID_CAD, DATA_PAG, CHAVE_PIX) VALUES ('1', %s, %s, %s)"
@@ -91,7 +106,10 @@ def gravar_dados_cartao(dados_gravacao):
         conex.commit()
         print("Dados do Pix inseridos com sucesso!") 
     
-    if plano == '2':  
+    # Processa a compra com base no plano escolhido.
+    # Se o plano for mensal, cairá nessa condição.
+    if plano == '2': 
+        # Se a escolha for cartão de crédito, cairá nesse comando de recuperação do ID de dados de pagamento pelo CPF e número de cartão, para depois ser realizado o insert na tabela compras 
         if escolha_pag == '2':
             sql = "SELECT ID_DADOS_PAG FROM DADOS_PAG WHERE CPF = %s AND NUM_CARTAO = %s order by ID_DADOS_PAG desc limit 1"
             val_dados_pag = (dados_gravacao[3], dados_gravacao[5])  # Preenchendo com os valores corretos
@@ -107,6 +125,7 @@ def gravar_dados_cartao(dados_gravacao):
             print("Compra mensal inserida com sucesso")
             conex.commit()
 
+        # Cairá nesse comando se a escolha de pagamento for pix, recuperando o ID de dados de pagamento, para depois ser realizado o insert na tabela compras 
         else:
             sql = "SELECT ID_DADOS_PAG FROM DADOS_PAG WHERE CHAVE_PIX = %s order by ID_DADOS_PAG desc limit 1"
             val_dados_pag = (dados_gravacao[9],)  # Preenchendo com os valores corretos
@@ -122,6 +141,7 @@ def gravar_dados_cartao(dados_gravacao):
             print("Compra mensal inserida com sucesso")
             conex.commit()
 
+     # Se o plano for anual, cairá nessa condição, que fará os mesmos comandos que a condição de cima para realizar o insert na tabela compras.
     else: 
         if escolha_pag == "2":
             sql = "SELECT ID_DADOS_PAG FROM DADOS_PAG WHERE CPF = %s AND NUM_CARTAO = %s order by ID_DADOS_PAG desc limit 1"
@@ -154,6 +174,7 @@ def gravar_dados_cartao(dados_gravacao):
     conex.close()
     return  {'erro': False, 'mensagem': 'Dados do cartão realizados com sucesso'}
 
+# Função que grava dados de compromissos com base no plano do usuário.
 def gravar_dados_compromisso(dados_gravacao):
     conex = conexao.conectar()
     cursor = conex.cursor()
@@ -162,6 +183,7 @@ def gravar_dados_compromisso(dados_gravacao):
     
     try:
         # Validação do plano (Anual)
+        # Plano anual: grava compromissos sem limites diários.
         if plano_esc == '1': 
             sql = "INSERT INTO compromissos (ID_CAD, TITULO_COMP, DATA_COMP, HORARIO_COMP, DESCRICAO, IMPORTANTE, LEMBRETE) VALUES (%s, %s, %s, %s, %s, %s, %s)"
             cursor.execute(sql, tuple(dados_gravacao[:7]))  # Passando os valores como uma tupla
@@ -169,6 +191,7 @@ def gravar_dados_compromisso(dados_gravacao):
             print("Dados do compromisso inseridos com sucesso!")
         
         # Validação do plano (Mensal)
+        # Plano mensal: limita compromissos a 100 por dia.
         elif plano_esc == '2':
             data_atual = datetime.datetime.now()
             data_formatada = data_atual.strftime("%Y/%m/%d")
@@ -186,7 +209,9 @@ def gravar_dados_compromisso(dados_gravacao):
             else: 
                 return {'erro': True, 'mensagens': [{'limite': 'Você chegou ao seu limite de tarefas diárias para o plano mensal.'}]}
             
-            # Validação do plano (Grátis)
+            
+        # Validação do plano (Grátis)
+        # Plano grátis: limita compromissos a 7 por dia.
         else:
             data_atual = datetime.datetime.now()
             data_formatada = data_atual.strftime("%Y/%m/%d")

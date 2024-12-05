@@ -1,6 +1,6 @@
 # Nome do componente: validacoes.py
-# Autor: Marília Martins Bellini 
-# Data criação/alteração: 24/09/2024
+# Autor: Maria Luiza 
+# Data criação/alteração: 05-12-2024
 # Descrição detalhada: esse componente valida os campos dos formulários (cadastro e login), 
 # como nome, email, senha e confirmar senha, tendo validações como mínimo e máximo de caracteres,
 # se o campo nome possui somente letras, se o campo emaile senha estão dentro das condições específicas
@@ -8,15 +8,15 @@
 
 import re
 # Nome da função: validar_nome
-# Autor: Marília Martins Bellini
-# Data de criação/alteração: 24/09/2024
+# Autor: Maria Luiza
+# Data de criação/alteração: 05-12-2024
 # Parâmetros de entrada: 
 ## Nome: nome, tipo: string, finalidade: validar se o nome está dentro das condições específicas
 # 1° Retorno:
 ## Nome: retorna mensagens de erro, tipo: boleano, finalidade: retornar mensagens de erro para o usuário
 # 2° Retorno:
 ## Nome: retorna vazio, tipo: boleano, finalidade: não retornar nada se não tiver erro.
-# Essa função tem a finalidade de validar o email do usuário através da quantidade de caracteres, se há somente letras, 
+# Essa função tem a finalidade de validar o nome do usuário através da quantidade de caracteres, se há somente letras, 
 # espaço e se não há mais de 3 letras repetidas
 def validar_nome(nome):
    
@@ -43,8 +43,8 @@ def validar_nome(nome):
     return {'erro': False, 'mensagem': ''}
 
 # Nome da função: validar_email
-# Autora: Marília Martins Bellini
-# Data de criação/alteração: 24/09/2024
+# Autora: Maria Luiza
+# Data de criação/alteração: 05-12-2024
 # Parâmetros de entrada: 
 ## Nome: vemail, tipo: string, finalidade: validar se o email está dentro das condições específicas
 # 1° Retorno:
@@ -97,7 +97,7 @@ def confirmar_senha(senha, confirmsenha):
 # Autora: Marilia Martins Bellini
 # Data de criação/alteração: 24/09/2024
 # Parâmetros de entrada: 
-## Nome: senha, tipo: string, finalidade: validar se a senha está dentro das condições específicas.
+## Nome: vsenha, tipo: string, finalidade: validar se a senha está dentro das condições específicas.
 # 1° Retorno:
 ## Nome: retorna mensagens de erro, tipo: boleano, finalidade: retornar mensagens de erro para o usuário.
 # 2° Retorno:

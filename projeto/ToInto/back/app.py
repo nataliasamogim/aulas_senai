@@ -1,6 +1,6 @@
 # Nome do componente: app.py
 # Autor: Maria Luiza 
-# Data criação/alteração: 01/12/2023
+# Data alteração: 03/12/2024
 # Descrição detalhada: esse componente importa o flask, flask_cors e a função processar_dados do processamento.py, 
 # além de printar no terminal as mensagens de erro que estão dentro da função processar_dados.
 
