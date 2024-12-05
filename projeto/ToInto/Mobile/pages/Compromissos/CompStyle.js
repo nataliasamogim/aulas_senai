@@ -12,7 +12,7 @@ export default styles = StyleSheet.create({
     container: {
         backgroundColor: '#AE80D6',
         height: 557,
-        width: 350,
+        width: 400,
         borderRadius: 15,
         alignItems: 'center',
         marginLeft: 22
@@ -126,7 +126,7 @@ export default styles = StyleSheet.create({
         paddingRight: 10,
         borderTopWidth: 0.8,
         borderTopColor: '#fff',
-        top: 55,
+        top: 50,
         paddingRight: 20,
         paddingLeft: 20
     },
