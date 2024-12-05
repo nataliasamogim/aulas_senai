@@ -1,3 +1,6 @@
+/*Descrição: Esse código é responsável pela estilização da página plano no mobile, o código estiliza a estrutura da página, 
+para a escolher da forma de pagamento entre pix e cartão, além dos botões*/
+
 import { StyleSheet } from "react-native";
 
 export default styles = StyleSheet.create({
@@ -5,6 +8,8 @@ export default styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#6B29A4',
     },
+
+    /*Início da logo*/
     containerLogos: {
         display: 'flex',
         flexDirection: 'row',
@@ -16,6 +21,8 @@ export default styles = StyleSheet.create({
         top: 35, 
         paddingBottom: 10
     },
+    /*Fim da logo*/
+
     perfil: {
         width: 60,
         height: 60, 
@@ -29,6 +36,8 @@ export default styles = StyleSheet.create({
     container: {
         marginTop: 150
     },
+    
+    /*Início dos textos*/
     texto: {
         textAlign: 'center',
         color: '#fff',
@@ -46,6 +55,19 @@ export default styles = StyleSheet.create({
         fontSize: 27, 
         textAlign: 'center'
     },
+    selectTxt: {
+        fontSize: 20, 
+        color: '#fff',
+        paddingLeft: 10,
+        alignItems: 'center'
+    },
+    submitTxt: {
+        color: '#fff',
+        fontSize: 20
+    },
+    /*Fim dos textos*/
+
+    /*Início do select da escolha entre pix e cartão*/
     selectPlano: {
         alignItems: 'center',
         marginTop: 30, 
@@ -62,12 +84,9 @@ export default styles = StyleSheet.create({
         display: 'flex', 
         flexDirection: 'row',
     },
-    selectTxt: {
-        fontSize: 20, 
-        color: '#fff',
-        paddingLeft: 10,
-        alignItems: 'center'
-    },
+    /*Fim do select da escolha entre pix e cartão*/
+
+    /*Início dos botões*/
     buttonsPlano: {
         display:'flex', 
         flexDirection: 'row',
@@ -89,9 +108,7 @@ export default styles = StyleSheet.create({
         paddingRight: 25,  
         borderRadius: 5,
     },
-    submitTxt: {
-        color: '#fff',
-        fontSize: 20
-    }
+
+    /*Fim dos botões*/
 
 });

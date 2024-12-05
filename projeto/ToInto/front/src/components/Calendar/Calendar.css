@@ -106,13 +106,24 @@
   font-size: 140%;
 }
 
-/* Fim do bloco dos dias */
+.day-today {
+  background-color: #9764b7; /* Cor para o dia de hoje */
+  color: #fff; /* Cor do texto */
+  
+}
 
-/*.event {
-    color: white;
-    padding: 4px;
-    margin: 2px;
-  }*/
+.bolinha {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background-color: yellow;
+  border-radius: 50%;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Fim do bloco dos dias */
 
 /*Início do botão de adicionar evento*/
 .todo_button {
@@ -124,47 +135,9 @@
   text-decoration: none;
 }
 
-/*.toDoList{
-  background-color: #9e80b3;
-  width: 40%;
-  margin-top: 8.1%;
-  border-radius: 5px;
-}
+/*Fim do botão de adicionar evento*/
 
-#DataTodo{
-  color: white;
-  font-size: 33px;
-  margin: 17px;
-}
-
-
-.butTodo{
-background-color: transparent;
-  color: white;
-  border: none;
-  font-size: 34px;
-  margin-top: 470px;
-  bottom: 0;
-  margin-left: 300px;
-}
-  */
-  .day-today {
-    background-color: #9764b7; /* Cor para o dia de hoje */
-    color: #fff; /* Cor do texto */
-    
-  }
-  
-  .bolinha {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    background-color: yellow;
-    border-radius: 50%;
-    bottom: 5px;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
+/*Início do menu*/
   a.menu_hoje {
     color: white;
     text-decoration: none;
@@ -192,6 +165,9 @@ background-color: transparent;
     font-size: 18px;
   }
 
+/*Fim do menu*/
+
+/*Início do todo*/
 .toDoList {
   background-color: #9e80b3;
   width: 100%;
@@ -223,6 +199,8 @@ background-color: transparent;
   margin-top: auto;
 }
 
+/*Fim do todo*/
+
 ul {
   list-style-type: none;
   padding: 0;
@@ -238,6 +216,8 @@ ul {
   flex-direction: column; /* Alinha título e descrição em coluna */
   align-items: flex-start;
 }
+
+/*Início da data, descrição, hora e título*/
 
 .data_tarefa {
   margin-left: -238px !important;  /* Coloca o contêiner no início da linha (à esquerda) */
@@ -261,6 +241,14 @@ ul {
   word-break: break-all;
 }
 
+li .descricao {
+  margin-top: 5px; /* Espaçamento entre título e descrição */
+  font-size: 14px; /* Tamanho menor para a descrição */
+}
+
+/*Fim da data, descrição, hora e título*/
+
+/*Início dos botões de editar e excluir*/
 .buttonEditar,
 .buttonExcluir{
   background-color: transparent;
@@ -272,22 +260,26 @@ ul {
   /*align-self: flex-end; Posiciona o botão à direita */
 }
 
+.tarefa_edit_lixo{
+  display: flex;
+  justify-content: space-between;
+}
+
 #botoes{
   display: flex;
   align-self: flex-end;
 }
 
+/*Fim dos botões de editar e excluir*/
 
-li .descricao {
-  margin-top: 5px; /* Espaçamento entre título e descrição */
-  font-size: 14px; /* Tamanho menor para a descrição */
-}
-
+/*Início para quando não possui tarefas*/
 #nenhuma-task{
   align-items: center;
   background-color: transparent;
 }
+/*Fim para quando não possui tarefas*/
 
+/*Início do check*/
 .check_tarefa{
   display: flex;
 }
@@ -296,18 +288,15 @@ li .descricao {
   padding-right: 5px;
 }
 
-.tarefa_edit_lixo{
-  display: flex;
-  justify-content: space-between;
-}
-
-/* Fim do botão de adicionar evento*/
+/*Fim do check*/
 
 /*Inicio do css para destaque das tarefas importantes*/
 .tarefa-importante {
   background-color: #628cbd; /* Azul para destaque */
   color: white; /* Texto branco para contraste */
 }
+
+/*Fim do css para destaque das tarefas importantes*/
 
 
 /*Fim do Calendar*/

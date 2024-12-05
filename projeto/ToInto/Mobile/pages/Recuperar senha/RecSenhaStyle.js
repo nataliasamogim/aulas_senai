@@ -1,3 +1,6 @@
+/*Descrição: Esse código é responsável pela estilização da página recuperar senha no mobile, o código estiliza a estrutura da página, 
+como o nome de usuário, email e botões.*/
+
 import { StyleSheet } from "react-native";
 
 export default styles = StyleSheet.create({
@@ -10,6 +13,11 @@ export default styles = StyleSheet.create({
         width: 395,
     },
 
+    containerRec:{
+        marginBottom: '8%',
+    },
+
+    /*Início da logo*/
     logoRec: {
         position: 'absolute',
         top: 80,
@@ -22,7 +30,9 @@ export default styles = StyleSheet.create({
         position: 'relative',
         alignItems:'center',
     },
+    /*Fim da logo*/
 
+    /*Início dos textos e email*/
     titleRec:{
         marginBottom: '8%',
     },
@@ -47,10 +57,9 @@ export default styles = StyleSheet.create({
         paddingLeft: 10,
     },
 
-    containerRec:{
-        marginBottom: '8%',
-    },
+    /*Fim dos textos e email*/
 
+    /*Início dos botões*/
     btnSubSalvarRec:{
         backgroundColor: '#AE80D6', 
         justifyContent: 'center',
@@ -71,5 +80,5 @@ export default styles = StyleSheet.create({
        
     }
 
-
+    /*Fim dos botões*/
 });
