@@ -1,6 +1,10 @@
+/*Descrição detalhada: Esse código é responsável pela estilização do Perfil do Tointo Mobile, que consiste em um modal,
+por essa razão esse código inclui edição de sua posição, dos botões, dos textos */
 import { StyleSheet } from 'react-native';
 
 export default styles = StyleSheet.create({
+
+    /*Inicio do Perfil*/
     container: {
         flex: 1,
         backgroundColor: '#6B29A4',
@@ -17,25 +21,19 @@ export default styles = StyleSheet.create({
         borderRadius: 50,
         marginBottom: 10,
     },
+
     text: {
         fontSize: 20,
         color: 'white',
         marginBottom: 5,
         textAlign: 'center',
     },
+
     text2: {
         fontSize: 20,
         color: 'white',
         marginBottom: 20,
         textAlign: 'center',
-    },
-
-    botao: {
-        fontSize: 20,
-        color: 'white',
-        textAlign: 'center',
-        alignItems: 'center',
-        padding: 4
     },
 
     containerButtons: {
@@ -44,7 +42,6 @@ export default styles = StyleSheet.create({
         width: '70%',
         alignItems: 'center',
         marginLeft: 65
-
     },
 
     button: {
@@ -56,35 +53,12 @@ export default styles = StyleSheet.create({
         marginBottom: 15
     },
 
-    buttonAjuda: {
-        padding: 5,
-        borderRadius: 5,
-        backgroundColor: '#AE80D6',
-        width: '90%',
-        marginBottom: 15,
-    },
-    
-    buttonExclui: {
-        padding: 5,
-        borderRadius: 5,
-        backgroundColor: '#AE80D6',
-        width: '90%',
-        marginBottom: 15,
-    },
-    buttonSair: {
-        backgroundColor: '#AE80D6',
-        padding: 5,
-        borderRadius: 5,
-        margin: 10,
-        width: '20%',
-        fontSize: 17,
-
-    },
-    containerSair: {
-        alignItems: 'center'
-    },
-    buttonText: {
-        fontSize: 16,
+    botao: {
+        fontSize: 20,
+        color: 'white',
+        textAlign: 'center',
+        alignItems: 'center',
+        padding: 4
     },
 
     ModifPag: {
@@ -108,11 +82,6 @@ export default styles = StyleSheet.create({
         padding: 7,
         borderRadius: 5
     },
-    optionCart: {
-        backgroundColor: '#773AAB',
-        padding: 7,
-        borderRadius: 5
-    },
 
     option: {
         fontSize: 20,
@@ -120,6 +89,42 @@ export default styles = StyleSheet.create({
         textAlign: 'center',
         alignItems: 'center',
     },
+
+    optionCart: {
+        backgroundColor: '#773AAB',
+        padding: 7,
+        borderRadius: 5
+    },
+    
+    buttonAjuda: {
+        padding: 5,
+        borderRadius: 5,
+        backgroundColor: '#AE80D6',
+        width: '90%',
+        marginBottom: 15,
+    },
+    
+    buttonExclui: {
+        padding: 5,
+        borderRadius: 5,
+        backgroundColor: '#AE80D6',
+        width: '90%',
+        marginBottom: 15,
+    },
+
+    containerSair: {
+        alignItems: 'center'
+    },
+
+    buttonSair: {
+        backgroundColor: '#AE80D6',
+        padding: 5,
+        borderRadius: 5,
+        margin: 10,
+        width: '20%',
+        fontSize: 17,
+    },
+
     containerLogos: {
         backgroundColor: '#E0',
         height: 83,
@@ -134,21 +139,28 @@ export default styles = StyleSheet.create({
         paddingRight: 20,
         paddingLeft: 20
     },
-    perfil: {
-        width: 55,
-        height: 55,
-        borderRadius: 50,
-        top: 8,
+    
+    buttonText: {
+        fontSize: 16,
     },
+
     menu: {
         width: 48,
         height: 48,
         top: 12
     },
+
     iconeCalen: {
         width: 50,
         height: 50,
         top: 10
+    },
+    
+    perfil: {
+        width: 55,
+        height: 55,
+        borderRadius: 50,
+        top: 8,
     },
 
     centeredView: {
@@ -173,18 +185,21 @@ export default styles = StyleSheet.create({
         shadowRadius: 4,
         elevation: 5,
     },
+
     modalText: {
         marginBottom: 15,
         textAlign: 'center',
         color: 'white',
         fontSize: 20
     },
+
     buttonsModal: {
         flexDirection: 'row',
         display: 'flex',
         justifyContent: 'space-between',
         alignSelf: 'center'
     },
+
     closeButton: {
         backgroundColor: '#AE80D6',
         borderRadius: 10,
@@ -192,6 +207,7 @@ export default styles = StyleSheet.create({
         elevation: 2,
         margin: 5,
     },
+
     confirmButton: {
         backgroundColor: '#AE80D6',
         borderRadius: 10,
@@ -200,11 +216,14 @@ export default styles = StyleSheet.create({
         margin: 5,
         marginLeft: 40,
     },
+    
     closeButtonText: {
         color: 'white',
         fontWeight: 'bold',
         textAlign: 'center',
         fontSize: 15,
     },
+
+    /*Fim do perfil*/
 
 });

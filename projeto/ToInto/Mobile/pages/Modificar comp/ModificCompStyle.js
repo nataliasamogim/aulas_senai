@@ -1,5 +1,9 @@
+/*Descrição detalhada: Esse código é responsável pela estilização do Modificar Compromisso do Tointo Mobile, 
+que inclui, os botões, os inputs e os textos, o checkBox */
+
 import { StyleSheet } from 'react-native';
 
+/*Inicio do Modificar compromisso*/
 export default styles = StyleSheet.create({
     background: {
         flex: 1,
@@ -130,6 +134,7 @@ export default styles = StyleSheet.create({
     btnHorarioText: {
         fontSize: 15,
     },
-
+    
+ /*Fim do modificar do compromisso */
 
 });

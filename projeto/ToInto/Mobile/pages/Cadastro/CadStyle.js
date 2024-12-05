@@ -1,7 +1,10 @@
-/*Descrição detalhada: Esse código é responsável pela estilização do Cadastro do Tointo Mobile,  */
+/*Descrição detalhada: Esse código é responsável pela estilização do Cadastro do Tointo Mobile, que inclui a logo, os botões, os inputs e os textos */
 import { StyleSheet } from "react-native";
 
+
 export default styles = StyleSheet.create({
+
+  /*Inicio do cadastro */
   background: {
     flex: 1,
     alignItems: 'center',
@@ -9,20 +12,29 @@ export default styles = StyleSheet.create({
     backgroundColor: '#6B29A4',
     width: '100%'
   },
+
   containerLogo: {
     flex: 0.17,
     position: 'relative',
   },
+
+  container: {
+    flex: 1,
+    width: '90%',
+  },
+
   logo: {
     width: 280,
     height: 100,
     position: 'absolute',
     top: 15
   },
-  container: {
-    flex: 1,
-    width: '90%',
+
+  label: {
+    fontSize: 18,
+    color: '#fff',
   },
+
   inputs: {
     backgroundColor: '#fff',
     width: '100%',
@@ -33,7 +45,6 @@ export default styles = StyleSheet.create({
     padding: 7,
   },
 
-  // Exemplo de estilo para o ícone de olho
   eyeIcon: {
     position: 'absolute',
     right: 10,
@@ -41,6 +52,65 @@ export default styles = StyleSheet.create({
     width: 40,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+
+  selectableBoxes: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 20,
+  },
+
+  box: {
+    width: 90,
+    height: 120,
+    backgroundColor: '#AC72BF',
+    borderWidth: 2,
+    borderColor: 'black',
+    alignItems: 'center',
+    paddingTop: 6,
+    color: '#fff',
+  },
+
+  boxText: {
+    color: '#fff',
+    fontSize: 20,
+  },
+
+  boxSubtitle: {
+    color: '#fff',
+    fontSize: 12,
+  },
+
+  saibaMais: {
+    paddingTop: 10,
+    color: '#570D70',
+    fontSize: 12,
+  },
+
+  containerConta: {
+    alignItems: 'center',
+    marginTop: 20,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+
+  titleNoCampo: {
+    color: '#fff',
+    fontSize: 16,
+    marginRight: 5,
+  },
+
+  Txtentrar: {
+    color: '#fff',
+    fontSize: 18,
+  },
+
+  buttons: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    padding: 20,
   },
 
   btnSubmit: {
@@ -53,35 +123,29 @@ export default styles = StyleSheet.create({
     borderRadius: 5,
     margin: 10,
   },
-  buttons: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    padding: 20,
-  },
+  
   submitTxt: {
     color: '#fff',
     fontSize: 18,
   },
-  label: {
-    fontSize: 18,
-    color: '#fff',
-  },
-  selectableBoxes: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: 20,
-  },
-  box: {
-    width: 90,
-    height: 120,
-    backgroundColor: '#AC72BF',
-    borderWidth: 2,
-    borderColor: 'black',
+
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
     alignItems: 'center',
-    paddingTop: 6,
-    color: '#fff',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
+  
+  modalTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    textAlign: 'center',
+    color: '#570D70',
+    marginTop: 20, // Espaçamento acima do título
+  },
+  
+  
   selected: {
     backgroundColor: '#570D70',
   },
@@ -89,28 +153,12 @@ export default styles = StyleSheet.create({
     width: 40,
     height: 40,
   },
-  boxText: {
-    color: '#fff',
-    fontSize: 20,
-  },
-  boxSubtitle: {
-    color: '#fff',
-    fontSize: 12,
-  },
-  saibaMais: {
-    paddingTop: 10,
-    color: '#570D70',
-    fontSize: 12,
-  },
+  
+  
   selectedText: {
     color: '#fff',
   },
-  modalContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  },
+  
   modalContent: {
     backgroundColor: '#AC72BF',
     borderRadius: 20,
@@ -126,36 +174,25 @@ export default styles = StyleSheet.create({
     elevation: 5,
     alignItems: 'center',
   },
-  modalTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 10,
-    textAlign: 'center',
-    color: '#570D70',
-    marginTop: 20, // Espaçamento acima do título
-  },
+  
   modalText: {
     marginBottom: 10, // Espaçamento entre as mensagens de erro
     fontSize: 18,
     textAlign: 'left', // Alinhamento do texto para a esquerda
     color: '#fff',
   },
-  containerConta: {
-    alignItems: 'center',
-    marginTop: 20,
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
+
+  containerErro: {
+    marginBottom: 20,
   },
-  titleNoCampo: {
-    color: '#fff',
-    fontSize: 16,
-    marginRight: 5,
-  },
-  Txtentrar: {
-    color: '#fff',
+
+  textErro: {
+    textAlign: 'center',
+    marginBottom: 10,
     fontSize: 18,
+    color: '#fff',
   },
+  
   closeButton: {
     backgroundColor: '#570D70',
     paddingVertical: 10,
@@ -163,19 +200,13 @@ export default styles = StyleSheet.create({
     width: 150,
     marginTop: 20, // Espaçamento acima do botão Fechar
   },
+
   closeButtonText: {
     color: '#fff',
     fontWeight: 'bold',
     fontSize: 18,
     textAlign: 'center',
   },
-  containerErro: {
-    marginBottom: 20,
-  },
-  textErro: {
-    textAlign: 'center',
-    marginBottom: 10,
-    fontSize: 18,
-    color: '#fff',
-  },
+
+  /*Fim do cadastro */
 });
