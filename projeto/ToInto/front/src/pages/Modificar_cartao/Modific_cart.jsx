@@ -1,7 +1,7 @@
-{/* Nome do componente: Modifc_cart*/ }
-{/* Autor: Júlia Dias Lara e Natália Ap. Samogim*/ }
-{/* Data de criação: 01/10/2024*/ }
-{/* Descrição detalhada: Nesse componente, o código lida com a manipulação de dados do formulário, realiza validações no 
+{/* Nome do componente: Modifc_cart
+ Autor(a): Laura
+ Data de criação: 01/10/2024/Alterações: 05/12/2024
+ Descrição detalhada: Nesse componente, o código lida com a manipulação de dados do formulário, realiza validações no 
 lado do cliente, e envia esses dados para um servidor, para ser processado e gravado em um documento txt. O componente é 
 configurado para fornecer feedback visual aos usuários sobre o sucesso ou falha no processamento do formulário.*/}
 

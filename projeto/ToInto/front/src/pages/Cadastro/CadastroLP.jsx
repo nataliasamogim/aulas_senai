@@ -1,16 +1,15 @@
-{/* Nome do componente: CadastroLP*/ }
-{/* Autor: Júlia */ }
-{/* Data de criação: /alteração: 01-10-2024*/ }
-{/* Descrição detalhada: Nesse componente, o código lida com a manipulação de dados do formulário, realiza validações no 
-lado do cliente, e envia esses dados para um servidor, para ser processado e gravado em um documento txt. O componente é 
-configurado para fornecer feedback visual aos usuários sobre o sucesso ou falha no processamento do formulário.*/}
+{/* Nome do componente: CadastroLP */ }
+{/* Autor(a): Laura */ }
+{/* Data de criação: /Alterações: 01-10-2024 */ }
+{/* Descrição detalhada: Esse componente lida com a manipulação de dados do formulário, realiza validações no 
+lado do cliente e envia esses dados para um servidor, para serem processados e gravados em um documento txt. 
+O componente é configurado para fornecer feedback visual aos usuários sobre o sucesso ou falha no processamento do formulário. */ }
 
 import React, { useState } from 'react';
 import './CadastroLP.css';
 import { useNavigate } from 'react-router-dom';
 import { Modal, Button } from 'react-bootstrap';
 
-{/*Utiliza o useState para a criação de um estado local chamado formValues(vai armazenar as informações do campo de email e senha) */ }
 const CadastroLP = () => {
     const navigate = useNavigate();
     const [planoSelecionado, setPlanoSelecionado] = useState(null);
@@ -24,10 +23,9 @@ const CadastroLP = () => {
     });
 
     const [mensagensErro, setMensagensErro] = useState([]);
-    const [modalIsOpen, setIsOpen] = useState(false); // Alterado: 'modalIsOpen' controla a exibição do modal.
-    
-    {/* O método handleChange é chamado sempre que um dos campos do formulário é alterado. 
-    Ele atualiza o estado formValues com os novos valores do campo.*/}
+    const [modalIsOpen, setIsOpen] = useState(false);
+
+    // Atualiza os valores do formulário conforme o usuário preenche os campos
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormValues((prevValues) => ({
@@ -36,42 +34,40 @@ const CadastroLP = () => {
         }));
     };
 
+    // Define o plano selecionado
     const handlePlanoSelecionado = (plano) => {
-        console.log('plano', plano);
         setPlanoSelecionado(plano);
-        //console.log('plano',planoSelecionado);
     };
 
+    // Transforma as mensagens do servidor para melhor exibição
     function transformarMensagens(response) {
         const novasMensagens = [];
 
-        // Itera sobre as mensagens do JSON original
         response.mensagens.forEach((item) => {
             if (Array.isArray(item.mensagem)) {
-                // Se 'mensagem' for um array, adiciona cada mensagem como um novo objeto
                 item.mensagem.forEach((msg) => {
                     novasMensagens.push({ erro: item.erro, mensagem: msg });
                 });
             } else {
-                // Caso contrário, mantém o objeto original
                 novasMensagens.push(item);
             }
         });
 
-        // Retorna um novo objeto com o array de mensagens atualizado
         return { erro: response.erro, mensagens: novasMensagens };
     }
 
+    // Lida com o envio do formulário
     const handleSubmit = async () => {
         if (!planoSelecionado) {
-            // Exibe uma mensagem de erro se nenhum plano foi selecionado
             setMensagensErro([{ mensagem: 'Por favor, selecione um plano antes de continuar.' }]);
-            return; // Impede o envio do formulário
+            return;
         }
-        formValues.planos = planoSelecionado
+
+        formValues.planos = planoSelecionado;
         console.log('submit', formValues);
+
         try {
-            const resposta = await fetch('http://10.135.60.17:8085/receber-dados', {
+            const resposta = await fetch('http://10.135.60.47:8085/receber-dados', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -82,12 +78,7 @@ const CadastroLP = () => {
             const resultado = await resposta.json();
 
             if (resultado.erro) {
-                // Exibe mensagens de erro no console.log ou em algum local visível
-                console.error('Erro no servidor:', resultado.mensagens);
-
-                // Atualiza o estado com as mensagens de erro para exibição no formulário
                 const novoResponse = transformarMensagens(resultado);
-                console.log(novoResponse);
                 setMensagensErro(novoResponse.mensagens);
                 setIsOpen(true);
             } else {
@@ -99,6 +90,7 @@ const CadastroLP = () => {
                 // Dados foram processados com sucesso
                 console.log('Dados processados com sucesso!', resposta);
                 // É direcionado para a página de acordo com o plano escolhido
+
                 if (planoSelecionado === 1) {
                     navigate('/concluido');
                 } else {
@@ -110,11 +102,13 @@ const CadastroLP = () => {
         }
     };
 
+    // Fecha o modal de erro
     const closeModal = () => {
-        setIsOpen(false); // Alterado: Função para fechar o modal
-        setMensagensErro([]); // Limpa as mensagens de erro
+        setIsOpen(false);
+        setMensagensErro([]);
     };
 
+    // Limpa os campos do formulário
     const limpaForm = () => {
         setFormValues({
             nome: '',
@@ -160,7 +154,6 @@ const CadastroLP = () => {
                         </Modal.Footer>
                     </Modal>
                 </div>
-
                 <section className="form_cadastro">
                     <form className="cadastro" id="cadastrar" action="" onSubmit={(e) => e.preventDefault()}>
                         <h1 className="h1_cadastro">Cadastro</h1>
@@ -180,7 +173,7 @@ const CadastroLP = () => {
                             <input className="input_3" type="password" name="senha" id="senha" value={formValues.senha} onChange={handleChange} placeholder="Digite sua senha" data-password-validate data-min-length="8" data-max-length="15" />
                         </div>
 
-                        <div className="form_grupo"> {/*div para a parte de confirmar senha*/}
+                        <div className="form_grupo">
                             <label className="confirmar">Confirmar senha </label>
                             <input className="input_4" type="password" name="confirmsenha" id="password" value={formValues.confirmsenha} onChange={handleChange} placeholder="Digite novamente sua senha" data-equal="senha" />
                         </div>
@@ -203,7 +196,6 @@ const CadastroLP = () => {
                             </button>
                         </div>
 
-
                         <div className="btn_can_cad">
                             <div className='can'> {/*botão cancelar do footer */}
                                 <input type='button' className="submit_can" id="btn_cancelar" onClick={limpaForm} value="Cancelar" />
@@ -215,7 +207,6 @@ const CadastroLP = () => {
                     </form>
                 </section>
             </div>
-
         </>
     );
 };

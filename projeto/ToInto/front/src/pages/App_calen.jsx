@@ -1,7 +1,7 @@
-{/*Nome componente: Componente AppCalen*/ }
-{/*Autor(a): Natália Aparecida Samogim*/ }
-{/*Data de criação:25/10/2023 e data de alteração: 06/12/2023*/ }
-{/*Tem o objetivo de juntar o Menu Lateral, o Calendário e o Perfil tudo na mesma página(é a página principal)*/ }
+{/*Nome componente: Componente App_calen
+Autor(a): Laura
+Data de criação:25/10/2023 /Alterações: 05/12/2024
+Descrição detalhada: Tem o objetivo de juntar o Menu Lateral, o Calendário e o Perfil tudo na mesma página(é a página principal)*/ }
 
 import Perfil from "../components/Perfil"
 import Calendario from "../components/Calendario";
@@ -9,11 +9,12 @@ import "../App.css"
 import React, { useEffect, useState } from 'react';
 
 
-{/*Nome função: AppCalen*/ }
-{/*Autor(a): Natália Aparecida Samogim*/ }
-{/*Data de criação:25/10/2023 e data de alteração: 06/12/2023*/ }
-{/*Parâmetros de entrada: Nulo*/ }
-{/*Retorno: retorna o MenuLateral, Calendário e Perfil*/ }
+{/*Nome função: AppCalen
+Autor(a): Laura
+Data de criação:25/10/2023 /Alterações: 05/12/2024
+Parâmetros de entrada: Nulo
+Retorno: retorna o MenuLateral, Calendário e Perfil*/ }
+
 function App_calen() {
     const [username, setUsername] = useState('');
 

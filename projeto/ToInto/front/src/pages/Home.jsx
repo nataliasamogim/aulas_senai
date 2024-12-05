@@ -1,7 +1,7 @@
-{/* Nome do componente: Home*/ }
-{/* Autor: Maria Luiza*/ }
-{/* Data de criação: /alteração: 06-12-2023*/ }
-{/* Descrição detalhada: Nesse componente, são importados todos os componentes da Landing, para que sejam chamados
+{/* Nome do componente: Home
+ Autor(a): Laura
+ Data de criação: /Alterações: 05/12/2024
+ Descrição detalhada: Nesse componente, são importados todos os componentes da Landing, para que sejam chamados
 todos em um mesmo componente.*/}
 
 import { CabecalhoLP } from "../components/Header/CabecalhoLP";
@@ -11,11 +11,11 @@ import { RecursosLP } from "../components/Recursos/RecursosLP";
 import { PlanosLP } from "../components/Planos/PlanosLP";
 import { FooterLP } from "../components/Footer/FooterLP";
 
-{/*Nome da função: Home*/ }
-{/*Autor: Maria Luiza*/ }
-{/*Data de criação/alteração: 06-12-2023*/ }
-{/*Parâmetros entrada: nulo*/ }
-{/*Descrição/observação: essa função retorna todos os componentes da Landing Page.*/ }
+{/*Nome da função: Home
+Autor(a): Laura
+Data de criação: /Alterações: 05/12/2024
+Parâmetros entrada: nulo
+Descrição/observação: essa função retorna todos os componentes da Landing Page.*/ }
 
 function Home() {
     return (

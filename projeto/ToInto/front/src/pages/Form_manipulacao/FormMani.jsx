@@ -1,3 +1,9 @@
+{/* Nome do componente: Esc_Pag_Modific 
+Autor(a): Laura
+Data de criação: /Alterações: 05/12/2024
+Descrição detalhada: Este componente representa uma seção de um formulário de pagamento para um plano mensal, oferecendo escolhas de forma de pagamento (Pix ou cartão de crédito),
+com botões para voltar e continuar. O componente permite que o usuário escolha sua forma de pagamento e navegue para a próxima seção do pagamento. */}
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './FormMani.css';
@@ -101,7 +107,7 @@ const FormMani = () => {
         convertPadraoBase64(defaultPhoto, (base64Image) => {
             const showDados = async () => {
                 try {
-                    const resposta = await fetch('http://10.135.60.34:8085/receber-dados', {
+                    const resposta = await fetch('http://10.135.60.47:8085/receber-dados', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -151,7 +157,7 @@ const FormMani = () => {
         e.preventDefault();
         console.log('imagem', formAlter.foto)
         try {
-            const resposta = await fetch('http://10.135.60.34:8085/receber-dados', {
+            const resposta = await fetch('http://10.135.60.47:8085/receber-dados', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

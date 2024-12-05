@@ -1,7 +1,7 @@
-{/*Nome componente: Componente App*/}
-{/*Autor(a): Natália Aparecida Samogim*/}
-{/*Data de criação:20/10/2023 e data de alteração: 06/12/2023*/}
-{/*configura a estrutura do componente App, que vai conter o roteamento da aplicação*/}
+{/*Nome da page: App*/}
+{/*Autor(a): Laura*/}
+{/*Data de criação:20/10/2023 /Alterações: 05/12/2024*/}
+{/*Descrição detalhada: configura a estrutura do componente App, que vai conter o roteamento da aplicação*/}
 import './App.css'
 import { BrowserRouter } from 'react-router-dom';
 import Content from './components/Content'

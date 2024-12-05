@@ -1,24 +1,24 @@
-{/* Componente PlanoMensal */}
-{/* Autor: Júlia Dias Lara*/}
-{/* 22/03/2023-06/12/2023 */}
-{/* Descrição detalhada: este componente representa uma seção de um formulário de pagamento para um plano mensal, */}
-{/* oferecendo escolhas de forma de pagamento por Pix ou cartão de crédito, com botões para voltar e continuar */}
+{/* Nome do componente: Esc_Pag_Modific 
+Autor(a): Laura
+Data de criação: 22/03/2023 /Alterações: 05/12/2024
+Descrição detalhada:
+    Este componente representa uma seção de um formulário de pagamento para um plano mensal, oferecendo escolhas de forma de pagamento (Pix ou cartão de crédito),
+    com botões para voltar e continuar. O componente permite que o usuário escolha sua forma de pagamento e navegue para a próxima seção do pagamento. */}
+
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Pagamento.css';
 
-
-{/* Função Planomensal*/}
-{/* Autor: Júlia Dias Lara */}
-{/* 22/03/2023-01/12/2023*/}
-{/* Parâmetros entrada: nulo*/}
-{/* Retorno:nulo */}
-{/* Descrição/Observação: Representa uma seção de pagamaento mensal, apresenta opções de pagamento (Pix e cartão de crédito) */}
-{/* e botões para navegação, como voltar e continuar. */}
+{/* Função Esc_Pag_Modific
+    Autor(a): Laura
+    Data de criação: 22/03/2023 /Alterações: 05/12/2024 
+    Parâmetros de entrada: Nenhum 
+    Retorno: Nenhum 
+    Descrição/Observação: 
+        Este componente representa uma seção de pagamento mensal, exibindo opções de escolha de forma de pagamento (Pix e cartão de crédito),
+        e com navegação entre as páginas, incluindo os botões "Continuar" e "Voltar". O estado controla a forma de pagamento selecionada pelo usuário. */}
 
 function Esc_Pag_Modific() {
-    // Estado para controlar a opção de pagamento selecionada
-    const [formaPagamento, setFormaPagamento] = useState('');
 
     return (
         <>
@@ -52,7 +52,6 @@ function Esc_Pag_Modific() {
                             />
                             <span className="span_frase">Cartão de crédito</span>
                         </div>
-
                         <div className="btn_pag">
                             <Link to={formaPagamento === 'cartao' ? "/dadoscart" : formaPagamento === 'pix' ? "/dadospix" : "/escpag"} className="button_btn" id='cont_esc'>Continuar</Link>
                             <Link to="/calendario" className="button_btn_voltar" id='voltar_esc'>Voltar</Link>
@@ -65,7 +64,3 @@ function Esc_Pag_Modific() {
 }
 
 export { Esc_Pag_Modific };
-
-
-
-

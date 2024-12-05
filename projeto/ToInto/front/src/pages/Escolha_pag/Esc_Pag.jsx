@@ -1,20 +1,22 @@
-{/* Componente PlanoMensal */}
-{/* Autor: Júlia Dias Lara*/}
-{/* 22/03/2023-06/12/2023 */}
-{/* Descrição detalhada: este componente representa uma seção de um formulário de pagamento para um plano mensal, */}
-{/* oferecendo escolhas de forma de pagamento por Pix ou cartão de crédito, com botões para voltar e continuar */}
+{/*Nome do componente: Esc_Pag 
+Autor(a): Laura
+Data de criação: 22/03/2023 /Alterações: 05/12/2024 */}
+{/* Descrição detalhada:
+    Este componente representa uma seção de um formulário de pagamento para um plano mensal, oferecendo escolhas de forma de pagamento (Pix ou cartão de crédito), 
+    com botões para voltar e continuar, permitindo navegação entre diferentes seções do pagamento. */}
+
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Pagamento.css';
 
-
-{/* Função Planomensal*/}
-{/* Autor: Júlia Dias Lara */}
-{/* 22/03/2023-01/12/2023*/}
-{/* Parâmetros entrada: nulo*/}
-{/* Retorno:nulo */}
-{/* Descrição/Observação: Representa uma seção de pagamaento mensal, apresenta opções de pagamento (Pix e cartão de crédito) */}
-{/* e botões para navegação, como voltar e continuar. */}
+{/* Função Esc_Pag 
+    Autor(a): Laura 
+    Data de criação: 22/03/2023 /Alterações: 05/12/2024 
+    Parâmetros de entrada: Nenhum 
+    Retorno: Nenhum 
+    Descrição/Observação: 
+        Este componente representa uma seção de pagamento mensal, exibindo opções de escolha de forma de pagamento (Pix e cartão de crédito),
+        e navegação com os botões "Continuar" e "Voltar". O estado é utilizado para controlar a opção selecionada pelo usuário. */}
 
 function Esc_Pag() {
     // Estado para controlar a opção de pagamento selecionada
@@ -65,7 +67,3 @@ function Esc_Pag() {
 }
 
 export { Esc_Pag };
-
-
-
-

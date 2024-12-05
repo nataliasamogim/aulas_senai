@@ -1,23 +1,46 @@
+{/* Nome da página: Dados_pix*/ }
+{/* Autor(a): Laura */ }
+{/* Data de criação: /alteração: 03-12-2024*/ }
+{/* Descrição detalhada: Nesse componente, o código lida com a geração de um código Pix aleatório, 
+exibe esse código e um QR Code para o pagamento. O componente também envia esses dados para um servidor através de uma requisição HTTP. 
+Se os dados forem processados com sucesso, o usuário é redirecionado para uma página de confirmação; caso contrário, 
+erros são exibidos e processados. O componente inclui feedback visual em caso de sucesso ou falha na operação. */ }
+
 import React, { useState, useEffect } from 'react';
 import './Dados_pix.css';
-import { useNavigate } from 'react-router-dom'; //recuperar a rota 
+import { useNavigate } from 'react-router-dom';
+
+{/* Nome da função: Dados_pix */}
+{/* Autor(a): Laura */}
+{/* Data de criação: /alteração: 03-12-2024 */}
+{/* Retorno
+Nome: Retorna a interface do código Pix gerado
+Tipo: JSX
+Finalidade: Gerar e exibir um código Pix para pagamento e enviar os dados para o servidor.
+Descrição/Observação: O componente gera um código Pix aleatório, exibe o QR Code e o código gerado, 
+e permite que o usuário prossiga com o pagamento. Envia os dados para o servidor e trata o sucesso ou erro da operação.*/}
 
 function Dados_pix() {
+
+    // Declarando o estado para armazenar o código Pix gerado
     const [codigoPix, setCodigoPix] = useState('');
     const navigate = useNavigate();
 
-    // Gera um código de 4 dígitos ao carregar o componente
+    // useEffect para gerar o código Pix assim que o componente for montado
     useEffect(() => {
+        // Função para gerar um código Pix de 4 dígitos aleatórios
         const gerarCodigoPix = () => {
             return Math.floor(1000 + Math.random() * 9000); // Gera um número entre 1000 e 9999
         };
 
-        setCodigoPix(gerarCodigoPix());
+        setCodigoPix(gerarCodigoPix()); // Atualiza o estado com o código Pix gerado
     }, []);
 
 
+    // Função assíncrona que trata a requisição para salvar os dados do Pix
     const handleConfPix = async () => {
         try {
+            // Faz a requisição POST para o servidor, enviando os dados do Pix
             const resposta = await fetch('http://10.135.60.34:8085/receber-dados', {
                 method: 'POST',
                 headers: {

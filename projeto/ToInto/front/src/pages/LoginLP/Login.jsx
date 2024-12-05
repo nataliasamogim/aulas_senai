@@ -1,9 +1,9 @@
-{/*Utiliza o useState para a criação de um estado local chamado formValues(vai armazenar as informações do campo de email e senha) */ }
-{/* Nome do componente: Login*/ }
-{/* Autor(a): Maria Luiza, Laura e Marília */ }
-{/* Data de criação:25/10/2023 e data de alteração: 01/10/2024*/ }
-{/*Representa os campos de email e senha, além do recuperação de senha e botão de cadastrar e entrar do formulário do login*/ }
-{/*Observação pertinente: o estado local armazena as informações recebida do formulário e os handle cuidam da sua interação */ }
+{/*Utiliza o useState para a criação de um estado local chamado formValues(vai armazenar as informações do campo de email e senha)
+Nome do componente: Login
+Autor(a): Laura
+Data de criação: 25/10/2023 /Alterações: 05/12/2024
+Representa os campos de email e senha, além do recuperação de senha e botão de cadastrar e entrar do formulário do login
+Observação pertinente: o estado local armazena as informações recebida do formulário e os handle cuidam da sua interação */ }
 
 import React, { useState } from 'react';
 import './Login.css'
@@ -45,7 +45,7 @@ const Login = () => {
     }
 
     try {
-      const resposta = await fetch('http://10.135.60.34:8085/receber-dados', {
+      const resposta = await fetch('http://10.135.60.47:8085/receber-dados', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

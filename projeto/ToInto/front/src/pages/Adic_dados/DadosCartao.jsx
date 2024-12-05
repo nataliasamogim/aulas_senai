@@ -1,17 +1,41 @@
+{/* Nome da página: DadosCartao */}
+{/* Autor(a): Laura */}
+{/* Data de criação: /alteração: 03-12-2024 */}
+{/* Descrição detalhada: Esse componente permite que o usuário adicione as informações do cartão de crédito, incluindo nome do titular, 
+CPF, número do cartão, data de vencimento e código de segurança. As informações são formatadas conforme inseridas, 
+e os dados são enviados para o servidor via uma requisição HTTP. Caso haja erros, um modal será exibido com as mensagens de erro. 
+Após a submissão bem-sucedida, o formulário é resetado e o usuário é redirecionado para uma página de conclusão de pagamento. */}
+
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './DadosCartao.css';
 import { Modal, Button } from 'react-bootstrap';
 
-// Função para formatar a data como MM/AA 
+{/*Formata o valor da data de vencimento do cartão em formato MM/AA, removendo quaisquer caracteres não numéricos. */}
 const formatarData = (valor) => {
-    // Remove todos os caracteres não numéricos 
-    const apenasNumeros = valor.replace(/\D/g, '');
-    // Adiciona a barra após dois dígitos 
+    const apenasNumeros = valor.replace(/\D/g, ''); // Remove todos os caracteres não numéricos 
     if (apenasNumeros.length > 2) {
-        return `${apenasNumeros.slice(0, 2)}/${apenasNumeros.slice(2, 4)}`;
+        return `${apenasNumeros.slice(0, 2)}/${apenasNumeros.slice(2, 4)}`; // Adiciona a barra após dois dígitos 
     }
     return apenasNumeros;
+};
+
+{/*Formata o CPF inserido, adicionando pontos e traço conforme o padrão ###.###.###-## */}
+const formatarCpf = (valor) => {
+    const apenasNumeros = valor.replace(/\D/g, ''); // Remove caracteres não numéricos
+    if (apenasNumeros.length <= 11) {
+        return apenasNumeros.replace(/(\d{3})(\d)/, '$1.$2') // Adiciona o primeiro ponto
+            .replace(/(\d{3})(\d)/, '$1.$2') // Adiciona o segundo ponto
+            .replace(/(\d{3})(\d{1,2})$/, '$1-$2'); // Adiciona o traço
+    }
+    return valor; // Retorna o valor original se exceder 11 caracteres
+};
+
+{/*Formata o número do cartão de crédito, inserindo um espaço após cada grupo de quatro dígitos. */}
+const formatarNumeroCartao = (valor) => {
+    const apenasNumeros = valor.replace(/\D/g, ''); // Remove caracteres não numéricos
+    return apenasNumeros.replace(/(.{4})/g, '$1 ').trim(); // Adiciona um espaço a cada quatro dígitos
 };
 
 const DadosCartao = () => {
@@ -28,24 +52,7 @@ const DadosCartao = () => {
         plano_esc: localStorage.getItem('plano_esc')
     });
 
-    // Função para formatar o CPF
-    const formatarCpf = (valor) => {
-        const apenasNumeros = valor.replace(/\D/g, ''); // Remove caracteres não numéricos
-        if (apenasNumeros.length <= 11) {
-            return apenasNumeros.replace(/(\d{3})(\d)/, '$1.$2') // Adiciona o primeiro ponto
-                .replace(/(\d{3})(\d)/, '$1.$2') // Adiciona o segundo ponto
-                .replace(/(\d{3})(\d{1,2})$/, '$1-$2'); // Adiciona o traço
-        }
-        return valor; // Retorna o valor original se exceder 11 caracteres
-    };
-
-    // Função para formatar o número do cartão
-    const formatarNumeroCartao = (valor) => {
-        const apenasNumeros = valor.replace(/\D/g, ''); // Remove caracteres não numéricos
-        return apenasNumeros.replace(/(.{4})/g, '$1 ').trim(); // Adiciona um espaço a cada quatro dígitos
-    };
-
-    // Função para lidar com a mudança no campo CPF
+    {/* Atualiza o estado do formulário com o CPF formatado quando o usuário digita. */}
     const handleChangeCpf = (e) => {
         const valor = e.target.value;
         setFormCartao((prevValues) => ({
@@ -54,7 +61,7 @@ const DadosCartao = () => {
         }));
     };
 
-    // Função para lidar com a mudança no campo Número do Cartão
+    {/*Atualiza o estado do formulário com o número do cartão formatado conforme o usuário digita. */}
     const handleChangeNumCartao = (e) => {
         const valor = e.target.value;
         const valorFormatado = formatarNumeroCartao(valor);
@@ -64,14 +71,13 @@ const DadosCartao = () => {
         }));
     };
 
+    {/*Atualiza o estado do formulário com os dados dos campos, e formata a data de vencimento se necessário. */}
     const handleChange = (e) => {
         const { name, value } = e.target;
-        // Formata a data de vencimento         
         if (name === 'datavenc') {
-            // Formata a data e limita a 5 caracteres             
             setFormCartao((prevValues) => ({
                 ...prevValues,
-                [name]: formatarData(value).slice(0, 5),
+                [name]: formatarData(value).slice(0, 5), // Limita a data a 5 caracteres
             }));
         } else {
             setFormCartao((prevValues) => ({
@@ -84,6 +90,7 @@ const DadosCartao = () => {
     const [mensagensErro, setMensagensErro] = useState([]);
     const [modalIsOpen, setIsOpen] = useState(false);
 
+    {/*Faz a requisição POST para enviar os dados do formulário para o servidor. Exibe um modal de erro em caso de falha. */}
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -98,12 +105,9 @@ const DadosCartao = () => {
             const resultado = await resposta.json();
 
             if (resultado.erro) {
-                // Exibe mensagens de erro no console.log ou em algum local visível
                 console.error('Erro no servidor:', resultado.mensagens);
-
-                // Atualiza o estado com as mensagens de erro para exibição no formulário
                 setMensagensErro(resultado.mensagens);
-                setIsOpen(true);
+                setIsOpen(true); // Exibe o modal de erro
             } else {
                 console.log('Dados processados do cartão com sucesso!', resposta);
                 setFormCartao({
@@ -122,8 +126,9 @@ const DadosCartao = () => {
         }
     };
 
+    {/*Fecha o modal de erro e limpa as mensagens de erro. */}
     const closeModal = () => {
-        setIsOpen(false); // Alterado: Função para fechar o modal
+        setIsOpen(false);
         setMensagensErro([]); // Limpa as mensagens de erro
     };
 
@@ -132,13 +137,7 @@ const DadosCartao = () => {
             <div className='modal-erro-adccartao'>
                 <Modal show={modalIsOpen} onHide={closeModal} centered className="modcad">
                     <Modal.Header>
-                        <button
-                            onClick={closeModal} // Chama a função para fechar o modal
-                            className="modal-close-button"
-                            aria-label="Fechar"
-                        >
-                            &times;
-                        </button>
+                        <button onClick={closeModal} className="modal-close-button" aria-label="Fechar">&times;</button>
                         <Modal.Title>Erro ao processar os dados</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
@@ -159,7 +158,6 @@ const DadosCartao = () => {
                         </Button>
                     </Modal.Footer>
                 </Modal>
-
             </div>
 
             <section className="form_adiccartao">

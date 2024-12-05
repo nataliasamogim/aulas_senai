@@ -1,6 +1,6 @@
 {/*Nome do componente: Todolist_2
 Autor: Laura
-Data criação: /Alterações:01/12/2023
+Data criação: /Alterações: 05/12/2024
 Descricação Detlahada: Ele usa o estado show para controlar a exibição de algo na interface.  
 É uma lista de tarefas, onde cada tarefa tem um horário, descrição e ícones para edição e exclusão.
 Além disso, inclui um componente chamado Compromissos no final da lista. Esse componente faz uso de estilos do

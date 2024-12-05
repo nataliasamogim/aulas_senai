@@ -1,6 +1,11 @@
+{/*Nome do componente: Compromissos
+Autor(a): Laura
+Data de criação: /Alterações: 05/12/2024
+Descrição detalhada: Este componente é responsável pela criação e edição de compromissos. Ele utiliza modais (Bootstrap e React-modal)
+para exibir o formulário de criação/edição de compromissos. Além disso, há suporte para lembretes com notificações
+no navegador, se a permissão estiver concedida. Os dados são integrados ao backend por meio de fetch API.*/}
+
 import { useState, useEffect } from 'react';
-//import Button from 'react-bootstrap/Button';
-//import Form from 'react-bootstrap/Form';
 import Modal from "react-modal";
 import { Modal as BootstrapModal, Button } from "react-bootstrap";
 import './CompStyle.css'
@@ -8,7 +13,10 @@ import './CompStyle.css'
 // Define o elemento principal da aplicação (geralmente o root do DOM)
 Modal.setAppElement('#root');
 
+{/*Retorna a interface do modal de compromissos; Tipo: JSX. Controla o comportamento de criação e edição de compromissos.
+Trabalha com múltiplos estados para tarefas, validações e lembretes. */}
 const Compromissos = ({ isOpen, onRequestClose, tarefasData, receberTarefas, dataEscolhida }) => {
+  // Estados para controlar os dados do formulário e comportamento do modal
   const [idComp, setIdComp] = useState('');
   const [titulo, setTitulo] = useState('');
   const [date, setDate] = useState(dataEscolhida || ''); // Inicializa com dataEscolhida
@@ -18,6 +26,8 @@ const Compromissos = ({ isOpen, onRequestClose, tarefasData, receberTarefas, dat
   const [lembrete, setLembrete] = useState(0);
   const [mensagensErro, setMensagensErro] = useState({});
   const [isSecondModalOpen, setIsSecondModalOpen] = useState(false); // Estado para o segundo modal
+
+  // Função para fechar o segundo modal
   const closeSecondModal = () => {
     setIsSecondModalOpen(false);
   };
@@ -28,6 +38,7 @@ const Compromissos = ({ isOpen, onRequestClose, tarefasData, receberTarefas, dat
     return `${day}/${month}/${year}`;
   };
 
+  // Hook para carregar os dados da tarefa quando `tarefasData` ou `dataEscolhida` mudarem
   useEffect(() => {
     if (tarefasData) {
       setIdComp(tarefasData.id_comp);
@@ -47,7 +58,7 @@ const Compromissos = ({ isOpen, onRequestClose, tarefasData, receberTarefas, dat
     }
   }, [tarefasData, dataEscolhida]);
 
-    // Efeito para tratar lembretes
+    // Hook para configurar lembretes com base no tempo restante até a tarefa
   useEffect(() => {
     if (!lembrete || lembrete === '0') return;
 
@@ -76,6 +87,7 @@ const Compromissos = ({ isOpen, onRequestClose, tarefasData, receberTarefas, dat
     }
   }, [lembrete, date, time, titulo, descricao]);
 
+  // Função para resetar o formulário para valores iniciais
   const resetForm = () => {
     setTitulo('');
     setDescricao('');
@@ -86,12 +98,14 @@ const Compromissos = ({ isOpen, onRequestClose, tarefasData, receberTarefas, dat
     setMensagensErro({});
   };
 
+  // Função para lidar com erros retornados pela API
   const handleErrors = (resultado) => {
     if (resultado.erro) {
       setMensagensErro(resultado.erro);
     }
   };
 
+  {/*Envia os dados da tarefa para o backend (criação ou atualização). */}
   const handleSubmit = async (e) => {
     e.preventDefault();
     const tarefa = { titulo, descricao, date, time, importante, lembrete };

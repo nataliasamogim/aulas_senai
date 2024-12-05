@@ -1,3 +1,4 @@
+/*Descrição detalhada: Esse código é responsável pela estilização do Cadastro do Tointo Mobile,  */
 import { StyleSheet } from "react-native";
 
 export default styles = StyleSheet.create({
