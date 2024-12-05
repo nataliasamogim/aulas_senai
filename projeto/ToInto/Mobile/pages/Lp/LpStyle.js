@@ -1,7 +1,10 @@
+//Descrição: estilização da Landing Page (página inicial onde o usuário vai escolher se quer logar ou cadastrar), como o tamanho e cor
+// dos inputs e do texto, além doresto da página
+
 import { StyleSheet } from "react-native";
 
 export default styles = StyleSheet.create({
-
+    //Início
     background: {
         flex: 1,
         alignItems: 'center',
@@ -113,5 +116,5 @@ export default styles = StyleSheet.create({
         flex: 0.1,
         marginTop: '10%'
     }
-
+    //Fim
 });
