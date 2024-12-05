@@ -1,8 +1,8 @@
 /*  Descrição: Esse código CSS é responsável pela estilização do cabeçalho do
 Tointo, ele define o estilo dos elementos como a logo, os itens do menu de
 navegação (home, recurso e plano), e botões de "Entrar" e "Cadastrar" Ele
-também controla o comportamento visual durante interações do usuário (hover).
-Tem a intenção de facilitar o uso da aplicação para os usuários  */
+também controla o comportamento visual durante interações do usuário (hover),
+com a intenção de facilitar o uso da aplicação para os usuários  */
 
 * {
     font-family: Arial, Helvetica, sans-serif;
@@ -10,8 +10,9 @@ Tem a intenção de facilitar o uso da aplicação para os usuários  */
     
 /*Fonte arial para o site inteiro*/
     
-/*-----Inicio Header-----*/
+/*-----Início Header-----*/
     
+/*Início container do header*/
 header.container {
     display: flex;
     border-bottom: 4px solid rgb(124, 101, 147);
@@ -24,9 +25,9 @@ header.container {
     margin-left: 7px;
     margin-right: 7px;
 }
+/*Fim do container do header*/   
     
-    
-/*ínicio Logo Tointo*/
+/*início Logo Tointo*/
     
 .img_logo {
     /*tamanho da div da logo*/
@@ -43,7 +44,8 @@ header.container {
 }
     
 /*Fim logo Tointo*/
-    
+ 
+/*Início Menu*/
 nav.menu {
 /*tamanho da nav (home, recurso e plano) e sua posição*/
     width: 100%;
@@ -119,5 +121,6 @@ nav.menu {
 .topico:hover {
     color: #A978A5;
 }
+/*Fim do menu*/
     
 /*-----Fim Header-----*/

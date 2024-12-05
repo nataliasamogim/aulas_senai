@@ -1,7 +1,6 @@
 /*Descrição detalhada: Esse código é responsável pela estilização do rodapé do Tointo, ele define o estilo
-dos elementos como o campo de opinião, o botão de "Enviar", os títulos, textos e redes sociais. Ele também controla
-o comportamento visual durante interações do usuário (hover).
-e também tem a intenção de facilitar o uso da aplicação para os usuários.*/
+dos elementos como o botão de "Enviar", os títulos, textos, redes sociais e suporte. Ele também controla
+o comportamento visual durante interações do usuário (hover) e possui a intenção de facilitar o uso da aplicação para os usuários.*/
 
 /*-----Início do Footer------*/
 
@@ -22,7 +21,7 @@ e também tem a intenção de facilitar o uso da aplicação para os usuários.*
     justify-content: space-between;
 }
 
-.sobre{ /*aside sobre, para dar cor ao titulo e a descrição do sobre nós*/
+.sobre{ /*aside sobre, para dar cor ao título e a descrição do sobre nós*/
     padding-left: 80px;
     color: #fff;
 }
@@ -36,7 +35,7 @@ e também tem a intenção de facilitar o uso da aplicação para os usuários.*
     font-size: 25px;
 }
 
-.titulo_sobre{ /*titulo do footer*/
+.titulo_sobre{ /*título do footer*/
     margin-top: 20px;
     font-weight: bold;
     font-size: 25px;
@@ -47,13 +46,13 @@ e também tem a intenção de facilitar o uso da aplicação para os usuários.*
     width: 300px;
 }
 
-.sociais { /*Ul que contem o li dos icones das redes sociais*/
+.sociais { /*Ul que contêm o li dos ícones das redes sociais*/
     list-style-type: none;
     display: flex;
     margin-left: 100px;
 }
 
-.sociais li img{ /*Aqui está modificando os imgs (icones das redes sociais)*/
+.sociais li img{ /*Aqui está modificando os imgs (ícones das redes sociais)*/
     max-width: 38px;
     margin-right: 16px;
 }

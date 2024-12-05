@@ -1,4 +1,4 @@
-/* Esse código CSS é responsável pela estilização dos recursos da Landing Page do TOINTO, o código estiliza uma seção de
+/* Descrição: Esse código CSS é responsável pela estilização dos recursos da Landing Page do TOINTO, o código estiliza uma seção de
 recursos, apresentando quatro recursos com imagens, títulos e descrições, sendo eles classificação, calendário, checklist e lembretes . */
 
 /*Início Recursos*/
@@ -18,7 +18,7 @@ recursos, apresentando quatro recursos com imagens, títulos e descrições, sen
 }
 
 .title {
-    /*Span com o titulo Recurso*/
+    /*Span com o título Recurso*/
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
     padding: 45px;

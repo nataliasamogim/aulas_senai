@@ -1,4 +1,9 @@
-/* Contêiner que mantém as notificações fixas no canto inferior direito */
+/* Descrição: Esse código CSS é responsável pela estilização dos alertas do TOINTO */
+/* criando um sistema de notificações estilizadas que aparecem no canto inferior direito da tela. */
+
+/* Início do Alertas*/
+
+/* Container que mantém as notificações fixas no canto inferior direito */
 .Alerta-Tarefa {
     position: fixed;  /* Fixação na tela */
     bottom: 15px;     /* Distância do fundo da tela */
@@ -48,4 +53,6 @@
       opacity: 1;
     }
   }
+
+/*Fim do alertas*/
   

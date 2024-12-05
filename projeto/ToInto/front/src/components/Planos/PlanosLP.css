@@ -4,7 +4,7 @@ o comportamento visual durante interações do usuário (hover, na imagem e bot�
 os usuários.*/
 
 
-/*---inicio do planos---*/
+/*---início do planos---*/
 .planos {
     /*div com todos os planos incluídos, e suas configurações totais*/
     display: flex;
@@ -21,7 +21,7 @@ os usuários.*/
 .plano_free,
 .plano_mensal,
 .plano_anual {
-    /*cor das letras das tres divs*/
+    /*cor das letras das três divs*/
     padding: 5%;
     color: white;
 
@@ -33,12 +33,6 @@ os usuários.*/
 
 .plano_anual {
     margin-right: 30px;
-}
-
-.planos img {
-    /*tamanho das imagens e sua margem*/
-    max-width: 90px;
-    margin-top: 10px;
 }
 
 .plano_free {
@@ -66,10 +60,12 @@ os usuários.*/
     text-align: center;
 }
 
+/*Início dos botões dos planos*/
+
 .btn_1,
 .btn_2,
 .btn_3 {
-    /*configuração dos botoes, padronizando o tamanho e bordas, cores e sua margem*/
+    /*configuração dos botões, padronizando o tamanho e bordas, cores e sua margem*/
     padding: 20px 40px 20px 40px;
     border-radius: 57px;
     /*arredondando bordas*/
@@ -85,6 +81,7 @@ os usuários.*/
     background-color: #B662B5;
 }
 
+/*Fim dos botões dos planos*/
 
 .preco_1,
 .preco_2,
@@ -114,6 +111,8 @@ os usuários.*/
     margin-bottom: 30px;
 }
 
+/*Início das imagens dos planos*/
+
 .plano_free img:hover {
     /*imagem da div free e seu movimento (transição) e tamanho*/
     max-width: 140px;
@@ -131,5 +130,13 @@ os usuários.*/
     max-width: 140px;
     transition: 300ms linear;
 }
+
+.planos img {
+    /*tamanho das imagens e sua margem*/
+    max-width: 90px;
+    margin-top: 10px;
+}
+
+/*Fim das imagens dos planos*/
 
 /*---Fim dos planos---*/
