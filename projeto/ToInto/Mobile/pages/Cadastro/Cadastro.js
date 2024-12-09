@@ -1,3 +1,14 @@
+/*Cadastro.js
+Autor: Marília
+Data criação/Alterações: 03/12
+Descrição Detalhada: O CadastroForm é responsável pela criação de um formulário de cadastro de usuário no aplicativo TOINTO, 
+com a funcionalidade de selecionar planos de pagamento. Ele utiliza o estado para controlar os dados do usuário, como nome, e-mail, 
+senha e confirmação de senha, além de exibir mensagens de erro caso algo dê errado durante o processo de cadastro. O formulário inclui campos 
+para os dados do usuário e botões para alternar a visibilidade das senhas, juntamente com opções de planos (Free, Mensal e Anual), que 
+podem ser selecionadas através de toques. O componente utiliza AsyncStorage para armazenar dados do usuário após um cadastro bem-sucedido 
+e navega entre as telas conforme a escolha do plano. Além disso, ao selecionar um plano, um modal é exibido com mais informações sobre o 
+plano escolhido. Em caso de erro na tentativa de cadastro, um modal de erro exibe as mensagens retornadas pela API. O formulário também 
+inclui opções para o usuário acessar a tela de login ou cancelar a ação.*/
 import React, { useState } from "react";
 import { View, TextInput, Image, KeyboardAvoidingView, TouchableOpacity, Text, Alert, Modal, TouchableHighlight } from "react-native";
 import styles from './CadStyle.js';
@@ -6,6 +17,16 @@ import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+
+/*
+Autor: Marília
+Data criação/Alterações: 03/12/2024
+Descrição/Observação:A função handleCadastrar é responsável por gerenciar o processo de cadastro de um usuário em um sistema. Ela coleta os 
+dados do formulário de cadastro, como nome, e-mail, senha, confirmação de senha e o plano selecionado, e envia esses dados para um endpoint 
+especificado via requisição POST. Após o envio, a função aguarda a resposta do servidor para determinar o próximo passo. Caso haja erros, as
+ mensagens de erro retornadas são exibidas em um modal; caso contrário, os dados importantes, como ID e informações do usuário, são armazenados 
+ localmente usando AsyncStorage, e o usuário é redirecionado para diferentes telas com base no plano selecionado. A função também inclui 
+ verificações para evitar envios com campos obrigatórios em branco. */
 const CadastroForm = ({ handleSaibaMais }) => {
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
@@ -32,7 +53,7 @@ const CadastroForm = ({ handleSaibaMais }) => {
       };
 
       try {
-        const response = await fetch('http://10.135.60.15:8085/receber-dados', {
+        const response = await fetch('http://10.135.60.42:8085/receber-dados', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -72,6 +93,9 @@ const CadastroForm = ({ handleSaibaMais }) => {
     }
   };
 
+// Função para lidar com o clique em uma caixa específica
+// Se a caixa clicada já estiver selecionada (boxNumber === selectedBox), desmarca-a definindo `null`.
+// Caso contrário, seleciona a caixa clicada (define o número da caixa como `selectedBox`).
   const handleBoxPress = (boxNumber) => {
     setSelectedBox(boxNumber === selectedBox ? null : boxNumber);
   };
@@ -193,6 +217,10 @@ const Cadastro = ({ navigation }) => {
     }
   };
 
+// Função para exibir mais informações sobre um plano específico
+// Recebe o identificador do plano como argumento (`plano`),
+// obtém os detalhes do plano no objeto `planos` e os define como conteúdo do modal (`setModalContent`).
+// Em seguida, exibe o modal configurando `setShowModal` para `true`.
   const handleSaibaMais = (plano) => {
     setModalContent(planos[plano]);
     setShowModal(true);

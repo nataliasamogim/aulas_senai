@@ -1,3 +1,12 @@
+/*ModificCart.js
+Autor: Marília
+Data criação/Alterações: 03/12/2024
+Descrição Detalhada: O ModificarDadosCartao permite ao usuário atualizar as informações de seu cartão de crédito, como nome do titular, CPF, 
+número do cartão, data de vencimento e código de segurança. Ao carregar a tela, os dados atuais são carregados do servidor e preenchidos nos 
+campos. O usuário pode editar esses campos, e ao salvar, as informações atualizadas são enviadas para o servidor. O código inclui funções para 
+formatar o CPF, o número do cartão e a data de vencimento de acordo com os padrões, e exibe um modal de erro caso algo dê errado durante o 
+processo de atualização. A tela também possui botões para salvar ou cancelar as modificações.*/
+
 import React, { useState, useEffect } from "react";
 import { View, TextInput, KeyboardAvoidingView, TouchableOpacity, Text, Alert, Modal, TouchableHighlight } from "react-native";
 import styles from './ModificCartStyle.js';
@@ -77,7 +86,7 @@ const ModificarDadosCartao = ({ navigation }) => {
       const id_cad = await AsyncStorage.getItem('ID')
       try {
         // Faz uma requisição para receber os dados do usuário do servidor
-        const resposta = await fetch('http://10.135.60.14:8085/receber-dados', {
+        const resposta = await fetch('http://10.135.60.42:8085/receber-dados', {
           method: 'POST', // Método da requisição
           headers: {
             'Content-Type': 'application/json', // Tipo de conteúdo da requisição
@@ -114,7 +123,7 @@ const ModificarDadosCartao = ({ navigation }) => {
     const id_cad = await AsyncStorage.getItem('ID');
     try {
       // Faz uma requisição para enviar os dados do formulário para o servidor
-      const resposta = await fetch('http://10.135.60.14:8085/receber-dados', {
+      const resposta = await fetch('http://10.135.60.42:8085/receber-dados', {
         method: 'POST', // Método da requisição
         headers: {
           'Content-Type': 'application/json', // Tipo de conteúdo da requisição

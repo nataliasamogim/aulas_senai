@@ -1,3 +1,14 @@
+/*RecSenha.js
+Autor: Marília
+Data criação/Alterações: 03/12/2024
+Descrição Detalhada: A página Recuperar Senha permite que o usuário insira seu e-mail para solicitar a recuperação da senha. O layout é simples 
+e contém um campo de entrada para o e-mail, que ao ser preenchido, envia uma solicitação para o servidor ao clicar no botão "Salvar". 
+O código usa o estado email para gerenciar o valor inserido no campo de texto. Quando o botão é pressionado, uma requisição é feita para o 
+servidor usando o método POST, e o e-mail inserido é enviado para o backend. Caso ocorra algum erro, a página exibe uma modal com a mensagem 
+de erro correspondente, utilizando o estado mensagensErro para armazená-las. Se a requisição for bem-sucedida, os dados do usuário (ID, nome 
+e e-mail) são armazenados no AsyncStorage e o campo de e-mail é limpo. Além disso, a interface é estilizada com um LinearGradient para criar 
+um fundo degradê, e um KeyboardAvoidingView é usado para ajustar a interface quando o teclado é exibido. O código trata erros de rede, de 
+preenchimento de campos e de resposta do servidor, garantindo uma experiência de usuário robusta. - Não foi possível finalizar*/
 import React, { useState } from "react";
 import { View, Image, KeyboardAvoidingView, TouchableOpacity, Text, Modal, TextInput } from "react-native";
 import styles from './RecSenhaStyle.js';
@@ -15,7 +26,7 @@ const Lp = () => {
         email_log: email,
       };
       try {
-        const response = await fetch('http://10.135.60.20:8085/receber-dados', {
+        const response = await fetch('http://10.135.60.42:8085/receber-dados', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

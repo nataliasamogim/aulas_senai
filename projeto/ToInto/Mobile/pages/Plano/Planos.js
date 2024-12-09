@@ -1,3 +1,13 @@
+/*Plano.js
+Autor: Marília
+Data criação/Alterações: 03/12/2024
+Descrição Detalhada: A página Planos permite ao usuário escolher entre duas formas de pagamento: Pix ou Cartão de Crédito. O layout é 
+simples e apresenta duas opções de escolha, com botões de seleção (radio buttons) que indicam qual opção está ativada. Quando o usuário 
+seleciona uma opção, o estado selectedOption é atualizado. O botão "Continuar" leva o usuário para a próxima tela, que depende da opção 
+escolhida: se "Pix" for selecionado, navega para a página Pix; se "Cartão de Crédito" for selecionado, navega para a página Cartão de 
+Crédito. A navegação entre telas é feita através do hook useNavigation do React Navigation. Há também um botão "Voltar" para retornar 
+à tela anterior. O uso de KeyboardAvoidingView assegura que a interface permaneça ajustada quando o teclado estiver visível. O código 
+é funcional e intuitivo, oferecendo uma navegação clara entre as opções de pagamento.*/
 import React, { useState } from "react";
 import { View, Image, KeyboardAvoidingView, TouchableOpacity, Text } from "react-native";
 import { Ionicons } from '@expo/vector-icons';

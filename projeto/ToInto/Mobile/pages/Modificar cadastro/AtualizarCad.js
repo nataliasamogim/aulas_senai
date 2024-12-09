@@ -1,3 +1,12 @@
+/* AtualizarCad
+Autor: Marília
+Data criação/Alterações: 03/12/2024
+Descrição Detalhada: O componente Login é responsável pela autenticação do usuário, permitindo o login com e-mail e senha. Ele valida os campos 
+antes de enviar uma requisição ao servidor, e, em caso de sucesso, armazena os dados do usuário no AsyncStorage e navega para a tela "Calendário". 
+O componente também oferece uma funcionalidade para alternar a visibilidade da senha, um link para recuperação de senha, e exibe um modal com 
+mensagens de erro caso haja falhas no login. Além disso, inclui botões para login via redes sociais (Facebook, Instagram e WhatsApp) e uma animação
+para suavizar a transição da tela.*/ 
+
 import React, { useState, useEffect } from "react";
 import { View, TextInput, Image, KeyboardAvoidingView, TouchableOpacity, Text, Modal, TouchableHighlight, FlatList } from "react-native";
 import styles from './AtualizarCadStyle.js';
@@ -47,7 +56,7 @@ const AtualizarCad = ({ navigation }) => {
     useEffect(() => {
         const showDados = async () => {
             try {
-                const resposta = await fetch('http://10.135.60.34:8085/receber-dados', {
+                const resposta = await fetch('http://10.135.60.42:8085/receber-dados', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -61,9 +70,11 @@ const AtualizarCad = ({ navigation }) => {
 
                 const userData = await resposta.json();
                 console.log('Dados do usuário:', userData);
+                 // Atualiza o estado com o nome e o e-mail do usuário
                 setNome(userData.mensagem[1]);
                 setEmail(userData.mensagem[2]);
 
+                 // Verifica se existe uma imagem salva no AsyncStorage e seleciona a imagem correspondente
                 const savedImagePath = await AsyncStorage.getItem('foto_perfil');
                 if (savedImagePath) {
                     const selected = fotoOpcoes.find((img) => img.uri === savedImagePath) || PlaceholderImage;
@@ -73,14 +84,14 @@ const AtualizarCad = ({ navigation }) => {
                 console.error('Erro ao buscar dados do usuário:', error);
             }
         };
-
+    // Chama a função para buscar os dados assim que o componente for montado
         showDados();
     }, []);
 
     const handleAtualizar = async () => {
         const id_str = await AsyncStorage.getItem('ID');
         try {
-            const resposta = await fetch('http://10.135.60.34:8085/receber-dados', {
+            const resposta = await fetch('http://10.135.60.42:8085/receber-dados', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

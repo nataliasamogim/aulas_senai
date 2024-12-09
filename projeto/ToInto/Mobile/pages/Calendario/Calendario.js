@@ -33,7 +33,7 @@ const Calendario = ({ navigation }) => {
         const userId = await AsyncStorage.getItem('ID');
         console.log('ID--- envio', userId);
         if (userId) {
-          const response = await fetch('http://10.135.60.34:8085/receber-dados', {
+          const response = await fetch('http://10.135.60.42:8085/receber-dados', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

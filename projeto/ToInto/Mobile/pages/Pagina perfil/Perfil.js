@@ -1,4 +1,11 @@
-
+/*Perfil.js
+Autor: Marília
+Data criação/Alterações: 03/12/2024
+Descrição Detalhada: 
+A página "Perfil" permite que o usuário visualize e edite suas informações, como nome, e-mail e foto de perfil. Ele pode alterar seu cadastro, 
+plano de pagamento, ou excluir sua conta. A tela também possui uma função de modal para confirmar a exclusão da conta. As informações do usuário 
+são carregadas e atualizadas periodicamente usando AsyncStorage. O layout é ajustado para evitar sobreposição com o teclado, e a navegação entre 
+as telas é gerenciada com a biblioteca de navegação do React Native. O código também inclui um botão para acessar um vídeo de ajuda no YouTube.*/
 import { View, Image, Text, TouchableOpacity, KeyboardAvoidingView, Modal, Linking  } from 'react-native';
 import styles from './PerfilStyle.js';
 import React, { useState, useEffect } from 'react';
@@ -87,7 +94,7 @@ const Perfil = ({ navigation }) => {
     }
 
     try {
-      const response = await fetch('http://10.135.60.34:8085/receber-dados', {
+      const response = await fetch('http://10.135.60.42:8085/receber-dados', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

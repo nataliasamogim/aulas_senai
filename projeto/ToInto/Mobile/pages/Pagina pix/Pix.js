@@ -1,3 +1,11 @@
+/*Pix.js
+Autor: Marília
+Data criação/Alterações: 03/12/2024
+Descrição Detalhada: A página "Pix" permite ao usuário gerar um código de pagamento PIX, que pode ser escaneado para realizar uma transação. 
+O código é gerado automaticamente, e ao clicar em "Continuar", os dados do pagamento são enviados para o servidor e, se bem-sucedido, o 
+usuário é redirecionado para uma tela de confirmação. O app usa AsyncStorage para recuperar o ID do usuário e a escolha do plano de pagamento. 
+A página é responsiva, ajustando-se ao teclado, e a navegação é simplificada com um botão de ação. O código também trata erros de rede, exibindo 
+uma mensagem caso haja falha.*/
 import React from 'react';
 import { View, KeyboardAvoidingView, Image, Text, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -20,7 +28,7 @@ const Pix = ({ route, navigation }) => {
         };
     
         try {
-          const response = await fetch('http://10.135.60.34:8085/receber-dados', {
+          const response = await fetch('http://10.135.60.42:8085/receber-dados', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'

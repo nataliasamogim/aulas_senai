@@ -1,3 +1,12 @@
+/*Compromissos.js
+Autor: Marília
+Data criação/Alterações: 03/12
+Descrição Detalhada: O componente Compromissos permite ao usuário criar um novo compromisso no calendário, fornecendo campos para título, 
+horário, descrição e lembrete. O horário é selecionado com um DateTimePicker e o lembrete é escolhido através de um Picker. O compromisso 
+pode ser marcado como importante. Ao clicar em "Criar", os dados são enviados para um servidor via requisição POST. Em caso de erro, um 
+modal exibe as mensagens de erro. O componente também oferece navegação para outras telas, como o menu e o perfil, utilizando o 
+react-navigation.*/
+
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, KeyboardAvoidingView, Image, TouchableOpacity, Modal, TouchableHighlight } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
@@ -73,6 +82,8 @@ const Compromissos = ({ route, navigation }) => {
     setChecked(!checked);
   };
 
+// Array de opções de tempo, usado para configurar intervalos em minutos
+// Cada opção contém um rótulo (`label`) para exibição e um valor (`value`) em minutos.
   const timeOptions = [
     { label: '0 minutos', value: 0 },
     { label: '15 minutos', value: 15 },

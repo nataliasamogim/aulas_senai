@@ -1,3 +1,12 @@
+/*Cadastro.js
+Autor: Marília
+Data criação/Alterações: 03/12/2024
+Descrição Detalhada: O componente Login é responsável pela autenticação do usuário, permitindo o login com e-mail e senha. Ele valida os campos 
+antes de enviar uma requisição ao servidor, e, em caso de sucesso, armazena os dados do usuário no AsyncStorage e navega para a tela "Calendário". 
+O componente também oferece uma funcionalidade para alternar a visibilidade da senha, um link para recuperação de senha, e exibe um modal com 
+mensagens de erro caso haja falhas no login. Além disso, inclui botões para login via redes sociais (Facebook, Instagram e WhatsApp) e uma animação
+para suavizar a transição da tela.*/
+
 import { StatusBar } from 'expo-status-bar';
 import { Text, View, KeyboardAvoidingView, Image, TextInput, TouchableOpacity, Animated, Linking, Modal, TouchableHighlight } from 'react-native';
 import styles from './LogStyle.js';
@@ -6,6 +15,14 @@ import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+/*
+Autor: Marília M bellini
+Alterações: 03/12/2024
+Tipo: Função assíncrona.
+Parâmetros: Não recebe parâmetros diretamente.
+Retorno: Não retorna valor explícito, mas executa ações como salvar dados no AsyncStorage ou exibir um modal de erro.
+Descrição/Observações: Valida os campos de e-mail e senha, envia os dados de login para o servidor, e dependendo da resposta, salva informações do 
+usuário no AsyncStorage ou exibe um modal com mensagens de erro. Se o login for bem-sucedido, redireciona o usuário para a tela "Calendário". */
 export default function Login({ navigation }) {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
@@ -21,7 +38,7 @@ export default function Login({ navigation }) {
         senha_log: senha,
       };
       try {
-        const response = await fetch('http://10.135.60.34:8085/receber-dados', {
+        const response = await fetch('http://10.135.60.42:8085/receber-dados', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

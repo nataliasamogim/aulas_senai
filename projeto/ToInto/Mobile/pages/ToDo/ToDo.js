@@ -1,3 +1,12 @@
+/*ToDo.js
+Autor: Marília
+Data criação/Alterações: 03/12/2024
+Descrição Detalhada: A página ToDo exibe e gerencia compromissos de um usuário para uma data específica, utilizando o estado local para 
+armazenar as tarefas e o status de conclusão. As tarefas são recuperadas do servidor com base no ID do usuário e na data selecionada,
+e podem ser marcadas como concluídas ou excluídas. A navegação é feita com react-navigation, permitindo acessar páginas de edição ou criação 
+de compromissos. A data é formatada com date-fns e a interface é atualizada automaticamente após interações com as tarefas, utilizando o hook 
+useFocusEffect para recarregar as tarefas ao retornar à página. O código inclui também tratamento de erros e a funcionalidade para adicionar 
+novas tarefas.*/
 import React, { useCallback, useState } from 'react';
 import { Text, View, KeyboardAvoidingView, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { CheckBox } from 'react-native-elements';
@@ -21,7 +30,7 @@ const ToDo = ({ route, navigation }) => {
             }
 
             // Configura o corpo da requisição
-            const response = await fetch('http://10.135.60.16:8085/receber-dados', {
+            const response = await fetch('http://10.135.60.42:8085/receber-dados', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -75,7 +84,7 @@ const ToDo = ({ route, navigation }) => {
         id_cad = await AsyncStorage.getItem("ID")
         try {
             console.log('Tentando deletar compromisso com ID:', tarefas[0].id_comp, 'e ID de cadastro:', id_cad); 
-            const response = await fetch('http://10.135.60.16:8085/receber-dados', {
+            const response = await fetch('http://10.135.60.42:8085/receber-dados', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -120,7 +129,7 @@ const ToDo = ({ route, navigation }) => {
     
         try {
             // Faz a requisição ao servidor para atualizar o estado do checkbox no banco de dados
-            const response = await fetch('http://10.135.60.16:8085/receber-dados', {
+            const response = await fetch('http://10.135.60.42:8085/receber-dados', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

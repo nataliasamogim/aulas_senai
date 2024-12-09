@@ -1,3 +1,13 @@
+/*Cartao.js
+Autor: Marília
+Data criação/Alterações: 03/12
+Descrição Detalhada: O componente AdicionarDadosCartao permite ao usuário adicionar os dados do seu cartão de crédito, incluindo nome do 
+titular, CPF, número do cartão, data de vencimento e código de segurança. Ele inclui funções para formatar automaticamente o CPF, número 
+do cartão e data de vencimento enquanto o usuário digita. Além disso, o usuário pode confirmar a data de vencimento por meio de um 
+DateTimePicker que formata a data como MM/AA. Quando o usuário clica em "Salvar", os dados são enviados para um servidor via requisição 
+POST. Caso haja erro ao processar os dados, um modal exibe as mensagens de erro. O estado do formulário é gerido com o useState, e há 
+navegação para a tela de login após o sucesso. O layout é estilizado com o uso de LinearGradient para um fundo gradiente, e o componente 
+também possui opções para cancelar a operação.*/
 import React, { useState } from "react";
 import { View, TextInput, KeyboardAvoidingView, TouchableOpacity, Text, Alert, Modal, TouchableHighlight } from "react-native";
 import styles from './DadCartStyle.js';
@@ -93,7 +103,7 @@ const AdicionarDadosCartao = () => {
     };
 
     try {
-      const response = await fetch('http://10.135.60.14:8085/receber-dados', {
+      const response = await fetch('http://10.135.60.42:8085/receber-dados', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

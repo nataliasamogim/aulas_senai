@@ -1,3 +1,11 @@
+/*Lp.js
+Autor: Marília
+Data criação/Alterações: 03/12/2024
+Descrição Detalhada: O componente Lp exibe a tela inicial do aplicativo com opções para o usuário escolher entre fazer login ou cadastro.
+ Ele apresenta um logo, dois botões de seleção (Logar e Cadastrar), e um ícone de ajuda que redireciona para um vídeo no YouTube. Além disso, 
+ inclui ícones de redes sociais como Facebook, Instagram e WhatsApp, prontos para receber eventos de clique. Quando ocorre um erro, um modal 
+ é exibido com as mensagens de erro. A navegação entre as telas é feita através do React Navigation, e o estado dos elementos é gerenciado 
+ com useState, incluindo a seleção do box e a visibilidade do modal de erro.*/
 import React, { useState } from "react";
 import { View, Image, KeyboardAvoidingView, TouchableOpacity, Text, Modal, Linking} from "react-native";
 import styles from './LpStyle.js';

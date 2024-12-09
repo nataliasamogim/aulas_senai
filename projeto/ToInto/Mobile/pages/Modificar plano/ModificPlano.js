@@ -1,3 +1,13 @@
+/*ModificPlano.js
+Autor: Marília
+Data criação/Alterações: 03/12/2024
+Descrição Detalhada: Essa página tem como objetivo permitir que o usuário modifique o seu plano de assinatura dentro de um aplicativo. 
+O layout exibe três opções de planos: "Free", "Mensal" e "Anual", cada uma com informações como o nome, preço e uma breve descrição. O 
+usuário pode selecionar um dos planos, e ao clicar em "Saiba Mais", é exibido um modal com detalhes adicionais sobre o plano escolhido, 
+como benefícios e limitações. Ao selecionar um plano e pressionar "Salvar", a escolha é enviada ao servidor para atualização, e o 
+usuário é redirecionado para uma nova tela dependendo da opção escolhida. Caso o usuário não queira prosseguir, pode cancelar a ação. 
+O design é responsivo e usa um gradiente de cores no fundo, com interação por toque. Além disso, a página faz uso de AsyncStorage para 
+armazenar informações temporárias, como o ID do usuário e a seleção do plano.*/
 import React, { useState } from "react";
 import { View, TextInput, Image, KeyboardAvoidingView, TouchableOpacity, Text, Alert, Modal, TouchableHighlight } from "react-native";
 import styles from './ModificPlanoStyle.js';
@@ -12,7 +22,7 @@ const ModificarPlano = ({ navigation, handleSaibaMais }) => {
   const handleVerifiqPlano = async (selectedBox) => {
     try {
       // Faz uma requisição para receber os dados do usuário do servidor
-      const resposta = await fetch('http://10.135.60.34:8085/receber-dados', {
+      const resposta = await fetch('http://10.135.60.42:8085/receber-dados', {
         method: 'POST', // Método da requisição
         headers: {
           'Content-Type': 'application/json', // Tipo de conteúdo da requisição
@@ -49,7 +59,7 @@ const ModificarPlano = ({ navigation, handleSaibaMais }) => {
   const handleModifPlano = async (selectedBox, dadospag) => {
     try {
       // Faz uma requisição para receber os dados do usuário do servidor
-      const resposta = await fetch('http://10.135.60.34:8085/receber-dados', {
+      const resposta = await fetch('http://10.135.60.42:8085/receber-dados', {
         method: 'POST', // Método da requisição
         headers: {
           'Content-Type': 'application/json', // Tipo de conteúdo da requisição

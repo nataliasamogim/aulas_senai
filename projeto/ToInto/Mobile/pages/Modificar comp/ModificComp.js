@@ -1,3 +1,12 @@
+/*ModificComp.js
+Autor: Marília
+Data criação/Alterações: 03/12/2024
+Descrição Detalhada: O ModificarCompromissos permite ao usuário editar um compromisso existente, como o título, descrição, horário, lembrete e 
+se o compromisso é importante. Quando a tela é carregada, os dados da tarefa selecionada são pré-preenchidos nos campos, permitindo ao usuário 
+editar as informações. Após a modificação, os dados são enviados para o servidor para atualização. O componente também inclui um seletor de data 
+e hora para o horário do compromisso, opções de lembrete e um campo de seleção para marcar a importância do compromisso. Caso ocorra algum erro 
+ao enviar os dados, uma mensagem de erro é exibida na tela.*/
+
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, KeyboardAvoidingView, TouchableOpacity } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
@@ -28,6 +37,7 @@ const ModificarCompromissos = ({ route, navigation }) => {
       setTitulo(tarefa.titulo ? String(tarefa.titulo) : ''); // Garantir que seja string
       setDescricao(tarefa.descricao ? String(tarefa.descricao) : ''); // Garantir que seja string
 
+      // Se a tarefa tiver um horário, converte para objeto Date e ajusta as horas e minutos
       if (tarefa.horario) {
         const horarioComp = new Date();
         const timeParts = tarefa.horario.match(/^(\d{2}):(\d{2})$/);
@@ -39,6 +49,7 @@ const ModificarCompromissos = ({ route, navigation }) => {
         }
       }
 
+      // Define o valor do lembrete (0 se não houver)
       setLembrete(tarefa.lembrete || 0);
       setChecked(tarefa.importante || false);
     }
@@ -61,7 +72,7 @@ const ModificarCompromissos = ({ route, navigation }) => {
       console.log('Dados enviados:', formCompromisso);
 
       try {
-        const response = await fetch('http://10.135.60.16:8085/receber-dados', {
+        const response = await fetch('http://10.135.60.42:8085/receber-dados', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

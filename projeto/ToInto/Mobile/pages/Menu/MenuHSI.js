@@ -1,3 +1,13 @@
+/*Cadastro.js
+Autor: Marília
+Data criação/Alterações: 03/12/2024
+Descrição Detalhada: O MenuHSI gerencia e exibe tarefas baseadas na data selecionada, com a capacidade de visualizar tarefas para o dia atual, 
+para a semana ou marcar como importantes. Utiliza o estado para controlar a data atual, a data selecionada, e as tarefas a serem exibidas. As 
+tarefas são buscadas de um servidor usando fetch, e a exibição pode ser filtrada com base na seleção de "Hoje", "Semana" ou "Importante". O 
+componente também permite marcar tarefas como concluídas, deletar ou editar compromissos, e atualiza o estado local e remoto conforme essas 
+interações. Utiliza AsyncStorage para armazenar e recuperar informações do usuário, além de date-fns para manipulação de datas. A interface 
+é construída com componentes como CheckBox e botões para navegação entre diferentes categorias de tarefas, além de exibir informações detalhadas 
+como horários e descrições.*/
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { View, Text, TextInput, KeyboardAvoidingView, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { CheckBox } from 'react-native-elements';
@@ -35,7 +45,7 @@ const MenuHSI = ({ route, navigation }) => {
                 throw new Error('ID do usuário não encontrado');
             }
 
-            const response = await fetch('http://10.135.60.16:8085/receber-dados', {
+            const response = await fetch('http://10.135.60.42:8085/receber-dados', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -83,7 +93,7 @@ const MenuHSI = ({ route, navigation }) => {
 
     const fetchSemana = async (inicio, fim) => {
         try {
-            const resposta = await fetch('http://10.135.60.16:8085/receber-dados', {
+            const resposta = await fetch('http://10.135.60.42:8085/receber-dados', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -126,7 +136,7 @@ const MenuHSI = ({ route, navigation }) => {
 
     const fetchImportante = async () => {
         try {
-            const resposta = await fetch('http://10.135.60.16:8085/receber-dados', {
+            const resposta = await fetch('http://10.135.60.42:8085/receber-dados', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -170,7 +180,7 @@ const MenuHSI = ({ route, navigation }) => {
             const dataComp = tarefa?.data_comp;
             if (!dataComp) throw new Error('Data da tarefa não encontrada');
 
-            const response = await fetch('http://10.135.60.16:8085/receber-dados', {
+            const response = await fetch('http://10.135.60.42:8085/receber-dados', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ acao: 'deletar_comp', id_cad, id_comp: idComp, data_comp: dataComp })
@@ -254,7 +264,7 @@ const MenuHSI = ({ route, navigation }) => {
 
         try {
             // Atualize o estado no servidor
-            await fetch('http://10.135.60.16:8085/receber-dados', {
+            await fetch('http://10.135.60.42:8085/receber-dados', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ acao: 'atualizar_checkbox', id_comp: idComp, estado_checkbox: novoEstadoCheckbox }),
