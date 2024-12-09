@@ -86,7 +86,7 @@ const ModificarDadosCartao = ({ navigation }) => {
       const id_cad = await AsyncStorage.getItem('ID')
       try {
         // Faz uma requisição para receber os dados do usuário do servidor
-        const resposta = await fetch('http://10.135.60.42:8085/receber-dados', {
+        const resposta = await fetch('http://10.135.60.34:8085/receber-dados', {
           method: 'POST', // Método da requisição
           headers: {
             'Content-Type': 'application/json', // Tipo de conteúdo da requisição
@@ -123,7 +123,7 @@ const ModificarDadosCartao = ({ navigation }) => {
     const id_cad = await AsyncStorage.getItem('ID');
     try {
       // Faz uma requisição para enviar os dados do formulário para o servidor
-      const resposta = await fetch('http://10.135.60.42:8085/receber-dados', {
+      const resposta = await fetch('http://10.135.60.34:8085/receber-dados', {
         method: 'POST', // Método da requisição
         headers: {
           'Content-Type': 'application/json', // Tipo de conteúdo da requisição
@@ -136,6 +136,7 @@ const ModificarDadosCartao = ({ navigation }) => {
           novo_cvv: codSeguranca,
           nova_dataVenc: dataVenc,
           novo_nomeTitular: nomeTitular,
+          escolha_pag: '2'
         }), // Corpo da requisição contendo os dados do formulário em formato JSON
       });
       // Extrai o resultado da resposta e o converte para JSON
