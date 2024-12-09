@@ -23,7 +23,7 @@ function ConfPix() {
                     <div className="conteudo">
                         <h2 className="title_conf">Pagamento realizado com sucesso!!!</h2>
                         <h5 className="subtitulo_conf">Aproveite sua experiência no TOINTO</h5>
-                        <Link to="/calendario" className="link_conf">Continuar</Link>
+                        <Link to="/Login" className="link_conf">Continuar</Link>
                     </div>
                 </div>
             </div>

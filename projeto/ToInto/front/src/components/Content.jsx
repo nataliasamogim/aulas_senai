@@ -22,7 +22,7 @@ import { ModificPlano } from "../pages/Modific_plano/Modific_plano";
 import Concluido_cadatualizado from "../pages/Concluido/Concluido_cadatualizado";
 import { Esc_Pag } from "../pages/Escolha_pag/Esc_Pag";
 import Recuperacao from "../pages/Esq_senha/Recuperacao";
-import { Esc_Pag_Modific } from "../pages/Escolha_pag/Modific_pag";
+import { Modific_pag } from "../pages/Escolha_pag/Modific_pag";
 import Pag_cartao_realizado from "../pages/Concluido/pag_cartao_realizado";
 
 // Define o componente Content, que renderiza as rotas da aplicação
@@ -39,7 +39,7 @@ const Content = props => (
             <Route path="/concluido" exact element={<Cad_concluido />} />
             <Route path="/pag_concluido" exact element={<Pag_cartao_realizado />} />
             <Route path="/escpag" exact element={<Esc_Pag />} />
-            <Route path="/modific_pag" exact element={<Esc_Pag_Modific/>}/>
+            <Route path="/modific_pag" exact element={<Modific_pag/>}/>
             <Route path="/modificar" exact element={<FormMani />} />
             <Route path="/cadatualizado" exact element={<Concluido_cadatualizado />} />
             <Route path="/dadoscart" exact element={<DadosCartao />} />

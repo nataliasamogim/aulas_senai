@@ -18,7 +18,8 @@ import './Pagamento.css';
         Este componente representa uma seção de pagamento mensal, exibindo opções de escolha de forma de pagamento (Pix e cartão de crédito),
         e com navegação entre as páginas, incluindo os botões "Continuar" e "Voltar". O estado controla a forma de pagamento selecionada pelo usuário. */}
 
-function Esc_Pag_Modific() {
+function Modific_pag() {
+    const [formaPagamento, setFormaPagamento] = useState('');
 
     return (
         <>
@@ -63,4 +64,4 @@ function Esc_Pag_Modific() {
     );
 }
 
-export { Esc_Pag_Modific };
+export { Modific_pag };
