@@ -13,7 +13,7 @@ export default styles = StyleSheet.create({
     container: {
         backgroundColor: '#AE80D6',
         height: 565,
-        width: 350,
+        width: 400,
         borderRadius: 15,
         alignItems: 'center',
         marginLeft: 22
