@@ -27,41 +27,34 @@ const AtualizarCad = ({ navigation }) => {
 
     // No array fotoOpcoes, adicione o caminho de cada imagem como string junto ao objeto
     const fotoOpcoes = [
+        { img: require('../../images_perfil/foto_perfil.jpg'), path: 'images_perfil/foto_perfil.jpg' },
         { img: require('../../images_perfil/perfil_2.jpg'), path: 'images_perfil/perfil_2.jpg' },
         { img: require('../../images_perfil/perfil_3.jpg'), path: 'images_perfil/perfil_3.jpg' },
         { img: require('../../images_perfil/perfil_4.jpg'), path: 'images_perfil/perfil_4.jpg' },
-        { img: require('../../images_perfil/Gru.png'), path: 'images_perfil/Gru.png' },
+        { img: require('../../images_perfil/minions.jpg'), path: 'images_perfil/minions.jpg' },
+        { img: require('../../images_perfil/toy_story.jpg'), path: 'images_perfil/toy_story.jpg' },
+        { img: require('../../images_perfil/papagaio.jpg'), path: 'images_perfil/papagaio.jpg' },
+        { img: require('../../images_perfil/lirios.webp'), path: 'images_perfil/lirios.webp' },
+        { img: require('../../images_perfil/dog1.jpg'), path: 'images_perfil/dog1.jpg' },
+        { img: require('../../images_perfil/dog2.jpg'), path: 'images_perfil/dog2.jpg' },
+        { img: require('../../images_perfil/rato.webp'), path: 'images_perfil/rato.webp' },
+        { img: require('../../images_perfil/tigre_foto.png'), path: 'images_perfil/tigre_foto.png' },
+        { img: require('../../images_perfil/calopsita.jpg'), path: 'images_perfil/calopsita.jpg' },
+        { img: require('../../images_perfil/pintinho.jpg'), path: 'images_perfil/pintinho.jpg' },
+        { img: require('../../images_perfil/jabuti.webp'), path: 'images_perfil/jabuti.webp' },
+        { img: require('../../images_perfil/tigre_foto.png'), path: 'images_perfil/tigre_foto.png' },
         // Adicione os outros da mesma forma
-    ];
-    // Opções de fotos de perfil com require estático
-    const fotoOpcoes2 = [
-        require('../../images_perfil/perfil_2.jpg'),
-        require('../../images_perfil/perfil_3.jpg'),
-        require('../../images_perfil/perfil_4.jpg'),
-        require('../../images_perfil/Gru.png'),
-        require('../../images_perfil/minions.jpg'),
-        require('../../images_perfil/toy_story.jpg'),
-        require('../../images_perfil/papagaio.jpg'),
-        require('../../images_perfil/dog1.jpg'),
-        require('../../images_perfil/dog2.jpg'),
-        require('../../images_perfil/rato.webp'),
-        require('../../images_perfil/lirios.webp'),
-        require('../../images_perfil/tigre_foto.png'),
-        require('../../images_perfil/calopsita.jpg'),
-        require('../../images_perfil/pintinho.jpg'),
-        require('../../images_perfil/jabuti.webp'),
-        require('../../images_perfil/lirios.webp'),
     ];
 
     useEffect(() => {
         const showDados = async () => {
             try {
-                const resposta = await fetch('http://10.135.60.42:8085/receber-dados', {
+                const resposta = await fetch('http://10.135.60.34:8085/receber-dados', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ acao: 'selecionar_cad', id: await AsyncStorage.getItem("ID") }),
+                    body: JSON.stringify({ acao: 'selecionar_cad_mob', id: await AsyncStorage.getItem("ID") }),
                 });
 
                 if (!resposta.ok) {
@@ -91,7 +84,7 @@ const AtualizarCad = ({ navigation }) => {
     const handleAtualizar = async () => {
         const id_str = await AsyncStorage.getItem('ID');
         try {
-            const resposta = await fetch('http://10.135.60.42:8085/receber-dados', {
+            const resposta = await fetch('http://10.135.60.34:8085/receber-dados', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
