@@ -1,4 +1,4 @@
-/*Plano.js
+/*Planos.js
 Autor: Marília
 Data criação/Alterações: 03/12/2024
 Descrição Detalhada: A página Planos permite ao usuário escolher entre duas formas de pagamento: Pix ou Cartão de Crédito. O layout é 

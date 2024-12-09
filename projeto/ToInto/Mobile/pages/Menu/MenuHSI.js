@@ -1,4 +1,4 @@
-/*Cadastro.js
+/*MenuHSI.js
 Autor: Marília
 Data criação/Alterações: 03/12/2024
 Descrição Detalhada: O MenuHSI gerencia e exibe tarefas baseadas na data selecionada, com a capacidade de visualizar tarefas para o dia atual, 

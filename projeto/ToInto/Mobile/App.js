@@ -1,4 +1,4 @@
-/*ConfPix.js
+/*App.js
 Autor: Marília
 Data criação/Alterações: 03/122024
 Descrição Detalhada: O código apresentado configura a navegação de um aplicativo React Native utilizando o React Navigation. A navegação é 
@@ -32,8 +32,7 @@ import RecuperarSenha from './pages/Recuperar senha/RecSenha';
 
 const Stack = createNativeStackNavigator();
 
-/*
-Autor: Marília M bellini
+/*  Autor: Marília M bellini
 Alterações: 05/12/2024
 Tipo: Função: App é um componente funcional em React.
 Parâmetros: Nenhum parâmetro explícito: A função App não recebe parâmetros diretamente.
@@ -42,9 +41,9 @@ tela é configurada com um nome (name) e um componente (component), além de op�
 navegação de cada tela.
 Descrição/Observações: 
 A função App é um componente funcional React que usa o React Navigation para gerenciar a navegação entre várias telas, configuradas com opções de
- personalização para a barra de navegação, como cor e estilo do título. Ela organiza as telas em uma navegação em pilha, permitindo transições
-  entre os diferentes componentes do aplicativo.
- */
+personalização para a barra de navegação, como cor e estilo do título. Ela organiza as telas em uma navegação em pilha, permitindo transições
+entre os diferentes componentes do aplicativo.*/
+
 function App() {
   return (
     <NavigationContainer>

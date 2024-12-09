@@ -1,4 +1,4 @@
-/*Cadastro.js
+/*Login.js
 Autor: Marília
 Data criação/Alterações: 03/12/2024
 Descrição Detalhada: O componente Login é responsável pela autenticação do usuário, permitindo o login com e-mail e senha. Ele valida os campos 

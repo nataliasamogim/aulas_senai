@@ -98,16 +98,6 @@ const Compromissos = ({ route, navigation }) => {
 
   return (
     <KeyboardAvoidingView style={styles.background} behavior="padding">
-   {/*  {mensagensErro.length > 0 && (
-        <View style={{ color: 'white' }}>
-          <Text>Erro ao processar os dados:</Text>
-          <View>
-            {mensagensErro.map((mensagem, index) => (
-              <Text key={index}>{mensagem.mensagem}</Text>
-            ))}
-          </View>
-        </View>
-      )}    */}
       <View style={styles.container}>
         <View style={styles.containerData}>
           <Text style={styles.data}>{formattedDate}</Text>

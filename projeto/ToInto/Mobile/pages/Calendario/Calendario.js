@@ -1,9 +1,18 @@
+/*Calendario.js
+Autor: Marília
+Data criação/Alterações: 09/12
+Descrição Detalhada: O código define um componente React Native chamado Calendario, que exibe um calendário interativo configurado em português e 
+sincronizado com uma API para marcar datas associadas a tarefas do usuário. Ele utiliza AsyncStorage para recuperar o ID do usuário e faz 
+requisições HTTP para buscar as tarefas, marcando visualmente as datas relevantes no calendário. O componente permite a navegação para uma tela 
+de lista de tarefas ao pressionar um dia, além de incluir botões na parte inferior para acessar menus e o perfil do usuário. O layout é estilizado
+com cores e ajustes personalizados, e o comportamento é atualizado sempre que a tela ganha foco na navegação.*/
 import React, { useState, useEffect } from 'react';
 import { View, TouchableOpacity, Image, KeyboardAvoidingView } from "react-native";
 import { Calendar, LocaleConfig } from 'react-native-calendars';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import styles from "./CalenStyle";
 
+// Configuração de localização do calendário para o idioma português
 LocaleConfig.locales['pt'] = {
   monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
   monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
