@@ -179,7 +179,7 @@ def gravar_dados_compromisso(dados_gravacao):
     conex = conexao.conectar()
     cursor = conex.cursor()
     plano_esc = dados_gravacao[7]
-    print('PLANO ESCOLHIDO NO CADASTRO', type(plano_esc))
+    print('PLANO ESCOLHIDO NO CADASTRO', plano_esc)
     
     try:
         # Validação do plano (Anual)
@@ -199,7 +199,7 @@ def gravar_dados_compromisso(dados_gravacao):
             val = (dados_gravacao[0], data_formatada)
             cursor.execute(sql, val)
             tarefas = cursor.fetchone()
-            print('DADOS DA TAREFA DO MENSAL', tarefas)
+            print('DADOS DA TAREFA DO MENSAL', tarefas[0])
 
             if tarefas[0] < 101:
                 sql = "INSERT INTO compromissos (ID_CAD, TITULO_COMP, DATA_COMP, HORARIO_COMP, DESCRICAO, IMPORTANTE, LEMBRETE) VALUES (%s, %s, %s, %s, %s, %s, %s)"
@@ -220,7 +220,7 @@ def gravar_dados_compromisso(dados_gravacao):
             cursor.execute(sql, val)
             tarefas = cursor.fetchone()
             total = tarefas[0]
-            print('DADOS DA TAREFA', total)
+            print('DADOS DA TAREFA Grátis', total)
 
             if total < 7:
                 sql = "INSERT INTO compromissos (ID_CAD, TITULO_COMP, DATA_COMP, HORARIO_COMP, DESCRICAO, IMPORTANTE, LEMBRETE) VALUES (%s, %s, %s, %s, %s, %s, %s)"
