@@ -25,7 +25,7 @@ return (
         </View>
 
         <View>
-          <TouchableOpacity onPress={() => navigation.navigate('Calendario')} >
+          <TouchableOpacity onPress={() => navigation.navigate('Login')} >
             <Text style={styles.btnContPix}>Continuar</Text>
           </TouchableOpacity>
         </View>
