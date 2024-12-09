@@ -1,6 +1,6 @@
-{/* Nome do componente: Esc_Pag_Modific 
-Autor(a): Laura
-Data de criação: /Alterações: 05/12/2024
+{/* Nome do componente: FormMani
+Autor(a): Marília
+Data de criação/Alterações: 09/12/2024
 Descrição detalhada: Este componente representa uma seção de um formulário de pagamento para um plano mensal, oferecendo escolhas de forma de pagamento (Pix ou cartão de crédito),
 com botões para voltar e continuar. O componente permite que o usuário escolha sua forma de pagamento e navegue para a próxima seção do pagamento. */}
 
@@ -107,7 +107,7 @@ const FormMani = () => {
         convertPadraoBase64(defaultPhoto, (base64Image) => {
             const showDados = async () => {
                 try {
-                    const resposta = await fetch('http://10.135.60.47:8085/receber-dados', {
+                    const resposta = await fetch('http://10.135.60.42:8085/receber-dados', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -145,19 +145,39 @@ const FormMani = () => {
     const [modalIsOpen, setIsOpen] = useState(false);
     const [mensagensErro, setMensagensErro] = useState([]);
 
-    //transforma a mensagem das validações de senha em tópicos
+ 
+{/*Autor: Marília M bellini
+Alterações: 09/12/2024
+Tipo: A função é uma função pura de JavaScript que processa um objeto de entrada e transforma parte de sua estrutura para retornar um novo objeto.
+Parâmetros: O parâmetro response é um objeto com duas propriedades: erro, indicando o estado de erro, e mensagens, um array de objetos que possuem
+erro (tipo do erro) e mensagem, que pode ser uma string ou um array de strings.
+Retorno: A função retorna um objeto com erro igual ao do objeto de entrada e um array mensagens transformado, onde cada mensagem é um objeto com 
+erro e uma string como mensagem. Se a mensagem original for um array, cada elemento é separado no novo array.
+Descrição/Observações: A função transformarMensagens processa um objeto de mensagens, "achata" arrays internos de mensagens e padroniza a 
+estrutura para um formato consistente, preservando o estado de erro (erro) do objeto de entrada. */}
+
+    // Transforma as mensagens do servidor para melhor exibição
     function transformarMensagens(response) {
-        if (response.erro && response.mensagens) {
-            return { erro: response.erro, mensagens: response.mensagens };
-        }
-        return { erro: false, mensagens: [] };
+        const novasMensagens = [];
+
+        response.mensagens.forEach((item) => {
+            if (Array.isArray(item.mensagem)) {
+                item.mensagem.forEach((msg) => {
+                    novasMensagens.push({ erro: item.erro, mensagem: msg });
+                });
+            } else {
+                novasMensagens.push(item);
+            }
+        });
+
+        return { erro: response.erro, mensagens: novasMensagens };
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log('imagem', formAlter.foto)
         try {
-            const resposta = await fetch('http://10.135.60.47:8085/receber-dados', {
+            const resposta = await fetch('http://10.135.60.42:8085/receber-dados', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
