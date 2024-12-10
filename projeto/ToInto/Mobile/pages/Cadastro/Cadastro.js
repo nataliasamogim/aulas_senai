@@ -53,7 +53,7 @@ const CadastroForm = ({ handleSaibaMais }) => {
       };
 
       try {
-        const response = await fetch('http://10.135.60.42:8085/receber-dados', {
+        const response = await fetch('http://10.135.60.34:8085/receber-dados', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -202,12 +202,12 @@ const Cadastro = ({ navigation }) => {
   const planos = {
     free: {
       nome: "Plano Free",
-      descricao: "Sem acesso aos itens do menu, somente acesso ao calendário e com um limite de 50 compromissos a adicionar no dia.",
+      descricao: "Sem acesso aos itens do menu, apenas com acesso ao calendário e um limite de 7 compromissos a serem adicionados por dia.",
       preco: "Grátis"
     },
     mensal: {
       nome: "Plano Mensal",
-      descricao: "Acesso ao item Hoje e Semana do menu e com um limite de 200 compromissos ao dia.",
+      descricao: "Acesso ao item Hoje e Semana do menu e com um limite de 100 compromissos ao dia.",
       preco: "R$7,90/mês"
     },
     anual: {
